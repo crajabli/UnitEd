@@ -2,6 +2,13 @@ package utilities;
 
 import java.math.BigDecimal;
 
+/**
+ * Operation class
+ * 
+ * @author Team 22
+ * @version 04-06-2022
+ * 
+ */
 public class Operation
 {
 
