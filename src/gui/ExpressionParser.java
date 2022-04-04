@@ -1,7 +1,6 @@
 package gui;
 
 import java.math.BigDecimal;
-
 import utilities.Operand;
 
 /**
