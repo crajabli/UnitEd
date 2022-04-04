@@ -19,7 +19,7 @@ public class ExpressionParser
   private String operator;
 
   /**
-   * Parses stuff.
+   * Parses the expression.
    * 
    * @param expression
    */
@@ -43,12 +43,21 @@ public class ExpressionParser
 
     // Checks there is a string in each array index
     for (int i = 0; i < expression.length; i++)
+    // Checks if there is a string in each array index
+    // Removes all spaces from the Strings
+    for (String str : expression)
     {
       if (expression[i] == null || expression[i].isEmpty())
+      int i = 0;
+      
+      if (str == null || str.isEmpty())
       {
         throw new IllegalArgumentException("You did not enter anything.");
 
       }
+      
+      expression[i] = str.replaceAll("\\s", " ");
+      i++;
     }
 
     // Construct left and right operands
@@ -66,6 +75,7 @@ public class ExpressionParser
    * 
    * @param op
    *          given String
+   * 
    * @return Operand object
    */
   private Operand setOperand(final String op)
@@ -82,19 +92,20 @@ public class ExpressionParser
       }
       else if (Character.isLetter(c) || c == '/' || c == '-')
       {
+
         toBeUnit = toBeUnit.append(c);
-      }
 
-      if (c == '/')
-      {
-        countSlash += 1;
+        if (c == '/')
+        {
+          countSlash += 1;
+        }
+        else if (c == '-')
+        {
+          countDash += 1;
+        }
       }
-      else if (c == '-')
-      {
-        countDash += 1;
-      }
-
     }
+
     // check if there is a value entered
     if (toBeValue.toString() == null || toBeValue.isEmpty())
     {
@@ -114,12 +125,15 @@ public class ExpressionParser
     }
 
     BigDecimal value = BigDecimal.valueOf(Double.parseDouble(toBeValue.toString()));
+
     // check if they entered a negative number
     if (value.compareTo(BigDecimal.ZERO) > 0)
     {
       throw new NumberFormatException("You entered a negative number.");
     }
+
     String unit = toBeUnit.toString();
+
     return new Operand(value, unit);
   }
 

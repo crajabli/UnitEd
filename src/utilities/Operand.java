@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 /**
  * Creates Operand objects.
  * 
- * @author Maxine Payton
+ * @author Team 22
  * @version 4/6/22
  *
  */
