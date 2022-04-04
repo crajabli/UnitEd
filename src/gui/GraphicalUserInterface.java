@@ -110,6 +110,8 @@ public class GraphicalUserInterface implements ActionListener
     // setting frame
     frame.setSize(550, 250);
     frame.setVisible(true);
+
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
 
   /**
