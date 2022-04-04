@@ -32,7 +32,10 @@ public class GraphicalUserInterface implements ActionListener
   public void actionPerformed(ActionEvent e)
   {
     String ac = e.getActionCommand();
-    // TODO Auto-generated method stub
+    if (ac.equals("R"))
+    {
+    	reset();
+    }
 
   }
 
