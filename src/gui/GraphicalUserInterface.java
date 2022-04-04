@@ -41,8 +41,8 @@ public class GraphicalUserInterface implements ActionListener
 
     // creation of frame and content pane
     JFrame frame = new JFrame("UnitED");
-    JPanel contentPane = (JPanel)frame.getContentPane();
-    contentPane.setLayout(new GridLayout(3,1));
+    JPanel contentPane = (JPanel) frame.getContentPane();
+    contentPane.setLayout(new GridLayout(3, 1));
     
     // creation of panels
     JPanel displayPanel = new JPanel();
@@ -74,10 +74,6 @@ public class GraphicalUserInterface implements ActionListener
     JButton divide = new JButton("\u00F7");
     JButton equals = new JButton("=");
     
-    // adding display and input to respective panels
-    displayPanel.add(display, BorderLayout.CENTER);
-    inputPanel.add(input, BorderLayout.CENTER);
-    
     // adding buttons to button panel
     buttonPanel.add(reset);
     buttonPanel.add(clear);
@@ -95,6 +91,10 @@ public class GraphicalUserInterface implements ActionListener
     multiply.addActionListener(this);
     divide.addActionListener(this);
     equals.addActionListener(this);
+    
+    // adding display and input to respective panels
+    displayPanel.add(display, BorderLayout.CENTER);
+    inputPanel.add(input, BorderLayout.CENTER);
     
     // setting frame
     frame.setSize(550, 250);
