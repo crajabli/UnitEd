@@ -19,6 +19,9 @@ import javax.swing.JTextField;
  */
 public class GraphicalUserInterface implements ActionListener
 {
+  
+  JTextField display;
+  JTextField input;
 
   public GraphicalUserInterface()
   {
@@ -28,6 +31,7 @@ public class GraphicalUserInterface implements ActionListener
   @Override
   public void actionPerformed(ActionEvent e)
   {
+    String ac = e.getActionCommand();
     // TODO Auto-generated method stub
 
   }
@@ -53,12 +57,12 @@ public class GraphicalUserInterface implements ActionListener
     contentPane.add(buttonPanel);
     
     // creation of display text field
-    JTextField display = new JTextField();
+    display = new JTextField();
     display.setEditable(false);
     display.setHorizontalAlignment(JTextField.CENTER);
 
     // creation of input text field
-    JTextField input = new JTextField();
+    input = new JTextField();
     display.setSize(500, 50);
     
     // creation of all buttons
@@ -83,6 +87,15 @@ public class GraphicalUserInterface implements ActionListener
     buttonPanel.add(divide);
     buttonPanel.add(equals);
     
+    // adding action listener to each button
+    reset.addActionListener(this);
+    clear.addActionListener(this);
+    plus.addActionListener(this);
+    minus.addActionListener(this);
+    multiply.addActionListener(this);
+    divide.addActionListener(this);
+    equals.addActionListener(this);
+    
     // setting frame
     frame.setSize(550, 250);
     frame.setVisible(true);
@@ -92,14 +105,15 @@ public class GraphicalUserInterface implements ActionListener
    * Clears both input and display field.
    */
   private void reset() {
-    
+    display.setText("");
+    input.setText("");
   }
   
   /**
    * Clears input field.
    */
   private void clear() {
-   
+    input.setText("");
   }
 
 }
