@@ -43,22 +43,13 @@ public class ExpressionParser
 
     // Checks there is a string in each array index
     for (int i = 0; i < expression.length; i++)
-    // Checks if there is a string in each array index
-    // Removes all spaces from the Strings
-    for (String str : expression)
-    {
+
       if (expression[i] == null || expression[i].isEmpty())
-      int i = 0;
-      
-      if (str == null || str.isEmpty())
+
       {
         throw new IllegalArgumentException("You did not enter anything.");
 
       }
-      
-      expression[i] = str.replaceAll("\\s", " ");
-      i++;
-    }
 
     // Construct left and right operands
     String left = expression[0];
