@@ -3,7 +3,7 @@ package utilities;
 import java.math.BigDecimal;
 
 /**
- * Creates operand objects.
+ * Creates Operand objects.
  * 
  * @author Maxine Payton
  * @version 4/6/22

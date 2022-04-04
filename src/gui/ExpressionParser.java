@@ -42,25 +42,23 @@ public class ExpressionParser
     }
 
     // Checks there is a string in each array index
-    // Removes all spaces from the Strings
-    for (String str : expression)
+    for (int i = 0; i < expression.length; i++)
     {
-      int i = 0;
-      if (str == null || str.isEmpty())
+      if (expression[i] == null || expression[i].isEmpty())
       {
         throw new IllegalArgumentException("You did not enter anything.");
 
       }
-      expression[i] = str.replaceAll("\\s", " ");
-      i++;
     }
 
     // Construct left and right operands
     String left = expression[0];
     leftOp = setOperand(left);
     operator = expression[1];
+
     String right = expression[2];
     rightOp = setOperand(right);
+
   }
 
   /**
@@ -101,7 +99,6 @@ public class ExpressionParser
     if (toBeValue.toString() == null || toBeValue.isEmpty())
     {
       throw new IllegalArgumentException("You didn't enter a value.");
-
     }
 
     // check if there is a unit entered
@@ -118,12 +115,32 @@ public class ExpressionParser
 
     BigDecimal value = BigDecimal.valueOf(Double.parseDouble(toBeValue.toString()));
     // check if they entered a negative number
-    if (value.compareTo(BigDecimal.ZERO) < 0)
+    if (value.compareTo(BigDecimal.ZERO) > 0)
     {
       throw new NumberFormatException("You entered a negative number.");
     }
     String unit = toBeUnit.toString();
     return new Operand(value, unit);
+  }
+
+  /**
+   * Helper method for testing purposes.
+   * 
+   * @return left operand
+   */
+  public Operand getLeft()
+  {
+    return this.leftOp;
+  }
+
+  /**
+   * Helper method for testing purposes.
+   * 
+   * @return left operand
+   */
+  public Operand getRight()
+  {
+    return this.rightOp;
   }
 
 }
