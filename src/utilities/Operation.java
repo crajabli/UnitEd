@@ -3,7 +3,7 @@ package utilities;
 /**
  * Calculates result given two operands and an operator.
  * 
- * @author Victor Aten
+ * @author Team 22
  * @version 4/4/22
  */
 public class Operation
