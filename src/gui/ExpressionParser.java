@@ -7,13 +7,11 @@ import utilities.Operand;
 /**
  * Parses value, unit, and operator from the users expression.
  * 
- * @author Maxine Payton
+ * @author Team 22
  * @version 4/6/22
  */
 public class ExpressionParser
 {
-  private int countDash = 0;
-  private int countSlash = 0;
   private Operand leftOp;
   private Operand rightOp;
   private String operator;
@@ -76,6 +74,9 @@ public class ExpressionParser
   {
     StringBuilder toBeValue = new StringBuilder();
     StringBuilder toBeUnit = new StringBuilder();
+    
+    int countSlash = 0;
+    int countDash = 0;
 
     for (int i = 0; i < op.length(); i++)
     {
@@ -91,11 +92,11 @@ public class ExpressionParser
         
         if (c == '/')
         {
-          countSlash += 1;
+          countSlash++;
         }
         else if (c == '-')
         {
-          countDash += 1;
+          countDash++;
         }
       }
     }

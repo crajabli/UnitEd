@@ -21,7 +21,6 @@ public class Operation
     
     BigDecimal result = BigDecimal.ZERO;
     
-    // Rough draft
     switch (operator)
     {
       
@@ -35,6 +34,7 @@ public class Operation
         str = result.toString() + " " + leftOp.getUnit();
         break;
         
+      // Need to handle the case for dividing different units.
       case "/":
         result = leftValue.divide(rightValue);
         
