@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 
 /**
  * 
- * @author Makenzie Williams
+ * @author Makenzie Williams, Chingiz Rajabli
  * @version 1
  *
  */
@@ -39,21 +39,31 @@ public class GraphicalUserInterface implements ActionListener
     switch (ac) {
       case "R" -> reset();
       case "C" -> clear();
-      case "+" ->
-          // parsing the inputField
-          clear();
-      case "-" ->
-          // parse the input
-          clear();
-      case "x" ->
-          // parse the input
-          clear();
-      case DIVIDE ->
-          // parse the input
-          clear();
-      case "=" ->
-          // calculate;
-          clear();
+      case "+" -> {
+        // parsing the inputField
+        display.setText(display.getText() + input.getText() + " + ");
+        clear();
+      }
+      case "-" -> {
+        // parse the input
+        display.setText(display.getText() + input.getText() + " - ");
+        clear();
+      }
+      case "x" -> {
+        // parse the input
+        display.setText(display.getText() + input.getText() + " x ");
+        clear();
+      }
+      case DIVIDE -> {
+        // parse the input
+        display.setText(display.getText() + input.getText() + " / ");
+        clear();
+      }
+      case "=" -> {
+        // calculate;
+        display.setText(display.getText() + input.getText() + " = ");
+        clear();
+      }
     }
 
   }
