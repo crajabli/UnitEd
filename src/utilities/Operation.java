@@ -1,14 +1,13 @@
 package utilities;
 
-import java.math.BigDecimal;
-
 /**
  * Calculates result given two operands and an operator.
  * 
  * @author Victor Aten
  * @version 4/4/22
  */
-public class Operation {
+public class Operation
+{
 	/**
 	 * Returns String that represents the calculation of the given expression.
 	 * 
@@ -22,22 +21,27 @@ public class Operation {
 		String result = "";
 
 		// Check operation
-		switch (operator) {
-		case "+":
-			result = add(leftOp, rightOp);
-			break;
+		switch (operator)
+		{
+		  
+		  case "+":
+		    result = add(leftOp, rightOp);
+		    break;
 
-		case "-":
-			result = subtract(leftOp, rightOp);
-			break;
+		  case "-":
+		    result = subtract(leftOp, rightOp);
+		    break;
 
-		case "/":
-			result = divide(leftOp, rightOp);
-			break;
+		  case "/":
+		    result = divide(leftOp, rightOp);
+		    break;
 
-		case "x": // Check 'x' or '*'
-			result = multiply(leftOp, rightOp);
-			break;
+		  case "x": // Check 'x' or '*'
+		    result = multiply(leftOp, rightOp);
+		    break;
+		    
+		  default:
+		    break;
 		}
 
 		return result;
