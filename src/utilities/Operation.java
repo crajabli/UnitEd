@@ -3,67 +3,94 @@ package utilities;
 import java.math.BigDecimal;
 
 /**
- * Operation class
+ * Calculates result given two operands and an operator.
  * 
- * @author Team 22
- * @version 04-06-2022
- * 
+ * @author Victor Aten
+ * @version 4/4/22
  */
-public class Operation
-{
+public class Operation {
+	/**
+	 * Returns String that represents the calculation of the given expression.
+	 * 
+	 * @param leftOp represents left operand
+	 * @param rightOp represents right operand
+	 * @param operator represents which calculation to do
+	 * @return String
+	 */
+	public String calculate(final Operand leftOp, final Operand rightOp, final String operator) 
+	{
+		String result = "";
 
-  private Operand leftOp;
-  private Operand rightOp;
-  private String str;
-  
-  public Operation(Operand leftOp, Operand rightOp)
-  {
-    
-    this.leftOp = leftOp;
-    this.rightOp = rightOp;
-  }
-  
-  public BigDecimal Calculate(BigDecimal leftValue, BigDecimal rightValue, String operator)
-  {
-    
-    BigDecimal result = BigDecimal.ZERO;
-    
-    switch (operator)
-    {
-      
-      case "+":
-        result = leftValue.add(rightValue);
-        str = result.toString() + " " + leftOp.getUnit();
-        break;
-        
-      case "-":
-        result = leftValue.subtract(rightValue);
-        str = result.toString() + " " + leftOp.getUnit();
-        break;
-        
-      // Need to handle the case for dividing different units.
-      case "/":
-        result = leftValue.divide(rightValue);
-        
-        if (leftOp.getUnit().equals(rightOp.getUnit())) {
-          
-          str = result.toString();
-        }
-        
-        break;
-        
-      case "x": // Check 'x' or '*'
-        result = leftValue.multiply(rightValue);
-        str = result.toString() + " " + leftOp.getUnit() + "-" + rightOp.getUnit();
-        break;
-    }
-    
-    return result;
-  }
-  
-  public String toString()
-  {
-    
-    return str;
-  }
+		// Check operation
+		switch (operator) {
+		case "+":
+			result = add(leftOp, rightOp);
+			break;
+
+		case "-":
+			result = subtract(leftOp, rightOp);
+			break;
+
+		case "/":
+			result = divide(leftOp, rightOp);
+			break;
+
+		case "x": // Check 'x' or '*'
+			result = multiply(leftOp, rightOp);
+			break;
+		}
+
+		return result;
+	}
+
+	/**
+	 * Adds the given operands together.
+	 * 
+	 * @param leftOp represents left operand
+	 * @param rightOp represents right operand
+	 * @return String
+	 */
+	public String add(final Operand leftOp, final Operand rightOp) 
+	{
+		// check that units are the same
+		return "";
+	}
+
+	/**
+	 * Subtracts the given operands in the format leftOp - rightOp.
+	 * 
+	 * @param leftOp represents left operand
+	 * @param rightOp represents right operand
+	 * @return String
+	 */
+	public String subtract(final Operand leftOp, final Operand rightOp) 
+	{
+		// check that units are the same
+		return "";
+	}
+
+	/**
+	 * Multiplies the given operands together.
+	 * 
+	 * @param leftOp represents left operand
+	 * @param rightOp represents right operand
+	 * @return String
+	 */
+	public String multiply(final Operand leftOp, final Operand rightOp) 
+	{
+		return "";
+	}
+
+	/**
+	 * Divides the given operands in the format leftOp / rightOp.
+	 * 
+	 * @param leftOp represents left operand
+	 * @param rightOp represents right operand
+	 * @return String
+	 */
+	public String divide(final Operand leftOp, final Operand rightOp) 
+	{
+		// check that rightOp value is not zero
+		return "";
+	}
 }
