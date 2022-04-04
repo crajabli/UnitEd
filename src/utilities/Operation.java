@@ -2,6 +2,13 @@ package utilities;
 
 import java.math.BigDecimal;
 
+/**
+ * Operation class
+ * 
+ * @author Team 22
+ * @version 04-06-2022
+ * 
+ */
 public class Operation
 {
 
@@ -21,7 +28,6 @@ public class Operation
     
     BigDecimal result = BigDecimal.ZERO;
     
-    // Rough draft
     switch (operator)
     {
       
@@ -35,6 +41,7 @@ public class Operation
         str = result.toString() + " " + leftOp.getUnit();
         break;
         
+      // Need to handle the case for dividing different units.
       case "/":
         result = leftValue.divide(rightValue);
         
