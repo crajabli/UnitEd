@@ -39,6 +39,10 @@ public class GraphicalUserInterface implements ActionListener
     if (ac.equals("R"))
     {
     	reset();
+    } 
+    else if (ac.equals("C"))
+    {
+    	clear();
     }
 
   }
