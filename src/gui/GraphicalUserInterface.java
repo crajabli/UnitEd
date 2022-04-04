@@ -22,7 +22,7 @@ public class GraphicalUserInterface implements ActionListener
 
   JTextField display;
   JTextField input;
-  private final String divideString = "\u00F7";
+  private final String DIVIDE = "\u00F7";
 
   /**
    * Constructor.
@@ -36,16 +36,29 @@ public class GraphicalUserInterface implements ActionListener
   public void actionPerformed(final ActionEvent e)
   {
     String ac = e.getActionCommand();
-    if (ac.equals("R"))
-    {
-    	reset();
-    } 
-    else if (ac.equals("C"))
-    {
-    	clear();
+    switch (ac) {
+      case "R" -> reset();
+      case "C" -> clear();
+      case "+" ->
+          // parsing the inputField
+          clear();
+      case "-" ->
+          // parse the input
+          clear();
+      case "x" ->
+          // parse the input
+          clear();
+      case DIVIDE ->
+          // parse the input
+          clear();
+      case "=" ->
+          // calculate;
+          clear();
     }
 
   }
+
+
 
   private void setLayout()
   {
@@ -82,7 +95,7 @@ public class GraphicalUserInterface implements ActionListener
     JButton plus = new JButton("+");
     JButton minus = new JButton("-");
     JButton multiply = new JButton("x");
-    JButton divide = new JButton(divideString);
+    JButton divide = new JButton(DIVIDE);
     JButton equals = new JButton("=");
 
     // adding buttons to button panel
