@@ -1,10 +1,13 @@
 package utilities;
 
+import java.math.BigDecimal;
+
 public class Operation
 {
 
   private Operand leftOp;
   private Operand rightOp;
+  private String str;
   
   public Operation(Operand leftOp, Operand rightOp)
   {
@@ -13,29 +16,38 @@ public class Operation
     this.rightOp = rightOp;
   }
   
-  public double Calculate(double leftValue, double rightValue, String operator)
+  public BigDecimal Calculate(BigDecimal leftValue, BigDecimal rightValue, String operator)
   {
     
-    double result = 0.0;
+    BigDecimal result = BigDecimal.ZERO;
     
     // Rough draft
     switch (operator)
     {
       
       case "+":
-        result = leftValue + rightValue;
+        result = leftValue.add(rightValue);
+        str = result.toString() + " " + leftOp.getUnit();
         break;
         
       case "-":
-        result = leftValue - rightValue;
+        result = leftValue.subtract(rightValue);
+        str = result.toString() + " " + leftOp.getUnit();
         break;
         
       case "/":
-        result = leftValue / rightValue;
+        result = leftValue.divide(rightValue);
+        
+        if (leftOp.getUnit().equals(rightOp.getUnit())) {
+          
+          str = result.toString();
+        }
+        
         break;
         
-      case "*":
-        result = leftValue * rightValue;
+      case "x": // Check 'x' or '*'
+        result = leftValue.multiply(rightValue);
+        str = result.toString() + " " + leftOp.getUnit() + "-" + rightOp.getUnit();
         break;
     }
     
@@ -45,6 +57,6 @@ public class Operation
   public String toString()
   {
     
-    return "";
+    return str;
   }
 }

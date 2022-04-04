@@ -19,7 +19,7 @@ public class ExpressionParser
   private String operator;
 
   /**
-   * Parses stuff.
+   * Parses the expression.
    * 
    * @param expression
    */
@@ -41,16 +41,18 @@ public class ExpressionParser
       throw new IllegalArgumentException("You didn't enter anything.");
     }
 
-    // Checks there is a string in each array index
+    // Checks if there is a string in each array index
     // Removes all spaces from the Strings
     for (String str : expression)
     {
       int i = 0;
+      
       if (str == null || str.isEmpty())
       {
         throw new IllegalArgumentException("You did not enter anything.");
 
       }
+      
       expression[i] = str.replaceAll("\\s", " ");
       i++;
     }
@@ -66,8 +68,8 @@ public class ExpressionParser
   /**
    * Private Helper method to make sure the operands were inputted correctly before setting them.
    * 
-   * @param op
-   *          given String
+   * @param op given String
+   * 
    * @return Operand object
    */
   private Operand setOperand(final String op)
@@ -84,24 +86,24 @@ public class ExpressionParser
       }
       else if (Character.isLetter(c) || c == '/' || c == '-')
       {
+        
         toBeUnit = toBeUnit.append(c);
+        
+        if (c == '/')
+        {
+          countSlash += 1;
+        }
+        else if (c == '-')
+        {
+          countDash += 1;
+        }
       }
-
-      if (c == '/')
-      {
-        countSlash += 1;
-      }
-      else if (c == '-')
-      {
-        countDash += 1;
-      }
-
     }
+    
     // check if there is a value entered
     if (toBeValue.toString() == null || toBeValue.isEmpty())
     {
       throw new IllegalArgumentException("You didn't enter a value.");
-
     }
 
     // check if there is a unit entered
@@ -117,12 +119,15 @@ public class ExpressionParser
     }
 
     BigDecimal value = BigDecimal.valueOf(Double.parseDouble(toBeValue.toString()));
+    
     // check if they entered a negative number
     if (value.compareTo(BigDecimal.ZERO) < 0)
     {
       throw new NumberFormatException("You entered a negative number.");
     }
+    
     String unit = toBeUnit.toString();
+    
     return new Operand(value, unit);
   }
 
