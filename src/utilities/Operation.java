@@ -16,8 +16,9 @@ public class Operation {
 	 * @param rightOp represents right operand
 	 * @param operator represents which calculation to do
 	 * @return String
+	 * @throws OperationFormatException 
 	 */
-	public String calculate(final Operand leftOp, final Operand rightOp, final String operator) 
+	public String calculate(final Operand leftOp, final Operand rightOp, final String operator) throws OperationFormatException 
 	{
 		String result = "";
 
@@ -49,10 +50,12 @@ public class Operation {
 	 * @param leftOp represents left operand
 	 * @param rightOp represents right operand
 	 * @return String
+	 * @throws OperationFormatException 
 	 */
-	public String add(final Operand leftOp, final Operand rightOp) 
+	public String add(final Operand leftOp, final Operand rightOp) throws OperationFormatException 
 	{
-		// check that units are the same
+		sameUnitException(leftOp, rightOp);
+		BigDecimal value = leftOp.getValue().add(rightOp.getValue());
 		return "";
 	}
 
@@ -62,10 +65,12 @@ public class Operation {
 	 * @param leftOp represents left operand
 	 * @param rightOp represents right operand
 	 * @return String
+	 * @throws OperationFormatException 
 	 */
-	public String subtract(final Operand leftOp, final Operand rightOp) 
+	public String subtract(final Operand leftOp, final Operand rightOp) throws OperationFormatException 
 	{
-		// check that units are the same
+		sameUnitException(leftOp, rightOp);
+		BigDecimal value = leftOp.getValue().subtract(rightOp.getValue());
 		return "";
 	}
 
@@ -92,5 +97,13 @@ public class Operation {
 	{
 		// check that rightOp value is not zero
 		return "";
+	}
+	
+	private void sameUnitException(final Operand leftOp, final Operand rightOp) throws OperationFormatException
+	{
+		if (!leftOp.getUnit().equals(rightOp.getUnit()))
+		{
+			throw new OperationFormatException("Units must be the same for this operation");
+		}
 	}
 }
