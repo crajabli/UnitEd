@@ -19,11 +19,32 @@ public class ExpressionParser
   /**
    * Parses the expression.
    * 
-   * @param expression
+   * @param expression final expression 
    */
   public ExpressionParser(final String[] expression)
   {
     parseHelper(expression);
+  }
+
+
+  /**
+   * getter for left operand.
+   *
+   * @return left operand
+   */
+  public Operand getLeftOp()
+  {
+    return this.leftOp;
+  }
+
+  /**
+   * getter for the right operand.
+   *
+   * @return the right operand
+   */
+  public Operand getRightOp()
+  {
+    return this.rightOp;
   }
 
   /**

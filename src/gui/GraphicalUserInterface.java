@@ -1,5 +1,7 @@
 package gui;
 
+import utilities.Operation;
+
 import java.awt.BorderLayout;
 
 import java.awt.GridLayout;
@@ -21,6 +23,7 @@ public class GraphicalUserInterface implements ActionListener
   JTextField input;
   private final String DIVIDE = "\u00F7";
   String[] expression = new String[3];
+  Operation operation;
 
   /**
    * Constructor.
@@ -84,11 +87,15 @@ public class GraphicalUserInterface implements ActionListener
         try
         {
           ExpressionParser parser = new ExpressionParser(expression);
+          operation = new Operation();
+
         }
         catch (IllegalArgumentException ie)
         {
           // display.setText("You didn't enter a unit");
           reset();
+
+
           JOptionPane.showMessageDialog(null,
               "You didn't enter a unit", "No unit ",
               JOptionPane.INFORMATION_MESSAGE
