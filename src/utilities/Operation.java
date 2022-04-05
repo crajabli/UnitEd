@@ -26,7 +26,6 @@ public class Operation
    */
   public Operation(final Operand leftOp, final Operand rightOp)
   {
-
     this.leftOp = leftOp;
     this.rightOp = rightOp;
   }
