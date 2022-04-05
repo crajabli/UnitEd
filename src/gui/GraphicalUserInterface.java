@@ -1,5 +1,8 @@
 package gui;
 
+import utilities.Operation;
+import utilities.OperationFormatException;
+
 import java.awt.BorderLayout;
 
 import java.awt.GridLayout;
@@ -21,6 +24,7 @@ public class GraphicalUserInterface implements ActionListener
   JTextField input;
   private final String DIVIDE = "\u00F7";
   String[] expression = new String[3];
+  Operation operation;
 
   /**
    * Constructor.
@@ -33,14 +37,11 @@ public class GraphicalUserInterface implements ActionListener
 
   public void addOperand(String operand,String operation)
   {
-    if (expression[0] == null) {
+
       expression[0] = operand;
       expression[1] = operation;
-    }
-    else
-    {
-      expression[3] = operand;
-    }
+
+
   }
 
 
@@ -55,47 +56,58 @@ public class GraphicalUserInterface implements ActionListener
       case "+" -> {
         // parsing the inputField
         display.setText(display.getText() + input.getText() + " + ");
-        addOperand(display.getText(), "+");
+        addOperand(input.getText(), "+");
         clear();
       }
       case "-" -> {
         // parse the input
         display.setText(display.getText() + input.getText() + " - ");
-        addOperand(display.getText(), "-");
+        addOperand(input.getText(), "-");
         clear();
       }
       case "x" -> {
         // parse the input
         display.setText(display.getText() + input.getText() + " x ");
-        addOperand(display.getText(), "x");
+        addOperand(input.getText(), "x");
         clear();
       }
       case DIVIDE -> {
         // parse the input
         display.setText(display.getText() + input.getText() + " / ");
-        addOperand(display.getText(), "/");
+        addOperand(input.getText(), "/");
         clear();
       }
       case "=" -> {
         // calculate;
         expression[2] = input.getText();
-        display.setText(display.getText() + input.getText() + " = ");
 
         try
         {
+          String result;
+          System.out.println(expression[0] + expression[1] + expression[2]);
           ExpressionParser parser = new ExpressionParser(expression);
+          System.out.println(expression[0] + expression[1] + expression[2]);
+          operation = new Operation();
+          result = operation.calculate(parser.getLeftOp(), parser.getRightOp(), parser.getOperator());
+          display.setText(display.getText() + input.getText() + " = " + result);
+          expression = new String[3];
         }
         catch (IllegalArgumentException ie)
         {
-          // display.setText("You didn't enter a unit");
           reset();
           JOptionPane.showMessageDialog(null,
               "You didn't enter a unit", "No unit ",
               JOptionPane.INFORMATION_MESSAGE
           );
+        } catch (OperationFormatException ex) {
+          reset();
+          JOptionPane.showMessageDialog(null,
+              "Units are not same ", "Wrong unit ",
+              JOptionPane.INFORMATION_MESSAGE
+          );
         }
         clear();
-        System.out.println(expression[0] + expression[1] + expression[2]);
+
       }
     }
 
