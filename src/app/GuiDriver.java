@@ -1,7 +1,5 @@
 package app;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 
 import gui.GraphicalUserInterface;
@@ -12,12 +10,16 @@ import gui.GraphicalUserInterface;
  * @author Makenzie Williams
  *
  */
-
 public class GuiDriver
 {
 
   private JFrame frame;
 
+  /**
+   * Runs GraphicalUserInterface class.
+   * @param args
+   * @throws NumberFormatException
+   */
   public static void main(final String[] args) throws NumberFormatException
   {
     new GraphicalUserInterface();

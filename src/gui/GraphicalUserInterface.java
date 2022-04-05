@@ -36,6 +36,7 @@ public class GraphicalUserInterface implements ActionListener
   public void actionPerformed(final ActionEvent e)
   {
     String ac = e.getActionCommand();
+    
     switch (ac) {
       case "R" -> reset();
       case "C" -> clear();
