@@ -19,7 +19,7 @@ public class ExpressionParser
   /**
    * Parses the expression.
    * 
-   * @param expression final expression 
+   * @param expression final expression
    */
   public ExpressionParser(final String[] expression)
   {
