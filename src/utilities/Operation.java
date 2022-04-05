@@ -144,7 +144,7 @@ public class Operation
 	{
 		if (!leftOp.getUnit().equals(rightOp.getUnit()))
 		{
-			throw new OperationFormatException("Units must be the same for this"
+			throw new OperationFormatException("Units must be the same for this "
 			    + "operation");
 		}
 	}

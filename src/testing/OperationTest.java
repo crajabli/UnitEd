@@ -1,10 +1,11 @@
 package testing;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
-import org.junit.Test;
 
 import utilities.Operand;
 import utilities.Operation;
@@ -20,21 +21,33 @@ import utilities.OperationFormatException;
 public class OperationTest
 {
 
+  private final String unit = "lb";
   /**
    * Testing add method.
    * 
    * @throws OperationFormatException 
    */
   @Test
-  public void add() throws OperationFormatException
+  public void add()
   {
     
     BigDecimal a = BigDecimal.valueOf(12);
     BigDecimal b = BigDecimal.valueOf(2);
-    Operand leftOp = new Operand(a, "lb");
-    Operand rightOp = new Operand(b, "lb");
+    String add = "+";
+    Operand leftOp = new Operand(a, unit);
+    Operand rightOp = new Operand(b, unit);
     
-    assertEquals("14 lb", Operation.calculate(leftOp, rightOp, "+"));
+    assertEquals("14 lb", Operation.calculate(leftOp, rightOp, add));
+    
+    // Throws the exception
+    Operand leftOp1 = new Operand(a, unit);
+    Operand rightOp1 = new Operand(b, "m");
+    
+    assertThrows(OperationFormatException.class, () ->
+    {
+      
+      Operation.calculate(leftOp1, rightOp1, add)
+    });
   }
   
   /**
@@ -48,10 +61,21 @@ public class OperationTest
     
     BigDecimal a = BigDecimal.valueOf(9);
     BigDecimal b = BigDecimal.valueOf(4);
-    Operand leftOp = new Operand(a, "lb");
-    Operand rightOp = new Operand(b, "lb");
+    String subtract = "-";
+    Operand leftOp = new Operand(a, unit);
+    Operand rightOp = new Operand(b, unit);
     
-    assertEquals("5 lb", Operation.calculate(leftOp, rightOp, "-"));
+    assertEquals("5 lb", Operation.calculate(leftOp, rightOp, subtract));
+    
+    // Throws the exception
+    Operand leftOp1 = new Operand(a, unit);
+    Operand rightOp1 = new Operand(b, "km");
+    
+    assertThrows(OperationFormatException.class, () ->
+    {
+      
+      Operation.calculate(leftOp1, rightOp1, subtract)
+    });
   }
   
   /**
@@ -65,8 +89,8 @@ public class OperationTest
     
     BigDecimal a = BigDecimal.valueOf(6);
     BigDecimal b = BigDecimal.valueOf(5);
-    Operand leftOp = new Operand(a, "lb");
-    Operand rightOp = new Operand(b, "lb");
+    Operand leftOp = new Operand(a, unit);
+    Operand rightOp = new Operand(b, unit);
     
     assertEquals("30 lb-lb", Operation.calculate(leftOp, rightOp, "x"));
   }
@@ -82,8 +106,8 @@ public class OperationTest
     
     BigDecimal a = BigDecimal.valueOf(8);
     BigDecimal b = BigDecimal.valueOf(4);
-    Operand leftOp = new Operand(a, "lb");
-    Operand rightOp = new Operand(b, "lb");
+    Operand leftOp = new Operand(a, unit);
+    Operand rightOp = new Operand(b, unit);
     
     assertEquals("2 lb", Operation.calculate(leftOp, rightOp, "/"));
   }

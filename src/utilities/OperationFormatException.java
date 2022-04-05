@@ -7,7 +7,8 @@ package utilities;
  * @version 04-06-2022
  *
  */
-public class OperationFormatException extends Exception {
+public class OperationFormatException extends Exception
+{
   
 	private static final long serialVersionUID = 1L;
 
@@ -20,5 +21,4 @@ public class OperationFormatException extends Exception {
 	{
 		super(error);
 	}
-
 }
