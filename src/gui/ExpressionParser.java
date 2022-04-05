@@ -47,6 +47,12 @@ public class ExpressionParser
     return this.rightOp;
   }
 
+
+  public String getOperator()
+  {
+    return this.operator;
+  }
+
   /**
    * Private helper.
    * 
