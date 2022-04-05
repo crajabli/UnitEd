@@ -3,78 +3,47 @@ package utilities;
 import java.math.BigDecimal;
 
 /**
- * Operation class.
+ * Calculates result given two operands and an operator.
  * 
- * @author Team 22
- * @version 04-06-2022
- * 
+ * @author Victor Aten
+ * @version 4/5/22
  */
 public class Operation
 {
-
-  private Operand leftOp;
-  private Operand rightOp;
-  private String str;
-
   /**
-   * Constructor.
+   * Returns String that represents the calculation of the given expression.
    * 
    * @param leftOp
-   *          left operand
+   *          represents left operand
    * @param rightOp
-   *          right operand
-   */
-  public Operation(final Operand leftOp, final Operand rightOp)
-  {
-    this.leftOp = leftOp;
-    this.rightOp = rightOp;
-  }
-
-  /**
-   * Calculates users expression.
-   * 
-   * @param leftValue
-   *          left operand
-   * @param rightValue
-   *          right operand
+   *          represents right operand
    * @param operator
-   *          op
-   * @return calculated answer
+   *          represents which calculation to do
+   * @return String
+   * @throws OperationFormatException
    */
-  public BigDecimal calculate(final BigDecimal leftValue, final BigDecimal rightValue,
-      final String operator)
+  public String calculate(final Operand leftOp, final Operand rightOp, final String operator)
+      throws OperationFormatException
   {
+    String result = "";
 
-    BigDecimal result = BigDecimal.ZERO;
-
+    // Check operation
     switch (operator)
     {
-
       case "+":
-        result = leftValue.add(rightValue);
-        str = result.toString() + " " + leftOp.getUnit();
+        result = add(leftOp, rightOp);
         break;
 
       case "-":
-        result = leftValue.subtract(rightValue);
-        str = result.toString() + " " + leftOp.getUnit();
+        result = subtract(leftOp, rightOp);
         break;
 
-      // Need to handle the case for dividing different units.
       case "/":
-        result = leftValue.divide(rightValue);
-
-        if (leftOp.getUnit().equals(rightOp.getUnit()))
-        {
-
-          str = result.toString();
-        }
-
+        result = divide(leftOp, rightOp);
         break;
 
       case "x": // Check 'x' or '*'
-        result = leftValue.multiply(rightValue);
-        str = result.toString() + " " + leftOp.getUnit() + "-" + rightOp.getUnit();
+        result = multiply(leftOp, rightOp);
         break;
     }
 
@@ -82,12 +51,96 @@ public class Operation
   }
 
   /**
+   * Adds the given operands together.
    * 
-   * @return proper answer
+   * @param leftOp
+   *          represents left operand
+   * @param rightOp
+   *          represents right operand
+   * @return String
+   * @throws OperationFormatException
+   *           when units are not the same
    */
-  public String toString()
+  public String add(final Operand leftOp, final Operand rightOp) throws OperationFormatException
   {
+    sameUnitException(leftOp, rightOp);
+    BigDecimal value = leftOp.getValue().add(rightOp.getValue());
+    return value + " " + leftOp.getUnit(); // Assumes that leftOp and rightOp unit are the same
+  }
 
-    return str;
+  /**
+   * Subtracts the given operands in the format leftOp - rightOp.
+   * 
+   * @param leftOp
+   *          represents left operand
+   * @param rightOp
+   *          represents right operand
+   * @return String
+   * @throws OperationFormatException
+   *           when units are not the same
+   */
+  public String subtract(final Operand leftOp, final Operand rightOp)
+      throws OperationFormatException
+  {
+    sameUnitException(leftOp, rightOp);
+    BigDecimal value = leftOp.getValue().subtract(rightOp.getValue());
+    return value + " " + leftOp.getUnit(); // Assumes that leftOp and rightOp unit are the same
+  }
+
+  /**
+   * Multiplies the given operands together.
+   * 
+   * @param leftOp
+   *          represents left operand
+   * @param rightOp
+   *          represents right operand
+   * @return String
+   */
+  public String multiply(final Operand leftOp, final Operand rightOp)
+  {
+    BigDecimal value = leftOp.getValue().multiply(rightOp.getValue());
+    return value + " " + leftOp.getUnit() + "-" + rightOp.getUnit();
+  }
+
+  /**
+   * Divides the given operands in the format leftOp / rightOp.
+   * 
+   * @param leftOp
+   *          represents left operand
+   * @param rightOp
+   *          represents right operand
+   * @return String
+   * @throws OperationFormatException
+   *           when trying to divide by zero
+   */
+  public String divide(final Operand leftOp, final Operand rightOp) throws OperationFormatException
+  {
+    // Check that rightOp value is not zero
+    if (rightOp.getValue().equals(0))
+    {
+      throw new OperationFormatException("Cannot divide by zero");
+    }
+
+    BigDecimal value = leftOp.getValue().divide(rightOp.getValue());
+    return value + " " + leftOp.getUnit() + "/" + rightOp.getUnit();
+  }
+
+  /**
+   * Helper method to throw exception.
+   * 
+   * @param leftOp
+   *          represents left operand
+   * @param rightOp
+   *          represents right operand
+   * @throws OperationFormatException
+   *           when units are the same
+   */
+  private void sameUnitException(final Operand leftOp, final Operand rightOp)
+      throws OperationFormatException
+  {
+    if (!leftOp.getUnit().equals(rightOp.getUnit()))
+    {
+      throw new OperationFormatException("Units must be the same for this operation");
+    }
   }
 }
