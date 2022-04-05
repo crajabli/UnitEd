@@ -5,8 +5,13 @@ import java.math.BigDecimal;
 /**
  * Calculates result given two operands and an operator.
  * 
+<<<<<<< HEAD
  * @author Team 22
  * @version 4/4/22
+=======
+ * @author Victor Aten
+ * @version 4/5/22
+>>>>>>> branch 'main' of https://github.com/bernstdh/team22
  */
 public class Operation
 {
@@ -24,8 +29,10 @@ public class Operation
 	 * @param rightOp represents right operand
 	 * @param operator represents which calculation to do
 	 * @return String
+	 * @throws OperationFormatException 
 	 */
-	public String calculate(final Operand leftOp, final Operand rightOp, final String operator) 
+	public String calculate(final Operand leftOp, final Operand rightOp, final String operator)
+	    throws OperationFormatException 
 	{
 		String result = "";
 
@@ -62,20 +69,15 @@ public class Operation
 	 * @param leftOp represents left operand
 	 * @param rightOp represents right operand
 	 * @return String
+	 * @throws OperationFormatException when units are not the same
 	 */
-	public String add(final Operand leftOp, final Operand rightOp) 
+	public String add(final Operand leftOp, final Operand rightOp)
+	    throws OperationFormatException 
 	{
 		
-	  // check that units are the same
-	  if (!leftOp.getUnit().equals(rightOp.getUnit()))
-	  {
-	    
-	    throw new IllegalArgumentException("The units are different!");
-	  }
-	  
-	  BigDecimal r = leftOp.getValue().add(rightOp.getValue());
-	  
-		return r.toString() + space + leftOp.getUnit();
+		sameUnitException(leftOp, rightOp);
+		BigDecimal value = leftOp.getValue().add(rightOp.getValue());
+		return value + space + leftOp.getUnit();
 	}
 
 	/**
@@ -84,19 +86,16 @@ public class Operation
 	 * @param leftOp represents left operand
 	 * @param rightOp represents right operand
 	 * @return String
+	 * @throws OperationFormatException when units are not the same
 	 */
 	public String subtract(final Operand leftOp, final Operand rightOp) 
+	    throws OperationFormatException 
 	{
-		// check that units are the same
-	  if (!leftOp.getUnit().equals(rightOp.getUnit()))
-    {
-      
-      throw new IllegalArgumentException("The units are different");
-    }
     
-    BigDecimal r = leftOp.getValue().subtract(rightOp.getValue());
-    
-    return r.toString() + space + rightOp.getUnit();
+		sameUnitException(leftOp, rightOp);
+		BigDecimal value = leftOp.getValue().subtract(rightOp.getValue());
+		
+		return value + space + leftOp.getUnit(); 
 	}
 
 	/**
@@ -120,16 +119,36 @@ public class Operation
 	 * @param leftOp represents left operand
 	 * @param rightOp represents right operand
 	 * @return String
+	 * @throws OperationFormatException when trying to divide by zero
 	 */
-	public String divide(final Operand leftOp, final Operand rightOp) 
+	public String divide(final Operand leftOp, final Operand rightOp)
+	    throws OperationFormatException 
 	{
-		// check that rightOp value is not zero
 	  
-	  if (rightOp.getValue() == BigDecimal.ZERO) {
-	    
-	    throw new IllegalArgumentException("Cannot divide by 0");
-	  }
-	  
-		return "";
+		// Check that rightOp value is not zero
+		if (rightOp.getValue().equals(0))
+		{
+			throw new OperationFormatException("Cannot divide by zero");
+		}
+		
+		BigDecimal value = leftOp.getValue().divide(rightOp.getValue());
+		return value + space + leftOp.getUnit() + division + rightOp.getUnit();
+	}
+	
+	/**
+	 * Helper method to throw exception.
+	 * 
+	 * @param leftOp represents left operand
+	 * @param rightOp represents right operand
+	 * @throws OperationFormatException when units are the same
+	 */
+	private void sameUnitException(final Operand leftOp, final Operand rightOp)
+	    throws OperationFormatException
+	{
+		if (!leftOp.getUnit().equals(rightOp.getUnit()))
+		{
+			throw new OperationFormatException("Units must be the same for this"
+			    + "operation");
+		}
 	}
 }
