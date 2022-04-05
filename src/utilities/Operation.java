@@ -1,5 +1,7 @@
 package utilities;
 
+import java.math.BigDecimal;
+
 /**
  * Calculates result given two operands and an operator.
  * 
@@ -8,6 +10,13 @@ package utilities;
  */
 public class Operation
 {
+  
+  private final String minus = "-";
+  private final String plus = "+";
+  private final String division = "/";
+  private final String multiplication = "x";
+  private final String space = " ";
+  
 	/**
 	 * Returns String that represents the calculation of the given expression.
 	 * 
@@ -24,19 +33,19 @@ public class Operation
 		switch (operator)
 		{
 		  
-		  case "+":
+		  case plus:
 		    result = add(leftOp, rightOp);
 		    break;
 
-		  case "-":
+		  case minus:
 		    result = subtract(leftOp, rightOp);
 		    break;
 
-		  case "/":
+		  case division:
 		    result = divide(leftOp, rightOp);
 		    break;
 
-		  case "x": // Check 'x' or '*'
+		  case multiplication:
 		    result = multiply(leftOp, rightOp);
 		    break;
 		    
@@ -56,8 +65,17 @@ public class Operation
 	 */
 	public String add(final Operand leftOp, final Operand rightOp) 
 	{
-		// check that units are the same
-		return "";
+		
+	  // check that units are the same
+	  if (!leftOp.getUnit().equals(rightOp.getUnit()))
+	  {
+	    
+	    throw new IllegalArgumentException("The units are different!");
+	  }
+	  
+	  BigDecimal r = leftOp.getValue().add(rightOp.getValue());
+	  
+		return r.toString() + space + leftOp.getUnit();
 	}
 
 	/**
@@ -70,7 +88,15 @@ public class Operation
 	public String subtract(final Operand leftOp, final Operand rightOp) 
 	{
 		// check that units are the same
-		return "";
+	  if (!leftOp.getUnit().equals(rightOp.getUnit()))
+    {
+      
+      throw new IllegalArgumentException("The units are different");
+    }
+    
+    BigDecimal r = leftOp.getValue().subtract(rightOp.getValue());
+    
+    return r.toString() + space + rightOp.getUnit();
 	}
 
 	/**
@@ -82,7 +108,10 @@ public class Operation
 	 */
 	public String multiply(final Operand leftOp, final Operand rightOp) 
 	{
-		return "";
+	  
+	  BigDecimal r = leftOp.getValue().multiply(rightOp.getValue());
+	  
+		return r.toString() + space + leftOp.getUnit() + minus + rightOp.getUnit();
 	}
 
 	/**
@@ -95,6 +124,12 @@ public class Operation
 	public String divide(final Operand leftOp, final Operand rightOp) 
 	{
 		// check that rightOp value is not zero
+	  
+	  if (rightOp.getValue() == BigDecimal.ZERO) {
+	    
+	    throw new IllegalArgumentException("Cannot divide by 0");
+	  }
+	  
 		return "";
 	}
 }

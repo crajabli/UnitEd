@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 
 /**
  * 
- * @author Makenzie Williams
+ * @author Makenzie Williams, Chingiz Rajabli
  * @version 1
  *
  */
@@ -22,7 +22,7 @@ public class GraphicalUserInterface implements ActionListener
 
   JTextField display;
   JTextField input;
-  private final String divideString = "\u00F7";
+  private final String DIVIDE = "\u00F7";
 
   /**
    * Constructor.
@@ -36,9 +36,39 @@ public class GraphicalUserInterface implements ActionListener
   public void actionPerformed(final ActionEvent e)
   {
     String ac = e.getActionCommand();
-    // TODO Auto-generated method stub
+    switch (ac) {
+      case "R" -> reset();
+      case "C" -> clear();
+      case "+" -> {
+        // parsing the inputField
+        display.setText(display.getText() + input.getText() + " + ");
+        clear();
+      }
+      case "-" -> {
+        // parse the input
+        display.setText(display.getText() + input.getText() + " - ");
+        clear();
+      }
+      case "x" -> {
+        // parse the input
+        display.setText(display.getText() + input.getText() + " x ");
+        clear();
+      }
+      case DIVIDE -> {
+        // parse the input
+        display.setText(display.getText() + input.getText() + " / ");
+        clear();
+      }
+      case "=" -> {
+        // calculate;
+        display.setText(display.getText() + input.getText() + " = ");
+        clear();
+      }
+    }
 
   }
+
+
 
   private void setLayout()
   {
@@ -75,7 +105,7 @@ public class GraphicalUserInterface implements ActionListener
     JButton plus = new JButton("+");
     JButton minus = new JButton("-");
     JButton multiply = new JButton("x");
-    JButton divide = new JButton(divideString);
+    JButton divide = new JButton(DIVIDE);
     JButton equals = new JButton("=");
 
     // adding buttons to button panel
@@ -103,6 +133,8 @@ public class GraphicalUserInterface implements ActionListener
     // setting frame
     frame.setSize(550, 250);
     frame.setVisible(true);
+
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
 
   /**
