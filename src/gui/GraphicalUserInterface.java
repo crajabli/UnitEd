@@ -24,7 +24,6 @@ public class GraphicalUserInterface implements ActionListener
   JTextField input;
   private final String DIVIDE = "\u00F7";
   String[] expression = new String[3];
-  Operation operation;
 
   /**
    * Constructor.
@@ -34,13 +33,16 @@ public class GraphicalUserInterface implements ActionListener
     setLayout();
   }
 
-
+  /**
+   * adds operand to the expression array.
+   *
+   * @param operand first operand
+   * @param operation operation
+   */
   public void addOperand(String operand,String operation)
   {
-
       expression[0] = operand;
       expression[1] = operation;
-
 
   }
 
@@ -55,24 +57,28 @@ public class GraphicalUserInterface implements ActionListener
       case "C" -> clear();
       case "+" -> {
         // parsing the inputField
+        display.setText("");
         display.setText(display.getText() + input.getText() + " + ");
         addOperand(input.getText(), "+");
         clear();
       }
       case "-" -> {
         // parse the input
+        display.setText("");
         display.setText(display.getText() + input.getText() + " - ");
         addOperand(input.getText(), "-");
         clear();
       }
       case "x" -> {
         // parse the input
+        display.setText("");
         display.setText(display.getText() + input.getText() + " x ");
         addOperand(input.getText(), "x");
         clear();
       }
       case DIVIDE -> {
         // parse the input
+        display.setText("");
         display.setText(display.getText() + input.getText() + " / ");
         addOperand(input.getText(), "/");
         clear();
@@ -87,8 +93,7 @@ public class GraphicalUserInterface implements ActionListener
           System.out.println(expression[0] + expression[1] + expression[2]);
           ExpressionParser parser = new ExpressionParser(expression);
           System.out.println(expression[0] + expression[1] + expression[2]);
-          operation = new Operation();
-          result = operation.calculate(parser.getLeft(), parser.getRight(), parser.getOperator());
+          result = Operation.calculate(parser.getLeft(), parser.getRight(), parser.getOperator());
           display.setText(display.getText() + input.getText() + " = " + result);
           expression = new String[3];
         }
@@ -114,7 +119,9 @@ public class GraphicalUserInterface implements ActionListener
   }
 
 
-
+  /**
+   * sets up the layout.
+   */
   private void setLayout()
   {
 
