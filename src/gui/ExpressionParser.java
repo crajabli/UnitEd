@@ -2,6 +2,7 @@ package gui;
 
 import java.math.BigDecimal;
 import utilities.Operand;
+import utilities.OperationFormatException;
 
 /**
  * Parses value, unit, and operator from the users expression.
@@ -20,12 +21,18 @@ public class ExpressionParser
    * 
    * @param expression
    *          final expression
+   * @throws OperationFormatException
    */
-  public ExpressionParser(final String[] expression)
+  public ExpressionParser(final String[] expression) throws OperationFormatException
   {
     parseHelper(expression);
   }
 
+  /**
+   * Getter method.
+   * 
+   * @return operator
+   */
   public String getOperator()
   {
     return operator;
@@ -35,8 +42,9 @@ public class ExpressionParser
    * Private helper.
    * 
    * @param expression
+   * @throws OperationFormatException
    */
-  private void parseHelper(final String[] expression)
+  private void parseHelper(final String[] expression) throws OperationFormatException
   {
 
     if (expression == null || expression.length == 0)
@@ -70,17 +78,18 @@ public class ExpressionParser
    *          given String
    * 
    * @return Operand object
+   * @throws OperationFormatException
    */
-  private Operand setOperand(final String op)
+  private Operand setOperand(final String op) throws OperationFormatException
   {
     StringBuilder toBeValue = new StringBuilder();
     StringBuilder toBeUnit = new StringBuilder();
 
     int countSlash = 0;
-    int countDash = 0; 
+    int countDash = 0;
     if (op.charAt(0) == '-')
     {
-      toBeValue = toBeValue.append(op.charAt(0)); 
+      toBeValue = toBeValue.append(op.charAt(0));
     }
 
     for (int i = 0; i < op.length(); i++)
@@ -109,13 +118,13 @@ public class ExpressionParser
     // check if there is a value entered
     if (toBeValue.length() == 0)
     {
-      throw new IllegalArgumentException("You didn't enter a value.");
+      throw new ArrayIndexOutOfBoundsException("You didn't enter a value.");
     }
 
     // check if there is a unit entered
     if (toBeUnit.length() == 0)
     {
-      throw new IllegalArgumentException("You didn't enter a unit.");
+      throw new ArithmeticException("You didn't enter a unit.");
     }
 
     // check if they entered too many slashes or dashes
