@@ -103,6 +103,21 @@ public class Operation
 
     return value.toString() + SPACE + leftOp.getUnit();
   }
+  
+  
+  /**
+   * mi/hr * hr = mi
+   * mi/hr * hr/mi = no unit
+   * mi/hr / hr = mi/hr^2
+   * mi/hr * mi = mi^2/hr
+   * mi/hr / mi = 1/hr
+   * 
+   * MULTIPLICATION:
+   * Private helper method that checks units for - or / (used for both)
+   * split units and compare individual units 
+   * 
+   * 
+   */
 
   /**
    * Multiplies the given operands together.
@@ -115,7 +130,7 @@ public class Operation
    */
   public static String multiply(final Operand leftOp, final Operand rightOp)
   {
-
+    
     BigDecimal value = leftOp.getValue().multiply(rightOp.getValue());
 
     return value.toString() + SPACE + leftOp.getUnit() + MINUS + rightOp.getUnit();
