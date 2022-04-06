@@ -147,10 +147,20 @@ public class Operation
     {
       BigDecimal value = leftOp.getValue().divide(rightOp.getValue());
       return value.toString();
-    
-    } else
+ 
+    }
+    else if (leftOp.getUnit().contains(rightOp.getUnit()))
     {
-
+      BigDecimal value = leftOp.getValue().divide(rightOp.getValue());
+      return value.toString() + SPACE + rightOp.getUnit();
+    }
+    else if (rightOp.getUnit().contains(leftOp.getUnit()))
+    {
+      BigDecimal value = leftOp.getValue().divide(rightOp.getValue());
+      return value.toString() + SPACE + leftOp.getUnit();
+    }
+    else
+    {
       BigDecimal value = leftOp.getValue().divide(rightOp.getValue());
       return value.toString() + SPACE + leftOp.getUnit() + DIVISION + rightOp.getUnit();
     }

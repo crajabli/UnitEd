@@ -56,13 +56,10 @@ public class ExpressionParser
 
     // Construct left and right operands
     String left = expression[0];
-    System.out.println(left);
     leftOp = setOperand(left);
     operator = expression[1];
-    System.out.println(operator);
     String right = expression[2];
     rightOp = setOperand(right);
-    System.out.println(right);
 
   }
 
