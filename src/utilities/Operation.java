@@ -112,6 +112,8 @@ public class Operation
    * mi/hr * mi = mi^2/hr
    * mi/hr / mi = 1/hr
    * 
+   * 5mi/ should be an error ("incomplete units...)
+   * 
    * MULTIPLICATION:
    * Private helper method that checks units for - or / (used for both)
    * split units and compare individual units 
