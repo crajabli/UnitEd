@@ -135,33 +135,29 @@ public class Operation
   public static String divide(final Operand leftOp, final Operand rightOp)
       throws OperationFormatException
   {
-
     // Check that rightOp value is not zero
     if (rightOp.getValue().equals(BigDecimal.ZERO))
     {
       throw new OperationFormatException("Cannot divide by zero");
     }
+    
+    BigDecimal value = leftOp.getValue().divide(rightOp.getValue());
 
     // Check if units are the same and return just value
     if (leftOp.getUnit().equals(rightOp.getUnit()))
     {
-      BigDecimal value = leftOp.getValue().divide(rightOp.getValue());
       return value.toString();
- 
     }
     else if (leftOp.getUnit().contains(rightOp.getUnit()))
     {
-      BigDecimal value = leftOp.getValue().divide(rightOp.getValue());
       return value.toString() + SPACE + rightOp.getUnit();
     }
     else if (rightOp.getUnit().contains(leftOp.getUnit()))
     {
-      BigDecimal value = leftOp.getValue().divide(rightOp.getValue());
       return value.toString() + SPACE + leftOp.getUnit();
     }
     else
     {
-      BigDecimal value = leftOp.getValue().divide(rightOp.getValue());
       return value.toString() + SPACE + leftOp.getUnit() + DIVISION + rightOp.getUnit();
     }
   }
