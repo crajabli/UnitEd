@@ -97,17 +97,23 @@ public class GraphicalUserInterface implements ActionListener
         try
         {
           String result;
-          System.out.println(expression[0] + expression[1] + expression[2]);
           ExpressionParser parser = new ExpressionParser(expression);
-          System.out.println(expression[0] + expression[1] + expression[2]);
           result = Operation.calculate(parser.getLeft(), parser.getRight(), parser.getOperator());
           display.setText(display.getText() + input.getText() + " = " + result);
           expression = new String[3];
         }
+        catch (NumberFormatException ne)
+        {
+          reset();
+          JOptionPane.showMessageDialog(null,
+              "You entered a negative number  ", "negative number ",
+              JOptionPane.INFORMATION_MESSAGE
+          );
+        }
         catch (IllegalArgumentException ie)
         {
           reset();
-          JOptionPane.showMessageDialog(null, "You didn't enter a unit", "No unit ",
+          JOptionPane.showMessageDialog(null, "You entered too many '-' or'/'", "No unit ",
               JOptionPane.INFORMATION_MESSAGE);
         }
         catch (OperationFormatException ex)
@@ -116,6 +122,20 @@ public class GraphicalUserInterface implements ActionListener
           JOptionPane.showMessageDialog(null, "Units are not same ", "Wrong unit ",
               JOptionPane.INFORMATION_MESSAGE);
         }
+        catch (ArithmeticException ax)
+        {
+          reset();
+          JOptionPane.showMessageDialog(null, "You didn't enter a unit ", "No unit ",
+              JOptionPane.INFORMATION_MESSAGE);
+        }
+        catch (ArrayIndexOutOfBoundsException ax)
+        {
+          reset();
+          JOptionPane.showMessageDialog(null, "You didn't enter a value ", "No unit ",
+              JOptionPane.INFORMATION_MESSAGE);
+        }
+
+
         clear();
 
       }
