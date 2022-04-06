@@ -22,8 +22,8 @@ public class GraphicalUserInterface implements ActionListener
 
   JTextField display;
   JTextField input;
-  private final String DIVIDE = "\u00F7";
   String[] expression = new String[3];
+  private final String DIVIDE = "\u00F7";
 
   /**
    * Constructor.
@@ -36,54 +36,61 @@ public class GraphicalUserInterface implements ActionListener
   /**
    * adds operand to the expression array.
    *
-   * @param operand first operand
-   * @param operation operation
+   * @param operand
+   *          first operand
+   * @param operation
+   *          operation
    */
-  public void addOperand(String operand,String operation)
+  public void addOperand(final String operand, final String operation)
   {
-      expression[0] = operand;
-      expression[1] = operation;
+    expression[0] = operand;
+    expression[1] = operation;
 
   }
-
 
   @Override
   public void actionPerformed(final ActionEvent e)
   {
     String ac = e.getActionCommand();
-    
-    switch (ac) {
+
+    switch (ac)
+    {
       case "R" -> reset();
       case "C" -> clear();
-      case "+" -> {
+      case "+" ->
+      {
         // parsing the inputField
         display.setText("");
         display.setText(display.getText() + input.getText() + " + ");
         addOperand(input.getText(), "+");
         clear();
       }
-      case "-" -> {
+      case "-" ->
+      {
         // parse the input
         display.setText("");
         display.setText(display.getText() + input.getText() + " - ");
         addOperand(input.getText(), "-");
         clear();
       }
-      case "x" -> {
+      case "x" ->
+      {
         // parse the input
         display.setText("");
         display.setText(display.getText() + input.getText() + " x ");
         addOperand(input.getText(), "x");
         clear();
       }
-      case DIVIDE -> {
+      case DIVIDE ->
+      {
         // parse the input
         display.setText("");
         display.setText(display.getText() + input.getText() + " / ");
         addOperand(input.getText(), "/");
         clear();
       }
-      case "=" -> {
+      case "=" ->
+      {
         // calculate;
         expression[2] = input.getText();
 
@@ -100,16 +107,14 @@ public class GraphicalUserInterface implements ActionListener
         catch (IllegalArgumentException ie)
         {
           reset();
-          JOptionPane.showMessageDialog(null,
-              "You didn't enter a unit", "No unit ",
-              JOptionPane.INFORMATION_MESSAGE
-          );
-        } catch (OperationFormatException ex) {
+          JOptionPane.showMessageDialog(null, "You didn't enter a unit", "No unit ",
+              JOptionPane.INFORMATION_MESSAGE);
+        }
+        catch (OperationFormatException ex)
+        {
           reset();
-          JOptionPane.showMessageDialog(null,
-              "Units are not same ", "Wrong unit ",
-              JOptionPane.INFORMATION_MESSAGE
-          );
+          JOptionPane.showMessageDialog(null, "Units are not same ", "Wrong unit ",
+              JOptionPane.INFORMATION_MESSAGE);
         }
         clear();
 
@@ -117,7 +122,6 @@ public class GraphicalUserInterface implements ActionListener
     }
 
   }
-
 
   /**
    * sets up the layout.
@@ -166,7 +170,7 @@ public class GraphicalUserInterface implements ActionListener
     buttonPanel.add(plus);
     buttonPanel.add(minus);
     buttonPanel.add(multiply);
-    buttonPanel.add(divide); 
+    buttonPanel.add(divide);
     buttonPanel.add(equals);
 
     // adding action listener to each button

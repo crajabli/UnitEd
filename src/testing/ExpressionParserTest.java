@@ -12,9 +12,9 @@ import utilities.Operand;
 class ExpressionParserTest
 {
   private final String MULTIPLICATION = "x";
-  private final String DIVISION = "x";
-  private final String SUBTRACTION = "x";
-  private final String ADDITION = "x";
+  private final String DIVISION = "/";
+  private final String SUBTRACTION = "-";
+  private final String ADDITION = "+";
 
   private String[] expression = new String[3];
 
@@ -62,7 +62,7 @@ class ExpressionParserTest
     }
     catch (IllegalArgumentException iae)
     {
-      System.out.println("You didn't enter an unit");
+      System.out.println("You didn't enter any units");
     }
 
     expression[0] = "";
