@@ -95,7 +95,7 @@ public class ExpressionParser
     for (int i = 0; i < op.length(); i++)
     {
       char c = op.charAt(i);
-      if (Character.isDigit(c))
+      if (Character.isDigit(c) || c == '.')
       {
         toBeValue = toBeValue.append(c);
       }
