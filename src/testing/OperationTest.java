@@ -28,7 +28,7 @@ public class OperationTest
    * @throws OperationFormatException 
    */
   @Test
-  public void add()
+  public void add() throws OperationFormatException
   {
     
     BigDecimal a = BigDecimal.valueOf(12);
@@ -46,8 +46,8 @@ public class OperationTest
     assertThrows(OperationFormatException.class, () ->
     {
       
-      Operation.calculate(leftOp1, rightOp1, add)
-    });
+      Operation.calculate(leftOp1, rightOp1, add);
+      });
   }
 
   /**
@@ -74,7 +74,7 @@ public class OperationTest
     assertThrows(OperationFormatException.class, () ->
     {
       
-      Operation.calculate(leftOp1, rightOp1, subtract)
+      Operation.calculate(leftOp1, rightOp1, subtract);
     });
   }
 

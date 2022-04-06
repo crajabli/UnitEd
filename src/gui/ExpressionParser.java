@@ -18,38 +18,17 @@ public class ExpressionParser
   /**
    * Parses the expression.
    * 
-   * @param expression final expression
+   * @param expression
+   *          final expression
    */
   public ExpressionParser(final String[] expression)
   {
     parseHelper(expression);
   }
 
-
-  /**
-   * getter for left operand.
-   *
-   * @return left operand
-   */
-  public Operand getLeftOp()
-  {
-    return this.leftOp;
-  }
-
-  /**
-   * getter for the right operand.
-   *
-   * @return the right operand
-   */
-  public Operand getRightOp()
-  {
-    return this.rightOp;
-  }
-
-
   public String getOperator()
   {
-    return this.operator;
+    return operator;
   }
 
   /**
@@ -77,11 +56,13 @@ public class ExpressionParser
 
     // Construct left and right operands
     String left = expression[0];
+    System.out.println(left);
     leftOp = setOperand(left);
     operator = expression[1];
-
+    System.out.println(operator);
     String right = expression[2];
     rightOp = setOperand(right);
+    System.out.println(right);
 
   }
 
@@ -97,9 +78,13 @@ public class ExpressionParser
   {
     StringBuilder toBeValue = new StringBuilder();
     StringBuilder toBeUnit = new StringBuilder();
-    
+
     int countSlash = 0;
-    int countDash = 0;
+    int countDash = 0; 
+    if (op.charAt(0) == '-')
+    {
+      toBeValue = toBeValue.append(op.charAt(0)); 
+    }
 
     for (int i = 0; i < op.length(); i++)
     {
@@ -125,13 +110,13 @@ public class ExpressionParser
     }
 
     // check if there is a value entered
-    if (toBeValue.toString() == null || toBeValue.isEmpty())
+    if (toBeValue.length() == 0)
     {
       throw new IllegalArgumentException("You didn't enter a value.");
     }
 
     // check if there is a unit entered
-    if (toBeUnit.toString() == null || toBeUnit.toString().isEmpty())
+    if (toBeUnit.length() == 0)
     {
       throw new IllegalArgumentException("You didn't enter a unit.");
     }
@@ -145,7 +130,7 @@ public class ExpressionParser
     BigDecimal value = BigDecimal.valueOf(Double.parseDouble(toBeValue.toString()));
 
     // check if they entered a negative number
-    if (value.compareTo(BigDecimal.ZERO) > 0)
+    if (value.compareTo(BigDecimal.ZERO) < 0)
     {
       throw new NumberFormatException("You entered a negative number.");
     }

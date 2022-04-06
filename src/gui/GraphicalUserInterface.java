@@ -88,7 +88,7 @@ public class GraphicalUserInterface implements ActionListener
           ExpressionParser parser = new ExpressionParser(expression);
           System.out.println(expression[0] + expression[1] + expression[2]);
           operation = new Operation();
-          result = operation.calculate(parser.getLeftOp(), parser.getRightOp(), parser.getOperator());
+          result = operation.calculate(parser.getLeft(), parser.getRight(), parser.getOperator());
           display.setText(display.getText() + input.getText() + " = " + result);
           expression = new String[3];
         }
@@ -159,7 +159,7 @@ public class GraphicalUserInterface implements ActionListener
     buttonPanel.add(plus);
     buttonPanel.add(minus);
     buttonPanel.add(multiply);
-    buttonPanel.add(divide);
+    buttonPanel.add(divide); 
     buttonPanel.add(equals);
 
     // adding action listener to each button

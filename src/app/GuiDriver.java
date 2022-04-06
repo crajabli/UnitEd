@@ -13,7 +13,7 @@ import gui.GraphicalUserInterface;
 public class GuiDriver
 {
 
-  private JFrame frame;
+  private JFrame frame; 
 
   /**
    * Runs GraphicalUserInterface class.
