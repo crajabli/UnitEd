@@ -147,8 +147,8 @@ public class Operation
     {
       BigDecimal value = leftOp.getValue().divide(rightOp.getValue());
       return value.toString();
-    }
-    else
+    
+    } else
     {
 
       BigDecimal value = leftOp.getValue().divide(rightOp.getValue());
