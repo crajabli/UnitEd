@@ -24,5 +24,4 @@ public class GuiDriver
   {
     new GraphicalUserInterface();
   }
-
 }

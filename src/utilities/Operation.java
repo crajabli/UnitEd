@@ -143,7 +143,10 @@ public class Operation
     
     BigDecimal value = leftOp.getValue().divide(rightOp.getValue());
 
-    // Check if units are the same and return just value
+    /**
+     *  Check mi/h / h = mi/h-h
+     *  Check mi/h / mi = mi/h-mi
+     */
     if (leftOp.getUnit().equals(rightOp.getUnit()))
     {
       return value.toString();
