@@ -25,12 +25,19 @@ public class GraphicalUserInterface implements ActionListener
   String[] expression = new String[3];
   private final String DIVIDE = "\u00F7";
 
+
   /**
    * Constructor.
    */
   public GraphicalUserInterface()
   {
     setLayout();
+  }
+
+
+  public void setButtons()
+  {
+
   }
 
   /**
