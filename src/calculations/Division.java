@@ -20,12 +20,13 @@ public class Division
    * 
    * @param leftOp for the left operand
    * @param rightOp for the right operand
+   * @param operator for the operator
    * 
    * @return the result
    * 
    * @throws OperationFormatException when trying to divide by zero
    */
-  public static String calculate(final Operand leftOp, final Operand rightOp)
+  public static String calculate(final Operand leftOp, final Operand rightOp, final String operator)
       throws OperationFormatException
   {
     // Check that rightOp value is not zero

@@ -82,6 +82,13 @@ public class ExpressionParser
    */
   private Operand setOperand(final String op) throws OperationFormatException
   {
+    
+    if (op.charAt(op.length() - 1) == '/' || op.charAt(op.length() - 1) == '-')
+    {
+      
+      throw new IllegalArgumentException("The unit cannot end with a - or /");
+    }
+    
     StringBuilder toBeValue = new StringBuilder();
     StringBuilder toBeUnit = new StringBuilder();
 

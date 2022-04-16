@@ -48,11 +48,11 @@ public class Operation
         break;
 
       case DIVISION:
-        result = Division.calculate(leftOp, rightOp);
+        result = Division.calculate(leftOp, rightOp, DIVISION);
         break;
 
       case MULTIPLICATION:
-        result = Multiplication.calculate(leftOp, rightOp);
+        result = Multiplication.calculate(leftOp, rightOp, MULTIPLICATION);
         break;
 
       default:

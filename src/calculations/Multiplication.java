@@ -18,14 +18,20 @@ public class Multiplication
    * 
    * @param leftOp for the left operand
    * @param rightOp for the right operand
+   * @param operator for the operator
    * 
    * @return the result
    */
-  public static String calculate(final Operand leftOp, final Operand rightOp)
+  public static String calculate(final Operand leftOp, final Operand rightOp, final String operator)
   {
     
     BigDecimal value = leftOp.getValue().multiply(rightOp.getValue());
+    
+    String tempUnit = Unit.calculateUnits(leftOp.getUnit(), "") + "-"
+        + Unit.calculateUnits(rightOp.getUnit(), operator);
+    
+    String unit = Unit.calculateUnits(tempUnit, "");
 
-    return value.toString() + " " + leftOp.getUnit() + "-" + rightOp.getUnit();
+    return value.toString() + " " + unit;
   }
 }
