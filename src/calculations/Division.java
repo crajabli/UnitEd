@@ -14,8 +14,6 @@ import utilities.OperationFormatException;
 public class Division
 {
   
-  private static final String SPACE = " ";
-
   /**
    * 
    * @param leftOp for the left operand
@@ -37,25 +35,11 @@ public class Division
     
     BigDecimal value = leftOp.getValue().divide(rightOp.getValue());
 
-    /**
-     *  Check mi/h / h = mi/h-h
-     *  Check mi/h / mi = mi/h-mi
-     */
-    if (leftOp.getUnit().equals(rightOp.getUnit()))
-    {
-      return value.toString();
-    }
-    else if (leftOp.getUnit().contains(rightOp.getUnit()))
-    {
-      return value.toString() + SPACE + rightOp.getUnit();
-    }
-    else if (rightOp.getUnit().contains(leftOp.getUnit()))
-    {
-      return value.toString() + SPACE + leftOp.getUnit();
-    }
-    else
-    {
-      return value.toString() + SPACE + leftOp.getUnit() + "/" + rightOp.getUnit();
-    }
+    String tempUnit = Unit.calculateUnits(leftOp.getUnit(), "") + "-"
+        + Unit.calculateUnits(rightOp.getUnit(), operator);
+    
+    String unit = Unit.calculateUnits(tempUnit, "");
+    
+    return value.toString() + " " + Unit.format(unit);
   }
 }

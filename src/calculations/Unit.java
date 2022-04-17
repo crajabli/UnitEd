@@ -1,6 +1,8 @@
 package calculations;
 
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 
 import utilities.Operand;
 import utilities.OperationFormatException;
@@ -155,7 +157,11 @@ public class Unit
     if (denominator.size() > 0)
     {
       
-      result = result.substring(0, result.length() - 1) + slash;
+      if (!result.equals(""))
+      {
+        
+        result = result.substring(0, result.length() - 1) + slash;
+      }
       
       for (String s : denominator)
       {
@@ -164,7 +170,13 @@ public class Unit
       }
     }
     
-    return result.substring(0, result.length() - 1);
+    if (!result.equals(""))
+    {
+      
+      result = result.substring(0, result.length() - 1);
+    }
+    
+    return result;
   }
   
   /**
@@ -188,5 +200,145 @@ public class Unit
         list2.remove(t);
       }
     }
+  }
+  
+  /**
+   * Method formats the result.
+   * 
+   * @param expression for the expression
+   * 
+   * @return the formatted result
+   */
+  public static String format(final String expression)
+  {
+    
+    TreeMap<String, Integer> mapNumerator = new TreeMap<String, Integer>();
+    TreeMap<String, Integer> mapDenominator = new TreeMap<String, Integer>();
+    
+    char c = '-';
+    String temp = "";
+    
+    for (int i = 0; i < expression.length(); i++)
+    {
+      
+      char t = expression.charAt(i);
+      
+      if (t == '-' || t == '/')
+      {
+        
+        if (c == '-')
+        {
+          
+          int n = 1;
+          
+          if (mapNumerator.containsKey(temp))
+          {
+            
+            n = mapNumerator.get(temp) + 1;
+          }
+          
+          mapNumerator.put(temp, n);
+
+        } else
+        {
+          
+          int n = 1;
+          
+          if (mapDenominator.containsKey(temp))
+          {
+            
+            n = mapDenominator.get(temp) + 1;
+          }
+          
+          mapDenominator.put(temp, n);
+        }
+        
+        c = t;
+        temp = "";
+        
+      } else
+      {
+        
+        temp += t;
+      }
+    }
+    
+    if (c == '-')
+    {
+      
+      int n = 1;
+      
+      if (mapNumerator.containsKey(temp))
+      {
+        
+        n = mapNumerator.get(temp) + 1;
+      }
+      
+      mapNumerator.put(temp, n);
+
+    } else
+    {
+      
+      int n = 1;
+      
+      if (mapDenominator.containsKey(temp))
+      {
+        
+        n = mapDenominator.get(temp) + 1;
+      }
+      
+      mapDenominator.put(temp, n);
+    }
+    
+    String r = "";
+    char hat = '^';
+    
+    for (Map.Entry<String, Integer> e : mapNumerator.entrySet())
+    {
+      
+      if (e.getValue() > 1)
+      {
+        
+        r += e.getKey() + hat + e.getValue();
+      
+      } else
+      {
+        
+        r += e.getKey();
+      }
+      
+      r += '-';
+    }
+    
+    if (mapDenominator.size() != 0)
+    {
+      
+      r = r.substring(0, r.length() - 1) + '/';
+      
+      for (Map.Entry<String, Integer> e : mapDenominator.entrySet())
+      {
+        
+        if (e.getValue() > 1)
+        {
+          
+          r += e.getKey() + hat + e.getValue();
+        
+        } else
+        {
+          
+          r += e.getKey();
+        }
+        
+        r += '/';
+      }
+    }
+    
+    if (!r.equals(""))
+    {
+     
+      r = r.substring(0, r.length() - 1);
+    }
+    
+    return r;
   }
 }
