@@ -107,7 +107,7 @@ public class OperationTest
     BigDecimal a = BigDecimal.valueOf(8);
     BigDecimal b = BigDecimal.valueOf(4);
     String divide = "/";
-    String units = "lb-lb";
+    
     Operand leftOp = new Operand(a, unit);
     Operand rightOp = new Operand(b, unit);
     
@@ -118,9 +118,18 @@ public class OperationTest
     
     assertEquals("2 lb-m/ft-km", Operation.calculate(leftOp1, rightOp1, divide));
     
-    /** Handle cases for those examples.
-     * lb-m / lb = m
-     * lb-lb / lb = lb
+    String units = "lb-lb";
+    
+    Operand leftOp2 = new Operand(a, units);
+    Operand rightOp2 = new Operand(b, "m");
+    
+    assertEquals("2 lb", Operation.calculate(leftOp2, rightOp, divide));
+    assertEquals("2 lb-lb/m", Operation.calculate(leftOp2, rightOp2, divide));
+    
+    /**
+     * Handle cases.
+     * mi/h / h = mi/hr-hr
+     * mi/h / mi = mi/hr-mi
      */
   }
 }

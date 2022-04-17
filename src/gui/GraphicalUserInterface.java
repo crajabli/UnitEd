@@ -27,12 +27,19 @@ public class GraphicalUserInterface implements ActionListener
   private final String SIGN = "\u00B1";
   private final String BACK = "\u232B";
 
+
   /**
    * Constructor.
    */
   public GraphicalUserInterface()
   {
     setLayout();
+  }
+
+
+  public void setButtons()
+  {
+
   }
 
   /**
