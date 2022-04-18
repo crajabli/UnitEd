@@ -77,6 +77,7 @@ public class History extends JWindow implements ActionListener {
     if (ac.equals("<"))
     {
       setVisible(false);
+      GraphicalUserInterface.setHistoryButtonVisible();
     }
   }
 }

@@ -5,7 +5,6 @@ import utilities.OperationFormatException;
 
 import java.awt.BorderLayout;
 
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
@@ -29,8 +28,10 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   String lastResult = null;
   private final String SIGN = "\u00B1";
   private final String BACK = "\u232B";
-  History history = new History();
+  History historyDisplay = new History();
   JComboBox dropdown;
+  static JButton historyButton = new JButton(">");
+
 
   /**
    * Constructor.
@@ -69,6 +70,10 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   private void putInput(int n) {
     input.setText(input.getText() + n);
 
+  }
+
+  public static void setHistoryButtonVisible() {
+    historyButton.setVisible(true);
   }
 
   @Override
@@ -180,7 +185,9 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       case ">" ->
           {
             // parse the input
-            history.setVisible(true);
+            historyDisplay.setVisible(true);
+            historyButton.setVisible(false);
+
           }
       case SIGN ->
           {
@@ -268,11 +275,11 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           if (dropdown.getSelectedItem().equals("none"))
           {
             display.setText(display.getText() + input.getText() + " = " + result);
-            history.updateText(display.getText());
+            historyDisplay.updateText(display.getText());
           } else
           {
             display.setText(display.getText() + input.getText() + dropdown.getSelectedItem() + " = " + result);
-            history.updateText(display.getText());
+            historyDisplay.updateText(display.getText());
           }
 
             lastResult = result;
@@ -419,7 +426,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     JButton multiply = new JButton("x");
     JButton divide = new JButton(DIVIDE);
     JButton equals = new JButton("=");
-    JButton history = new JButton(">");
+
     JButton backspace = new JButton(BACK);
 
     // creation of number buttons
@@ -463,7 +470,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     equalsPanel.add(equals);
 
     // adding history button to panel
-    historyPanel.add(history);
+    historyPanel.add(historyButton);
 
     // adding action listener to each button
     sign.addActionListener(this);
@@ -474,7 +481,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     multiply.addActionListener(this);
     divide.addActionListener(this);
     equals.addActionListener(this);
-    history.addActionListener(this);
+    historyButton.addActionListener(this);
     backspace.addActionListener(this);
     zero.addActionListener(this);
     one.addActionListener(this);
@@ -526,7 +533,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
   @Override
   public void componentMoved(ComponentEvent e) {
-    history.setLocation((int) e.getComponent().getLocation().getX() + 540,
+    historyDisplay.setLocation((int) e.getComponent().getLocation().getX() + 540,
         (int) e.getComponent().getLocation().getY() + 115);
 
   }
