@@ -29,6 +29,7 @@ public class Addition
   {
 
     Unit.sameUnitException(leftOp, rightOp);
+    
     BigDecimal value = leftOp.getValue().add(rightOp.getValue());
     
     return value.toString() + " " + leftOp.getUnit();

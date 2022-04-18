@@ -31,7 +31,7 @@ public class Unit
   {
     if (!leftOp.getUnit().equals(rightOp.getUnit()))
     {
-      throw new OperationFormatException("Units must be the same for this" + "operation");
+      throw new OperationFormatException("Units must be the same for this operation");
     }
   }
   
