@@ -343,7 +343,6 @@ public class GraphicalUserInterface implements ActionListener
     display = new JTextField();
     display.setEditable(false);
     display.setHorizontalAlignment(JTextField.CENTER);
-    display.setSize(500, 50);
 
     // creation of input text field
     input = new JTextField();
