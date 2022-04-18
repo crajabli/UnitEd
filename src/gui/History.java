@@ -12,12 +12,13 @@ public class History extends JWindow {
   public History() {
     super();
     setSize(150, 280);
-    setVisible(true);
+
   }
 
-
-
-
+  @Override
+  public void setVisible(boolean b) {
+    super.setVisible(b);
+  }
 
   /*public static void main(String[] args)
   {
