@@ -52,7 +52,7 @@ public class Division
     } else if (right.equals(""))
     {
       
-      unit = Unit.calculateUnits(left, operator, false);
+      unit = Unit.calculateUnits(left, "", false);
     
     } else
     {
@@ -63,6 +63,6 @@ public class Division
       unit = Unit.calculateUnits(tempUnit, "", true);
     }
 
-    return value.toString() + " " + unit;
+    return value.toString() + " " + Unit.format(unit);
   }
 }

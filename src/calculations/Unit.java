@@ -54,86 +54,74 @@ public class Unit
     numerator = new ArrayList<String>();
     denominator = new ArrayList<String>();
     
-    String temp = "";
-    char c = '-';
-    
-    // Separate units of the numerator and denominator of the left operand.
+    String clone = unit;
     
     if (operator.equals(SLASH))
     {
       
-      for (int i = 0; i < unit.length(); i++)
+      clone = reverse(unit);
+    }
+    
+    String temp = "";
+    String digit = "";
+    char c = '-';
+    
+    // Separate units of the numerator and denominator of the left operand.
+    
+    for (int i = 0; i < clone.length(); i++)
+    {
+      
+      char t = clone.charAt(i);
+      
+      if (Character.isDigit(t))
       {
         
-        char t = unit.charAt(i);
+        digit += t;
         
-        if (t == '-' || t == '/')
+      } else if (Character.isLetter(t))
+      {
+        
+        temp += t;
+      
+      } else if (t != '^')
+      {
+        
+        if (!digit.equals(""))
+        {
+          
+          unformat(temp, digit, c);
+          digit = "";
+          temp = "";
+        
+        } else
         {
           
           if (c == '-')
           {
               
-            denominator.add(temp);
+            numerator.add(temp);
             
           } else
           {
               
-            numerator.add(temp);
-          }
-            
-          c = t;
-          temp = "";
-                    
-        } else
-        {
-          
-          temp += t;
-        }
-      }
-      
-      if (c == '-')
-      {
-        
-        denominator.add(temp);
-      
-      } else
-      {
-        
-        numerator.add(temp);
-      }
-      
-    } else
-    {
-      
-      for (int i = 0; i < unit.length(); i++)
-      {
-        
-        char t = unit.charAt(i);
-        
-        if (t == '-' || t == '/')
-        {
-          
-          if (c == '-')
-          {
-            
-            numerator.add(temp);
-          
-          } else if (c == '/')
-          {
-            
             denominator.add(temp);
           }
-          
-          c = t;
+            
           temp = "";
-          
-        } else
-        {
-          
-          temp += t;
         }
+        
+        c = t;
       }
+    }
+    
+    if (Character.isDigit(clone.charAt(clone.length() - 1)))
+    {
       
+      unformat(temp, digit, c);
+    
+    } else
+    {
+    
       if (c == '-')
       {
         
@@ -384,5 +372,41 @@ public class Unit
         denominator.add(unit);
       }
     }
+  }
+  
+  /**
+   * Method changes the / to - and - to /.
+   * 
+   * @param unit for the unit
+   * 
+   * @return the string
+   */
+  private static String reverse(final String unit)
+  {
+    
+    String r = "";
+    
+    for (int i = 0; i < unit.length(); i++)
+    {
+      
+      char t = unit.charAt(i);
+      if (t == '-')
+      {
+        
+        r += '/';
+      
+      } else if (t == '/')
+      {
+        
+        r += '-';
+      
+      } else 
+      {
+        
+        r += t;
+      }
+    }
+    
+    return r;
   }
 }

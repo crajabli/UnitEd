@@ -55,6 +55,6 @@ public class Multiplication
       unit = Unit.calculateUnits(tempUnit, "", true);
     }
 
-    return value.toString() + " " + unit;
+    return value.toString() + " " + Unit.format(unit);
   }
 }
