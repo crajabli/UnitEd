@@ -44,10 +44,11 @@ public class Unit
    * 
    * @param unit for the unit
    * @param operator for the operator
+   * @param check true means it is calculating final expression with two non empty operands
    * 
    * @return the final unit
    */
-  public static String calculateUnits(final String unit, final String operator)
+  public static String calculateUnits(final String unit, final String operator, final boolean check)
   {
     
     numerator = new ArrayList<String>();
@@ -147,6 +148,15 @@ public class Unit
     
     // Cancel out unit if it appears on numerator and denominator
     checkDuplicate(numerator, denominator);
+    
+    if (check)
+    {
+      if (numerator.size() == 0 && denominator.size() > 0)
+      {
+        
+        numerator.add("1");
+      }
+    }
     
     String result = "";
     

@@ -27,11 +27,34 @@ public class Multiplication
     
     BigDecimal value = leftOp.getValue().multiply(rightOp.getValue());
     
-    String tempUnit = Unit.calculateUnits(leftOp.getUnit(), "") + "-"
-        + Unit.calculateUnits(rightOp.getUnit(), operator);
+    String left = leftOp.getUnit();
+    String right = rightOp.getUnit();
+    String unit;
     
-    String unit = Unit.calculateUnits(tempUnit, "");
+    if (left.equals("") && right.equals(""))
+    {
+      
+      unit = "";
+    
+    } else if (left.equals(""))
+    {
+      
+      unit = Unit.calculateUnits(right, operator, false);
+    
+    } else if (right.equals(""))
+    {
+      
+      unit = Unit.calculateUnits(left, operator, false);
+    
+    } else
+    {
+    
+      String tempUnit = Unit.calculateUnits(leftOp.getUnit(), "", false) + "-"
+          + Unit.calculateUnits(rightOp.getUnit(), operator, false);
+      
+      unit = Unit.calculateUnits(tempUnit, "", true);
+    }
 
-    return value.toString() + " " + Unit.format(unit);
+    return value.toString() + " " + unit;
   }
 }
