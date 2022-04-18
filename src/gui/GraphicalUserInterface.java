@@ -83,8 +83,9 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       case "+" ->
       {
 
-        if(lastResult == null)
+        if(lastResult == null || !input.getText().equals(""))
         {
+          display.setText("");
           if (dropdown.getSelectedItem().equals("none"))
           {
             display.setText(display.getText() + input.getText() + " + ");
@@ -106,8 +107,9 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       case "-" ->
       {
         // parse the input
-        if(lastResult == null)
+        if(lastResult == null || !input.getText().equals(""))
         {
+          display.setText("");
           if (dropdown.getSelectedItem().equals("none"))
           {
             display.setText(display.getText() + input.getText() + " - ");
@@ -201,8 +203,9 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       case "x" ->
       {
         // parse the input
-        if(lastResult == null)
+        if(lastResult == null || !input.getText().equals(""))
         {
+          display.setText("");
           if (dropdown.getSelectedItem().equals("none"))
           {
             display.setText(display.getText() + input.getText() + " x ");
@@ -223,8 +226,9 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       case DIVIDE ->
       {
         // parse the input
-        if(lastResult == null)
+        if(lastResult == null || !input.getText().equals(""))
         {
+          display.setText("");
           if (dropdown.getSelectedItem().equals("none"))
           {
             display.setText(display.getText() + input.getText() + " / ");
@@ -264,9 +268,11 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           if (dropdown.getSelectedItem().equals("none"))
           {
             display.setText(display.getText() + input.getText() + " = " + result);
+            history.updateText(display.getText());
           } else
           {
             display.setText(display.getText() + input.getText() + dropdown.getSelectedItem() + " = " + result);
+            history.updateText(display.getText());
           }
 
             lastResult = result;
