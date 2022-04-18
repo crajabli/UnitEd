@@ -87,8 +87,6 @@ public class GraphicalUserInterface implements ActionListener
           clear();
         }
 
-
-
       }
       case "-" ->
       {
@@ -104,6 +102,72 @@ public class GraphicalUserInterface implements ActionListener
           clear();
         }
       }
+      case "1" ->
+          {
+            // parse the input
+              display.setText(display.getText() + "1");
+              clear();
+          }
+      case "2" ->
+          {
+            // parse the input
+            display.setText(display.getText() + "2");
+            clear();
+          }
+      case "3" ->
+          {
+            // parse the input
+            display.setText(display.getText() + "3");
+            clear();
+          }
+      case "4" ->
+          {
+            // parse the input
+            display.setText(display.getText() + "4");
+            clear();
+          }
+      case "5" ->
+          {
+            // parse the input
+            display.setText(display.getText() + "5");
+            clear();
+          }
+      case "6" ->
+          {
+            // parse the input
+            display.setText(display.getText() + "6");
+            clear();
+          }
+      case "7" ->
+          {
+            // parse the input
+            display.setText(display.getText() + "7");
+            clear();
+          }
+      case "8" ->
+          {
+            // parse the input
+            display.setText(display.getText() + "8");
+            clear();
+          }
+      case "9" ->
+          {
+            // parse the input
+            display.setText(display.getText() + "9");
+            clear();
+          }
+      case "0" ->
+          {
+            // parse the input
+            display.setText(display.getText() + "0");
+            clear();
+          }
+      case BACK ->
+          {
+            // parse the input
+            display.setText(display.getText().substring(0, display.getText().length() - 1));
+            clear();
+          }
       case "x" ->
       {
         // parse the input
