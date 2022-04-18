@@ -4,7 +4,7 @@ import utilities.Operation;
 import utilities.OperationFormatException;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,6 +24,7 @@ public class GraphicalUserInterface implements ActionListener
   JTextField input;
   String[] expression = new String[3];
   private final String DIVIDE = "\u00F7";
+  String lastResult = null;
   private final String SIGN = "\u00B1";
   private final String BACK = "\u232B";
 
@@ -69,34 +70,67 @@ public class GraphicalUserInterface implements ActionListener
       case "+" ->
       {
         // parsing the inputField
-        display.setText("");
+
+        /*display.setText("");
         display.setText(display.getText() + input.getText() + " + ");
         addOperand(input.getText(), "+");
-        clear();
+        clear();*/
+
+        if(lastResult == null)
+        {
+          display.setText(display.getText() + input.getText() + " + ");
+          addOperand(input.getText(), "+");
+          clear();
+        } else if (lastResult != null){
+          display.setText(lastResult + " + ");
+          addOperand(lastResult, "+");
+          clear();
+        }
+
+
+
       }
       case "-" ->
       {
         // parse the input
-        display.setText("");
-        display.setText(display.getText() + input.getText() + " - ");
-        addOperand(input.getText(), "-");
-        clear();
+        if(lastResult == null)
+        {
+          display.setText(display.getText() + input.getText() + " - ");
+          addOperand(input.getText(), "-");
+          clear();
+        } else if (lastResult != null){
+          display.setText(lastResult + " - ");
+          addOperand(lastResult, "-");
+          clear();
+        }
       }
       case "x" ->
       {
         // parse the input
-        display.setText("");
-        display.setText(display.getText() + input.getText() + " x ");
-        addOperand(input.getText(), "x");
-        clear();
+        if(lastResult == null)
+        {
+          display.setText(display.getText() + input.getText() + " x ");
+          addOperand(input.getText(), "x");
+          clear();
+        } else if (lastResult != null){
+          display.setText(lastResult + " x ");
+          addOperand(lastResult, "x");
+          clear();
+        }
       }
       case DIVIDE ->
       {
         // parse the input
-        display.setText("");
-        display.setText(display.getText() + input.getText() + " / ");
-        addOperand(input.getText(), "/");
-        clear();
+        if(lastResult == null)
+        {
+          display.setText(display.getText() + input.getText() + " / ");
+          addOperand(input.getText(), "/");
+          clear();
+        } else if (lastResult != null){
+          display.setText(lastResult + " / ");
+          addOperand(lastResult, "/");
+          clear();
+        }
       }
       case "=" ->
       {
@@ -109,14 +143,10 @@ public class GraphicalUserInterface implements ActionListener
           ExpressionParser parser = new ExpressionParser(expression);
           result = Operation.calculate(parser.getLeft(), parser.getRight(), parser.getOperator());
           display.setText(display.getText() + input.getText() + " = " + result);
+          lastResult = result;
           expression = new String[3];
         }
-        catch (NumberFormatException ne)
-        {
-          reset();
-          JOptionPane.showMessageDialog(null, "You entered a negative number  ", "negative number ",
-              JOptionPane.INFORMATION_MESSAGE);
-        }
+
         catch (IllegalArgumentException ie)
         {
           reset();
@@ -141,6 +171,7 @@ public class GraphicalUserInterface implements ActionListener
           JOptionPane.showMessageDialog(null, "You didn't enter a value ", "No unit ",
               JOptionPane.INFORMATION_MESSAGE);
         }
+
 
         clear();
 
@@ -342,6 +373,7 @@ public class GraphicalUserInterface implements ActionListener
     display.setText("");
     input.setText("");
     expression = new String[3];
+    lastResult = null;
   }
 
   /**
