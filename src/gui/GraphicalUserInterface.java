@@ -27,7 +27,7 @@ public class GraphicalUserInterface implements ActionListener
   String lastResult = null;
   private final String SIGN = "\u00B1";
   private final String BACK = "\u232B";
-
+  History history = new History();
 
   /**
    * Constructor.
@@ -151,6 +151,22 @@ public class GraphicalUserInterface implements ActionListener
           {
             // parse the input
             putInput(0);
+          }
+      case ">" ->
+          {
+            // parse the input
+            history.setVisible(true);
+          }
+      case SIGN ->
+          {
+            // parse the input
+            if (!input.getText().contains("-"))
+            {
+              input.setText("-" + input.getText());
+            } else
+            {
+              input.setText(input.getText().substring(1));
+            }
           }
       case BACK ->
           {
