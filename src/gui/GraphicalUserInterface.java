@@ -8,6 +8,8 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 
 import javax.swing.*;
 
@@ -17,7 +19,7 @@ import javax.swing.*;
  * @version 1
  *
  */
-public class GraphicalUserInterface implements ActionListener
+public class GraphicalUserInterface implements ActionListener, ComponentListener
 {
 
   JTextField display;
@@ -478,6 +480,8 @@ public class GraphicalUserInterface implements ActionListener
     seven.addActionListener(this);
     eight.addActionListener(this);
     nine.addActionListener(this);
+    frame.addComponentListener(this);
+
 
     // adding display and input to respective panels
     displayPanel.add(display, BorderLayout.CENTER);
@@ -509,4 +513,25 @@ public class GraphicalUserInterface implements ActionListener
     input.setText("");
   }
 
+  @Override
+  public void componentResized(ComponentEvent e) {
+
+  }
+
+  @Override
+  public void componentMoved(ComponentEvent e) {
+    history.setLocation((int) e.getComponent().getLocation().getX() + 540,
+        (int) e.getComponent().getLocation().getY() + 115);
+
+  }
+
+  @Override
+  public void componentShown(ComponentEvent e) {
+
+  }
+
+  @Override
+  public void componentHidden(ComponentEvent e) {
+
+  }
 }
