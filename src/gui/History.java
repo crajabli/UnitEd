@@ -2,62 +2,84 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 
 /**
  * should be components listener, and will be sepearate window/panel which will be adjacent to the main JFrame.
  *
  */
-public class History extends JWindow {
+public class History extends JWindow implements ActionListener {
 
-  public History() {
+  JTextArea historyDisplay;
+
+  public History()
+  {
     super();
-    setSize(150, 280);
-    setVisible(true);
+
+    setLayout();
+  }
+
+  private void setLayout()
+  {
+    Container contentPane = getContentPane();
+
+    contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.X_AXIS));
+
+    JPanel historyPanel = new JPanel();
+
+    historyDisplay = new JTextArea();
+    historyPanel.setLayout(new GridLayout());
+
+
+    historyDisplay.setEditable(false);
+
+    historyDisplay.setSize(160, 100);
+
+
+    JButton closeButton = new JButton("<");
+    closeButton.addActionListener(this);
+
+
+    historyPanel.add(historyDisplay);
+    contentPane.add(historyPanel);
+    contentPane.add(closeButton);
+    setSize(200, 280);
+    contentPane.add(Box.createVerticalGlue());
+
+  }
+
+  public void updateText(String text)
+  {
+    historyDisplay.setText(historyDisplay.getText() + "\n" + text);
+    System.out.println(historyDisplay.getText());
   }
 
 
-
-
-
-  /*public static void main(String[] args)
+  public void reset()
   {
-    Container contentPane;
-    JButton        cancelButton, okButton;
-    JFrame         frame;
-    JLabel         titleLabel;
-    JTextArea      messageArea;
-    JToolBar     toolBar;
+    historyDisplay.setText("");
+  }
 
-    frame = new JFrame();
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  @Override
+  public void setVisible(boolean b)
+  {
+    super.setVisible(b);
+  }
 
-    contentPane = frame.getContentPane();
-    contentPane.setLayout(new BorderLayout());
 
-    titleLabel = new JLabel();
-    titleLabel.setText("A Button Example");
-    contentPane.add(titleLabel, BorderLayout.NORTH);
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    String ac = e.getActionCommand();
 
-    messageArea = new JTextArea(40,20);
-    contentPane.add(messageArea, BorderLayout.CENTER);
-
-    // This is new
-    toolBar = new JToolBar();
-
-    okButton = new JButton("OK");
-    // This is new
-    toolBar.add(okButton);
-
-    cancelButton = new JButton("Cancel");
-    // This is new
-    toolBar.add(cancelButton);
-
-    // This is new
-    contentPane.add(toolBar, BorderLayout.SOUTH);
-
-    frame.setSize(400,400);
-    frame.setVisible(true);
-  }*/
+    if (ac.equals("<"))
+    {
+      setVisible(false);
+      GraphicalUserInterface.setHistoryButtonVisible();
+    }
+  }
 }
 
 

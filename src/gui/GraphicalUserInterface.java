@@ -5,9 +5,10 @@ import utilities.OperationFormatException;
 
 import java.awt.BorderLayout;
 
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 
 import javax.swing.*;
 
@@ -17,7 +18,7 @@ import javax.swing.*;
  * @version 1
  *
  */
-public class GraphicalUserInterface implements ActionListener
+public class GraphicalUserInterface implements ActionListener, ComponentListener
 {
 
   JTextField display;
@@ -27,6 +28,9 @@ public class GraphicalUserInterface implements ActionListener
   String lastResult = null;
   private final String SIGN = "\u00B1";
   private final String BACK = "\u232B";
+  History historyDisplay = new History();
+  JComboBox dropdown;
+  static JButton historyButton = new JButton(">");
 
 
   /**
@@ -58,9 +62,18 @@ public class GraphicalUserInterface implements ActionListener
 
   }
 
+  /**
+   * uses buttons to input to the input field.
+   *
+   * @param n button to be pressed
+   */
   private void putInput(int n) {
     input.setText(input.getText() + n);
 
+  }
+
+  public static void setHistoryButtonVisible() {
+    historyButton.setVisible(true);
   }
 
   @Override
@@ -75,12 +88,20 @@ public class GraphicalUserInterface implements ActionListener
       case "+" ->
       {
 
-
-        if(lastResult == null)
+        if(lastResult == null || !input.getText().equals(""))
         {
-          display.setText(display.getText() + input.getText() + " + ");
-          addOperand(input.getText(), "+");
-          clear();
+          display.setText("");
+          if (dropdown.getSelectedItem().equals("none"))
+          {
+            display.setText(display.getText() + input.getText() + " + ");
+            addOperand(input.getText() + dropdown.getSelectedItem(), "+");
+            clear();
+          } else
+          {
+            display.setText(display.getText() + input.getText() + dropdown.getSelectedItem() + " + ");
+            addOperand(input.getText() + dropdown.getSelectedItem(), "+");
+            clear();
+          }
         } else if (lastResult != null){
           display.setText(lastResult + " + ");
           addOperand(lastResult, "+");
@@ -91,11 +112,20 @@ public class GraphicalUserInterface implements ActionListener
       case "-" ->
       {
         // parse the input
-        if(lastResult == null)
+        if(lastResult == null || !input.getText().equals(""))
         {
-          display.setText(display.getText() + input.getText() + " - ");
-          addOperand(input.getText(), "-");
-          clear();
+          display.setText("");
+          if (dropdown.getSelectedItem().equals("none"))
+          {
+            display.setText(display.getText() + input.getText() + " - ");
+            addOperand(input.getText() + dropdown.getSelectedItem(), "-");
+            clear();
+          } else
+          {
+            display.setText(display.getText() + input.getText() + dropdown.getSelectedItem() + " - ");
+            addOperand(input.getText() + dropdown.getSelectedItem(), "-");
+            clear();
+          }
         } else if (lastResult != null){
           display.setText(lastResult + " - ");
           addOperand(lastResult, "-");
@@ -152,6 +182,24 @@ public class GraphicalUserInterface implements ActionListener
             // parse the input
             putInput(0);
           }
+      case ">" ->
+          {
+            // parse the input
+            historyDisplay.setVisible(true);
+            historyButton.setVisible(false);
+
+          }
+      case SIGN ->
+          {
+            // parse the input
+            if (!input.getText().contains("-"))
+            {
+              input.setText("-" + input.getText());
+            } else
+            {
+              input.setText(input.getText().substring(1));
+            }
+          }
       case BACK ->
           {
             // parse the input
@@ -162,11 +210,20 @@ public class GraphicalUserInterface implements ActionListener
       case "x" ->
       {
         // parse the input
-        if(lastResult == null)
+        if(lastResult == null || !input.getText().equals(""))
         {
-          display.setText(display.getText() + input.getText() + " x ");
-          addOperand(input.getText(), "x");
-          clear();
+          display.setText("");
+          if (dropdown.getSelectedItem().equals("none"))
+          {
+            display.setText(display.getText() + input.getText() + " x ");
+            addOperand(input.getText() + dropdown.getSelectedItem(), "x");
+            clear();
+          } else
+          {
+            display.setText(display.getText() + input.getText() + dropdown.getSelectedItem() + " x ");
+            addOperand(input.getText() + dropdown.getSelectedItem(), "x");
+            clear();
+          }
         } else if (lastResult != null){
           display.setText(lastResult + " x ");
           addOperand(lastResult, "x");
@@ -176,11 +233,21 @@ public class GraphicalUserInterface implements ActionListener
       case DIVIDE ->
       {
         // parse the input
-        if(lastResult == null)
+        if(lastResult == null || !input.getText().equals(""))
         {
-          display.setText(display.getText() + input.getText() + " / ");
-          addOperand(input.getText(), "/");
-          clear();
+          display.setText("");
+          if (dropdown.getSelectedItem().equals("none"))
+          {
+            display.setText(display.getText() + input.getText() + " / ");
+            addOperand(input.getText() + dropdown.getSelectedItem(), "/");
+            clear();
+          }
+          else
+          {
+            display.setText(display.getText() + input.getText() + dropdown.getSelectedItem() + " / ");
+            addOperand(input.getText() + dropdown.getSelectedItem(), "/");
+            clear();
+          }
         } else if (lastResult != null){
           display.setText(lastResult + " / ");
           addOperand(lastResult, "/");
@@ -190,16 +257,34 @@ public class GraphicalUserInterface implements ActionListener
       case "=" ->
       {
         // calculate;
-        expression[2] = input.getText();
+        if (dropdown.getSelectedItem().equals("none"))
+        {
+          expression[2] = input.getText();
+        }
+        else
+        {
+          expression[2] = input.getText() + dropdown.getSelectedItem();
+        }
 
         try
         {
           String result;
           ExpressionParser parser = new ExpressionParser(expression);
           result = Operation.calculate(parser.getLeft(), parser.getRight(), parser.getOperator());
-          display.setText(display.getText() + input.getText() + " = " + result);
-          lastResult = result;
-          expression = new String[3];
+
+          if (dropdown.getSelectedItem().equals("none"))
+          {
+            display.setText(display.getText() + input.getText() + " = " + result);
+            historyDisplay.updateText(display.getText());
+          } else
+          {
+            display.setText(display.getText() + input.getText() + dropdown.getSelectedItem() + " = " + result);
+            historyDisplay.updateText(display.getText());
+          }
+
+            lastResult = result;
+            expression = new String[3];
+
         }
 
         catch (IllegalArgumentException ie)
@@ -289,12 +374,12 @@ public class GraphicalUserInterface implements ActionListener
     logoPanel.add(label);
 
     // creation of options in dropdown menu
-    String[] measurements = {"none", "c", "cm", "cm-cm", "ft", "ft-ft", "ft-ft-ft", "gal", "gr", "hrs", "in", "kg", "km", "l", "lbs",
+    String[] measurements = {"none", "custom", "c", "cm", "cm-cm", "ft", "ft-ft", "ft-ft-ft", "gal", "gr", "hrs", "in", "kg", "km", "l", "lbs",
         "m", "mg", "mi", "mi-mi", "min", "mm", "mph", "oz", "pt", "qt", "sec", "sec-sec", "tbsp", "tsp", "yd"};
 
     // creation of drop down menu
-    @SuppressWarnings("unchecked")
-    JComboBox dropdown = new JComboBox(measurements);
+
+    dropdown = new JComboBox(measurements);
     dropdown.setEditable(true);
     dropdown.setVisible(true);
 
@@ -341,7 +426,7 @@ public class GraphicalUserInterface implements ActionListener
     JButton multiply = new JButton("x");
     JButton divide = new JButton(DIVIDE);
     JButton equals = new JButton("=");
-    JButton history = new JButton(">");
+
     JButton backspace = new JButton(BACK);
 
     // creation of number buttons
@@ -385,7 +470,7 @@ public class GraphicalUserInterface implements ActionListener
     equalsPanel.add(equals);
 
     // adding history button to panel
-    historyPanel.add(history);
+    historyPanel.add(historyButton);
 
     // adding action listener to each button
     sign.addActionListener(this);
@@ -396,7 +481,7 @@ public class GraphicalUserInterface implements ActionListener
     multiply.addActionListener(this);
     divide.addActionListener(this);
     equals.addActionListener(this);
-    history.addActionListener(this);
+    historyButton.addActionListener(this);
     backspace.addActionListener(this);
     zero.addActionListener(this);
     one.addActionListener(this);
@@ -408,6 +493,8 @@ public class GraphicalUserInterface implements ActionListener
     seven.addActionListener(this);
     eight.addActionListener(this);
     nine.addActionListener(this);
+    frame.addComponentListener(this);
+
 
     // adding display and input to respective panels
     displayPanel.add(display, BorderLayout.CENTER);
@@ -415,7 +502,7 @@ public class GraphicalUserInterface implements ActionListener
     inputPanel.add(dropdown);
 
     // setting frame
-    frame.setSize(550, 280);
+    frame.setSize(550, 400);
     frame.setVisible(true);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
@@ -439,4 +526,25 @@ public class GraphicalUserInterface implements ActionListener
     input.setText("");
   }
 
+  @Override
+  public void componentResized(ComponentEvent e) {
+
+  }
+
+  @Override
+  public void componentMoved(ComponentEvent e) {
+    historyDisplay.setLocation((int) e.getComponent().getLocation().getX() + 540,
+        (int) e.getComponent().getLocation().getY() + 115);
+
+  }
+
+  @Override
+  public void componentShown(ComponentEvent e) {
+
+  }
+
+  @Override
+  public void componentHidden(ComponentEvent e) {
+
+  }
 }
