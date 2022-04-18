@@ -32,6 +32,6 @@ public class Multiplication
     
     String unit = Unit.calculateUnits(tempUnit, "");
 
-    return value.toString() + " " + unit;
+    return value.toString() + " " + Unit.format(unit);
   }
 }

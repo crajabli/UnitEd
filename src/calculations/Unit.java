@@ -16,6 +16,10 @@ import utilities.OperationFormatException;
 public class Unit
 {
 
+  private static final String DASH = "-";
+  private static final String SLASH = "/";
+  private static ArrayList<String> numerator;
+  private static ArrayList<String> denominator;
   /**
    * Method throws an exception if different units.
    * 
@@ -46,17 +50,15 @@ public class Unit
   public static String calculateUnits(final String unit, final String operator)
   {
     
-    ArrayList<String> numerator = new ArrayList<String>();
-    ArrayList<String> denominator = new ArrayList<String>();
+    numerator = new ArrayList<String>();
+    denominator = new ArrayList<String>();
     
     String temp = "";
     char c = '-';
     
-    // Separate units of the numerator and denominator of the left operand
-    String slash = "/";
-    String dash = "-";
+    // Separate units of the numerator and denominator of the left operand.
     
-    if (operator.equals(slash))
+    if (operator.equals(SLASH))
     {
       
       for (int i = 0; i < unit.length(); i++)
@@ -69,18 +71,18 @@ public class Unit
           
           if (c == '-')
           {
-            
+              
             denominator.add(temp);
-          
+            
           } else
           {
-            
+              
             numerator.add(temp);
           }
-          
+            
           c = t;
           temp = "";
-          
+                    
         } else
         {
           
@@ -115,7 +117,7 @@ public class Unit
             
             numerator.add(temp);
           
-          } else
+          } else if (c == '/')
           {
             
             denominator.add(temp);
@@ -151,7 +153,7 @@ public class Unit
     for (String s : numerator)
     {
       
-      result += s + dash;
+      result += s + DASH;
     }
     
     if (denominator.size() > 0)
@@ -160,13 +162,13 @@ public class Unit
       if (!result.equals(""))
       {
         
-        result = result.substring(0, result.length() - 1) + slash;
+        result = result.substring(0, result.length() - 1) + SLASH;
       }
       
       for (String s : denominator)
       {
         
-        result += s + slash;
+        result += s + SLASH;
       }
     }
     
@@ -340,5 +342,37 @@ public class Unit
     }
     
     return r;
+  }
+  
+  /**
+   * Method unformats the expression.
+   * 
+   * @param unit for the unit
+   * @param power for the power
+   * @param operator for the operator
+   */
+  private static void unformat(final String unit, final String power, final char operator)
+  {
+    
+    int n = Integer.parseInt(power);
+    
+    if (operator == '-')
+    {
+      
+      for (int i = 0; i < n; i++)
+      {
+        
+        numerator.add(unit);
+      }
+    
+    } else 
+    {
+      
+      for (int i = 0; i < n; i++)
+      {
+        
+        denominator.add(unit);
+      }
+    }
   }
 }
