@@ -58,6 +58,11 @@ public class GraphicalUserInterface implements ActionListener
 
   }
 
+  private void putInput(int n) {
+    input.setText(input.getText() + n);
+
+  }
+
   @Override
   public void actionPerformed(final ActionEvent e)
   {
@@ -69,12 +74,7 @@ public class GraphicalUserInterface implements ActionListener
       case "C" -> clear();
       case "+" ->
       {
-        // parsing the inputField
 
-        /*display.setText("");
-        display.setText(display.getText() + input.getText() + " + ");
-        addOperand(input.getText(), "+");
-        clear();*/
 
         if(lastResult == null)
         {
@@ -105,68 +105,59 @@ public class GraphicalUserInterface implements ActionListener
       case "1" ->
           {
             // parse the input
-              display.setText(display.getText() + "1");
-              clear();
+              putInput(1);
           }
       case "2" ->
           {
             // parse the input
-            display.setText(display.getText() + "2");
-            clear();
+            putInput(2);
           }
       case "3" ->
           {
             // parse the input
-            display.setText(display.getText() + "3");
-            clear();
+            putInput(3);
           }
       case "4" ->
           {
             // parse the input
-            display.setText(display.getText() + "4");
-            clear();
+            putInput(4);
           }
       case "5" ->
           {
             // parse the input
-            display.setText(display.getText() + "5");
-            clear();
+            putInput(5);
           }
       case "6" ->
           {
             // parse the input
-            display.setText(display.getText() + "6");
-            clear();
+            putInput(6);
           }
       case "7" ->
           {
             // parse the input
-            display.setText(display.getText() + "7");
-            clear();
+            putInput(7);
           }
       case "8" ->
           {
             // parse the input
-            display.setText(display.getText() + "8");
-            clear();
+            putInput(8);
           }
       case "9" ->
           {
             // parse the input
-            display.setText(display.getText() + "9");
-            clear();
+            putInput(9);
           }
       case "0" ->
           {
             // parse the input
-            display.setText(display.getText() + "0");
-            clear();
+            putInput(0);
           }
       case BACK ->
           {
             // parse the input
-            display.setText(display.getText().substring(0, display.getText().length() - 1));
-            clear();
+            if (input.getText().length() > 0) {
+              input.setText(input.getText().substring(0, input.getText().length() - 1));
+            }
           }
       case "x" ->
       {
@@ -424,7 +415,7 @@ public class GraphicalUserInterface implements ActionListener
     inputPanel.add(dropdown);
 
     // setting frame
-    frame.setSize(550, 250);
+    frame.setSize(550, 280);
     frame.setVisible(true);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
