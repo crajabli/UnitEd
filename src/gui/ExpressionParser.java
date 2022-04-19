@@ -2,6 +2,7 @@ package gui;
 
 import java.math.BigDecimal;
 
+import exceptions.IncompleteExpressionException;
 import exceptions.IncompleteUnitsException;
 import exceptions.NoValueEnteredException;
 import utilities.Operand;
@@ -27,9 +28,10 @@ public class ExpressionParser
    * @throws OperationFormatException
    * @throws IncompleteUnitsException
    * @throws NoValueEnteredException 
+   * @throws IncompleteExpressionException 
    */
   public ExpressionParser(final String[] expression)
-      throws OperationFormatException, IncompleteUnitsException, NoValueEnteredException
+      throws OperationFormatException, IncompleteUnitsException, NoValueEnteredException, IncompleteExpressionException
   {
     parseHelper(expression);
   }
@@ -51,9 +53,10 @@ public class ExpressionParser
    * @throws OperationFormatException
    * @throws IncompleteUnitsException
    * @throws NoValueEnteredException 
+   * @throws IncompleteExpressionException 
    */
   private void parseHelper(final String[] expression)
-      throws OperationFormatException, IncompleteUnitsException, NoValueEnteredException
+      throws OperationFormatException, IncompleteUnitsException, NoValueEnteredException, IncompleteExpressionException
   {
 
     if (expression == null || expression.length == 0)
@@ -61,18 +64,17 @@ public class ExpressionParser
       throw new IllegalArgumentException("You didn't enter anything.");
     }
 
-    // potentially change this to allow null to be passed in so we can throw error message in real
-    // time
-    // Checks there is a string in each array index
-    // for (int i = 0; i < expression.length; i++)
-    //
-    // if (expression[i] == null || expression[i].isEmpty())
-    //
-    // {
-    // throw new IllegalArgumentException("You did not enter anything.");
-    // }
+//     potentially change this to allow null to be passed in so we can throw error message in real
+//     time
+//     Checks there is a string in each array index
+     for (int i = 0; i < expression.length; i++)
+    
+     if (expression[i] == null || expression[i].length() == 0)
+    
+     {
+     throw new IncompleteExpressionException("You did not enter anything.");
+     }
 
-    System.out.println(expression[0]);
 
     // Construct left and right operands
     String left = expression[0];
@@ -100,42 +102,38 @@ public class ExpressionParser
     StringBuilder toBeValue = new StringBuilder();
     StringBuilder toBeUnit = new StringBuilder();
 
-    // int countSlash = 0;
-    // int countDash = 0;
+    
     if (op.charAt(0) == '-')
     {
       toBeValue = toBeValue.append(op.charAt(0));
-    }
+    } 
 
-    // char c = op.charAt(0);
     for (int i = 0; i < op.length(); i++)
     {
       char c = op.charAt(i);
-      System.out.println(c);
 
       if ((i == 0 && Character.isDigit(c))
           || (i > 0 && Character.isDigit(c) && op.charAt(i - 1) != '^') || c == '.')
       {
         toBeValue = toBeValue.append(c);
       }
-      else if (Character.isLetter(c) || c == '/' || c == '-' || (c == '^')
-          || (i != 0 && Character.isDigit(c) && op.charAt(i - 1) == '^'))
+      else if ((op.charAt(0) != '-') && (Character.isLetter(c) || c == '/' || c == '-' || (c == '^')
+          || (i != 0 && Character.isDigit(c) && op.charAt(i - 1) == '^')))
       {
 
         toBeUnit = toBeUnit.append(c);
 
       }
-      // c = op.charAt(i);
     }
 
-    // System.out.println(toBeUnit.charAt(toBeUnit.length() - 1));
     // check for incomplete units
     if (toBeUnit.length() != 0 && (toBeUnit.charAt(toBeUnit.length() - 1) == '/'
         || toBeUnit.charAt(toBeUnit.length() - 1) == '-'))
     {
-
       throw new IncompleteUnitsException("The unit you entered is incomplete");
     }
+    
+    
 
      // check if there is a value entered
      if (toBeValue.length() == 0)
@@ -149,7 +147,7 @@ public class ExpressionParser
     // throw new ArithmeticException("You didn't enter a unit.");
     // }
 
-    System.out.println("Value: " + toBeValue.toString());
+    // System.out.println("Value: " + toBeValue.toString());
     BigDecimal value = BigDecimal.valueOf(Double.parseDouble(toBeValue.toString()));
 
     String unit = toBeUnit.toString();

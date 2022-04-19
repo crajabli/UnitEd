@@ -1,7 +1,7 @@
 package exceptions;
 
 /**
- * Custom exception for incomplete units. 
+ * Custom exception for no values inputed. 
  * 
  * @author Maxine Payton
  * @version 4/19/22

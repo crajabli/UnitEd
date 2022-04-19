@@ -12,6 +12,7 @@ import java.awt.event.ComponentListener;
 
 import javax.swing.*;
 
+import exceptions.IncompleteExpressionException;
 import exceptions.IncompleteUnitsException;
 import exceptions.NoValueEnteredException;
 
@@ -338,6 +339,12 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         {
           reset();
           JOptionPane.showMessageDialog(null, "Please enter a value", "No Value",
+              JOptionPane.INFORMATION_MESSAGE);
+        }
+        catch (IncompleteExpressionException iee)
+        {
+          reset();
+          JOptionPane.showMessageDialog(null, "The expression you entered was incomplete.", "Incomplete Expression",
               JOptionPane.INFORMATION_MESSAGE);
         }
 
