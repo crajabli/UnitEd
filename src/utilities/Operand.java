@@ -22,6 +22,10 @@ public class Operand
    */
   public Operand(final BigDecimal value, final String unit)
   {
+    if (unit == null || unit == "none")
+    {
+      this.unit = "";
+    }
     this.unit = unit;
     this.value = value;
   }
@@ -43,23 +47,27 @@ public class Operand
   {
     return unit;
   }
-  
+
   /**
-   * Parses out individual units if apart of  a conjuction. 
-   * @return string array of individual units 
+   * Parses out individual units if apart of a conjuction.
+   * 
+   * @return string array of individual units
    */
-  public String[] separateDashUnits(String unit) {
+  public String[] separateDashUnits(String unit)
+  {
     String[] units = unit.split("-");
     return units;
   }
-  
+
   /**
-   * Parses out individual units if apart of  a conjuction. 
-   * @return string array of individual units 
+   * Parses out individual units if apart of a conjuction.
+   * 
+   * @return string array of individual units
    */
- public String[] separateSlashUnits(String unit) {
-   String[] units = unit.split("-");
-   return units;
- }
-  
+  public String[] separateSlashUnits(String unit)
+  {
+    String[] units = unit.split("-");
+    return units;
+  }
+
 }
