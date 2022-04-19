@@ -72,7 +72,10 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
    */
   private void putInput(int n)
   {
-    input.setText(input.getText() + n);
+    String numeric = input.getText().replaceAll("[^0-9]", "");
+    String units = input.getText().replaceAll("\\d", "");
+
+    input.setText(numeric + n + units);
 
   }
 
@@ -216,10 +219,12 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       }
       case BACK ->
       {
-        // parse the input
-        if (input.getText().length() > 0)
+        String numeric = input.getText().replaceAll("[^0-9]", "");
+        String units = input.getText().replaceAll("\\d", "");
+
+        if (numeric.length() > 0)
         {
-          input.setText(input.getText().substring(0, input.getText().length() - 1));
+          input.setText(numeric.substring(0, numeric.length() - 1) + units);
         }
       }
       case "x" ->
