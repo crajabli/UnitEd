@@ -1,7 +1,5 @@
 package app;
 
-import javax.swing.JFrame;
-
 import gui.GraphicalUserInterface;
 
 /**
@@ -12,8 +10,6 @@ import gui.GraphicalUserInterface;
  */
 public class GuiDriver
 {
-
-  private JFrame frame; 
 
   /**
    * Runs GraphicalUserInterface class.
