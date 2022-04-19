@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import org.junit.jupiter.api.Test;
 
 import exceptions.IncompleteUnitsException;
+import exceptions.NoValueEnteredException;
 import gui.ExpressionParser;
 import utilities.Operand;
 import utilities.OperationFormatException;
@@ -21,7 +22,7 @@ class ExpressionParserTest
   private String[] expression = new String[3];
 
   @Test
-  void testGoodArray() throws OperationFormatException, IncompleteUnitsException
+  void testGoodArray() throws OperationFormatException, IncompleteUnitsException, NoValueEnteredException
   {
     expression[0] = "5ft";
     expression[1] = ADDITION;
@@ -52,7 +53,7 @@ class ExpressionParserTest
   }
 
   @Test
-  void testNoUnits() throws OperationFormatException, IncompleteUnitsException
+  void testNoUnits() throws OperationFormatException, IncompleteUnitsException, NoValueEnteredException
   {
     expression[0] = "5";
     expression[1] = MULTIPLICATION;
@@ -83,7 +84,7 @@ class ExpressionParserTest
   }
 
   @Test
-  void testNoValue() throws OperationFormatException, IncompleteUnitsException
+  void testNoValue() throws OperationFormatException, IncompleteUnitsException, NoValueEnteredException
   {
     expression[0] = "feet";
     expression[1] = "-";
@@ -114,7 +115,7 @@ class ExpressionParserTest
   }
 
   @Test
-  void testNothingEntered() throws OperationFormatException, IncompleteUnitsException
+  void testNothingEntered() throws OperationFormatException, IncompleteUnitsException, NoValueEnteredException
   {
     expression = new String[3];
 
@@ -151,7 +152,7 @@ class ExpressionParserTest
   }
 
   @Test
-  void testArrayNull() throws OperationFormatException, IncompleteUnitsException
+  void testArrayNull() throws OperationFormatException, IncompleteUnitsException, NoValueEnteredException
   {
     expression = null;
 
@@ -178,7 +179,7 @@ class ExpressionParserTest
   }
 
   @Test
-  void testNegative() throws OperationFormatException, IncompleteUnitsException
+  void testNegative() throws OperationFormatException, IncompleteUnitsException, NoValueEnteredException
   {
     expression[0] = "-10ft";
     expression[1] = SUBTRACTION;
@@ -195,7 +196,7 @@ class ExpressionParserTest
   }
 
   @Test
-  void testTooManyDash() throws OperationFormatException, IncompleteUnitsException
+  void testTooManyDash() throws OperationFormatException, IncompleteUnitsException, NoValueEnteredException
   {
     expression[0] = "5ft-ft-ft";
     expression[1] = ADDITION;
@@ -213,7 +214,7 @@ class ExpressionParserTest
   }
 
   @Test
-  void testTooManySlash() throws OperationFormatException, IncompleteUnitsException
+  void testTooManySlash() throws OperationFormatException, IncompleteUnitsException, NoValueEnteredException
   {
     expression[0] = "5ft/ft/ft";
     expression[1] = ADDITION;

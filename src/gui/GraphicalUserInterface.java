@@ -13,6 +13,7 @@ import java.awt.event.ComponentListener;
 import javax.swing.*;
 
 import exceptions.IncompleteUnitsException;
+import exceptions.NoValueEnteredException;
 
 /**
  * 
@@ -331,6 +332,12 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         {
           reset();
           JOptionPane.showMessageDialog(null, "You didn't enter a value ", "No unit ",
+              JOptionPane.INFORMATION_MESSAGE);
+        }
+        catch (NoValueEnteredException e1)
+        {
+          reset();
+          JOptionPane.showMessageDialog(null, "Please enter a value", "No Value",
               JOptionPane.INFORMATION_MESSAGE);
         }
 

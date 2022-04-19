@@ -3,6 +3,7 @@ package gui;
 import java.math.BigDecimal;
 
 import exceptions.IncompleteUnitsException;
+import exceptions.NoValueEnteredException;
 import utilities.Operand;
 import utilities.OperationFormatException;
 
@@ -25,9 +26,10 @@ public class ExpressionParser
    *          final expression
    * @throws OperationFormatException
    * @throws IncompleteUnitsException
+   * @throws NoValueEnteredException 
    */
   public ExpressionParser(final String[] expression)
-      throws OperationFormatException, IncompleteUnitsException
+      throws OperationFormatException, IncompleteUnitsException, NoValueEnteredException
   {
     parseHelper(expression);
   }
@@ -48,9 +50,10 @@ public class ExpressionParser
    * @param expression
    * @throws OperationFormatException
    * @throws IncompleteUnitsException
+   * @throws NoValueEnteredException 
    */
   private void parseHelper(final String[] expression)
-      throws OperationFormatException, IncompleteUnitsException
+      throws OperationFormatException, IncompleteUnitsException, NoValueEnteredException
   {
 
     if (expression == null || expression.length == 0)
@@ -89,9 +92,10 @@ public class ExpressionParser
    * @return Operand object
    * @throws OperationFormatException
    * @throws IncompleteUnitsException
+   * @throws NoValueEnteredException 
    */
   private Operand setOperand(final String op)
-      throws OperationFormatException, IncompleteUnitsException
+      throws OperationFormatException, IncompleteUnitsException, NoValueEnteredException
   {
     StringBuilder toBeValue = new StringBuilder();
     StringBuilder toBeUnit = new StringBuilder();
@@ -133,11 +137,11 @@ public class ExpressionParser
       throw new IncompleteUnitsException("The unit you entered is incomplete");
     }
 
-    // // check if there is a value entered
-    // if (toBeValue.length() == 0)
-    // {
-    // throw new ArrayIndexOutOfBoundsException("You didn't enter a value.");
-    // }
+     // check if there is a value entered
+     if (toBeValue.length() == 0)
+     {
+     throw new NoValueEnteredException("You didn't enter a value.");
+     }
 
     // // check if there is a unit entered
     // if (toBeUnit.length() == 0)
