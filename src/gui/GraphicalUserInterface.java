@@ -71,7 +71,10 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
    */
   private void putInput(int n)
   {
-    input.setText(input.getText() + n);
+    String numeric = input.getText().replaceAll("[^0-9]", "");
+    String units = input.getText().replaceAll("\\d", "");
+
+    input.setText(numeric + n + units);
 
   }
 
