@@ -395,9 +395,8 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     logoPanel.add(label);
 
     // creation of options in dropdown menu
-    String[] measurements = {"none", "custom", "c", "cm", "cm-cm", "ft", "ft-ft", "ft-ft-ft", "gal",
-        "gr", "hrs", "in", "kg", "km", "l", "lbs", "m", "mg", "mi", "mi-mi", "min", "mm", "mph",
-        "oz", "pt", "qt", "sec", "sec-sec", "tbsp", "tsp", "yd"};
+    String[] measurements = {"", "c", "cm", "cm-cm", "ft", "ft-ft", "ft-ft-ft", "gal", "gr", "hrs", "in", "kg", "km", "l", "lbs",
+        "m", "mg", "mi", "mi-mi", "min", "mm", "mph", "oz", "pt", "qt", "sec", "sec-sec", "tbsp", "tsp", "yd"};
 
     // creation of drop down menu
 
@@ -434,7 +433,6 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     display = new JTextField();
     display.setEditable(false);
     display.setHorizontalAlignment(JTextField.CENTER);
-    display.setSize(500, 50);
 
     // creation of input text field
     input = new JTextField();
