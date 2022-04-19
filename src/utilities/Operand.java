@@ -43,4 +43,23 @@ public class Operand
   {
     return unit;
   }
+  
+  /**
+   * Parses out individual units if apart of  a conjuction. 
+   * @return string array of individual units 
+   */
+  public String[] separateDashUnits(String unit) {
+    String[] units = unit.split("-");
+    return units;
+  }
+  
+  /**
+   * Parses out individual units if apart of  a conjuction. 
+   * @return string array of individual units 
+   */
+ public String[] separateSlashUnits(String unit) {
+   String[] units = unit.split("-");
+   return units;
+ }
+  
 }
