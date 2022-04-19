@@ -55,16 +55,17 @@ public class Unit
     denominator = new ArrayList<String>();
     
     String clone = unit;
+    char c = '-';
     
     if (operator.equals(SLASH))
     {
       
       clone = reverse(unit);
+      c = '/';
     }
     
     String temp = "";
     String digit = "";
-    char c = '-';
     
     // Separate units of the numerator and denominator of the left operand.
     

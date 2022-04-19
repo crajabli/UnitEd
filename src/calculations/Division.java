@@ -33,7 +33,7 @@ public class Division
       throw new OperationFormatException("Cannot divide by zero");
     }
     
-    BigDecimal value = leftOp.getValue().multiply(rightOp.getValue());
+    BigDecimal value = leftOp.getValue().divide(rightOp.getValue());
     
     String left = leftOp.getUnit();
     String right = rightOp.getUnit();
@@ -57,12 +57,12 @@ public class Division
     } else
     {
     
-      String tempUnit = Unit.calculateUnits(leftOp.getUnit(), "", false) + "/"
-          + Unit.calculateUnits(rightOp.getUnit(), operator, false);
+      String tempUnit = Unit.calculateUnits(left, "", false) + "/"
+          + Unit.calculateUnits(right, operator, false);
       
       unit = Unit.calculateUnits(tempUnit, "", true);
     }
 
-    return value.toString() + " " + Unit.format(unit);
+    return value.toString() + " " + (unit);
   }
 }
