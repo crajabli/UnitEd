@@ -1,6 +1,8 @@
 package calculations;
 
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 
 import utilities.Operand;
 import utilities.OperationFormatException;
@@ -14,6 +16,10 @@ import utilities.OperationFormatException;
 public class Unit
 {
 
+  private static final String DASH = "-";
+  private static final String SLASH = "/";
+  private static ArrayList<String> numerator;
+  private static ArrayList<String> denominator;
   /**
    * Method throws an exception if different units.
    * 
@@ -29,7 +35,7 @@ public class Unit
   {
     if (!leftOp.getUnit().equals(rightOp.getUnit()))
     {
-      throw new OperationFormatException("Units must be the same for this" + "operation");
+      throw new OperationFormatException("Units must be the same for this operation");
     }
   }
   
@@ -38,97 +44,84 @@ public class Unit
    * 
    * @param unit for the unit
    * @param operator for the operator
+   * @param check true means it is calculating final expression with two non empty operands
    * 
    * @return the final unit
    */
-  public static String calculateUnits(final String unit, final String operator)
+  public static String calculateUnits(final String unit, final String operator, final boolean check)
   {
     
-    ArrayList<String> numerator = new ArrayList<String>();
-    ArrayList<String> denominator = new ArrayList<String>();
+    numerator = new ArrayList<String>();
+    denominator = new ArrayList<String>();
+    
+    String clone = unit;
+    
+    if (operator.equals(SLASH))
+    {
+      
+      clone = reverse(unit);
+    }
     
     String temp = "";
+    String digit = "";
     char c = '-';
     
-    // Separate units of the numerator and denominator of the left operand
-    String slash = "/";
-    String dash = "-";
+    // Separate units of the numerator and denominator of the left operand.
     
-    if (operator.equals(slash))
+    for (int i = 0; i < clone.length(); i++)
     {
       
-      for (int i = 0; i < unit.length(); i++)
+      char t = clone.charAt(i);
+      
+      if (Character.isDigit(t))
       {
         
-        char t = unit.charAt(i);
+        digit += t;
         
-        if (t == '-' || t == '/')
+      } else if (Character.isLetter(t))
+      {
+        
+        temp += t;
+      
+      } else if (t != '^')
+      {
+        
+        if (!digit.equals(""))
+        {
+          
+          unformat(temp, digit, c);
+          digit = "";
+          temp = "";
+        
+        } else
         {
           
           if (c == '-')
           {
+              
+            numerator.add(temp);
             
-            denominator.add(temp);
-          
           } else
           {
-            
-            numerator.add(temp);
+              
+            denominator.add(temp);
           }
-          
-          c = t;
+            
           temp = "";
-          
-        } else
-        {
-          
-          temp += t;
         }
-      }
-      
-      if (c == '-')
-      {
         
-        denominator.add(temp);
-      
-      } else
-      {
-        
-        numerator.add(temp);
+        c = t;
       }
+    }
+    
+    if (Character.isDigit(clone.charAt(clone.length() - 1)))
+    {
       
+      unformat(temp, digit, c);
+    
     } else
     {
-      
-      for (int i = 0; i < unit.length(); i++)
-      {
-        
-        char t = unit.charAt(i);
-        
-        if (t == '-' || t == '/')
-        {
-          
-          if (c == '-')
-          {
-            
-            numerator.add(temp);
-          
-          } else
-          {
-            
-            denominator.add(temp);
-          }
-          
-          c = t;
-          temp = "";
-          
-        } else
-        {
-          
-          temp += t;
-        }
-      }
-      
+    
       if (c == '-')
       {
         
@@ -144,27 +137,46 @@ public class Unit
     // Cancel out unit if it appears on numerator and denominator
     checkDuplicate(numerator, denominator);
     
+    if (check)
+    {
+      if (numerator.size() == 0 && denominator.size() > 0)
+      {
+        
+        numerator.add("1");
+      }
+    }
+    
     String result = "";
     
     for (String s : numerator)
     {
       
-      result += s + dash;
+      result += s + DASH;
     }
     
     if (denominator.size() > 0)
     {
       
-      result = result.substring(0, result.length() - 1) + slash;
+      if (!result.equals(""))
+      {
+        
+        result = result.substring(0, result.length() - 1) + SLASH;
+      }
       
       for (String s : denominator)
       {
         
-        result += s + slash;
+        result += s + SLASH;
       }
     }
     
-    return result.substring(0, result.length() - 1);
+    if (!result.equals(""))
+    {
+      
+      result = result.substring(0, result.length() - 1);
+    }
+    
+    return result;
   }
   
   /**
@@ -188,5 +200,213 @@ public class Unit
         list2.remove(t);
       }
     }
+  }
+  
+  /**
+   * Method formats the result.
+   * 
+   * @param expression for the expression
+   * 
+   * @return the formatted result
+   */
+  public static String format(final String expression)
+  {
+    
+    TreeMap<String, Integer> mapNumerator = new TreeMap<String, Integer>();
+    TreeMap<String, Integer> mapDenominator = new TreeMap<String, Integer>();
+    
+    char c = '-';
+    String temp = "";
+    
+    for (int i = 0; i < expression.length(); i++)
+    {
+      
+      char t = expression.charAt(i);
+      
+      if (t == '-' || t == '/')
+      {
+        
+        if (c == '-')
+        {
+          
+          int n = 1;
+          
+          if (mapNumerator.containsKey(temp))
+          {
+            
+            n = mapNumerator.get(temp) + 1;
+          }
+          
+          mapNumerator.put(temp, n);
+
+        } else
+        {
+          
+          int n = 1;
+          
+          if (mapDenominator.containsKey(temp))
+          {
+            
+            n = mapDenominator.get(temp) + 1;
+          }
+          
+          mapDenominator.put(temp, n);
+        }
+        
+        c = t;
+        temp = "";
+        
+      } else
+      {
+        
+        temp += t;
+      }
+    }
+    
+    if (c == '-')
+    {
+      
+      int n = 1;
+      
+      if (mapNumerator.containsKey(temp))
+      {
+        
+        n = mapNumerator.get(temp) + 1;
+      }
+      
+      mapNumerator.put(temp, n);
+
+    } else
+    {
+      
+      int n = 1;
+      
+      if (mapDenominator.containsKey(temp))
+      {
+        
+        n = mapDenominator.get(temp) + 1;
+      }
+      
+      mapDenominator.put(temp, n);
+    }
+    
+    String r = "";
+    char hat = '^';
+    
+    for (Map.Entry<String, Integer> e : mapNumerator.entrySet())
+    {
+      
+      if (e.getValue() > 1)
+      {
+        
+        r += e.getKey() + hat + e.getValue();
+      
+      } else
+      {
+        
+        r += e.getKey();
+      }
+      
+      r += '-';
+    }
+    
+    if (mapDenominator.size() != 0)
+    {
+      
+      r = r.substring(0, r.length() - 1) + '/';
+      
+      for (Map.Entry<String, Integer> e : mapDenominator.entrySet())
+      {
+        
+        if (e.getValue() > 1)
+        {
+          
+          r += e.getKey() + hat + e.getValue();
+        
+        } else
+        {
+          
+          r += e.getKey();
+        }
+        
+        r += '/';
+      }
+    }
+    
+    if (!r.equals(""))
+    {
+     
+      r = r.substring(0, r.length() - 1);
+    }
+    
+    return r;
+  }
+  
+  /**
+   * Method unformats the expression.
+   * 
+   * @param unit for the unit
+   * @param power for the power
+   * @param operator for the operator
+   */
+  private static void unformat(final String unit, final String power, final char operator)
+  {
+    
+    int n = Integer.parseInt(power);
+    
+    if (operator == '-')
+    {
+      
+      for (int i = 0; i < n; i++)
+      {
+        
+        numerator.add(unit);
+      }
+    
+    } else 
+    {
+      
+      for (int i = 0; i < n; i++)
+      {
+        
+        denominator.add(unit);
+      }
+    }
+  }
+  
+  /**
+   * Method changes the / to - and - to /.
+   * 
+   * @param unit for the unit
+   * 
+   * @return the string
+   */
+  private static String reverse(final String unit)
+  {
+    
+    String r = "";
+    
+    for (int i = 0; i < unit.length(); i++)
+    {
+      
+      char t = unit.charAt(i);
+      if (t == '-')
+      {
+        
+        r += '/';
+      
+      } else if (t == '/')
+      {
+        
+        r += '-';
+      
+      } else 
+      {
+        
+        r += t;
+      }
+    }
+    
+    return r;
   }
 }

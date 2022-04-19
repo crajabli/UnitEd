@@ -28,11 +28,11 @@ public class ExpressionParser
     parseHelper(expression);
   }
 
-  /**
-   * Getter method.
-   * 
-   * @return operator
-   */
+ /**
+  * Getter method. 
+  * 
+  * @return operator sign 
+  */
   public String getOperator()
   {
     return operator;
@@ -52,6 +52,8 @@ public class ExpressionParser
       throw new IllegalArgumentException("You didn't enter anything.");
     }
 
+    
+    // potentially change this to allow null to be passed in so we can throw error message in real time 
     // Checks there is a string in each array index
     for (int i = 0; i < expression.length; i++)
 
@@ -82,44 +84,46 @@ public class ExpressionParser
    */
   private Operand setOperand(final String op) throws OperationFormatException
   {
-    
+
+    // check for incomplete units 
     if (op.charAt(op.length() - 1) == '/' || op.charAt(op.length() - 1) == '-')
     {
-      
+
       throw new IllegalArgumentException("The unit cannot end with a - or /");
     }
-    
+
     StringBuilder toBeValue = new StringBuilder();
     StringBuilder toBeUnit = new StringBuilder();
 
-    int countSlash = 0;
-    int countDash = 0;
+//    int countSlash = 0;
+//    int countDash = 0;
     if (op.charAt(0) == '-')
     {
       toBeValue = toBeValue.append(op.charAt(0));
     }
 
-    for (int i = 0; i < op.length(); i++)
+    char c = op.charAt(0);
+    for (int i = 1; i < op.length(); i++)
     {
-      char c = op.charAt(i);
-      if (Character.isDigit(c) || c == '.')
+      if ((Character.isDigit(c) && op.charAt(i-1) != '^')|| c == '.')
       {
         toBeValue = toBeValue.append(c);
       }
-      else if (Character.isLetter(c) || c == '/' || c == '-')
+      else if (Character.isLetter(c) || c == '/' || c == '-' || (c == '^') || Character.isDigit(c) && op.charAt(i-1) == '^')
       {
 
         toBeUnit = toBeUnit.append(c);
 
-        if (c == '/')
-        {
-          countSlash++;
-        }
-        else if (c == '-')
-        {
-          countDash++;
-        }
+//        if (c == '/')
+//        {
+//          countSlash++;
+//        }
+//        else if (c == '-')
+//        {
+//          countDash++;
+//        }
       }
+      c = op.charAt(i);
     }
 
     // check if there is a value entered
@@ -128,25 +132,25 @@ public class ExpressionParser
       throw new ArrayIndexOutOfBoundsException("You didn't enter a value.");
     }
 
-    // check if there is a unit entered
-    if (toBeUnit.length() == 0)
-    {
-      throw new ArithmeticException("You didn't enter a unit.");
-    }
+//    // check if there is a unit entered
+//    if (toBeUnit.length() == 0)
+//    {
+//      throw new ArithmeticException("You didn't enter a unit.");
+//    }
 
-    // check if they entered too many slashes or dashes
-    if (countSlash > 1 || countDash > 1)
-    {
-      throw new IllegalArgumentException("You entered too many '-' or '/'.");
-    }
+//    // check if they entered too many slashes or dashes
+//    if (countSlash > 1 || countDash > 1)
+//    {
+//      throw new IllegalArgumentException("You entered too many '-' or '/'.");
+//    }
 
     BigDecimal value = BigDecimal.valueOf(Double.parseDouble(toBeValue.toString()));
 
-    // check if they entered a negative number
-    if (value.compareTo(BigDecimal.ZERO) < 0)
-    {
-      throw new NumberFormatException("You entered a negative number.");
-    }
+//    // check if they entered a negative number
+//    if (value.compareTo(BigDecimal.ZERO) < 0)
+//    {
+//      throw new NumberFormatException("You entered a negative number.");
+//    }
 
     String unit = toBeUnit.toString();
 
