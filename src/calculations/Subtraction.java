@@ -29,6 +29,7 @@ public class Subtraction
   {
 
     Unit.sameUnitException(leftOp, rightOp);
+    
     BigDecimal value = leftOp.getValue().subtract(rightOp.getValue());
 
     return value.toString() + " " + leftOp.getUnit();
