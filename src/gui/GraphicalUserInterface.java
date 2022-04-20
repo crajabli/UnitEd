@@ -350,18 +350,18 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           JOptionPane.showMessageDialog(null, "Units are not same ", "Wrong unit ",
               JOptionPane.INFORMATION_MESSAGE);
         }
-//        catch (ArithmeticException ax)
-//        {
-//          reset();
-//          JOptionPane.showMessageDialog(null, "You didn't enter a unit ", "No unit ",
-//              JOptionPane.INFORMATION_MESSAGE);
-//        }
-//        catch (ArrayIndexOutOfBoundsException ax)
-//        {
-//          reset();
-//          JOptionPane.showMessageDialog(null, "You didn't enter a value ", "No unit ",
-//              JOptionPane.INFORMATION_MESSAGE);
-//        }
+//      catch (ArithmeticException ax)
+//      {
+//        reset();
+//        JOptionPane.showMessageDialog(null, "You didn't enter a unit ", "No unit ",
+//            JOptionPane.INFORMATION_MESSAGE);
+//      }
+//      catch (ArrayIndexOutOfBoundsException ax)
+//      {
+//        reset();
+//        JOptionPane.showMessageDialog(null, "You didn't enter a value ", "No unit ",
+//            JOptionPane.INFORMATION_MESSAGE);
+//      }
         catch (NoValueEnteredException e1)
         {
           reset();

@@ -1,6 +1,7 @@
 package calculations;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import enums.Convert;
 import utilities.Operand;
@@ -28,7 +29,8 @@ public class Multiplication
     // Functionality for unit conversion
     Operand tempRight = Convert.convert(leftOp, rightOp);
     
-    BigDecimal value = leftOp.getValue().multiply(tempRight.getValue());
+    BigDecimal value = leftOp.getValue().multiply(tempRight.getValue()).setScale(6,
+        RoundingMode.HALF_DOWN);
     
     String left = leftOp.getUnit();
     String right = tempRight.getUnit();
