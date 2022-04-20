@@ -73,9 +73,23 @@ public class ConvertUtils
   // VOLUME CONVERSIONS
   // gal conversions
   final static BigDecimal GAL_TO_L = new BigDecimal(23.78541);
+  final static BigDecimal GAL_TO_TSP = new BigDecimal(768.0);
+  final static BigDecimal GAL_TO_TBSP = new BigDecimal(256.0);
   
   // l conversions
   final static BigDecimal L_TO_GAL = new BigDecimal(0.264172);
+  final static BigDecimal L_TO_TSP = new BigDecimal(202.884);
+  final static BigDecimal L_TO_TBSP = new BigDecimal(67.628);
+  
+  // tsp conversions
+  final static BigDecimal TSP_TO_GAL = new BigDecimal(0.00130208);
+  final static BigDecimal TSP_TO_L = new BigDecimal(0.00492892);
+  final static BigDecimal TSP_TO_TBSP = new BigDecimal(0.333333);
+  
+  // tbsp conversions
+  final static BigDecimal TBSP_TO_GAL = new BigDecimal(0.00390625);
+  final static BigDecimal TBSP_TO_L = new BigDecimal(0.0147868);
+  final static BigDecimal TBSP_TO_TSP = new BigDecimal(3.0);
   
   
   // TIME CONVERSIONS
