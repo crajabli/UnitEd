@@ -49,7 +49,7 @@ public class History extends JWindow implements ActionListener {
     historyPanel.add(historyDisplay);
     contentPane.add(historyPanel);
     contentPane.add(closeButton);
-    setSize(200, 280);
+    setSize(250, 280);
     contentPane.add(Box.createVerticalGlue());
 
   }

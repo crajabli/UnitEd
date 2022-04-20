@@ -95,7 +95,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       case "+" ->
       {
 
-        if (lastResult == null || !input.getText().equals(""))
+        if (lastResult == null && !input.getText().equals(""))
         {
           display.setText("");
           if (dropdown.getSelectedItem().equals("none"))
@@ -112,18 +112,23 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
             clear();
           }
         }
-        else if (lastResult != null)
+        else if (lastResult != null && input.getText().equals(""))
         {
           display.setText(lastResult + " + ");
           addOperand(lastResult, "+");
           clear();
+        }
+        else if (lastResult == null && input.getText().equals(""))
+        {
+          JOptionPane.showMessageDialog(null, "Enter value", "No value",
+              JOptionPane.INFORMATION_MESSAGE);
         }
 
       }
       case "-" ->
       {
         // parse the input
-        if (lastResult == null || !input.getText().equals(""))
+        if (lastResult == null && !input.getText().equals(""))
         {
           display.setText("");
           if (dropdown.getSelectedItem().equals("none"))
@@ -146,60 +151,67 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           addOperand(lastResult, "-");
           clear();
         }
+        else if (lastResult == null && input.getText().equals(""))
+        {
+          JOptionPane.showMessageDialog(null, "Enter value", "No value",
+              JOptionPane.INFORMATION_MESSAGE);
+        }
       }
       case "1" ->
       {
-        // parse the input
+        // put the input
         putInput(1);
       }
       case "2" ->
       {
-        // parse the input
+        // put the input
         putInput(2);
       }
       case "3" ->
       {
-        // parse the input
+        // put the input
         putInput(3);
       }
       case "4" ->
       {
-        // parse the input
+        // put the input
         putInput(4);
       }
       case "5" ->
       {
-        // parse the input
+        // put the input
         putInput(5);
       }
       case "6" ->
       {
-        // parse the input
+        // put the input
         putInput(6);
       }
       case "7" ->
       {
-        // parse the input
+        // put the input
         putInput(7);
       }
       case "8" ->
       {
-        // parse the input
+        // put the input
         putInput(8);
       }
       case "9" ->
       {
-        // parse the input
+        // put the input
         putInput(9);
       }
       case "0" ->
       {
-        // parse the input
+        // put the input
         putInput(0);
       }
       case ">" ->
       {
-        // parse the input
+        // set history visible
+//        Timer timer = new Timer(10, this);
+//        timer.start();
         historyDisplay.setVisible(true);
         historyButton.setVisible(false);
 
@@ -229,7 +241,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       case "x" ->
       {
         // parse the input
-        if (lastResult == null || !input.getText().equals(""))
+        if (lastResult == null && !input.getText().equals(""))
         {
           display.setText("");
           if (dropdown.getSelectedItem().equals("none"))
@@ -252,11 +264,16 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           addOperand(lastResult, "x");
           clear();
         }
+        else if (lastResult == null && input.getText().equals(""))
+        {
+          JOptionPane.showMessageDialog(null, "Enter value", "No value",
+              JOptionPane.INFORMATION_MESSAGE);
+        }
       }
       case DIVIDE ->
       {
         // parse the input
-        if (lastResult == null || !input.getText().equals(""))
+        if (lastResult == null && !input.getText().equals(""))
         {
           display.setText("");
           if (dropdown.getSelectedItem().equals("none"))
@@ -278,6 +295,11 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           display.setText(lastResult + " / ");
           addOperand(lastResult, "/");
           clear();
+        }
+        else if (lastResult == null && input.getText().equals(""))
+        {
+          JOptionPane.showMessageDialog(null, "Enter value", "No value",
+              JOptionPane.INFORMATION_MESSAGE);
         }
       }
       case "=" ->
@@ -571,8 +593,8 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   @Override
   public void componentMoved(ComponentEvent e)
   {
-    historyDisplay.setLocation((int) e.getComponent().getLocation().getX() + 540,
-        (int) e.getComponent().getLocation().getY() + 115);
+    historyDisplay.setLocation((int) e.getComponent().getLocation().getX() + 545,
+        (int) e.getComponent().getLocation().getY() + 112);
 
   }
 
