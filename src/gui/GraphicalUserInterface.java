@@ -537,7 +537,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     intLogoPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
     // creation of image label
-    ImageIcon image = new ImageIcon("src/unitED_Logo.png");
+    ImageIcon image = loadImageIcon("unitED_Logo.png");
     JLabel label = new JLabel(image);
     intLogoPanel.add(label);
 
