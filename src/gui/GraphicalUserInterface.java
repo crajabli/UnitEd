@@ -318,7 +318,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         catch (IncompleteUnitsException iue)
         {
           reset();
-          JOptionPane.showMessageDialog(null, "The units you entered is incomplete", "Wrong units",
+          JOptionPane.showMessageDialog(null, "The units you entered are incomplete", "Wrong units",
               JOptionPane.INFORMATION_MESSAGE);
         }
         catch (OperationFormatException ex)
@@ -327,18 +327,18 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           JOptionPane.showMessageDialog(null, "Units are not same ", "Wrong unit ",
               JOptionPane.INFORMATION_MESSAGE);
         }
-        catch (ArithmeticException ax)
-        {
-          reset();
-          JOptionPane.showMessageDialog(null, "You didn't enter a unit ", "No unit ",
-              JOptionPane.INFORMATION_MESSAGE);
-        }
-        catch (ArrayIndexOutOfBoundsException ax)
-        {
-          reset();
-          JOptionPane.showMessageDialog(null, "You didn't enter a value ", "No unit ",
-              JOptionPane.INFORMATION_MESSAGE);
-        }
+//        catch (ArithmeticException ax)
+//        {
+//          reset();
+//          JOptionPane.showMessageDialog(null, "You didn't enter a unit ", "No unit ",
+//              JOptionPane.INFORMATION_MESSAGE);
+//        }
+//        catch (ArrayIndexOutOfBoundsException ax)
+//        {
+//          reset();
+//          JOptionPane.showMessageDialog(null, "You didn't enter a value ", "No unit ",
+//              JOptionPane.INFORMATION_MESSAGE);
+//        }
         catch (NoValueEnteredException e1)
         {
           reset();
@@ -363,7 +363,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
    * sets up the layout.
    */
   @SuppressWarnings({"rawtypes", "unchecked"})
-  private void setLayout()
+  private void setLayout() 
   {
 
     // creation of frame and content pane

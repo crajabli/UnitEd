@@ -38,7 +38,7 @@ public class ExpressionParser
 
   /**
    * Getter method.
-   * 
+   *  
    * @return operator sign
    */
   public String getOperator()
@@ -141,13 +141,6 @@ public class ExpressionParser
      throw new NoValueEnteredException("You didn't enter a value.");
      }
 
-    // // check if there is a unit entered
-    // if (toBeUnit.length() == 0)
-    // {
-    // throw new ArithmeticException("You didn't enter a unit.");
-    // }
-
-    // System.out.println("Value: " + toBeValue.toString());
     BigDecimal value = BigDecimal.valueOf(Double.parseDouble(toBeValue.toString()));
 
     String unit = toBeUnit.toString();
