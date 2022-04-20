@@ -4,6 +4,8 @@ import utilities.Operation;
 import utilities.OperationFormatException;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
@@ -327,18 +329,18 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           JOptionPane.showMessageDialog(null, "Units are not same ", "Wrong unit ",
               JOptionPane.INFORMATION_MESSAGE);
         }
-//        catch (ArithmeticException ax)
-//        {
-//          reset();
-//          JOptionPane.showMessageDialog(null, "You didn't enter a unit ", "No unit ",
-//              JOptionPane.INFORMATION_MESSAGE);
-//        }
-//        catch (ArrayIndexOutOfBoundsException ax)
-//        {
-//          reset();
-//          JOptionPane.showMessageDialog(null, "You didn't enter a value ", "No unit ",
-//              JOptionPane.INFORMATION_MESSAGE);
-//        }
+        // catch (ArithmeticException ax)
+        // {
+        // reset();
+        // JOptionPane.showMessageDialog(null, "You didn't enter a unit ", "No unit ",
+        // JOptionPane.INFORMATION_MESSAGE);
+        // }
+        // catch (ArrayIndexOutOfBoundsException ax)
+        // {
+        // reset();
+        // JOptionPane.showMessageDialog(null, "You didn't enter a value ", "No unit ",
+        // JOptionPane.INFORMATION_MESSAGE);
+        // }
         catch (NoValueEnteredException e1)
         {
           reset();
@@ -348,8 +350,8 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         catch (IncompleteExpressionException iee)
         {
           reset();
-          JOptionPane.showMessageDialog(null, "The expression you entered was incomplete.", "Incomplete Expression",
-              JOptionPane.INFORMATION_MESSAGE);
+          JOptionPane.showMessageDialog(null, "The expression you entered was incomplete.",
+              "Incomplete Expression", JOptionPane.INFORMATION_MESSAGE);
         }
 
         clear();
@@ -363,7 +365,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
    * sets up the layout.
    */
   @SuppressWarnings({"rawtypes", "unchecked"})
-  private void setLayout() 
+  private void setLayout()
   {
 
     // creation of frame and content pane
@@ -371,22 +373,39 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     JPanel contentPane = (JPanel) frame.getContentPane();
     contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 
-    // creation of panels
+    // top exterior panel
     JPanel topExteriorPanel = new JPanel();
     topExteriorPanel.setLayout(new BoxLayout(topExteriorPanel, BoxLayout.Y_AXIS));
 
+    // bottom exterior panel
     JPanel bottomExteriorPanel = new JPanel();
     bottomExteriorPanel.setLayout(new BoxLayout(bottomExteriorPanel, BoxLayout.X_AXIS));
 
-    JPanel logoPanel = new JPanel();
-    logoPanel.setLayout(new BorderLayout());
+    // exterior logo panel
+    JPanel extLogoPanel = new JPanel();
+    topExteriorPanel.add(extLogoPanel, BorderLayout.NORTH);
+    extLogoPanel.setLayout(new GridLayout(0, 2, 0, 0));
 
+    // interior logo panel
+    JPanel intLogoPanel = new JPanel();
+    extLogoPanel.add(intLogoPanel);
+    intLogoPanel.setLayout(new BoxLayout(intLogoPanel, BoxLayout.X_AXIS));
+    intLogoPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
+    // creation of image label
+    ImageIcon image = new ImageIcon("src/unitED_Logo.png");
+    JLabel label = new JLabel(image);
+    intLogoPanel.add(label);
+
+    // display panel
     JPanel displayPanel = new JPanel();
     displayPanel.setLayout(new BorderLayout());
 
+    // input panel
     JPanel inputPanel = new JPanel();
     inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.X_AXIS));
 
+    // number panels
     JPanel numberPanel = new JPanel();
     numberPanel.setLayout(new BoxLayout(numberPanel, BoxLayout.Y_AXIS));
 
@@ -396,6 +415,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     JPanel numberPanelFour = new JPanel();
     JPanel numberPanelFive = new JPanel();
 
+    // operator panels
     JPanel operatorPanel = new JPanel();
     operatorPanel.setLayout(new BoxLayout(operatorPanel, BoxLayout.Y_AXIS));
 
@@ -407,14 +427,10 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
     JPanel historyPanel = new JPanel();
 
-    // creation of image label
-    ImageIcon image = new ImageIcon("src/unitED_Logo.png");
-    JLabel label = new JLabel(image);
-    logoPanel.add(label);
-
     // creation of options in dropdown menu
-    String[] measurements = {"", "c", "cm", "cm-cm", "days", "ft", "ft-ft", "ft-ft-ft", "gal", "gr", "hrs", "in", "kg", "km", "l", "lbs",
-        "m", "mg", "mi", "mi-mi", "min", "months", "mm", "mph", "oz", "person-months", "pt", "qt", "sec", "sec-sec", "tbsp", "tsp", "yd"};
+    String[] measurements = {"", "c", "cm", "cm-cm", "days", "ft", "ft-ft", "ft-ft-ft", "gal", "gr",
+        "hrs", "in", "kg", "km", "l", "lbs", "m", "mg", "mi", "mi-mi", "min", "months", "mm", "mph",
+        "oz", "person-months", "pt", "qt", "sec", "sec-sec", "tbsp", "tsp", "yd"};
 
     // creation of drop down menu
     dropdown = new JComboBox(measurements);
@@ -422,7 +438,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     dropdown.setVisible(true);
 
     // adding interior panels to exterior panels
-    topExteriorPanel.add(logoPanel);
+    topExteriorPanel.add(extLogoPanel);
     topExteriorPanel.add(displayPanel);
     topExteriorPanel.add(inputPanel);
 
