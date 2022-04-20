@@ -4,7 +4,7 @@ import utilities.Operation;
 import utilities.OperationFormatException;
 
 import java.awt.BorderLayout;
-
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
@@ -351,7 +351,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   /**
    * sets up the layout.
    */
-  @SuppressWarnings("rawtypes")
+  @SuppressWarnings({"rawtypes", "unchecked"})
   private void setLayout()
   {
 
@@ -406,7 +406,6 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         "m", "mg", "mi", "mi-mi", "min", "months", "mm", "mph", "oz", "person-months", "pt", "qt", "sec", "sec-sec", "tbsp", "tsp", "yd"};
 
     // creation of drop down menu
-
     dropdown = new JComboBox(measurements);
     dropdown.setEditable(true);
     dropdown.setVisible(true);
