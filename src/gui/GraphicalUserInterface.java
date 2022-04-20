@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.net.URL;
 
 import javax.swing.*;
 
@@ -430,7 +431,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     JPanel historyPanel = new JPanel();
 
     // creation of image label
-    ImageIcon image = new ImageIcon("src/unitED_Logo.png");
+    ImageIcon image = loadImageIcon("unitED_Logo.png");
     JLabel label = new JLabel(image);
     logoPanel.add(label);
 
@@ -608,5 +609,21 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   public void componentHidden(ComponentEvent e)
   {
 
+  }
+  
+  /**
+   * Helper methods to load the icon.
+   * 
+   * @param name of the icon file
+   * 
+   * @return the icon
+   */
+  private ImageIcon loadImageIcon(String name)
+  {
+    
+    URL url = this.getClass().getResource("/icons/" + name);
+    ImageIcon icon = new ImageIcon(url);
+    
+    return icon;
   }
 }
