@@ -6,10 +6,34 @@ import utilities.Operand;
 
 public class Convert
 {
+  public static Operand convert(final Operand leftOp, final Operand rightOp)
+  {
+    Operand result = rightOp;
+
+    if (Length.instanceOf(leftOp) && Length.instanceOf(rightOp))
+    {
+      result = convertLength(leftOp, rightOp);
+    }
+    else if (Weight.instanceOf(leftOp) && Weight.instanceOf(rightOp))
+    {
+      result = convertWeight(leftOp, rightOp);
+    }
+    else if (Volume.instanceOf(leftOp) && Volume.instanceOf(rightOp))
+    {
+      result = convertVolume(leftOp, rightOp);
+    }
+    else if (Time.instanceOf(leftOp) && Time.instanceOf(rightOp))
+    {
+      result = convertTime(leftOp, rightOp);
+    }
+
+    return result;
+  }
+
   /**
    * Returns a new right operand for Length
    */
-  public static Operand convertLength(final Operand leftOp, final Operand rightOp)
+  private static Operand convertLength(final Operand leftOp, final Operand rightOp)
   {
     String unit = leftOp.getUnit();
     BigDecimal value = new BigDecimal(0.0);
@@ -19,7 +43,7 @@ public class Convert
       case "km":
         value = kmSwitch(rightOp);
         break;
-     
+
       case "m":
         value = mSwitch(rightOp);
         break;
@@ -47,7 +71,7 @@ public class Convert
   /**
    * Returns a new right operand for Weight
    */
-  public static Operand convertWeight(final Operand leftOp, final Operand rightOp)
+  private static Operand convertWeight(final Operand leftOp, final Operand rightOp)
   {
     String unit = leftOp.getUnit();
     BigDecimal value = new BigDecimal(0.0);
@@ -57,7 +81,7 @@ public class Convert
       case "kg":
         value = kgSwitch(rightOp);
         break;
-    
+
       case "g":
         value = gSwitch(rightOp);
         break;
@@ -69,6 +93,38 @@ public class Convert
       case "oz":
         value = ozSwitch(rightOp);
         break;
+    }
+
+    return new Operand(value, unit);
+  }
+  
+  /**
+   * Returns a new right operand for Volume
+   */
+  private static Operand convertVolume(final Operand leftOp, final Operand rightOp)
+  {
+    String unit = leftOp.getUnit();
+    BigDecimal value = new BigDecimal(0.0);
+
+    switch (unit)
+    {
+      
+    }
+
+    return new Operand(value, unit);
+  }
+  
+  /**
+   * Returns a new right operand for Time
+   */
+  private static Operand convertTime(final Operand leftOp, final Operand rightOp)
+  {
+    String unit = leftOp.getUnit();
+    BigDecimal value = new BigDecimal(0.0);
+
+    switch (unit)
+    {
+      
     }
 
     return new Operand(value, unit);
