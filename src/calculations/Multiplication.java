@@ -2,6 +2,7 @@ package calculations;
 
 import java.math.BigDecimal;
 
+import enums.Convert;
 import utilities.Operand;
 
 /**
@@ -24,11 +25,13 @@ public class Multiplication
    */
   public static String calculate(final Operand leftOp, final Operand rightOp, final String operator)
   {
+    // Functionality for unit conversion
+    Operand tempRight = Convert.convert(leftOp, rightOp);
     
-    BigDecimal value = leftOp.getValue().multiply(rightOp.getValue());
+    BigDecimal value = leftOp.getValue().multiply(tempRight.getValue());
     
     String left = leftOp.getUnit();
-    String right = rightOp.getUnit();
+    String right = tempRight.getUnit();
     String unit;
     
     if (left.equals("") && right.equals(""))
@@ -50,7 +53,7 @@ public class Multiplication
     {
     
       String tempUnit = Unit.calculateUnits(leftOp.getUnit(), "", false) + "-"
-          + Unit.calculateUnits(rightOp.getUnit(), operator, false);
+          + Unit.calculateUnits(tempRight.getUnit(), operator, false);
       
       unit = Unit.calculateUnits(tempUnit, "", true);
     }
