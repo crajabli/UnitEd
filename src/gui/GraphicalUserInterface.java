@@ -403,7 +403,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
     // creation of options in dropdown menu
     String[] measurements = {"", "c", "cm", "cm-cm", "days", "ft", "ft-ft", "ft-ft-ft", "gal", "gr", "hrs", "in", "kg", "km", "l", "lbs",
-        "m", "mg", "mi", "mi-mi", "min", "mm", "months", "mph", "oz", "person-months", "pt", "qt", "sec", "sec-sec", "tbsp", "tsp", "weeks", "yd"};
+        "m", "mg", "mi", "mi-mi", "min", "months", "mm", "mph", "oz", "person-months", "pt", "qt", "sec", "sec-sec", "tbsp", "tsp", "yd"};
 
     // creation of drop down menu
 
