@@ -2,6 +2,7 @@ package calculations;
 
 import java.math.BigDecimal;
 
+import enums.Convert;
 import utilities.Operand;
 import utilities.OperationFormatException;
 
@@ -27,10 +28,12 @@ public class Subtraction
   public static String calculate(final Operand leftOp, final Operand rightOp)
       throws OperationFormatException
   {
-
-    Unit.sameUnitException(leftOp, rightOp);
+    // Functionality for unit conversion
+    Operand tempRight = Convert.convert(leftOp, rightOp);
     
-    BigDecimal value = leftOp.getValue().subtract(rightOp.getValue());
+    Unit.sameUnitException(leftOp, tempRight);
+    
+    BigDecimal value = leftOp.getValue().subtract(tempRight.getValue());
 
     return value.toString() + " " + leftOp.getUnit();
   }
