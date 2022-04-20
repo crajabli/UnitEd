@@ -71,8 +71,23 @@ public class ConvertUtils
   
   
   // VOLUME CONVERSIONS
+  // gal conversions
+  final static BigDecimal GAL_TO_L = new BigDecimal(23.78541);
+  
+  // l conversions
+  final static BigDecimal L_TO_GAL = new BigDecimal(0.264172);
   
   
   // TIME CONVERSIONS
+  // day conversions
+  final static BigDecimal DAY_TO_HR = new BigDecimal(24.0);
+  final static BigDecimal DAY_TO_MIN = new BigDecimal(1440.0);
   
+  // hr conversions
+  final static BigDecimal HR_TO_DAY = new BigDecimal(0.0416667);
+  final static BigDecimal HR_TO_MIN = new BigDecimal(60.0);
+  
+  // min conversions
+  final static BigDecimal MIN_TO_DAY = new BigDecimal(0.000694444);
+  final static BigDecimal MIN_TO_HR = new BigDecimal(0.0166667);
 }

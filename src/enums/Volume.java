@@ -7,10 +7,10 @@ import utilities.Operand;
 
 public enum Volume
 {
-  GAL("gal"), QT("qt"), L("l");
+  GAL("gal"), L("l");
 
   private final String unit;
-  private static final List<String> WEIGHTS = Arrays.asList("gal", "qt", "l");
+  private static final List<String> WEIGHTS = Arrays.asList("gal", "l");
 
   Volume(String unit)
   {

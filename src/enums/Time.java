@@ -7,10 +7,10 @@ import utilities.Operand;
 
 public enum Time
 {
-  DAY("day"), MONTH("month"), HR("hr"), MIN("min");
+  DAY("day"), HR("hr"), MIN("min");
 
   private final String unit;
-  private static final List<String> TIMES = Arrays.asList("day", "month", "hr", "min");
+  private static final List<String> TIMES = Arrays.asList("day", "hr", "min");
 
   Time(String unit)
   {

@@ -108,7 +108,13 @@ public class Convert
 
     switch (unit)
     {
-      
+    case "gal":
+    	value = galSwitch(rightOp);
+    	break;
+    
+    case "l":
+    	value = lSwitch(rightOp);
+    	break;
     }
 
     return new Operand(value, unit);
@@ -124,7 +130,17 @@ public class Convert
 
     switch (unit)
     {
-      
+    	case "day":
+    		value = daySwitch(rightOp);
+        	break;
+    		
+    	case "hr":
+    		value = hrSwitch(rightOp);
+        	break;
+    		
+    	case "min":
+    		value = minSwitch(rightOp);
+        	break;
     }
 
     return new Operand(value, unit);
@@ -415,6 +431,97 @@ public class Convert
       case "kg":
         value = value.multiply(ConvertUtils.KG_TO_OZ);
         break;
+    }
+
+    return value;
+  }
+  
+  // VOLUME CONVERSIONS
+  private static BigDecimal galSwitch(final Operand rightOp)
+  {
+    String unit = rightOp.getUnit();
+    BigDecimal value = rightOp.getValue();
+
+    switch (unit)
+    {
+      case "l":
+        value = value.multiply(ConvertUtils.L_TO_GAL);
+        break;
+    }
+
+    return value;
+  }
+  
+  private static BigDecimal lSwitch(final Operand rightOp)
+  {
+    String unit = rightOp.getUnit();
+    BigDecimal value = rightOp.getValue();
+
+    switch (unit)
+    {
+      case "gal":
+        value = value.multiply(ConvertUtils.GAL_TO_L);
+        break;
+    }
+
+    return value;
+  }
+  
+  
+  
+  // TIME CONVERSIONS
+  private static BigDecimal daySwitch(final Operand rightOp)
+  {
+    String unit = rightOp.getUnit();
+    BigDecimal value = rightOp.getValue();
+
+    switch (unit)
+    {
+      case "hr":
+        value = value.multiply(ConvertUtils.HR_TO_DAY);
+        break;
+       
+      case "min":
+    	 value = value.multiply(ConvertUtils.MIN_TO_DAY);
+         break;
+    }
+
+    return value;
+  }
+  
+  private static BigDecimal hrSwitch(final Operand rightOp)
+  {
+    String unit = rightOp.getUnit();
+    BigDecimal value = rightOp.getValue();
+
+    switch (unit)
+    {
+      case "day":
+        value = value.multiply(ConvertUtils.DAY_TO_HR);
+        break;
+       
+      case "min":
+    	 value = value.multiply(ConvertUtils.MIN_TO_HR);
+         break;
+    }
+
+    return value;
+  }
+  
+  private static BigDecimal minSwitch(final Operand rightOp)
+  {
+    String unit = rightOp.getUnit();
+    BigDecimal value = rightOp.getValue();
+
+    switch (unit)
+    {
+      case "hr":
+        value = value.multiply(ConvertUtils.HR_TO_MIN);
+        break;
+       
+      case "day":
+    	 value = value.multiply(ConvertUtils.DAY_TO_MIN);
+         break;
     }
 
     return value;
