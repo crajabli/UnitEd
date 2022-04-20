@@ -79,15 +79,23 @@ public class ConvertUtils
   
   
   // TIME CONVERSIONS
+  //month conversions
+  final static BigDecimal MONTH_TO_HR = new BigDecimal(730.0);
+  final static BigDecimal MONTH_TO_MIN = new BigDecimal(43800.0);
+  final static BigDecimal MONTH_TO_DAY = new BigDecimal(30.0);
+  
   // day conversions
   final static BigDecimal DAY_TO_HR = new BigDecimal(24.0);
   final static BigDecimal DAY_TO_MIN = new BigDecimal(1440.0);
+  final static BigDecimal DAY_TO_MONTH = new BigDecimal(0.0328767);
   
   // hr conversions
   final static BigDecimal HR_TO_DAY = new BigDecimal(0.0416667);
   final static BigDecimal HR_TO_MIN = new BigDecimal(60.0);
+  final static BigDecimal HR_TO_MONTH = new BigDecimal(0.00136986);
   
   // min conversions
   final static BigDecimal MIN_TO_DAY = new BigDecimal(0.000694444);
   final static BigDecimal MIN_TO_HR = new BigDecimal(0.0166667);
+  final static BigDecimal MIN_TO_MONTH = new BigDecimal(0.000022831);
 }

@@ -130,7 +130,19 @@ public class Convert
 
     switch (unit)
     {
+    	case "month":
+    		value = monthSwitch(rightOp);
+    		break;
+    	
     	case "day":
+    		value = daySwitch(rightOp);
+        	break;
+        	
+    	case "person-month":
+    		value = monthSwitch(rightOp);
+    		break;
+    	
+    	case "person-day":
     		value = daySwitch(rightOp);
         	break;
     		
@@ -470,6 +482,33 @@ public class Convert
   
   
   // TIME CONVERSIONS
+  private static BigDecimal monthSwitch(final Operand rightOp)
+  {
+    String unit = rightOp.getUnit();
+    BigDecimal value = rightOp.getValue();
+
+    switch (unit)
+    {
+      case "day":
+    	value = value.multiply(ConvertUtils.DAY_TO_MONTH);
+    	break;
+    	
+      case "person-day":
+      	value = value.multiply(ConvertUtils.DAY_TO_MONTH);
+      	break;
+    	
+      case "hr":
+        value = value.multiply(ConvertUtils.HR_TO_MONTH);
+        break;
+       
+      case "min":
+    	 value = value.multiply(ConvertUtils.MIN_TO_MONTH);
+         break;
+    }
+
+    return value;
+  }
+  
   private static BigDecimal daySwitch(final Operand rightOp)
   {
     String unit = rightOp.getUnit();
@@ -477,6 +516,14 @@ public class Convert
 
     switch (unit)
     {
+      case "month":
+        value = value.multiply(ConvertUtils.MONTH_TO_DAY);
+        break;
+        
+      case "person-month":
+        value = value.multiply(ConvertUtils.MONTH_TO_DAY);
+        break;
+        
       case "hr":
         value = value.multiply(ConvertUtils.HR_TO_DAY);
         break;
@@ -496,6 +543,10 @@ public class Convert
 
     switch (unit)
     {
+      case "month":
+        value = value.multiply(ConvertUtils.MONTH_TO_HR);
+        break;
+        
       case "day":
         value = value.multiply(ConvertUtils.DAY_TO_HR);
         break;
@@ -515,6 +566,10 @@ public class Convert
 
     switch (unit)
     {
+      case "month":
+        value = value.multiply(ConvertUtils.MONTH_TO_MIN);
+        break;
+        
       case "hr":
         value = value.multiply(ConvertUtils.HR_TO_MIN);
         break;
