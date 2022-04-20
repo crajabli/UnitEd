@@ -2,6 +2,7 @@ package calculations;
 
 import java.math.BigDecimal;
 
+import enums.Convert;
 import utilities.Operand;
 import utilities.OperationFormatException;
 
@@ -33,10 +34,13 @@ public class Division
       throw new OperationFormatException("Cannot divide by zero");
     }
     
-    BigDecimal value = leftOp.getValue().divide(rightOp.getValue());
+    // Functionality for unit conversion
+    Operand tempRight = Convert.convert(leftOp, rightOp);
+    
+    BigDecimal value = leftOp.getValue().divide(tempRight.getValue());
     
     String left = leftOp.getUnit();
-    String right = rightOp.getUnit();
+    String right = tempRight.getUnit();
     String unit;
     
     if (left.equals("") && right.equals(""))
