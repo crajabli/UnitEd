@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.net.URL;
 
 import javax.swing.*;
 
@@ -624,5 +625,21 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   public void componentHidden(ComponentEvent e)
   {
 
+  }
+  
+  /**
+   * Helper methods to load the icon.
+   * 
+   * @param name of the icon file
+   * 
+   * @return the icon
+   */
+  private ImageIcon loadImageIcon(String name)
+  {
+    
+    URL url = this.getClass().getResource("/icons/" + name);
+    ImageIcon icon = new ImageIcon(url);
+    
+    return icon;
   }
 }

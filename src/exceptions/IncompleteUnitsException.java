@@ -17,12 +17,10 @@ public class IncompleteUnitsException extends Exception
   public IncompleteUnitsException()
   {
     super();
-
   }
 
   public IncompleteUnitsException(final String message)
   {
     super(message);
-
   }
 }
