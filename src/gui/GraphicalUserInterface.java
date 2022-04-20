@@ -402,8 +402,8 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     logoPanel.add(label);
 
     // creation of options in dropdown menu
-    String[] measurements = {"", "c", "cm", "cm-cm", "ft", "ft-ft", "ft-ft-ft", "gal", "gr", "hrs", "in", "kg", "km", "l", "lbs",
-        "m", "mg", "mi", "mi-mi", "min", "mm", "mph", "oz", "pt", "qt", "sec", "sec-sec", "tbsp", "tsp", "yd"};
+    String[] measurements = {"", "c", "cm", "cm-cm", "days", "ft", "ft-ft", "ft-ft-ft", "gal", "gr", "hrs", "in", "kg", "km", "l", "lbs",
+        "m", "mg", "mi", "mi-mi", "min", "mm", "months", "mph", "oz", "person-months", "pt", "qt", "sec", "sec-sec", "tbsp", "tsp", "weeks", "yd"};
 
     // creation of drop down menu
 
