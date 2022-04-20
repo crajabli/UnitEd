@@ -1,6 +1,7 @@
 package calculations;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import enums.Convert;
 import utilities.Operand;
@@ -33,7 +34,8 @@ public class Addition
     
     Unit.sameUnitException(leftOp, tempRight);
     
-    BigDecimal value = leftOp.getValue().add(tempRight.getValue());
+    BigDecimal value = leftOp.getValue().add(tempRight.getValue()).setScale(6,
+        RoundingMode.HALF_DOWN);
     
     return value.toString() + " " + leftOp.getUnit();
   }

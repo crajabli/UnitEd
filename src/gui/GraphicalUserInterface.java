@@ -97,31 +97,52 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       case "C" -> clear();
       case "+" ->
       {
+        String numeric = input.getText().replaceAll("[^0-9]", "");
+        String units = input.getText().replaceAll("\\d", "");
+        String dropdownUnits = dropdown.getSelectedItem().toString();
 
-        if (lastResult == null && !input.getText().equals(""))
+
+
+        if (lastResult == null && !numeric.equals(""))
         {
+          if (!units.equals(""))
+          {
+            if (units.charAt(units.length()-1) == ('/') || units.charAt(units.length()-1) == ('-'))
+            {
+              {
+                JOptionPane.showMessageDialog(null, "The units you entered are incomplete", "Wrong units",
+                    JOptionPane.INFORMATION_MESSAGE);
+                reset();
+                break;
+              }
+            }
+          }
+          if (!dropdownUnits.equals(""))
+          {
+            if (dropdownUnits.charAt(dropdownUnits.length() - 1) == ('/')
+                || dropdownUnits.charAt(dropdownUnits.length() - 1) == ('-'))
+            {
+              JOptionPane.showMessageDialog(null, "The units you entered are incomplete", "Wrong units",
+                  JOptionPane.INFORMATION_MESSAGE);
+              reset();
+              break;
+            }
+          }
+
           display.setText("");
-          if (dropdown.getSelectedItem().equals("none"))
-          {
-            display.setText(display.getText() + input.getText() + " + ");
-            addOperand(input.getText() + dropdown.getSelectedItem(), "+");
-            clear();
-          }
-          else
-          {
             display
-                .setText(display.getText() + input.getText() + dropdown.getSelectedItem() + " + ");
+                .setText(display.getText() + input.getText() + " "  + dropdown.getSelectedItem() + " + ");
             addOperand(input.getText() + dropdown.getSelectedItem(), "+");
             clear();
-          }
+
         }
-        else if (lastResult != null && input.getText().equals(""))
+        else if (lastResult != null && numeric.equals(""))
         {
           display.setText(lastResult + " + ");
           addOperand(lastResult, "+");
           clear();
         }
-        else if (lastResult == null && input.getText().equals(""))
+        else if (lastResult == null && numeric.equals(""))
         {
           JOptionPane.showMessageDialog(null, "Enter value", "No value",
               JOptionPane.INFORMATION_MESSAGE);
@@ -131,20 +152,48 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       case "-" ->
       {
         // parse the input
-        if (lastResult == null && !input.getText().equals(""))
+        String numeric = input.getText().replaceAll("[^0-9]", "");
+        String units = input.getText().replaceAll("\\d", "");
+        String dropdownUnits = dropdown.getSelectedItem().toString();
+
+        if (!units.equals(""))
+        {
+          if (units.charAt(units.length()-1) == ('/') || units.charAt(units.length()-1) == ('-'))
+          {
+            {
+              JOptionPane.showMessageDialog(null, "The units you entered are incomplete", "Wrong units",
+                  JOptionPane.INFORMATION_MESSAGE);
+              reset();
+              break;
+            }
+          }
+        }
+        if (!dropdownUnits.equals(""))
+        {
+          if (dropdownUnits.charAt(dropdownUnits.length() - 1) == ('/')
+              || dropdownUnits.charAt(dropdownUnits.length() - 1) == ('-'))
+          {
+            JOptionPane.showMessageDialog(null, "The units you entered are incomplete", "Wrong units",
+                JOptionPane.INFORMATION_MESSAGE);
+            reset();
+            break;
+          }
+        }
+
+        if (lastResult == null && !numeric.equals(""))
         {
           display.setText("");
           if (dropdown.getSelectedItem().equals("none"))
           {
             display.setText(display.getText() + input.getText() + " - ");
-            addOperand(input.getText() + dropdown.getSelectedItem(), "-");
+            addOperand(input.getText()+ dropdown.getSelectedItem(), "-");
             clear();
           }
           else
           {
             display
-                .setText(display.getText() + input.getText() + dropdown.getSelectedItem() + " - ");
-            addOperand(input.getText() + dropdown.getSelectedItem(), "-");
+                .setText(display.getText() + input.getText() + " "  + dropdown.getSelectedItem() + " - ");
+            addOperand(input.getText()+ dropdown.getSelectedItem(), "-");
             clear();
           }
         }
@@ -154,7 +203,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           addOperand(lastResult, "-");
           clear();
         }
-        else if (lastResult == null && input.getText().equals(""))
+        else if (lastResult == null && numeric.equals(""))
         {
           JOptionPane.showMessageDialog(null, "Enter value", "No value",
               JOptionPane.INFORMATION_MESSAGE);
@@ -244,8 +293,37 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       case "x" ->
       {
         // parse the input
-        if (lastResult == null && !input.getText().equals(""))
+        String numeric = input.getText().replaceAll("[^0-9]", "");
+        String units = input.getText().replaceAll("\\d", "");
+        String dropdownUnits = dropdown.getSelectedItem().toString();
+
+        if (!units.equals(""))
         {
+          if (units.charAt(units.length()-1) == ('/') || units.charAt(units.length()-1) == ('-'))
+          {
+            {
+              JOptionPane.showMessageDialog(null, "The units you entered are incomplete", "Wrong units",
+                  JOptionPane.INFORMATION_MESSAGE);
+              reset();
+              break;
+            }
+          }
+        }
+        if (!dropdownUnits.equals(""))
+        {
+          if (dropdownUnits.charAt(dropdownUnits.length() - 1) == ('/')
+              || dropdownUnits.charAt(dropdownUnits.length() - 1) == ('-'))
+          {
+            JOptionPane.showMessageDialog(null, "The units you entered are incomplete", "Wrong units",
+                JOptionPane.INFORMATION_MESSAGE);
+            reset();
+            break;
+          }
+        }
+
+        if (lastResult == null && !numeric.equals(""))
+        {
+
           display.setText("");
           if (dropdown.getSelectedItem().equals("none"))
           {
@@ -267,7 +345,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           addOperand(lastResult, "x");
           clear();
         }
-        else if (lastResult == null && input.getText().equals(""))
+        else if (lastResult == null && numeric.equals(""))
         {
           JOptionPane.showMessageDialog(null, "Enter value", "No value",
               JOptionPane.INFORMATION_MESSAGE);
@@ -276,7 +354,37 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       case DIVIDE ->
       {
         // parse the input
-        if (lastResult == null && !input.getText().equals(""))
+
+        String numeric = input.getText().replaceAll("[^0-9]", "");
+        String units = input.getText().replaceAll("\\d", "");
+        String dropdownUnits = dropdown.getSelectedItem().toString();
+
+        if (!units.equals(""))
+        {
+          if (units.charAt(units.length()-1) == ('/') || units.charAt(units.length()-1) == ('-'))
+          {
+            {
+              JOptionPane.showMessageDialog(null, "The units you entered are incomplete", "Wrong units",
+                  JOptionPane.INFORMATION_MESSAGE);
+              reset();
+              break;
+            }
+          }
+        }
+        if (!dropdownUnits.equals(""))
+        {
+          if (dropdownUnits.charAt(dropdownUnits.length() - 1) == ('/')
+              || dropdownUnits.charAt(dropdownUnits.length() - 1) == ('-'))
+          {
+            JOptionPane.showMessageDialog(null, "The units you entered are incomplete", "Wrong units",
+                JOptionPane.INFORMATION_MESSAGE);
+            reset();
+            break;
+          }
+        }
+
+
+        if (lastResult == null && !numeric.equals(""))
         {
           display.setText("");
           if (dropdown.getSelectedItem().equals("none"))
@@ -299,7 +407,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           addOperand(lastResult, "/");
           clear();
         }
-        else if (lastResult == null && input.getText().equals(""))
+        else if (lastResult == null && numeric.equals(""))
         {
           JOptionPane.showMessageDialog(null, "Enter value", "No value",
               JOptionPane.INFORMATION_MESSAGE);
@@ -364,6 +472,19 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         // JOptionPane.showMessageDialog(null, "You didn't enter a value ", "No unit ",
         // JOptionPane.INFORMATION_MESSAGE);
         // }
+
+//      catch (ArithmeticException ax)
+//      {
+//        reset();
+//        JOptionPane.showMessageDialog(null, "You didn't enter a unit ", "No unit ",
+//            JOptionPane.INFORMATION_MESSAGE);
+//      }
+//      catch (ArrayIndexOutOfBoundsException ax)
+//      {
+//        reset();
+//        JOptionPane.showMessageDialog(null, "You didn't enter a value ", "No unit ",
+//            JOptionPane.INFORMATION_MESSAGE);
+//      }
         catch (NoValueEnteredException e1)
         {
           reset();

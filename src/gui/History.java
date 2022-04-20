@@ -9,6 +9,8 @@ import java.awt.event.ActionListener;
 /**
  * should be components listener, and will be sepearate window/panel which will be adjacent to the main JFrame.
  *
+ * @version 1.0
+ * @author Chingiz
  */
 public class History extends JWindow implements ActionListener {
 
@@ -39,7 +41,7 @@ public class History extends JWindow implements ActionListener {
     historyDisplay = new JTextArea();
     historyPanel.setLayout(new GridLayout());
     historyDisplay.setEditable(false);
-    historyDisplay.setSize(160, 100);
+    historyDisplay.setSize(240, 100);
 
 
     JButton closeButton = new JButton("<");
@@ -49,7 +51,7 @@ public class History extends JWindow implements ActionListener {
     historyPanel.add(historyDisplay);
     contentPane.add(historyPanel);
     contentPane.add(closeButton);
-    setSize(250, 280);
+    setSize(300, 280);
     contentPane.add(Box.createVerticalGlue());
 
   }
