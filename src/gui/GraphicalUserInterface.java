@@ -4,7 +4,6 @@ import utilities.Operation;
 import utilities.OperationFormatException;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,9 +33,11 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   String lastResult = null;
   private final String SIGN = "\u00B1";
   private final String BACK = "\u232B";
-  History historyDisplay = new History();
+  static History historyDisplay = new History();
   JComboBox dropdown;
   static JButton historyButton = new JButton(">");
+  static Timer timer = new Timer(3, historyDisplay);
+
 
   /**
    * Constructor.
@@ -46,9 +47,9 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     setLayout();
   }
 
-  public void setButtons()
+  public void resetTimer()
   {
-
+    timer.restart();
   }
 
   /**
@@ -65,6 +66,16 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     expression[1] = operation;
 
   }
+
+  public static void startTimer() {
+    timer.start();
+  }
+
+
+  public static void stopTimer() {
+    timer.stop();
+  }
+
 
   /**
    * uses buttons to input to the input field.
@@ -262,8 +273,8 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       case ">" ->
       {
         // set history visible
-//        Timer timer = new Timer(10, this);
-//        timer.start();
+        startTimer();
+
         historyDisplay.setVisible(true);
         historyButton.setVisible(false);
 
@@ -387,19 +398,11 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         if (lastResult == null && !numeric.equals(""))
         {
           display.setText("");
-          if (dropdown.getSelectedItem().equals("none"))
-          {
-            display.setText(display.getText() + input.getText() + " / ");
-            addOperand(input.getText() + dropdown.getSelectedItem(), "/");
-            clear();
-          }
-          else
-          {
-            display
-                .setText(display.getText() + input.getText() + dropdown.getSelectedItem() + " / ");
-            addOperand(input.getText() + dropdown.getSelectedItem(), "/");
-            clear();
-          }
+          display
+            .setText(display.getText() + input.getText() + dropdown.getSelectedItem() + " / ");
+          addOperand(input.getText() + dropdown.getSelectedItem(), "/");
+          clear();
+
         }
         else if (lastResult != null)
         {
@@ -416,14 +419,8 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       case "=" ->
       {
         // calculate;
-        if (dropdown.getSelectedItem().equals("none"))
-        {
-          expression[2] = input.getText();
-        }
-        else
-        {
-          expression[2] = input.getText() + dropdown.getSelectedItem();
-        }
+
+        expression[2] = input.getText() + dropdown.getSelectedItem();
 
         try
         {
@@ -431,18 +428,9 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           ExpressionParser parser = new ExpressionParser(expression);
           result = Operation.calculate(parser.getLeft(), parser.getRight(), parser.getOperator());
 
-          if (dropdown.getSelectedItem().equals("none"))
-          {
-            display.setText(display.getText() + input.getText() + " = " + result);
-            historyDisplay.updateText(display.getText());
-          }
-          else
-          {
-            display.setText(
-                display.getText() + input.getText() + dropdown.getSelectedItem() + " = " + result);
-            historyDisplay.updateText(display.getText());
-          }
-
+          display.setText(
+            display.getText() + input.getText() + dropdown.getSelectedItem() + " = " + result);
+          historyDisplay.updateText(display.getText());
           lastResult = result;
           expression = new String[3];
 

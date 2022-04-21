@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -41,7 +42,7 @@ public class History extends JWindow implements ActionListener {
     historyDisplay = new JTextArea();
     historyPanel.setLayout(new GridLayout());
     historyDisplay.setEditable(false);
-    historyDisplay.setSize(240, 100);
+
 
 
     JButton closeButton = new JButton("<");
@@ -51,7 +52,6 @@ public class History extends JWindow implements ActionListener {
     historyPanel.add(historyDisplay);
     contentPane.add(historyPanel);
     contentPane.add(closeButton);
-    setSize(300, 280);
     contentPane.add(Box.createVerticalGlue());
 
   }
@@ -81,14 +81,43 @@ public class History extends JWindow implements ActionListener {
 
 
   @Override
-  public void actionPerformed(ActionEvent e) {
+  public void actionPerformed(ActionEvent e)
+  {
     String ac = e.getActionCommand();
 
-    if (ac.equals("<"))
+    if (ac != null)
     {
-      setVisible(false);
-      GraphicalUserInterface.setHistoryButtonVisible();
+      if (ac.equals("<"))
+      {
+        for (int i = 0; i < 42; i++)
+        {
+          GraphicalUserInterface.startTimer();
+          historyDisplay.setSize(getWidth() - 7, 280);
+          setSize(getWidth() - 7, 280);
+          if (getWidth() == 0) {
+            GraphicalUserInterface.stopTimer();
+          }
+          GraphicalUserInterface.setHistoryButtonVisible();
+          try {
+            TimeUnit.MILLISECONDS.sleep(10);
+          } catch (InterruptedException ex) {
+            ex.printStackTrace();
+          }
+        }
+
+      }
     }
+
+    System.out.println(getWidth());
+    historyDisplay.setSize(getWidth()+1, 280);
+    setSize(getWidth() + 7, 280);
+
+    if (getWidth() > 260)
+    {
+      GraphicalUserInterface.stopTimer();
+    }
+
+
   }
 }
 
