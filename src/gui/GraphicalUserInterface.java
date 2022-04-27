@@ -28,18 +28,21 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
   JTextField display;
   JTextField input;
-  String[] expression = new String[3];
+  String[] expression = new String[4];
   private final String DIVIDE = "\u00F7";
   String lastResult = null;
   private final String SIGN = "\u00B1";
   private final String BACK = "\u232B";
   static History historyDisplay = new History();
+  static Intermediate intermediateDisplay = new Intermediate();
   JComboBox unitsDropDown;
   JComboBox resultsDropDown;
   static JButton historyButton = new JButton(">");
   static JButton intStepsButton = new JButton("<");
-  static Timer timer = new Timer(3, historyDisplay);
+  static Timer historyTimer = new Timer(3, historyDisplay);
+  static Timer intermediateTimer = new Timer(3, intermediateDisplay);
   private final String EXPONENT = "X\u02B8";
+
 
   /**
    * Constructor.
@@ -51,7 +54,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
   public void resetTimer()
   {
-    timer.restart();
+    historyTimer.restart();
   }
 
   /**
@@ -69,14 +72,25 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
   }
 
-  public static void startTimer()
+  public static void startHistoryTimer()
   {
-    timer.start();
+    historyTimer.start();
   }
 
-  public static void stopTimer()
+  public static void startIntermediateTimer()
   {
-    timer.stop();
+    intermediateTimer.start();
+  }
+
+  public static void stopHistoryTimer()
+  {
+    historyTimer.stop();
+  }
+
+
+  public static void stopIntermediateTimer()
+  {
+    intermediateTimer.stop();
   }
 
   /**
@@ -99,6 +113,12 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     historyButton.setVisible(true);
   }
 
+
+  public static void setIntermediateButtonVisible()
+  {
+    intStepsButton.setVisible(true);
+  }
+
   @Override
   public void actionPerformed(final ActionEvent e)
   {
@@ -110,6 +130,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       case "C" -> clear();
       case "+" ->
       {
+        // plus assignment for the expression
         String numeric = input.getText().replaceAll("[^0-9]", "");
         String units = input.getText().replaceAll("\\d", "");
         String dropdownUnits = unitsDropDown.getSelectedItem().toString();
@@ -275,10 +296,17 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       case ">" ->
       {
         // set history visible
-        startTimer();
+
 
         historyDisplay.setVisible(true);
         historyButton.setVisible(false);
+
+      }
+      case "<" ->
+      {
+        // make the intermediate display appear
+        intermediateDisplay.setVisible(true);
+        intStepsButton.setVisible(false);
 
       }
       case SIGN ->
@@ -787,6 +815,9 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   public void componentMoved(ComponentEvent e)
   {
     historyDisplay.setLocation((int) e.getComponent().getLocation().getX() + 545,
+        (int) e.getComponent().getLocation().getY() + 112);
+
+    intermediateDisplay.setLocation((int) e.getComponent().getLocation().getX() + 6,
         (int) e.getComponent().getLocation().getY() + 112);
 
   }

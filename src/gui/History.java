@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.concurrent.TimeUnit;
 
+import static gui.GraphicalUserInterface.startHistoryTimer;
+
 
 /**
  * should be components listener, and will be sepearate window/panel which will be adjacent to the main JFrame.
@@ -77,6 +79,7 @@ public class History extends JWindow implements ActionListener {
   public void setVisible(boolean b)
   {
     super.setVisible(b);
+    startHistoryTimer();
   }
 
 
@@ -91,12 +94,8 @@ public class History extends JWindow implements ActionListener {
       {
         for (int i = 0; i < 42; i++)
         {
-          GraphicalUserInterface.startTimer();
           historyDisplay.setSize(getWidth() - 7, 280);
           setSize(getWidth() - 7, 280);
-          if (getWidth() == 0) {
-            GraphicalUserInterface.stopTimer();
-          }
           GraphicalUserInterface.setHistoryButtonVisible();
           try {
             TimeUnit.MILLISECONDS.sleep(10);
@@ -104,7 +103,8 @@ public class History extends JWindow implements ActionListener {
             ex.printStackTrace();
           }
         }
-
+        setSize(getWidth() - 7, 280);
+        return;
       }
     }
 
@@ -114,7 +114,7 @@ public class History extends JWindow implements ActionListener {
 
     if (getWidth() > 260)
     {
-      GraphicalUserInterface.stopTimer();
+      GraphicalUserInterface.stopHistoryTimer();
     }
 
 
