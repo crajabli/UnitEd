@@ -30,9 +30,9 @@ public class EnumTest {
 		assertFalse(Length.instanceOf("yard"));
 		
 		// Test conversions
-		Operand left = new Operand(new BigDecimal(12.0), "km");
-		Operand right = new Operand(new BigDecimal(12.0), "m");
-		Operand expected = new Operand(new BigDecimal(0.012), "km");
+		Operand left = new Operand(new BigDecimal(12.0), "km", 1, null);
+		Operand right = new Operand(new BigDecimal(12.0), "m", 1, null);
+		Operand expected = new Operand(new BigDecimal(0.012), "km", 1, null);
 		
 //		assertEquals(expected.getValue(), Convert.convertLength(left, right).getValue());
 //		assertEquals(expected.getUnit(), Convert.convertLength(left, right).getUnit());

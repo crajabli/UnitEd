@@ -65,7 +65,9 @@ public class Convert
         break;
     }
 
-    return new Operand(value, unit);
+    // added 1 for the exponent and null for the resulting unit
+    // adjust code above as needed if needed
+    return new Operand(value, unit, 1, null);
   }
 
   /**
@@ -95,9 +97,11 @@ public class Convert
         break;
     }
 
-    return new Operand(value, unit);
+    // added 1 for the exponent and null for the resulting unit
+    // adjust code above as needed if needed
+    return new Operand(value, unit, 1, null);
   }
-  
+
   /**
    * Returns a new right operand for Volume
    */
@@ -108,26 +112,28 @@ public class Convert
 
     switch (unit)
     {
-    case "gal":
-    	value = galSwitch(rightOp);
-    	break;
-    
-    case "l":
-    	value = lSwitch(rightOp);
-    	break;
-    	
-    case "tsp":
-    	value = tspSwitch(rightOp);
-    	break;
-    
-    case "tbsp":
-    	value = tbspSwitch(rightOp);
-    	break;
+      case "gal":
+        value = galSwitch(rightOp);
+        break;
+
+      case "l":
+        value = lSwitch(rightOp);
+        break;
+
+      case "tsp":
+        value = tspSwitch(rightOp);
+        break;
+
+      case "tbsp":
+        value = tbspSwitch(rightOp);
+        break;
     }
 
-    return new Operand(value, unit);
+    // added 1 for the exponent and null for the resulting unit
+    // adjust code above as needed if needed
+    return new Operand(value, unit, 1, null);
   }
-  
+
   /**
    * Returns a new right operand for Time
    */
@@ -138,32 +144,34 @@ public class Convert
 
     switch (unit)
     {
-    	case "months":
-    		value = monthSwitch(rightOp);
-    		break;
-    	
-    	case "days":
-    		value = daySwitch(rightOp);
-        	break;
-        	
-    	case "person-months":
-    		value = monthSwitch(rightOp);
-    		break;
-    	
-    	case "person-days":
-    		value = daySwitch(rightOp);
-        	break;
-    		
-    	case "hr":
-    		value = hrSwitch(rightOp);
-        	break;
-    		
-    	case "min":
-    		value = minSwitch(rightOp);
-        	break;
+      case "months":
+        value = monthSwitch(rightOp);
+        break;
+
+      case "days":
+        value = daySwitch(rightOp);
+        break;
+
+      case "person-months":
+        value = monthSwitch(rightOp);
+        break;
+
+      case "person-days":
+        value = daySwitch(rightOp);
+        break;
+
+      case "hr":
+        value = hrSwitch(rightOp);
+        break;
+
+      case "min":
+        value = minSwitch(rightOp);
+        break;
     }
 
-    return new Operand(value, unit);
+    // added 1 for the exponent and null for the resulting unit
+    // adjust code above as needed if needed
+    return new Operand(value, unit, 1, null);
   }
 
   // PRIVATE METHODS FOR CONVERTING LENGTHS
@@ -455,7 +463,7 @@ public class Convert
 
     return value;
   }
-  
+
   // VOLUME CONVERSIONS
   private static BigDecimal galSwitch(final Operand rightOp)
   {
@@ -467,19 +475,19 @@ public class Convert
       case "l":
         value = value.multiply(ConvertUtils.L_TO_GAL);
         break;
-        
+
       case "tsp":
-          value = value.multiply(ConvertUtils.TSP_TO_GAL);
-          break;
-          
+        value = value.multiply(ConvertUtils.TSP_TO_GAL);
+        break;
+
       case "tbsp":
-          value = value.multiply(ConvertUtils.TBSP_TO_GAL);
-          break;
+        value = value.multiply(ConvertUtils.TBSP_TO_GAL);
+        break;
     }
 
     return value;
   }
-  
+
   private static BigDecimal lSwitch(final Operand rightOp)
   {
     String unit = rightOp.getUnit();
@@ -490,19 +498,19 @@ public class Convert
       case "gal":
         value = value.multiply(ConvertUtils.GAL_TO_L);
         break;
-        
+
       case "tsp":
-          value = value.multiply(ConvertUtils.TSP_TO_L);
-          break;
-          
+        value = value.multiply(ConvertUtils.TSP_TO_L);
+        break;
+
       case "tbsp":
-          value = value.multiply(ConvertUtils.TBSP_TO_L);
-          break;
+        value = value.multiply(ConvertUtils.TBSP_TO_L);
+        break;
     }
 
     return value;
   }
-  
+
   private static BigDecimal tspSwitch(final Operand rightOp)
   {
     String unit = rightOp.getUnit();
@@ -513,19 +521,19 @@ public class Convert
       case "gal":
         value = value.multiply(ConvertUtils.GAL_TO_TSP);
         break;
-        
+
       case "l":
-          value = value.multiply(ConvertUtils.L_TO_TSP);
-          break;
-          
+        value = value.multiply(ConvertUtils.L_TO_TSP);
+        break;
+
       case "tbsp":
-          value = value.multiply(ConvertUtils.TBSP_TO_TSP);
-          break;
+        value = value.multiply(ConvertUtils.TBSP_TO_TSP);
+        break;
     }
 
     return value;
   }
-  
+
   private static BigDecimal tbspSwitch(final Operand rightOp)
   {
     String unit = rightOp.getUnit();
@@ -534,23 +542,21 @@ public class Convert
     switch (unit)
     {
       case "gal":
-          value = value.multiply(ConvertUtils.GAL_TO_TBSP);
-          break;
-          
-        case "tsp":
-            value = value.multiply(ConvertUtils.TSP_TO_TBSP);
-            break;
-            
-        case "l":
-            value = value.multiply(ConvertUtils.L_TO_TBSP);
-            break;
+        value = value.multiply(ConvertUtils.GAL_TO_TBSP);
+        break;
+
+      case "tsp":
+        value = value.multiply(ConvertUtils.TSP_TO_TBSP);
+        break;
+
+      case "l":
+        value = value.multiply(ConvertUtils.L_TO_TBSP);
+        break;
     }
 
     return value;
   }
-  
-  
-  
+
   // TIME CONVERSIONS
   private static BigDecimal monthSwitch(final Operand rightOp)
   {
@@ -560,25 +566,25 @@ public class Convert
     switch (unit)
     {
       case "days":
-    	value = value.multiply(ConvertUtils.DAY_TO_MONTH);
-    	break;
-    	
+        value = value.multiply(ConvertUtils.DAY_TO_MONTH);
+        break;
+
       case "person-days":
-      	value = value.multiply(ConvertUtils.DAY_TO_MONTH);
-      	break;
-    	
+        value = value.multiply(ConvertUtils.DAY_TO_MONTH);
+        break;
+
       case "hr":
         value = value.multiply(ConvertUtils.HR_TO_MONTH);
         break;
-       
+
       case "min":
-    	 value = value.multiply(ConvertUtils.MIN_TO_MONTH);
-         break;
+        value = value.multiply(ConvertUtils.MIN_TO_MONTH);
+        break;
     }
 
     return value;
   }
-  
+
   private static BigDecimal daySwitch(final Operand rightOp)
   {
     String unit = rightOp.getUnit();
@@ -589,23 +595,23 @@ public class Convert
       case "months":
         value = value.multiply(ConvertUtils.MONTH_TO_DAY);
         break;
-        
+
       case "person-months":
         value = value.multiply(ConvertUtils.MONTH_TO_DAY);
         break;
-        
+
       case "hr":
         value = value.multiply(ConvertUtils.HR_TO_DAY);
         break;
-       
+
       case "min":
-    	 value = value.multiply(ConvertUtils.MIN_TO_DAY);
-         break;
+        value = value.multiply(ConvertUtils.MIN_TO_DAY);
+        break;
     }
 
     return value;
   }
-  
+
   private static BigDecimal hrSwitch(final Operand rightOp)
   {
     String unit = rightOp.getUnit();
@@ -616,19 +622,19 @@ public class Convert
       case "months":
         value = value.multiply(ConvertUtils.MONTH_TO_HR);
         break;
-        
+
       case "days":
         value = value.multiply(ConvertUtils.DAY_TO_HR);
         break;
-       
+
       case "min":
-    	 value = value.multiply(ConvertUtils.MIN_TO_HR);
-         break;
+        value = value.multiply(ConvertUtils.MIN_TO_HR);
+        break;
     }
 
     return value;
   }
-  
+
   private static BigDecimal minSwitch(final Operand rightOp)
   {
     String unit = rightOp.getUnit();
@@ -639,14 +645,14 @@ public class Convert
       case "months":
         value = value.multiply(ConvertUtils.MONTH_TO_MIN);
         break;
-        
+
       case "hr":
         value = value.multiply(ConvertUtils.HR_TO_MIN);
         break;
-       
+
       case "days":
-    	 value = value.multiply(ConvertUtils.DAY_TO_MIN);
-         break;
+        value = value.multiply(ConvertUtils.DAY_TO_MIN);
+        break;
     }
 
     return value;

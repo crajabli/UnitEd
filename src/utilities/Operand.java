@@ -13,6 +13,8 @@ public class Operand
 {
   private String unit;
   private BigDecimal value;
+  private int exponent;
+  private String resultUnit;
 
   /**
    * Constructs operand objects.
@@ -20,7 +22,8 @@ public class Operand
    * @param value
    * @param unit
    */
-  public Operand(final BigDecimal value, final String unit)
+  public Operand(final BigDecimal value, final String unit, final int exponent,
+      final String resultUnit)
   {
     if (unit == null || unit == "none")
     {
@@ -28,6 +31,13 @@ public class Operand
     }
     this.unit = unit;
     this.value = value;
+    this.exponent = exponent;
+
+    if (resultUnit == null)
+    {
+      this.resultUnit = unit;
+    }
+    this.resultUnit = resultUnit;
   }
 
   /**
@@ -46,6 +56,25 @@ public class Operand
   public String getUnit()
   {
     return unit;
+  }
+  
+  /**
+   * 
+   * @return the unit to be converted to 
+   */
+  public String getResultUnit()
+  {
+    return resultUnit;
+  }
+  
+  /**
+   * Helper method for testing purposes.
+   * 
+   * @return operand's exponent
+   */
+  public int getExp()
+  {
+    return this.exponent;
   }
 
   /**
