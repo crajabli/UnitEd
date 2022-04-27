@@ -20,7 +20,7 @@ class ExpressionParserTest
   private final String SUBTRACTION = "-";
   private final String ADDITION = "+";
 
-  private String[] expression = new String[3];
+  private String[] expression = new String[4];
 
   @Test
   void testGoodArray() throws OperationFormatException, IncompleteUnitsException, NoValueEnteredException, IncompleteExpressionException
@@ -28,11 +28,12 @@ class ExpressionParserTest
     expression[0] = "5ft";
     expression[1] = ADDITION;
     expression[2] = "9miles";
+    expression[3] = null; 
 
     ExpressionParser ep = new ExpressionParser(expression);
     BigDecimal val = new BigDecimal("5.0");
-    Operand left = new Operand(val, "ft");
-    Operand right = new Operand(new BigDecimal("9.0"), "miles");
+    Operand left = new Operand(val, "ft", 1, null);
+    Operand right = new Operand(new BigDecimal("9.0"), "miles", 1, null);
     assertEquals(left.getUnit(), ep.getLeft().getUnit());
     assertEquals(left.getValue(), ep.getLeft().getValue());
     assertEquals(right.getValue(), ep.getRight().getValue());
@@ -41,11 +42,12 @@ class ExpressionParserTest
     expression[0] = "0 miles";
     expression[1] = DIVISION;
     expression[2] = "100 miles";
+    expression[3] = null; 
 
     ExpressionParser ep1 = new ExpressionParser(expression);
     BigDecimal val1 = new BigDecimal("0.0");
-    Operand left1 = new Operand(val1, "miles");
-    Operand right1 = new Operand(new BigDecimal("100.0"), "miles");
+    Operand left1 = new Operand(val1, "miles", 1, null);
+    Operand right1 = new Operand(new BigDecimal("100.0"), "miles", 1, null);
     assertEquals(left1.getUnit(), ep1.getLeft().getUnit());
     assertEquals(left1.getValue(), ep1.getLeft().getValue());
     assertEquals(right1.getValue(), ep1.getRight().getValue());
@@ -53,67 +55,37 @@ class ExpressionParserTest
     assertEquals(DIVISION, ep1.getOperator());
   }
 
-  @Test
-  void testNoUnits() throws OperationFormatException, IncompleteUnitsException, NoValueEnteredException, IncompleteExpressionException
-  {
-    expression[0] = "5";
-    expression[1] = MULTIPLICATION;
-    expression[2] = "9 miles";
-
-    try
-    {
-      new ExpressionParser(expression);
-    }
-    catch (ArithmeticException ae)
-    {
-      System.out.println("You didn't enter any units");
-    }
-
-//    expression[0] = "";
-//    expression[1] = MULTIPLICATION;
-//    expression[2] = "";
-//
-//    try
-//    {
-//      new ExpressionParser(expression);
-//    }
-//    catch (ArithmeticException ae)
-//    {
-//      System.out.println("You didn't enter an unit");
-//    }
-
-  }
-
-  @Test
-  void testNoValue() throws OperationFormatException, IncompleteUnitsException, NoValueEnteredException, IncompleteExpressionException
-  {
-    expression[0] = "feet";
-    expression[1] = "-";
-    expression[2] = "10 miles";
-
-    try
-    {
-      new ExpressionParser(expression);
-    }
-    catch (ArrayIndexOutOfBoundsException ae)
-    {
-      System.out.println("You didn't enter an value");
-    }
-
-//    expression[0] = null;
+  
+//  @Test
+//  void testNoValue() throws OperationFormatException, IncompleteUnitsException, NoValueEnteredException, IncompleteExpressionException
+//  {
+//    expression[0] = "feet";
 //    expression[1] = "-";
-//    expression[2] = "miles";
+//    expression[2] = "10 miles";
 //
 //    try
 //    {
 //      new ExpressionParser(expression);
 //    }
-//    catch (ArrayIndexOutOfBoundsException iae)
+//    catch (ArrayIndexOutOfBoundsException ae)
 //    {
 //      System.out.println("You didn't enter an value");
 //    }
-
-  }
+//
+////    expression[0] = null;
+////    expression[1] = "-";
+////    expression[2] = "miles";
+////
+////    try
+////    {
+////      new ExpressionParser(expression);
+////    }
+////    catch (ArrayIndexOutOfBoundsException iae)
+////    {
+////      System.out.println("You didn't enter an value");
+////    }
+//
+//  }
 
   @Test
   void testNothingEntered() throws OperationFormatException, IncompleteUnitsException, NoValueEnteredException, IncompleteExpressionException
@@ -124,7 +96,7 @@ class ExpressionParserTest
     {
       new ExpressionParser(expression);
     }
-    catch (IllegalArgumentException iae)
+    catch (IncompleteExpressionException iae)
     {
       System.out.println("You didn't anything");
     }
@@ -134,7 +106,7 @@ class ExpressionParserTest
     {
       new ExpressionParser(expression);
     }
-    catch (IllegalArgumentException iae)
+    catch (IncompleteExpressionException iae)
     {
       System.out.println("You didn't anything for one string");
     }
@@ -173,61 +145,43 @@ class ExpressionParserTest
     {
       new ExpressionParser(expression);
     }
-    catch (IllegalArgumentException iae)
+    catch (IncompleteExpressionException iae)
     {
       System.out.println("String in array was null");
     }
   }
 
+  
+
+  
+
+  
+  
   @Test
-  void testNegative() throws OperationFormatException, IncompleteUnitsException, NoValueEnteredException, IncompleteExpressionException
+  void testParseExponent() throws OperationFormatException, IncompleteUnitsException, NoValueEnteredException, IncompleteExpressionException
   {
-    expression[0] = "-10ft";
-    expression[1] = SUBTRACTION;
-    expression[2] = "10 miles";
+    String[] exp = new String[4];
 
-    try
-    {
-      new ExpressionParser(expression);
-    }
-    catch (NumberFormatException nfe)
-    {
-      System.out.println("You didn't enter an positive value");
-    }
-  }
+    exp[0] = "92\u00b3";
+    exp[1] = ADDITION;
+    exp[2] = "7mi";
+    exp[3] = "ft"; 
+    ExpressionParser ep = new ExpressionParser(exp);
+    BigDecimal bd = new BigDecimal("92.0");
+    assertEquals(ep.getLeft().getExp(), 3);
+    assertEquals(ep.getLeft().getValue(), bd);
+    assertEquals(ep.getLeft().getUnit(), "");
+    
+    assertEquals(ep.getRight().getUnit(), "mi");
+    
+    assertEquals(ep.getRight().getExp(), 1);
+    assertEquals(ep.getRight().getResultUnit(), "ft");
+    assertEquals(ep.getLeft().getResultUnit(), "ft");
 
-  @Test
-  void testTooManyDash() throws OperationFormatException, IncompleteUnitsException, NoValueEnteredException, IncompleteExpressionException
-  {
-    expression[0] = "5ft-ft-ft";
-    expression[1] = ADDITION;
-    expression[2] = "9miles";
 
-    try
-    {
-      new ExpressionParser(expression);
-    }
-    catch (IllegalArgumentException iae)
-    {
-      System.out.println("Too many dashes");
-    }
 
-  }
 
-  @Test
-  void testTooManySlash() throws OperationFormatException, IncompleteUnitsException, NoValueEnteredException, IncompleteExpressionException
-  {
-    expression[0] = "5ft/ft/ft";
-    expression[1] = ADDITION;
-    expression[2] = "9miles";
-    try
-    {
-      new ExpressionParser(expression);
-    }
-    catch (IllegalArgumentException iae)
-    {
-      System.out.println("Too many slashes");
-    }
+    
 
   }
 

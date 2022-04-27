@@ -19,6 +19,7 @@ public class ExpressionParser
   private Operand leftOp;
   private Operand rightOp;
   private String operator;
+  private String resultUnit; 
 
   /**
    * Parses the expression.
@@ -27,18 +28,19 @@ public class ExpressionParser
    *          final expression
    * @throws OperationFormatException
    * @throws IncompleteUnitsException
-   * @throws NoValueEnteredException 
-   * @throws IncompleteExpressionException 
+   * @throws NoValueEnteredException
+   * @throws IncompleteExpressionException
    */
-  public ExpressionParser(final String[] expression)
-      throws OperationFormatException, IncompleteUnitsException, NoValueEnteredException, IncompleteExpressionException
+  public ExpressionParser(final String[] expression) throws OperationFormatException,
+      IncompleteUnitsException, NoValueEnteredException, IncompleteExpressionException
   {
+    
     parseHelper(expression);
   }
 
   /**
    * Getter method.
-   *  
+   * 
    * @return operator sign
    */
   public String getOperator()
@@ -52,11 +54,11 @@ public class ExpressionParser
    * @param expression
    * @throws OperationFormatException
    * @throws IncompleteUnitsException
-   * @throws NoValueEnteredException 
-   * @throws IncompleteExpressionException 
+   * @throws NoValueEnteredException
+   * @throws IncompleteExpressionException
    */
-  private void parseHelper(final String[] expression)
-      throws OperationFormatException, IncompleteUnitsException, NoValueEnteredException, IncompleteExpressionException
+  private void parseHelper(final String[] expression) throws OperationFormatException,
+      IncompleteUnitsException, NoValueEnteredException, IncompleteExpressionException
   {
 
     if (expression == null || expression.length == 0)
@@ -64,24 +66,28 @@ public class ExpressionParser
       throw new IllegalArgumentException("You didn't enter anything.");
     }
 
-//     potentially change this to allow null to be passed in so we can throw error message in real
-//     time
-//     Checks there is a string in each array index
-     for (int i = 0; i < expression.length; i++)
-    
-     if (expression[i] == null || expression[i].length() == 0)
-    
-     {
-     throw new IncompleteExpressionException("You did not enter anything.");
-     }
+    // potentially change this to allow null to be passed in so we can throw error message in real
+    // time
+    // Checks there is a string in each array index
 
+    for (int i = 0; i < expression.length - 1; i++)
+
+      if (expression[i] == null || expression[i].length() == 0)
+
+      {
+        throw new IncompleteExpressionException("You did not enter anything.");
+      }
 
     // Construct left and right operands
     String left = expression[0];
+    resultUnit = expression[3]; 
     leftOp = setOperand(left);
     operator = expression[1];
+    // Do a check here first to see if we have something in for the right expression
+    // maybe pass the Expression parser in expression[3] a specific string "No Input yet"?
     String right = expression[2];
     rightOp = setOperand(right);
+    
 
   }
 
@@ -94,24 +100,24 @@ public class ExpressionParser
    * @return Operand object
    * @throws OperationFormatException
    * @throws IncompleteUnitsException
-   * @throws NoValueEnteredException 
+   * @throws NoValueEnteredException
    */
   private Operand setOperand(final String op)
       throws OperationFormatException, IncompleteUnitsException, NoValueEnteredException
   {
     StringBuilder toBeValue = new StringBuilder();
     StringBuilder toBeUnit = new StringBuilder();
+    int exponent = 1;
 
-    
     if (op.charAt(0) == '-')
     {
       toBeValue = toBeValue.append(op.charAt(0));
-    } 
+    }
 
     for (int i = 0; i < op.length(); i++)
     {
       char c = op.charAt(i);
-
+      // System.out.println(c); 
       if ((i == 0 && Character.isDigit(c))
           || (i > 0 && Character.isDigit(c) && op.charAt(i - 1) != '^') || c == '.')
       {
@@ -124,6 +130,17 @@ public class ExpressionParser
         toBeUnit = toBeUnit.append(c);
 
       }
+      else if (!Character.isDigit(c) && !Character.isLetter(c))
+      {
+        try
+        {
+          exponent = Character.getNumericValue(c);
+        }
+        catch (NumberFormatException nfe)
+        {
+          exponent = 1;
+        }
+      }
     }
 
     // check for incomplete units
@@ -132,14 +149,12 @@ public class ExpressionParser
     {
       throw new IncompleteUnitsException("The unit you entered is incomplete");
     }
-    
-    
 
-     // check if there is a value entered
-     if (toBeValue.length() == 0)
-     {
-     throw new NoValueEnteredException("You didn't enter a value.");
-     }
+    // check if there is a value entered
+    if (toBeValue.length() == 0)
+    {
+      throw new NoValueEnteredException("You didn't enter a value.");
+    }
 
     BigDecimal value = BigDecimal.valueOf(Double.parseDouble(toBeValue.toString()));
 
@@ -148,7 +163,8 @@ public class ExpressionParser
     {
       toBeUnit = null;
     }
-    return new Operand(value, unit);
+
+    return new Operand(value, unit, exponent, resultUnit);
   }
 
   /**
@@ -169,6 +185,18 @@ public class ExpressionParser
   public Operand getRight()
   {
     return this.rightOp;
+  }
+  
+ 
+  
+  /**
+   * Helper method for testing purposes.
+   * 
+   * @return left operand
+   */
+  public String getResultUnit()
+  {
+    return this.resultUnit;
   }
 
 }
