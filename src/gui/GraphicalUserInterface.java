@@ -4,12 +4,14 @@ import utilities.Operation;
 import utilities.OperationFormatException;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.net.URL;
+import java.util.ResourceBundle;
 
 import javax.swing.*;
 
@@ -37,6 +39,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   JComboBox dropdown;
   static JButton historyButton = new JButton(">");
   static Timer timer = new Timer(3, historyDisplay);
+  static final ResourceBundle COLORS = ResourceBundle.getBundle("gui.Strings");
 
 
   /**
@@ -746,7 +749,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   }
   
   /**
-   * Helper methods to load the icon.
+   * Helper method to load the icon.
    * 
    * @param name of the icon file
    * 
@@ -759,5 +762,25 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     ImageIcon icon = new ImageIcon(url);
     
     return icon;
+  }
+  
+  /**
+   * Helper method to set the colors.
+   */
+  private void setColor()
+  {
+    
+    int r1 = Integer.parseInt(COLORS.getString("R1"));
+    int g1 = Integer.parseInt(COLORS.getString("G1"));
+    int b1 = Integer.parseInt(COLORS.getString("B1"));
+    
+    int r2 = Integer.parseInt(COLORS.getString("R2"));
+    int g2 = Integer.parseInt(COLORS.getString("G2"));
+    int b2 = Integer.parseInt(COLORS.getString("B2"));
+    
+    Color first = new Color(r1, g1, b1);
+    Color second = new Color(r2, g2, b2);
+    
+    // Set the colors below
   }
 }
