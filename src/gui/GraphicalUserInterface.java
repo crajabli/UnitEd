@@ -560,9 +560,8 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     JPanel historyPanel = new JPanel();
 
     // creation of options in dropdown menu
-    String[] measurements = {"", "c", "cm", "cm-cm", "days", "ft", "ft-ft", "ft-ft-ft", "gal", "gr",
-        "hrs", "in", "kg", "km", "l", "lbs", "m", "mg", "mi", "mi-mi", "min", "months", "mm", "mph",
-        "oz", "person-months", "pt", "qt", "sec", "sec-sec", "tbsp", "tsp", "yd"};
+    String[] measurements = {"", "in", "ft", "yd", "mi", "mm", "cm", "m", "km", "oz", "lb", "ton",
+        "g", "kg", "pt", "qt", "gal", "cc", "l", "c", "$", "sec", "hr", "day", "mon", "yr"};
 
     // creation of drop down menu
     dropdown = new JComboBox(measurements);
