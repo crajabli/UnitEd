@@ -685,6 +685,15 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     inputPanel.add(input, BorderLayout.CENTER);
     inputPanel.add(dropdown);
 
+    try
+    {
+      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+    }
+    catch (Exception e)
+    {
+      // Use the default
+    }
+
     // setting frame
     frame.setSize(550, 400);
     frame.setVisible(true);
