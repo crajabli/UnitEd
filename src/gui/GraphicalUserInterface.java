@@ -506,6 +506,14 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     JFrame frame = new JFrame("UnitED");
     JPanel contentPane = (JPanel) frame.getContentPane();
     contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
+    
+    // create menu bar, menus, menu items.
+    JMenuBar menuBar = new JMenuBar();
+    JMenu help = new JMenu("Help");
+    JMenuItem about = new JMenuItem("About");
+    
+    menuBar.add(help);
+    help.add(about);
 
     // top exterior panel
     JPanel topExteriorPanel = new JPanel();
@@ -743,8 +751,10 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 //    }
 
     // setting frame
+    frame.setJMenuBar(menuBar);
     frame.setSize(550, 400);
     frame.setVisible(true);
+    frame.setLocationRelativeTo(null);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
 
