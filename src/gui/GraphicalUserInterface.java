@@ -34,10 +34,12 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   private final String SIGN = "\u00B1";
   private final String BACK = "\u232B";
   static History historyDisplay = new History();
-  JComboBox dropdown;
+  JComboBox unitsDropDown;
+  JComboBox resultsDropDown;
   static JButton historyButton = new JButton(">");
+  static JButton intStepsButton = new JButton("<");
   static Timer timer = new Timer(3, historyDisplay);
-
+  private final String EXPONENT = "X\u02B8";
 
   /**
    * Constructor.
@@ -67,15 +69,15 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
   }
 
-  public static void startTimer() {
+  public static void startTimer()
+  {
     timer.start();
   }
 
-
-  public static void stopTimer() {
+  public static void stopTimer()
+  {
     timer.stop();
   }
-
 
   /**
    * uses buttons to input to the input field.
@@ -110,19 +112,18 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       {
         String numeric = input.getText().replaceAll("[^0-9]", "");
         String units = input.getText().replaceAll("\\d", "");
-        String dropdownUnits = dropdown.getSelectedItem().toString();
-
-
+        String dropdownUnits = unitsDropDown.getSelectedItem().toString();
 
         if (lastResult == null && !numeric.equals(""))
         {
           if (!units.equals(""))
           {
-            if (units.charAt(units.length()-1) == ('/') || units.charAt(units.length()-1) == ('-'))
+            if (units.charAt(units.length() - 1) == ('/')
+                || units.charAt(units.length() - 1) == ('-'))
             {
               {
-                JOptionPane.showMessageDialog(null, "The units you entered are incomplete", "Wrong units",
-                    JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "The units you entered are incomplete",
+                    "Wrong units", JOptionPane.INFORMATION_MESSAGE);
                 reset();
                 break;
               }
@@ -133,18 +134,18 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
             if (dropdownUnits.charAt(dropdownUnits.length() - 1) == ('/')
                 || dropdownUnits.charAt(dropdownUnits.length() - 1) == ('-'))
             {
-              JOptionPane.showMessageDialog(null, "The units you entered are incomplete", "Wrong units",
-                  JOptionPane.INFORMATION_MESSAGE);
+              JOptionPane.showMessageDialog(null, "The units you entered are incomplete",
+                  "Wrong units", JOptionPane.INFORMATION_MESSAGE);
               reset();
               break;
             }
           }
 
           display.setText("");
-            display
-                .setText(display.getText() + input.getText() + " "  + dropdown.getSelectedItem() + " + ");
-            addOperand(input.getText() + dropdown.getSelectedItem(), "+");
-            clear();
+          display.setText(
+              display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + " + ");
+          addOperand(input.getText() + unitsDropDown.getSelectedItem(), "+");
+          clear();
 
         }
         else if (lastResult != null && numeric.equals(""))
@@ -165,15 +166,16 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         // parse the input
         String numeric = input.getText().replaceAll("[^0-9]", "");
         String units = input.getText().replaceAll("\\d", "");
-        String dropdownUnits = dropdown.getSelectedItem().toString();
+        String dropdownUnits = unitsDropDown.getSelectedItem().toString();
 
         if (!units.equals(""))
         {
-          if (units.charAt(units.length()-1) == ('/') || units.charAt(units.length()-1) == ('-'))
+          if (units.charAt(units.length() - 1) == ('/')
+              || units.charAt(units.length() - 1) == ('-'))
           {
             {
-              JOptionPane.showMessageDialog(null, "The units you entered are incomplete", "Wrong units",
-                  JOptionPane.INFORMATION_MESSAGE);
+              JOptionPane.showMessageDialog(null, "The units you entered are incomplete",
+                  "Wrong units", JOptionPane.INFORMATION_MESSAGE);
               reset();
               break;
             }
@@ -184,8 +186,8 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           if (dropdownUnits.charAt(dropdownUnits.length() - 1) == ('/')
               || dropdownUnits.charAt(dropdownUnits.length() - 1) == ('-'))
           {
-            JOptionPane.showMessageDialog(null, "The units you entered are incomplete", "Wrong units",
-                JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "The units you entered are incomplete",
+                "Wrong units", JOptionPane.INFORMATION_MESSAGE);
             reset();
             break;
           }
@@ -194,17 +196,17 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         if (lastResult == null && !numeric.equals(""))
         {
           display.setText("");
-          if (dropdown.getSelectedItem().equals("none"))
+          if (unitsDropDown.getSelectedItem().equals("none"))
           {
             display.setText(display.getText() + input.getText() + " - ");
-            addOperand(input.getText()+ dropdown.getSelectedItem(), "-");
+            addOperand(input.getText() + unitsDropDown.getSelectedItem(), "-");
             clear();
           }
           else
           {
-            display
-                .setText(display.getText() + input.getText() + " "  + dropdown.getSelectedItem() + " - ");
-            addOperand(input.getText()+ dropdown.getSelectedItem(), "-");
+            display.setText(
+                display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + " - ");
+            addOperand(input.getText() + unitsDropDown.getSelectedItem(), "-");
             clear();
           }
         }
@@ -306,15 +308,16 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         // parse the input
         String numeric = input.getText().replaceAll("[^0-9]", "");
         String units = input.getText().replaceAll("\\d", "");
-        String dropdownUnits = dropdown.getSelectedItem().toString();
+        String dropdownUnits = unitsDropDown.getSelectedItem().toString();
 
         if (!units.equals(""))
         {
-          if (units.charAt(units.length()-1) == ('/') || units.charAt(units.length()-1) == ('-'))
+          if (units.charAt(units.length() - 1) == ('/')
+              || units.charAt(units.length() - 1) == ('-'))
           {
             {
-              JOptionPane.showMessageDialog(null, "The units you entered are incomplete", "Wrong units",
-                  JOptionPane.INFORMATION_MESSAGE);
+              JOptionPane.showMessageDialog(null, "The units you entered are incomplete",
+                  "Wrong units", JOptionPane.INFORMATION_MESSAGE);
               reset();
               break;
             }
@@ -325,8 +328,8 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           if (dropdownUnits.charAt(dropdownUnits.length() - 1) == ('/')
               || dropdownUnits.charAt(dropdownUnits.length() - 1) == ('-'))
           {
-            JOptionPane.showMessageDialog(null, "The units you entered are incomplete", "Wrong units",
-                JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "The units you entered are incomplete",
+                "Wrong units", JOptionPane.INFORMATION_MESSAGE);
             reset();
             break;
           }
@@ -336,17 +339,17 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         {
 
           display.setText("");
-          if (dropdown.getSelectedItem().equals("none"))
+          if (unitsDropDown.getSelectedItem().equals("none"))
           {
             display.setText(display.getText() + input.getText() + " x ");
-            addOperand(input.getText() + dropdown.getSelectedItem(), "x");
+            addOperand(input.getText() + unitsDropDown.getSelectedItem(), "x");
             clear();
           }
           else
           {
             display
-                .setText(display.getText() + input.getText() + dropdown.getSelectedItem() + " x ");
-            addOperand(input.getText() + dropdown.getSelectedItem(), "x");
+                .setText(display.getText() + input.getText() + unitsDropDown.getSelectedItem() + " x ");
+            addOperand(input.getText() + unitsDropDown.getSelectedItem(), "x");
             clear();
           }
         }
@@ -368,15 +371,16 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
         String numeric = input.getText().replaceAll("[^0-9]", "");
         String units = input.getText().replaceAll("\\d", "");
-        String dropdownUnits = dropdown.getSelectedItem().toString();
+        String dropdownUnits = unitsDropDown.getSelectedItem().toString();
 
         if (!units.equals(""))
         {
-          if (units.charAt(units.length()-1) == ('/') || units.charAt(units.length()-1) == ('-'))
+          if (units.charAt(units.length() - 1) == ('/')
+              || units.charAt(units.length() - 1) == ('-'))
           {
             {
-              JOptionPane.showMessageDialog(null, "The units you entered are incomplete", "Wrong units",
-                  JOptionPane.INFORMATION_MESSAGE);
+              JOptionPane.showMessageDialog(null, "The units you entered are incomplete",
+                  "Wrong units", JOptionPane.INFORMATION_MESSAGE);
               reset();
               break;
             }
@@ -387,20 +391,18 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           if (dropdownUnits.charAt(dropdownUnits.length() - 1) == ('/')
               || dropdownUnits.charAt(dropdownUnits.length() - 1) == ('-'))
           {
-            JOptionPane.showMessageDialog(null, "The units you entered are incomplete", "Wrong units",
-                JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "The units you entered are incomplete",
+                "Wrong units", JOptionPane.INFORMATION_MESSAGE);
             reset();
             break;
           }
         }
 
-
         if (lastResult == null && !numeric.equals(""))
         {
           display.setText("");
-          display
-            .setText(display.getText() + input.getText() + dropdown.getSelectedItem() + " / ");
-          addOperand(input.getText() + dropdown.getSelectedItem(), "/");
+          display.setText(display.getText() + input.getText() + unitsDropDown.getSelectedItem() + " / ");
+          addOperand(input.getText() + unitsDropDown.getSelectedItem(), "/");
           clear();
 
         }
@@ -420,7 +422,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       {
         // calculate;
 
-        expression[2] = input.getText() + dropdown.getSelectedItem();
+        expression[2] = input.getText() + unitsDropDown.getSelectedItem();
 
         try
         {
@@ -429,7 +431,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           result = Operation.calculate(parser.getLeft(), parser.getRight(), parser.getOperator());
 
           display.setText(
-            display.getText() + input.getText() + dropdown.getSelectedItem() + " = " + result);
+              display.getText() + input.getText() + unitsDropDown.getSelectedItem() + " = " + result);
           historyDisplay.updateText(display.getText());
           lastResult = result;
           expression = new String[3];
@@ -461,18 +463,18 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         // JOptionPane.INFORMATION_MESSAGE);
         // }
 
-//      catch (ArithmeticException ax)
-//      {
-//        reset();
-//        JOptionPane.showMessageDialog(null, "You didn't enter a unit ", "No unit ",
-//            JOptionPane.INFORMATION_MESSAGE);
-//      }
-//      catch (ArrayIndexOutOfBoundsException ax)
-//      {
-//        reset();
-//        JOptionPane.showMessageDialog(null, "You didn't enter a value ", "No unit ",
-//            JOptionPane.INFORMATION_MESSAGE);
-//      }
+        // catch (ArithmeticException ax)
+        // {
+        // reset();
+        // JOptionPane.showMessageDialog(null, "You didn't enter a unit ", "No unit ",
+        // JOptionPane.INFORMATION_MESSAGE);
+        // }
+        // catch (ArrayIndexOutOfBoundsException ax)
+        // {
+        // reset();
+        // JOptionPane.showMessageDialog(null, "You didn't enter a value ", "No unit ",
+        // JOptionPane.INFORMATION_MESSAGE);
+        // }
         catch (NoValueEnteredException e1)
         {
           reset();
@@ -531,11 +533,14 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
     // display panel
     JPanel displayPanel = new JPanel();
-    displayPanel.setLayout(new BorderLayout());
+    displayPanel.setLayout(new BoxLayout(displayPanel, BoxLayout.X_AXIS));
 
     // input panel
     JPanel inputPanel = new JPanel();
     inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.X_AXIS));
+    
+    // intermediate steps panel
+    JPanel intStepsPanel = new JPanel();
 
     // number panels
     JPanel numberPanel = new JPanel();
@@ -550,23 +555,39 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     // operator panels
     JPanel operatorPanel = new JPanel();
     operatorPanel.setLayout(new BoxLayout(operatorPanel, BoxLayout.Y_AXIS));
-
+    
+    // creation of interior operator panels
     JPanel plusPanel = new JPanel();
     JPanel minusPanel = new JPanel();
     JPanel multiplyPanel = new JPanel();
     JPanel dividePanel = new JPanel();
     JPanel equalsPanel = new JPanel();
-
+    
+    // creation of exterior function panel
+    JPanel functionPanel = new JPanel();
+    functionPanel.setLayout(new BoxLayout(functionPanel, BoxLayout.Y_AXIS));
+    
+    // creation of interior function panels
+    JPanel exponentPanel = new JPanel();
+    JPanel inversePanel = new JPanel();
+    
+    // creation of history panel
     JPanel historyPanel = new JPanel();
+    
+    // result units drop down menu
+    resultsDropDown = new JComboBox();
+    resultsDropDown.setEditable(true);
+    resultsDropDown.setVisible(true);
+    
 
-    // creation of options in dropdown menu
+    // string array of units for dropdown menu
     String[] measurements = {"", "in", "ft", "yd", "mi", "mm", "cm", "m", "km", "oz", "lb", "ton",
         "g", "kg", "pt", "qt", "gal", "cc", "l", "c", "$", "sec", "hr", "day", "mon", "yr"};
 
-    // creation of drop down menu
-    dropdown = new JComboBox(measurements);
-    dropdown.setEditable(true);
-    dropdown.setVisible(true);
+    // units drop down menu
+    unitsDropDown = new JComboBox(measurements);
+    unitsDropDown.setEditable(true);
+    unitsDropDown.setVisible(true);
 
     // adding interior panels to exterior panels
     topExteriorPanel.add(extLogoPanel);
@@ -584,9 +605,14 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     operatorPanel.add(multiplyPanel);
     operatorPanel.add(dividePanel);
     operatorPanel.add(equalsPanel);
+    
+    functionPanel.add(exponentPanel);
+    functionPanel.add(inversePanel);
 
+    bottomExteriorPanel.add(intStepsPanel);
     bottomExteriorPanel.add(numberPanel);
     bottomExteriorPanel.add(operatorPanel);
+    bottomExteriorPanel.add(functionPanel);
     bottomExteriorPanel.add(historyPanel);
 
     // adding panels to content frame
@@ -596,22 +622,23 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     // creation of display text field
     display = new JTextField();
     display.setEditable(false);
-    display.setHorizontalAlignment(JTextField.CENTER);
+    display.setHorizontalAlignment(JTextField.LEFT);
 
     // creation of input text field
     input = new JTextField();
 
-    // creation of utility, operator, and history buttons
+    // creation of utility buttons
     JButton sign = new JButton(SIGN);
     JButton reset = new JButton("R");
     JButton clear = new JButton("C");
+    JButton backspace = new JButton(BACK);
+    
+    // operator buttons
     JButton plus = new JButton("+");
     JButton minus = new JButton("-");
     JButton multiply = new JButton("x");
     JButton divide = new JButton(DIVIDE);
     JButton equals = new JButton("=");
-
-    JButton backspace = new JButton(BACK);
 
     // creation of number buttons
     JButton zero = new JButton("0");
@@ -624,7 +651,14 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     JButton seven = new JButton("7");
     JButton eight = new JButton("8");
     JButton nine = new JButton("9");
+    
+    // creation of function buttons
+    JButton exponent = new JButton("X\u02B8");
+    JButton inverse = new JButton("1/x");
 
+    // adding intSteps button to panel
+    intStepsPanel.add(intStepsButton);
+    
     // adding utility buttons to panel
     numberPanelOne.add(sign);
     numberPanelOne.add(clear);
@@ -646,27 +680,35 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     numberPanelFive.add(zero);
     numberPanelFive.add(backspace);
 
-    // adding operator buttons to panel
+    // adding operator buttons to individual panels
     plusPanel.add(plus);
     minusPanel.add(minus);
     multiplyPanel.add(multiply);
     dividePanel.add(divide);
     equalsPanel.add(equals);
+    
+    // adding function buttons to panels
+    exponentPanel.add(exponent);
+    inversePanel.add(inverse);
 
-    // adding history button to panel
+    // adding history button to history panel
     historyPanel.add(historyButton);
 
     // adding action listener to each button
+    intStepsButton.addActionListener(this);
+    
     sign.addActionListener(this);
     reset.addActionListener(this);
     clear.addActionListener(this);
+    
     plus.addActionListener(this);
     minus.addActionListener(this);
     multiply.addActionListener(this);
     divide.addActionListener(this);
     equals.addActionListener(this);
-    historyButton.addActionListener(this);
+    
     backspace.addActionListener(this);
+    
     zero.addActionListener(this);
     one.addActionListener(this);
     two.addActionListener(this);
@@ -677,21 +719,28 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     seven.addActionListener(this);
     eight.addActionListener(this);
     nine.addActionListener(this);
+    
+    historyButton.addActionListener(this);
+    
+    exponent.addActionListener(this);
+    inverse.addActionListener(this);
+    
     frame.addComponentListener(this);
 
     // adding display and input to respective panels
-    displayPanel.add(display, BorderLayout.CENTER);
-    inputPanel.add(input, BorderLayout.CENTER);
-    inputPanel.add(dropdown);
+    displayPanel.add(display, BorderLayout.WEST);
+    displayPanel.add(resultsDropDown);
+    inputPanel.add(input, BorderLayout.WEST);
+    inputPanel.add(unitsDropDown);
 
-    try
-    {
-      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-    }
-    catch (Exception e)
-    {
-      // Use the default
-    }
+//    try
+//    {
+//      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//    }
+//    catch (Exception e)
+//    {
+//      // Use the default
+//    }
 
     // setting frame
     frame.setSize(550, 400);
@@ -743,20 +792,21 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   {
 
   }
-  
+
   /**
    * Helper methods to load the icon.
    * 
-   * @param name of the icon file
+   * @param name
+   *          of the icon file
    * 
    * @return the icon
    */
   private ImageIcon loadImageIcon(String name)
   {
-    
+
     URL url = this.getClass().getResource("/icons/" + name);
     ImageIcon icon = new ImageIcon(url);
-    
+
     return icon;
   }
 }
