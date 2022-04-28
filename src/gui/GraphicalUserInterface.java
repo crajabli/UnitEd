@@ -42,6 +42,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   static Timer historyTimer = new Timer(3, historyDisplay);
   static Timer intermediateTimer = new Timer(3, intermediateDisplay);
   private final String EXPONENT = "X\u02B8";
+  boolean integerPowerActive = false;
 
 
   /**
@@ -108,12 +109,33 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
   }
 
+  /**
+   * make first operand exponential in the backend.
+   *
+   * @param n the power
+   */
+  private void putExponent(String n)
+  {
+    String numeric = input.getText().replaceAll("[^0-9]", "");
+    String units = input.getText().replaceAll("\\d", "");
+
+    input.setText(numeric + n + units);
+
+  }
+
+
+  /**
+   * make history btton visible.
+   *
+   */
   public static void setHistoryButtonVisible()
   {
     historyButton.setVisible(true);
   }
 
-
+  /**
+   * make intemediate button visible
+   */
   public static void setIntermediateButtonVisible()
   {
     intStepsButton.setVisible(true);
@@ -135,25 +157,12 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         String units = input.getText().replaceAll("\\d", "");
         String dropdownUnits = unitsDropDown.getSelectedItem().toString();
 
-        if (lastResult == null && !numeric.equals(""))
+
+        if (!units.equals("")) //checking the units
         {
-          if (!units.equals(""))
+          if (units.charAt(units.length() - 1) == ('/')
+              || units.charAt(units.length() - 1) == ('-'))
           {
-            if (units.charAt(units.length() - 1) == ('/')
-                || units.charAt(units.length() - 1) == ('-'))
-            {
-              {
-                JOptionPane.showMessageDialog(null, "The units you entered are incomplete",
-                    "Wrong units", JOptionPane.INFORMATION_MESSAGE);
-                reset();
-                break;
-              }
-            }
-          }
-          if (!dropdownUnits.equals(""))
-          {
-            if (dropdownUnits.charAt(dropdownUnits.length() - 1) == ('/')
-                || dropdownUnits.charAt(dropdownUnits.length() - 1) == ('-'))
             {
               JOptionPane.showMessageDialog(null, "The units you entered are incomplete",
                   "Wrong units", JOptionPane.INFORMATION_MESSAGE);
@@ -161,7 +170,21 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
               break;
             }
           }
+        }
+        if (!dropdownUnits.equals("")) // checking units
+        {
+          if (dropdownUnits.charAt(dropdownUnits.length() - 1) == ('/')
+              || dropdownUnits.charAt(dropdownUnits.length() - 1) == ('-'))
+          {
+            JOptionPane.showMessageDialog(null, "The units you entered are incomplete",
+                "Wrong units", JOptionPane.INFORMATION_MESSAGE);
+            reset();
+            break;
+          }
+        }
 
+        if (lastResult == null && !numeric.equals("")) // initial calculation
+        {
           display.setText("");
           display.setText(
               display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + " + ");
@@ -169,10 +192,18 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           clear();
 
         }
-        else if (lastResult != null && numeric.equals(""))
+        else if (lastResult != null && numeric.equals("")) // calculation for the rolling over operations.
         {
           display.setText(lastResult + " + ");
           addOperand(lastResult, "+");
+          clear();
+        }
+        else if (lastResult != null && !numeric.equals("")) // calculations for the non rolling over operations that arent first
+        {
+          display.setText("");
+          display.setText(
+              display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + " + ");
+          addOperand(input.getText() + unitsDropDown.getSelectedItem(), "+");
           clear();
         }
         else if (lastResult == null && numeric.equals(""))
@@ -180,6 +211,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           JOptionPane.showMessageDialog(null, "Enter value", "No value",
               JOptionPane.INFORMATION_MESSAGE);
         }
+        integerPowerActive = false;
 
       }
       case "-" ->
@@ -214,84 +246,136 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           }
         }
 
-        if (lastResult == null && !numeric.equals(""))
+        if (lastResult == null && !numeric.equals("")) // the first calculation
         {
           display.setText("");
-          if (unitsDropDown.getSelectedItem().equals("none"))
-          {
-            display.setText(display.getText() + input.getText() + " - ");
-            addOperand(input.getText() + unitsDropDown.getSelectedItem(), "-");
-            clear();
-          }
-          else
-          {
-            display.setText(
-                display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + " - ");
-            addOperand(input.getText() + unitsDropDown.getSelectedItem(), "-");
-            clear();
-          }
+          display.setText(
+            display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + " - ");
+          addOperand(input.getText() + unitsDropDown.getSelectedItem(), "-");
+          clear();
+
         }
-        else if (lastResult != null)
+        else if (lastResult != null && numeric.equals("")) // rolling calculation
         {
           display.setText(lastResult + " - ");
           addOperand(lastResult, "-");
           clear();
+        }
+        if (lastResult != null && !numeric.equals("")) // non rolling calculation but with
+        {
+          display.setText("");
+          display.setText(
+              display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + " - ");
+          addOperand(input.getText() + unitsDropDown.getSelectedItem(), "-");
+          clear();
+
         }
         else if (lastResult == null && numeric.equals(""))
         {
           JOptionPane.showMessageDialog(null, "Enter value", "No value",
               JOptionPane.INFORMATION_MESSAGE);
         }
+        integerPowerActive = false;
+
       }
+      case EXPONENT ->
+          {
+            // activate exponent
+            if (integerPowerActive) {
+              integerPowerActive = false;
+            } else {
+              integerPowerActive = true;
+            }
+          }
       case "1" ->
       {
         // put the input
-        putInput(1);
+        if (integerPowerActive) {
+          putExponent("\u00B9");
+        } else {
+          putInput(1);
+        }
       }
       case "2" ->
       {
         // put the input
-        putInput(2);
+        if (integerPowerActive) {
+          putExponent("\u00B2");
+        } else {
+          putInput(2);
+        }
       }
       case "3" ->
       {
         // put the input
-        putInput(3);
+        if (integerPowerActive) {
+          putExponent("\u00B3");
+        } else {
+          putInput(3);
+        }
       }
       case "4" ->
       {
         // put the input
-        putInput(4);
+        if (integerPowerActive) {
+          putExponent("\u2074");
+        } else {
+          putInput(4);
+        }
       }
       case "5" ->
       {
         // put the input
-        putInput(5);
+        if (integerPowerActive) {
+          putExponent("\u2075");
+        } else {
+          putInput(5);
+        }
       }
       case "6" ->
       {
         // put the input
-        putInput(6);
+        if (integerPowerActive) {
+          putExponent("\u2076");
+        } else {
+          putInput(6);
+        }
       }
       case "7" ->
       {
         // put the input
-        putInput(7);
+        if (integerPowerActive) {
+          putExponent("\u2077");
+        } else {
+          putInput(7);
+        }
       }
       case "8" ->
       {
         // put the input
-        putInput(8);
+        if (integerPowerActive) {
+          putExponent("\u2078");
+        } else {
+          putInput(8);
+        }
       }
       case "9" ->
       {
         // put the input
-        putInput(9);
+        if (integerPowerActive) {
+          putExponent("\u2079");
+        } else {
+          putInput(9);
+        }
       }
       case "0" ->
       {
         // put the input
-        putInput(0);
+        if (integerPowerActive) {
+          putExponent("\u2070");
+        } else {
+          putInput(0);
+        }
       }
       case ">" ->
       {
@@ -338,7 +422,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         String units = input.getText().replaceAll("\\d", "");
         String dropdownUnits = unitsDropDown.getSelectedItem().toString();
 
-        if (!units.equals(""))
+        if (!units.equals("")) //checking units
         {
           if (units.charAt(units.length() - 1) == ('/')
               || units.charAt(units.length() - 1) == ('-'))
@@ -351,7 +435,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
             }
           }
         }
-        if (!dropdownUnits.equals(""))
+        if (!dropdownUnits.equals("")) //checking dropdown units
         {
           if (dropdownUnits.charAt(dropdownUnits.length() - 1) == ('/')
               || dropdownUnits.charAt(dropdownUnits.length() - 1) == ('-'))
@@ -363,28 +447,26 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           }
         }
 
-        if (lastResult == null && !numeric.equals(""))
+        if (lastResult == null && !numeric.equals("")) // first operation
         {
-
           display.setText("");
-          if (unitsDropDown.getSelectedItem().equals("none"))
-          {
-            display.setText(display.getText() + input.getText() + " x ");
-            addOperand(input.getText() + unitsDropDown.getSelectedItem(), "x");
-            clear();
-          }
-          else
-          {
-            display
-                .setText(display.getText() + input.getText() + unitsDropDown.getSelectedItem() + " x ");
-            addOperand(input.getText() + unitsDropDown.getSelectedItem(), "x");
-            clear();
-          }
+          display
+            .setText(display.getText() + input.getText() + unitsDropDown.getSelectedItem() + " x ");
+          addOperand(input.getText() + unitsDropDown.getSelectedItem(), "x");
+          clear();
         }
-        else if (lastResult != null)
+        else if (lastResult != null && numeric.equals("")) // rolling calculation
         {
           display.setText(lastResult + " x ");
           addOperand(lastResult, "x");
+          clear();
+        }
+        else if (lastResult !=null && !numeric.equals("")) // non rolling calculation but not first one
+        {
+          display.setText("");
+          display
+              .setText(display.getText() + input.getText() + unitsDropDown.getSelectedItem() + " x ");
+          addOperand(input.getText() + unitsDropDown.getSelectedItem(), "x");
           clear();
         }
         else if (lastResult == null && numeric.equals(""))
@@ -392,6 +474,8 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           JOptionPane.showMessageDialog(null, "Enter value", "No value",
               JOptionPane.INFORMATION_MESSAGE);
         }
+        integerPowerActive = false;
+
       }
       case DIVIDE ->
       {
@@ -426,7 +510,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           }
         }
 
-        if (lastResult == null && !numeric.equals(""))
+        if (lastResult == null && !numeric.equals("")) //first operation
         {
           display.setText("");
           display.setText(display.getText() + input.getText() + unitsDropDown.getSelectedItem() + " / ");
@@ -434,10 +518,17 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           clear();
 
         }
-        else if (lastResult != null)
+        else if (lastResult != null && numeric.equals("")) // rolling operation
         {
           display.setText(lastResult + " / ");
           addOperand(lastResult, "/");
+          clear();
+        }
+        if (lastResult != null && !numeric.equals("")) // normal calculation
+        {
+          display.setText("");
+          display.setText(display.getText() + input.getText() + unitsDropDown.getSelectedItem() + " / ");
+          addOperand(input.getText() + unitsDropDown.getSelectedItem(), "/");
           clear();
         }
         else if (lastResult == null && numeric.equals(""))
@@ -445,11 +536,13 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           JOptionPane.showMessageDialog(null, "Enter value", "No value",
               JOptionPane.INFORMATION_MESSAGE);
         }
+        integerPowerActive = false;
+
       }
       case "=" ->
       {
         // calculate;
-
+        integerPowerActive = false;
         expression[2] = input.getText() + unitsDropDown.getSelectedItem();
 
         try
@@ -462,7 +555,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
               display.getText() + input.getText() + unitsDropDown.getSelectedItem() + " = " + result);
           historyDisplay.updateText(display.getText());
           lastResult = result;
-          expression = new String[3];
+          expression = new String[4];
 
         }
 
