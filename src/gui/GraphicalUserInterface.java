@@ -47,6 +47,8 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   static Timer intermediateTimer = new Timer(3, intermediateDisplay);
   private final String EXPONENT = "X\u02B8";
   boolean integerPowerActive = false;
+  static JButton exponent = new JButton("X\u02B8");
+
 
   /**
    * Constructor.
@@ -109,25 +111,28 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     input.setText(numeric + n + units);
   }
 
+
+
   /**
    * make first operand exponential in the backend.
    *
-   * @param n
-   *          the power
+   * @param n the power
    */
   private void putExponent(String n)
   {
     String numeric = input.getText().replaceAll("[^0-9]", "");
     String units = input.getText().replaceAll("\\d", "");
 
-    input.setText(numeric + n + units);
+    input.setText(numeric + units + n);
 
   }
+
 
   private String getNumberOfInput()
   {
     return input.getText().replaceAll("[^0-9]", "");
   }
+
 
   /**
    * make history btton visible.
@@ -159,12 +164,12 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       {
         // plus assignment for the expression
         String numeric = input.getText().replaceAll("[^0-9]", "");
-        String units = input.getText().replaceAll("\\d", "");
+        String units = input.getText().replaceAll("[\\d, .]", "");
 
-        
+
         for (int i = 0; i < units.length(); i++)
         {
-          char c = units.charAt(i); 
+          char c = units.charAt(i);
           if ((Character.isDigit(c) || Character.isLetter(c)) && !units.equals("")) {
             JOptionPane.showMessageDialog(null, "No units allowed in input field", "Wrong units",
                 JOptionPane.INFORMATION_MESSAGE);
@@ -233,13 +238,13 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       {
         // parse the input
         String numeric = input.getText().replaceAll("[^0-9]", "");
-        String units = input.getText().replaceAll("\\d", "");
+        String units = input.getText().replaceAll("[\\d, .]", "");
         String dropdownUnits = unitsDropDown.getSelectedItem().toString();
 
         // Makes sure no units are entered into the input
         for (int i = 0; i < units.length(); i++)
         {
-          char c = units.charAt(i); 
+          char c = units.charAt(i);
           if ((Character.isDigit(c) || Character.isLetter(c)) && !units.equals("")) {
             JOptionPane.showMessageDialog(null, "No units allowed in input field", "Wrong units",
                 JOptionPane.INFORMATION_MESSAGE);
@@ -458,7 +463,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       case BACK ->
       {
         String numeric = input.getText().replaceAll("[^0-9]", "");
-        String units = input.getText().replaceAll("\\d", "");
+        String units = input.getText().replaceAll("[\\d, .]", "");
 
         if (numeric.length() > 0)
         {
@@ -469,13 +474,13 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       {
         // parse the input
         String numeric = input.getText().replaceAll("[^0-9]", "");
-        String units = input.getText().replaceAll("\\d", "");
+        String units = input.getText().replaceAll("[\\d, .]", "");
         String dropdownUnits = unitsDropDown.getSelectedItem().toString();
 
         // Makes sure no units are entered into the input
         for (int i = 0; i < units.length(); i++)
         {
-          char c = units.charAt(i); 
+          char c = units.charAt(i);
           if ((Character.isDigit(c) || Character.isLetter(c)) && !units.equals("")) {
             JOptionPane.showMessageDialog(null, "No units allowed in input field", "Wrong units",
                 JOptionPane.INFORMATION_MESSAGE);
@@ -531,13 +536,13 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         // parse the input
 
         String numeric = input.getText().replaceAll("[^0-9]", "");
-        String units = input.getText().replaceAll("\\d", "");
+        String units = input.getText().replaceAll("[\\d, .]", "");
         String dropdownUnits = unitsDropDown.getSelectedItem().toString();
 
         // Makes sure no units are entered into the input
         for (int i = 0; i < units.length(); i++)
         {
-          char c = units.charAt(i); 
+          char c = units.charAt(i);
           if ((Character.isDigit(c) || Character.isLetter(c)) && !units.equals("")) {
             JOptionPane.showMessageDialog(null, "No units allowed in input field", "Wrong units",
                 JOptionPane.INFORMATION_MESSAGE);
@@ -762,6 +767,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     resultsDropDown.setEditable(true);
     resultsDropDown.setVisible(true);
 
+
     // units drop down menu
     unitsDropDown = new JComboBox(measurements);
     unitsDropDown.setEditable(true);
@@ -831,7 +837,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     JButton nine = new JButton("9");
 
     // creation of function buttons
-    JButton exponent = new JButton("X\u02B8");
+
     JButton inverse = new JButton("1/x");
 
     // adding intSteps button to panel
