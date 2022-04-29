@@ -4,12 +4,14 @@ import utilities.Operation;
 import utilities.OperationFormatException;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.net.URL;
+import java.util.ResourceBundle;
 
 import javax.swing.*;
 
@@ -38,11 +40,15 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   JComboBox unitsDropDown;
   JComboBox resultsDropDown;
   static JButton historyButton = new JButton(">");
+  static Timer timer = new Timer(3, historyDisplay);
+  static final ResourceBundle COLORS = ResourceBundle.getBundle("gui.Colors");
   static JButton intStepsButton = new JButton("<");
   static Timer historyTimer = new Timer(3, historyDisplay);
   static Timer intermediateTimer = new Timer(3, intermediateDisplay);
   private final String EXPONENT = "X\u02B8";
   boolean integerPowerActive = false;
+  static JButton exponent = new JButton("X\u02B8");
+
 
   /**
    * Constructor.
@@ -105,25 +111,28 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     input.setText(numeric + n + units);
   }
 
+
+
   /**
    * make first operand exponential in the backend.
    *
-   * @param n
-   *          the power
+   * @param n the power
    */
   private void putExponent(String n)
   {
     String numeric = input.getText().replaceAll("[^0-9]", "");
     String units = input.getText().replaceAll("\\d", "");
 
-    input.setText(numeric + n + units);
+    input.setText(numeric + units + n);
 
   }
+
 
   private String getNumberOfInput()
   {
     return input.getText().replaceAll("[^0-9]", "");
   }
+
 
   /**
    * make history btton visible.
@@ -155,12 +164,12 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       {
         // plus assignment for the expression
         String numeric = input.getText().replaceAll("[^0-9]", "");
-        String units = input.getText().replaceAll("\\d", "");
+        String units = input.getText().replaceAll("[\\d, .]", "");
 
-        
+
         for (int i = 0; i < units.length(); i++)
         {
-          char c = units.charAt(i); 
+          char c = units.charAt(i);
           if ((Character.isDigit(c) || Character.isLetter(c)) && !units.equals("")) {
             JOptionPane.showMessageDialog(null, "No units allowed in input field", "Wrong units",
                 JOptionPane.INFORMATION_MESSAGE);
@@ -229,13 +238,13 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       {
         // parse the input
         String numeric = input.getText().replaceAll("[^0-9]", "");
-        String units = input.getText().replaceAll("\\d", "");
+        String units = input.getText().replaceAll("[\\d, .]", "");
         String dropdownUnits = unitsDropDown.getSelectedItem().toString();
 
         // Makes sure no units are entered into the input
         for (int i = 0; i < units.length(); i++)
         {
-          char c = units.charAt(i); 
+          char c = units.charAt(i);
           if ((Character.isDigit(c) || Character.isLetter(c)) && !units.equals("")) {
             JOptionPane.showMessageDialog(null, "No units allowed in input field", "Wrong units",
                 JOptionPane.INFORMATION_MESSAGE);
@@ -454,7 +463,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       case BACK ->
       {
         String numeric = input.getText().replaceAll("[^0-9]", "");
-        String units = input.getText().replaceAll("\\d", "");
+        String units = input.getText().replaceAll("[\\d, .]", "");
 
         if (numeric.length() > 0)
         {
@@ -465,13 +474,13 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       {
         // parse the input
         String numeric = input.getText().replaceAll("[^0-9]", "");
-        String units = input.getText().replaceAll("\\d", "");
+        String units = input.getText().replaceAll("[\\d, .]", "");
         String dropdownUnits = unitsDropDown.getSelectedItem().toString();
 
         // Makes sure no units are entered into the input
         for (int i = 0; i < units.length(); i++)
         {
-          char c = units.charAt(i); 
+          char c = units.charAt(i);
           if ((Character.isDigit(c) || Character.isLetter(c)) && !units.equals("")) {
             JOptionPane.showMessageDialog(null, "No units allowed in input field", "Wrong units",
                 JOptionPane.INFORMATION_MESSAGE);
@@ -527,13 +536,13 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         // parse the input
 
         String numeric = input.getText().replaceAll("[^0-9]", "");
-        String units = input.getText().replaceAll("\\d", "");
+        String units = input.getText().replaceAll("[\\d, .]", "");
         String dropdownUnits = unitsDropDown.getSelectedItem().toString();
 
         // Makes sure no units are entered into the input
         for (int i = 0; i < units.length(); i++)
         {
-          char c = units.charAt(i); 
+          char c = units.charAt(i);
           if ((Character.isDigit(c) || Character.isLetter(c)) && !units.equals("")) {
             JOptionPane.showMessageDialog(null, "No units allowed in input field", "Wrong units",
                 JOptionPane.INFORMATION_MESSAGE);
@@ -758,6 +767,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     resultsDropDown.setEditable(true);
     resultsDropDown.setVisible(true);
 
+
     // units drop down menu
     unitsDropDown = new JComboBox(measurements);
     unitsDropDown.setEditable(true);
@@ -827,7 +837,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     JButton nine = new JButton("9");
 
     // creation of function buttons
-    JButton exponent = new JButton("X\u02B8");
+
     JButton inverse = new JButton("1/x");
 
     // adding intSteps button to panel
@@ -973,7 +983,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   }
 
   /**
-   * Helper methods to load the icon.
+   * Helper method to load the icon.
    * 
    * @param name
    *          of the icon file
@@ -987,5 +997,25 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     ImageIcon icon = new ImageIcon(url);
 
     return icon;
+  }
+  
+  /**
+   * Helper method to set the colors.
+   */
+  private void setColor()
+  {
+    
+    int r1 = Integer.parseInt(COLORS.getString("R1"));
+    int g1 = Integer.parseInt(COLORS.getString("G1"));
+    int b1 = Integer.parseInt(COLORS.getString("B1"));
+    
+    int r2 = Integer.parseInt(COLORS.getString("R2"));
+    int g2 = Integer.parseInt(COLORS.getString("G2"));
+    int b2 = Integer.parseInt(COLORS.getString("B2"));
+    
+    Color first = new Color(r1, g1, b1);
+    Color second = new Color(r2, g2, b2);
+    
+    // Set the colors below
   }
 }
