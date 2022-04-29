@@ -91,7 +91,6 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     historyTimer.stop();
   }
 
-
   public static void stopIntermediateTimer()
   {
     intermediateTimer.stop();
@@ -110,12 +109,11 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     input.setText(numeric + n + units);
   }
 
-
-
   /**
    * make first operand exponential in the backend.
    *
-   * @param n the power
+   * @param n
+   *          the power
    */
   private void putExponent(String n)
   {
@@ -126,12 +124,10 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
   }
 
-
   private String getNumberOfInput()
   {
     return input.getText().replaceAll("[^0-9]", "");
   }
-
 
   /**
    * make history btton visible.
@@ -164,18 +160,30 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         // plus assignment for the expression
         String numeric = input.getText().replaceAll("[^0-9]", "");
         String units = input.getText().replaceAll("\\d", "");
-        String dropdownUnits = unitsDropDown.getSelectedItem().toString();
 
-
-        if (!units.equals("")) //checking the units
+        
+        for (int i = 0; i < units.length(); i++)
         {
-          {
-            JOptionPane.showMessageDialog(null, "No units allowed in input field",
-            "Wrong units", JOptionPane.INFORMATION_MESSAGE);
+          char c = units.charAt(i); 
+          if ((Character.isDigit(c) || Character.isLetter(c)) && !units.equals("")) {
+            JOptionPane.showMessageDialog(null, "No units allowed in input field", "Wrong units",
+                JOptionPane.INFORMATION_MESSAGE);
             reset();
             break;
           }
+
         }
+        String dropdownUnits = unitsDropDown.getSelectedItem().toString();
+
+//        if (!units.equals("")) // checking the units
+//        {
+//          {
+//            JOptionPane.showMessageDialog(null, "No units allowed in input field", "Wrong units",
+//                JOptionPane.INFORMATION_MESSAGE);
+//            reset();
+//            break;
+//          }
+//        }
         if (!dropdownUnits.equals("")) // checking units
         {
           if (dropdownUnits.charAt(dropdownUnits.length() - 1) == ('/')
@@ -197,13 +205,15 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           clear();
 
         }
-        else if (lastResult != null && numeric.equals("")) // calculation for the rolling over operations.
+        else if (lastResult != null && numeric.equals("")) // calculation for the rolling over
+                                                           // operations.
         {
           display.setText(lastResult + " + ");
           addOperand(lastResult, "+");
           clear();
         }
-        else if (lastResult != null && !numeric.equals("")) // calculations for the non rolling over operations that arent first
+        else if (lastResult != null && !numeric.equals("")) // calculations for the non rolling over
+                                                            // operations that arent first
         {
           display.setText("");
           display.setText(
@@ -226,11 +236,13 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         String units = input.getText().replaceAll("\\d", "");
         String dropdownUnits = unitsDropDown.getSelectedItem().toString();
 
-        if (!units.equals("")) //checking the units
+        // Makes sure no units are entered into the input
+        for (int i = 0; i < units.length(); i++)
         {
-          {
-            JOptionPane.showMessageDialog(null, "No units allowed in input field",
-                "Wrong units", JOptionPane.INFORMATION_MESSAGE);
+          char c = units.charAt(i); 
+          if ((Character.isDigit(c) || Character.isLetter(c)) && !units.equals("")) {
+            JOptionPane.showMessageDialog(null, "No units allowed in input field", "Wrong units",
+                JOptionPane.INFORMATION_MESSAGE);
             reset();
             break;
           }
@@ -251,7 +263,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         {
           display.setText("");
           display.setText(
-            display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + " - ");
+              display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + " - ");
           addOperand(input.getText() + unitsDropDown.getSelectedItem(), "-");
           clear();
 
@@ -280,101 +292,134 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
       }
       case EXPONENT ->
-          {
-            // activate exponent
-            if (integerPowerActive) {
-              integerPowerActive = false;
-            } else {
-              integerPowerActive = true;
-            }
-          }
+      {
+        // activate exponent
+        if (integerPowerActive)
+        {
+          integerPowerActive = false;
+        }
+        else
+        {
+          integerPowerActive = true;
+        }
+      }
       case "1" ->
       {
         // put the input
-        if (integerPowerActive) {
+        if (integerPowerActive)
+        {
           putExponent("\u00B9");
-        } else {
+        }
+        else
+        {
           putInput(1);
         }
       }
       case "2" ->
       {
         // put the input
-        if (integerPowerActive) {
+        if (integerPowerActive)
+        {
           putExponent("\u00B2");
-        } else {
+        }
+        else
+        {
           putInput(2);
         }
       }
       case "3" ->
       {
         // put the input
-        if (integerPowerActive) {
+        if (integerPowerActive)
+        {
           putExponent("\u00B3");
-        } else {
+        }
+        else
+        {
           putInput(3);
         }
       }
       case "4" ->
       {
         // put the input
-        if (integerPowerActive) {
+        if (integerPowerActive)
+        {
           putExponent("\u2074");
-        } else {
+        }
+        else
+        {
           putInput(4);
         }
       }
       case "5" ->
       {
         // put the input
-        if (integerPowerActive) {
+        if (integerPowerActive)
+        {
           putExponent("\u2075");
-        } else {
+        }
+        else
+        {
           putInput(5);
         }
       }
       case "6" ->
       {
         // put the input
-        if (integerPowerActive) {
+        if (integerPowerActive)
+        {
           putExponent("\u2076");
-        } else {
+        }
+        else
+        {
           putInput(6);
         }
       }
       case "7" ->
       {
         // put the input
-        if (integerPowerActive) {
+        if (integerPowerActive)
+        {
           putExponent("\u2077");
-        } else {
+        }
+        else
+        {
           putInput(7);
         }
       }
       case "8" ->
       {
         // put the input
-        if (integerPowerActive) {
+        if (integerPowerActive)
+        {
           putExponent("\u2078");
-        } else {
+        }
+        else
+        {
           putInput(8);
         }
       }
       case "9" ->
       {
         // put the input
-        if (integerPowerActive) {
+        if (integerPowerActive)
+        {
           putExponent("\u2079");
-        } else {
+        }
+        else
+        {
           putInput(9);
         }
       }
       case "0" ->
       {
         // put the input
-        if (integerPowerActive) {
+        if (integerPowerActive)
+        {
           putExponent("\u2070");
-        } else {
+        }
+        else
+        {
           putInput(0);
         }
       }
@@ -427,16 +472,18 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         String units = input.getText().replaceAll("\\d", "");
         String dropdownUnits = unitsDropDown.getSelectedItem().toString();
 
-        if (!units.equals("")) //checking the units
+        // Makes sure no units are entered into the input
+        for (int i = 0; i < units.length(); i++)
         {
-          {
-            JOptionPane.showMessageDialog(null, "No units allowed in input field",
-                "Wrong units", JOptionPane.INFORMATION_MESSAGE);
+          char c = units.charAt(i); 
+          if ((Character.isDigit(c) || Character.isLetter(c)) && !units.equals("")) {
+            JOptionPane.showMessageDialog(null, "No units allowed in input field", "Wrong units",
+                JOptionPane.INFORMATION_MESSAGE);
             reset();
             break;
           }
         }
-        if (!dropdownUnits.equals("")) //checking dropdown units
+        if (!dropdownUnits.equals("")) // checking dropdown units
         {
           if (dropdownUnits.charAt(dropdownUnits.length() - 1) == ('/')
               || dropdownUnits.charAt(dropdownUnits.length() - 1) == ('-'))
@@ -451,8 +498,8 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         if (lastResult == null && !numeric.equals("")) // first operation
         {
           display.setText("");
-          display
-            .setText(display.getText() + input.getText() + unitsDropDown.getSelectedItem() + " x ");
+          display.setText(
+              display.getText() + input.getText() + unitsDropDown.getSelectedItem() + " x ");
           addOperand(input.getText() + unitsDropDown.getSelectedItem(), "x");
           clear();
         }
@@ -462,11 +509,12 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           addOperand(lastResult, "x");
           clear();
         }
-        else if (lastResult !=null && !numeric.equals("")) // non rolling calculation but not first one
+        else if (lastResult != null && !numeric.equals("")) // non rolling calculation but not first
+                                                            // one
         {
           display.setText("");
-          display
-              .setText(display.getText() + input.getText() + unitsDropDown.getSelectedItem() + " x ");
+          display.setText(
+              display.getText() + input.getText() + unitsDropDown.getSelectedItem() + " x ");
           addOperand(input.getText() + unitsDropDown.getSelectedItem(), "x");
           clear();
         }
@@ -486,11 +534,13 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         String units = input.getText().replaceAll("\\d", "");
         String dropdownUnits = unitsDropDown.getSelectedItem().toString();
 
-        if (!units.equals("")) //checking the units
+        // Makes sure no units are entered into the input
+        for (int i = 0; i < units.length(); i++)
         {
-          {
-            JOptionPane.showMessageDialog(null, "No units allowed in input field",
-                "Wrong units", JOptionPane.INFORMATION_MESSAGE);
+          char c = units.charAt(i); 
+          if ((Character.isDigit(c) || Character.isLetter(c)) && !units.equals("")) {
+            JOptionPane.showMessageDialog(null, "No units allowed in input field", "Wrong units",
+                JOptionPane.INFORMATION_MESSAGE);
             reset();
             break;
           }
@@ -507,10 +557,11 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           }
         }
 
-        if (lastResult == null && !numeric.equals("")) //first operation
+        if (lastResult == null && !numeric.equals("")) // first operation
         {
           display.setText("");
-          display.setText(display.getText() + input.getText() + unitsDropDown.getSelectedItem() + " / ");
+          display.setText(
+              display.getText() + input.getText() + unitsDropDown.getSelectedItem() + " / ");
           addOperand(input.getText() + unitsDropDown.getSelectedItem(), "/");
           clear();
 
@@ -524,7 +575,8 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         if (lastResult != null && !numeric.equals("")) // normal calculation
         {
           display.setText("");
-          display.setText(display.getText() + input.getText() + unitsDropDown.getSelectedItem() + " / ");
+          display.setText(
+              display.getText() + input.getText() + unitsDropDown.getSelectedItem() + " / ");
           addOperand(input.getText() + unitsDropDown.getSelectedItem(), "/");
           clear();
         }
@@ -549,9 +601,8 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           ExpressionParser parser = new ExpressionParser(expression);
           result = Operation.calculate(parser.getLeft(), parser.getRight(), parser.getOperator());
 
-          display.setText(
-              display.getText() + input.getText() + unitsDropDown.getSelectedItem() + " = "
-                  + result);
+          display.setText(display.getText() + input.getText() + unitsDropDown.getSelectedItem()
+              + " = " + result);
           historyDisplay.updateText(display.getText());
           lastResult = result;
           expression = new String[4];
@@ -711,7 +762,6 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     resultsDropDown.setEditable(true);
     resultsDropDown.setVisible(true);
 
-
     // units drop down menu
     unitsDropDown = new JComboBox(measurements);
     unitsDropDown.setEditable(true);
@@ -861,14 +911,14 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     inputPanel.add(input, BorderLayout.WEST);
     inputPanel.add(unitsDropDown);
 
-//    try
-//    {
-//      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//    }
-//    catch (Exception e)
-//    {
-//      // Use the default
-//    }
+    // try
+    // {
+    // UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+    // }
+    // catch (Exception e)
+    // {
+    // // Use the default
+    // }
 
     // setting frame
     frame.setJMenuBar(menuBar);
