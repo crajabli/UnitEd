@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.concurrent.TimeUnit;
 
+import static gui.GraphicalUserInterface.startIntermediateTimer;
+
 public class Intermediate extends JWindow implements ActionListener {
   JTextArea intermediateDisplay;
 
@@ -15,6 +17,7 @@ public class Intermediate extends JWindow implements ActionListener {
    */
   public Intermediate() {
     super();
+    setupLayout();
   }
 
 
@@ -27,21 +30,21 @@ public class Intermediate extends JWindow implements ActionListener {
     Container contentPane = getContentPane();
     contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.X_AXIS));
 
-    JPanel historyPanel = new JPanel();
+    JPanel intermediatePanel = new JPanel();
 
     intermediateDisplay = new JTextArea();
-    historyPanel.setLayout(new GridLayout());
+    intermediatePanel.setLayout(new GridLayout());
     intermediateDisplay.setEditable(false);
 
 
 
-    JButton closeButton = new JButton("<");
+    JButton closeButton = new JButton(">");
     closeButton.addActionListener(this);
 
 
-    historyPanel.add(intermediateDisplay);
-    contentPane.add(historyPanel);
+    intermediatePanel.add(intermediateDisplay);
     contentPane.add(closeButton);
+    contentPane.add(intermediatePanel);
     contentPane.add(Box.createVerticalGlue());
   }
 
@@ -50,6 +53,7 @@ public class Intermediate extends JWindow implements ActionListener {
   public void setVisible(boolean b)
   {
     super.setVisible(b);
+    startIntermediateTimer();
   }
 
 
@@ -59,34 +63,32 @@ public class Intermediate extends JWindow implements ActionListener {
 
     if (ac != null)
     {
-      if (ac.equals("<"))
+      if (ac.equals(">"))
       {
         for (int i = 0; i < 42; i++)
         {
-          GraphicalUserInterface.startTimer();
           intermediateDisplay.setSize(getWidth() - 7, 280);
           setSize(getWidth() - 7, 280);
-          if (getWidth() == 0) {
-            GraphicalUserInterface.stopTimer();
-          }
-          GraphicalUserInterface.setHistoryButtonVisible();
+          setLocation(getX() + 7, getY());
+          GraphicalUserInterface.setIntermediateButtonVisible();
           try {
             TimeUnit.MILLISECONDS.sleep(10);
           } catch (InterruptedException ex) {
             ex.printStackTrace();
           }
         }
-
+        setLocation(getX() - 28, getY());
+        return;
       }
     }
 
     System.out.println(getWidth());
-    intermediateDisplay.setSize(getWidth()+1, 280);
     setSize(getWidth() + 7, 280);
+    setLocation(getX() - 7, getY());
 
     if (getWidth() > 260)
     {
-      GraphicalUserInterface.stopTimer();
+      GraphicalUserInterface.stopIntermediateTimer();
     }
   }
 }
