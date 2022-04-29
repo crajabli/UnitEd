@@ -28,7 +28,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
   JTextField display;
   JTextField input;
-  String[] expression = new String[3];
+  String[] expression = new String[4];
   private final String DIVIDE = "\u00F7";
   String lastResult = null;
   private final String SIGN = "\u00B1";

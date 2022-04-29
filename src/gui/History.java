@@ -2,6 +2,8 @@ package gui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.concurrent.TimeUnit;
@@ -16,6 +18,7 @@ import java.util.concurrent.TimeUnit;
 public class History extends JWindow implements ActionListener {
 
   JTextArea historyDisplay;
+  Clipboard clipboard; 
 
   /**
    * default Constructor.
@@ -40,9 +43,17 @@ public class History extends JWindow implements ActionListener {
     JPanel historyPanel = new JPanel();
 
     historyDisplay = new JTextArea();
+    Toolkit toolkit = historyDisplay.getToolkit(); 
+    clipboard = Toolkit.getDefaultToolkit().getSystemClipboard(); 
+    historyDisplay.copy();
     historyPanel.setLayout(new GridLayout());
     historyDisplay.setEditable(false);
 
+    historyDisplay.selectAll();
+    
+    StringSelection select = new StringSelection(historyDisplay.getText()); 
+    clipboard.setContents(select, null);
+    historyDisplay.copy();
 
 
     JButton closeButton = new JButton("<");
@@ -64,7 +75,8 @@ public class History extends JWindow implements ActionListener {
   public void updateText(String text)
   {
     historyDisplay.setText(historyDisplay.getText() + "\n" + text);
-    System.out.println(historyDisplay.getText());
+    
+    // System.out.println(historyDisplay.getText());
   }
 
 
