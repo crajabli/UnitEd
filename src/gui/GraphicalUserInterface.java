@@ -41,7 +41,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   JComboBox resultsDropDown;
   static JButton historyButton = new JButton(">");
   static Timer timer = new Timer(3, historyDisplay);
-  static final ResourceBundle COLORS = ResourceBundle.getBundle("gui.Strings");
+  static final ResourceBundle COLORS = ResourceBundle.getBundle("gui.Colors");
   static JButton intStepsButton = new JButton("<");
   static Timer historyTimer = new Timer(3, historyDisplay);
   static Timer intermediateTimer = new Timer(3, intermediateDisplay);
