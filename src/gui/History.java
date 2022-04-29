@@ -45,24 +45,29 @@ public class History extends JWindow implements ActionListener {
     JPanel historyPanel = new JPanel();
 
     historyDisplay = new JTextArea();
-    Toolkit toolkit = historyDisplay.getToolkit(); 
-    clipboard = Toolkit.getDefaultToolkit().getSystemClipboard(); 
-    historyDisplay.copy();
     historyPanel.setLayout(new GridLayout());
     historyDisplay.setEditable(false);
-
-    historyDisplay.selectAll();
+//    Toolkit toolkit = historyDisplay.getToolkit(); 
+//    clipboard = Toolkit.getDefaultToolkit().getSystemClipboard(); 
+//    historyDisplay.copy();
     
-    StringSelection select = new StringSelection(historyDisplay.getText()); 
-    clipboard.setContents(select, null);
-    historyDisplay.copy();
+
+   //  historyDisplay.selectAll();
+    
+//    StringSelection select = new StringSelection(historyDisplay.getText()); 
+//    clipboard.setContents(select, null);
+//    historyDisplay.copy();
 
 
+    Action copy = historyDisplay.getActionMap().get("copy"); 
+    
+    
     JButton closeButton = new JButton("<");
     closeButton.addActionListener(this);
 
 
     historyPanel.add(historyDisplay);
+    // contentPane.add( copy); 
     contentPane.add(historyPanel);
     contentPane.add(closeButton);
     contentPane.add(Box.createVerticalGlue());
@@ -98,8 +103,13 @@ public class History extends JWindow implements ActionListener {
   @Override
   public void actionPerformed(ActionEvent e)
   {
+//    String text = historyDisplay.getText(); 
+//    historyDisplay.selectAll();
+//    historyDisplay.setCaretPosition(historyDisplay.getDocument().getLength());
     String ac = e.getActionCommand();
 
+    
+    
     if (ac != null)
     {
       if (ac.equals("<"))
