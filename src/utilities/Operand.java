@@ -30,7 +30,6 @@ public class Operand
       this.unit = "";
     }
     this.unit = unit;
-    this.value = value;
     this.exponent = exponent;
 
     if (resultUnit == null)
@@ -38,6 +37,7 @@ public class Operand
       this.resultUnit = unit;
     }
     this.resultUnit = resultUnit;
+    this.value = BigDecimal.valueOf(Math.pow(value.doubleValue(), exponent));
   }
 
   /**
