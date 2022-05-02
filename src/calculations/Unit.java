@@ -54,7 +54,7 @@ public class Unit
     numerator = new ArrayList<String>();
     denominator = new ArrayList<String>();
     
-    String clone = unit;
+    String clone = unwrap(unit);
     char c = '-';
     
     if (operator.equals(SLASH))
@@ -300,7 +300,6 @@ public class Unit
       {
         
         r += unicode(e.getKey(), e.getValue());
-        System.out.println(r);
       
       } else
       {
@@ -495,5 +494,75 @@ public class Unit
     }
     
     return unit + exp;
+  }
+  
+  /**
+   * Method to convert all exponents to ^.
+   * 
+   * @param unit for the unit
+   * 
+   * @return the result
+   */
+  public static String unwrap(final String unit)
+  {
+    
+    String r = "";
+    
+    for (int i = 0; i < unit.length(); i++)
+    {
+      
+      r += unit.charAt(i);
+    }
+    
+    String sub = "";
+    int index = 0;
+    
+    if (r.contains("\u2070"))
+    {
+      
+      r = r.replace("\u2070", "^0");
+    
+    } else if (r.contains("\u00B2"))
+    {
+      
+      r = r.replace("\u00B2", "^2");
+    
+    } else if (r.contains("\u00B3"))
+    {
+      
+      r = r.replace("\u00B3", "^3");
+    
+    } else if (r.contains("\u2074"))
+    {
+      
+      r = r.replace("\u2074", "^4");
+    
+    } else if (r.contains("\u2075"))
+    {
+      
+      r = r.replace("\u2075", "^5");
+    
+    } else if (r.contains("\u2076")) 
+    {
+      
+      r = r.replace("\u2076", "^6");
+    
+    } else if (r.contains("\u2077")) 
+    {
+      
+      r = r.replace("\u2077", "^7");
+    
+    } else if (r.contains("\u2078")) 
+    {
+      
+      r = r.replace("\u2078", "^8");
+    
+    } else if (r.contains("\u2079"))
+    {
+      
+      r = r.replace("\u2079", "^9");
+    }
+    
+    return r;
   }
 }

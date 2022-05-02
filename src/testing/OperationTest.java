@@ -98,6 +98,17 @@ public class OperationTest
     Operand rightOp = new Operand(b, unit, 1, unit);
 
     assertEquals("30.000000 lb\u00B2", Operation.calculate(leftOp, rightOp, "x"));
+    
+    String u = "mi/h";
+    leftOp = new Operand(a, u, 1, u);
+    rightOp = new Operand(b, u, 1, u);
+    
+    assertEquals("30.000000 mi\u00B2/h\u00B2", Operation.calculate(leftOp, rightOp, "x"));
+    
+    leftOp = new Operand(a, unit, 2, unit);
+    rightOp = new Operand(b, unit, 2, unit);
+    
+    assertEquals("900.000000 lb\u2074", Operation.calculate(leftOp, rightOp, "x"));
   }
 
   /**
@@ -122,7 +133,7 @@ public class OperationTest
     Operand leftOp1 = new Operand(a, "lb-m", 1, "lb-m");
     Operand rightOp1 = new Operand(b, "ft-km", 1, "ft-km");
     
-    assertEquals("2.000000 lb-m/ft-km", Operation.calculate(leftOp1, rightOp1, divide));
+    assertEquals("2.000000 lb-m/ft/km", Operation.calculate(leftOp1, rightOp1, divide));
     
     String units = "lb-lb";
     
@@ -130,6 +141,6 @@ public class OperationTest
     Operand rightOp2 = new Operand(b, "m", 1, "m");
     
     assertEquals("2.000000 lb", Operation.calculate(leftOp2, rightOp, divide));
-    assertEquals("2.000000 lb-lb/m", Operation.calculate(leftOp2, rightOp2, divide));
+    assertEquals("2.000000 lb\u00B2/m", Operation.calculate(leftOp2, rightOp2, divide));
   }
 }
