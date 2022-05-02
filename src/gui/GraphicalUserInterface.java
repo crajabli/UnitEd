@@ -1,15 +1,19 @@
 package gui;
 
+import utilities.Operand;
 import utilities.Operation;
 import utilities.OperationFormatException;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -20,6 +24,7 @@ import exceptions.DivideByZeroException;
 import exceptions.IncompleteExpressionException;
 import exceptions.IncompleteUnitsException;
 import exceptions.NoValueEnteredException;
+import utilities.ResultUnits;
 
 /**
  * The Graphical User Interface for the unitED calculator.
@@ -53,6 +58,14 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   private final String EXPONENT = "X\u02B8";
   boolean integerPowerActive = false;
   static JButton exponent = new JButton("X\u02B8");
+  private String aboutStr = "This calculator is by unitEd. This is a four-function calculator with"
+      + " some extra features including the ability to inverse a function as well as evaluate an "
+      + "integer exponent. This calculator will not let you type units into the input bar; you must "
+      + "select one from the dropdown menu. Additionally, it will change languages based on your "
+      + "locality but is currently limited to English, French, and Russian-speaking localities. The "
+      + "calculator shows all previous calculations in the history display to the right and shows the "
+      + "steps of those calculations in the intermediate steps display on the left.";
+  Object[] finalUnits;
 
   /**
    * Constructor.
@@ -152,6 +165,11 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     intStepsButton.setVisible(true);
   }
 
+
+  private void updateFinalDropdown(Object[] units) {
+    resultsDropDown.setModel(new DefaultComboBoxModel(finalUnits));
+  }
+
   @Override
   public void actionPerformed(final ActionEvent e)
   {
@@ -159,7 +177,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
     switch (ac)
     {
-      // do i internationalize this ?? 
+      // do i internationalize this ??
       case "R" -> reset();
       case "C" -> clear();
       case "+" ->
@@ -215,6 +233,9 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           display.setText(
               display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + " + ");
           addOperand(input.getText() + unitsDropDown.getSelectedItem(), "+");
+          finalUnits = ResultUnits.likeUnits(new Operand(new BigDecimal(12),
+              (String) unitsDropDown.getSelectedItem(), 1, "result"));
+          updateFinalDropdown(finalUnits);
           clear();
 
         }
@@ -223,6 +244,9 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         {
           display.setText(lastResult + " + ");
           addOperand(lastResult, "+");
+          finalUnits = ResultUnits.likeUnits(new Operand(new BigDecimal(12),
+              (String) unitsDropDown.getSelectedItem(), 1, "result"));
+          updateFinalDropdown(finalUnits);
           clear();
         }
         else if (lastResult != null && !numeric.equals("")) // calculations for the non rolling over
@@ -232,6 +256,9 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           display.setText(
               display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + " + ");
           addOperand(input.getText() + unitsDropDown.getSelectedItem(), "+");
+          finalUnits = ResultUnits.likeUnits(new Operand(new BigDecimal(12),
+              (String) unitsDropDown.getSelectedItem(), 1, "result"));
+          updateFinalDropdown(finalUnits);
           clear();
         }
         else if (lastResult == null && numeric.equals(""))
@@ -287,6 +314,9 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           display.setText(
               display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + " - ");
           addOperand(input.getText() + unitsDropDown.getSelectedItem(), "-");
+          finalUnits = ResultUnits.likeUnits(new Operand(new BigDecimal(12),
+              (String) unitsDropDown.getSelectedItem(), 1, "result"));
+          updateFinalDropdown(finalUnits);
           clear();
 
         }
@@ -294,6 +324,9 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         {
           display.setText(lastResult + " - ");
           addOperand(lastResult, "-");
+          finalUnits = ResultUnits.likeUnits(new Operand(new BigDecimal(12),
+              (String) unitsDropDown.getSelectedItem(), 1, "result"));
+          updateFinalDropdown(finalUnits);
           clear();
         }
         if (lastResult != null && !numeric.equals("")) // non rolling calculation but with
@@ -302,6 +335,9 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           display.setText(
               display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + " - ");
           addOperand(input.getText() + unitsDropDown.getSelectedItem(), "-");
+          finalUnits = ResultUnits.likeUnits(new Operand(new BigDecimal(12),
+              (String) unitsDropDown.getSelectedItem(), 1, "result"));
+          updateFinalDropdown(finalUnits);
           clear();
 
         }
@@ -627,6 +663,23 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         integerPowerActive = false;
 
       }
+      case "About" ->
+      {
+        JDialog aboutDialog = new JDialog();
+        JPanel aboutPanel = (JPanel) aboutDialog.getContentPane();
+        JTextArea textArea = new JTextArea(5, 40);
+
+        textArea.setText(aboutStr);
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        textArea.setEditable(false);
+
+        aboutPanel.add(textArea);
+        aboutDialog.setVisible(true);
+        aboutDialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        aboutDialog.setSize(400, 200);
+        aboutDialog.setLocationRelativeTo(null);
+      }
       case "=" ->
       {
         // calculate;
@@ -676,7 +729,11 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           // STRINGS.getString("NO_VALUE"),
           // JOptionPane.INFORMATION_MESSAGE);
         }
+<<<<<<< HEAD
        
+=======
+
+>>>>>>> branch 'main' of https://github.com/bernstdh/team22.git
         catch (NoValueEnteredException e1)
         {
           reset();
@@ -711,7 +768,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   {
 
     // creation of frame and content pane
-    // Do i internationalize logo?? 
+    // Do i internationalize logo??
     JFrame frame = new JFrame("UnitED");
     JPanel contentPane = (JPanel) frame.getContentPane();
     contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
@@ -940,6 +997,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
     exponent.addActionListener(this);
     inverse.addActionListener(this);
+    about.addActionListener(this);
 
     frame.addComponentListener(this);
 
@@ -1034,7 +1092,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   /**
    * Helper method to set the colors.
    */
-  private void setColor()
+  private void setColor(boolean set)
   {
 
     int r1 = Integer.parseInt(COLORS.getString("R1"));
@@ -1049,5 +1107,11 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     Color second = new Color(r2, g2, b2);
 
     // Set the colors below
+    
+    if (set)
+    {
+      
+      
+    }
   }
 }

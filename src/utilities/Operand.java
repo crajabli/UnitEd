@@ -29,7 +29,7 @@ public class Operand
     {
       this.unit = "";
     }
-    this.unit = unit;
+    this.unit = unitExp(unit, exponent);
     this.exponent = exponent;
 
     if (resultUnit == null)
@@ -99,4 +99,76 @@ public class Operand
     return units;
   }
 
+  private String unitExp(String unit, int exponent) {
+    
+    String e = String.valueOf(exponent);
+    String exp = "";
+    
+    char[] c = new char[e.length()];
+    
+    for (int i = 0; i < e.length(); i++)
+    {
+      
+      c[i] = e.charAt(i);
+    }
+    
+    for (char ch : c)
+    {
+      
+      switch (ch)
+      {
+        
+        case '0':
+          
+          exp += ("\u2070");
+          break;
+          
+        case '2':
+          
+          exp += ("\u00B2");
+          break;
+
+        case '3':
+          
+          exp += ("\u00B3");
+          break;
+
+        case '4':
+          
+          exp += ("\u2074");
+          break;
+
+        case '5':
+          
+          exp += ("\u2075");
+          break;
+
+        case '6':
+          
+          exp += ("\u2076");
+          break;
+
+        case '7':
+          
+          exp += ("\u2077");
+          break;
+
+        case '8':
+          
+          exp += ("\u2078");
+          break;
+
+        case '9':
+          
+          exp += ("\u2079");
+          break;
+
+        default:
+          
+          break;
+      }
+    }
+    
+    return unit + exp;
+  }
 }
