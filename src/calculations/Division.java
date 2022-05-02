@@ -3,7 +3,7 @@ package calculations;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import enums.Convert;
+import convertUtils.Convert;
 import utilities.Operand;
 import utilities.OperationFormatException;
 
@@ -36,12 +36,14 @@ public class Division
     }
     
     // Functionality for unit conversion
-    Operand tempRight = Convert.convert(leftOp, rightOp);
+    Operand[] temp = Convert.convert(leftOp, rightOp);
+    Operand tempLeft = temp[0];
+    Operand tempRight = temp[1];
     
-    BigDecimal value = leftOp.getValue().divide(tempRight.getValue()).setScale(6,
+    BigDecimal value = tempLeft.getValue().divide(tempRight.getValue(), 6,
         RoundingMode.HALF_DOWN);
     
-    String left = leftOp.getUnit();
+    String left = tempLeft.getUnit();
     String right = tempRight.getUnit();
     String unit;
     
