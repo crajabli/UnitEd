@@ -41,6 +41,25 @@ public class Weight
     
     switch (unit)
     {
+      case "oz":
+        value = TimeUtils.toSecond(op);
+        break;
+
+      case "lb":
+        value = TimeUtils.toHour(op);
+        break;
+        
+      case "ton":
+        value = TimeUtils.toDay(op);
+        break;
+
+      case "g":
+        value = TimeUtils.toMonth(op);
+        break;
+          
+      case "kg":
+         value = TimeUtils.toYear(op);
+         break;
 
     }
 
