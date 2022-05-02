@@ -40,6 +40,25 @@ public class Time
 
     switch (unit)
     {
+      case "sec":
+        value = MoneyUtils.toCent(op);
+        break;
+
+      case "hr":
+        value = MoneyUtils.toDollar(op);
+        break;
+        
+      case "day":
+        value = MoneyUtils.toCent(op);
+        break;
+
+      case "mon":
+        value = MoneyUtils.toDollar(op);
+        break;
+          
+      case "yr":
+         value = MoneyUtils.toCent(op);
+         break;
 
     }
 

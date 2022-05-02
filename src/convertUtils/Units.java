@@ -40,6 +40,31 @@ public class Units
 
     return result;
   }
+  
+  /**
+   * Returns type list associated with the given Operand. Returns empty list if unit is unsupported.
+   * 
+   * @param left
+   *          represents left Operand
+   * @param right
+   *          represents right Operand
+   * @return List of Strings
+   */
+  public static List<String> instanceOf(final Operand op)
+  {
+    List<String> result = new ArrayList<>();
+
+    for (int i = 0; i < UNITS.size(); i++)
+    {
+      if (instanceOf(op, UNITS.get(i)))
+      {
+        result.addAll(UNITS.get(i));
+        break;
+      }
+    }
+
+    return result;
+  }
 
   /**
    * Returns true if given String is in the given list.

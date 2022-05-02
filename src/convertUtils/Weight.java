@@ -37,7 +37,8 @@ public class Weight
   {
     String unit = op.getResultUnit();
     BigDecimal value = op.getValue();
-
+    //"oz", "lb", "ton", "g", "kg"
+    
     switch (unit)
     {
 

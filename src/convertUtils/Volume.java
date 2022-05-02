@@ -40,6 +40,26 @@ public class Volume
 
     switch (unit)
     {
+      case "pt":
+        value = VolumeUtils.toPint(op);
+        break;
+
+      case "qt":
+    	value = VolumeUtils.toPint(op);
+        break;
+        
+      case "gal":
+    	value = VolumeUtils.toPint(op);
+        break;
+
+      case "cc":
+    	value = VolumeUtils.toPint(op);
+        break;
+          
+      case "l":
+    	 value = VolumeUtils.toPint(op);
+         break;
+
 
     }
 

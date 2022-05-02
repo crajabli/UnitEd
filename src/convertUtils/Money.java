@@ -40,6 +40,13 @@ public class Money
 
     switch (unit)
     {
+      case "c":
+        value = MoneyUtils.toCent(op);
+        break;
+
+      case "$":
+        value = MoneyUtils.toDollar(op);
+        break;
 
     }
 
