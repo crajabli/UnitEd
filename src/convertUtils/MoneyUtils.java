@@ -19,8 +19,7 @@ public class MoneyUtils {
 		switch (unit) {
 			case "$":
 				// $ to c
-				value = value.divide(new BigDecimal(100.0), 6,
-				        RoundingMode.HALF_DOWN);
+				value = value.multiply(new BigDecimal(100.0));
 		        break;
 		}
 
@@ -40,7 +39,8 @@ public class MoneyUtils {
 		switch (unit) {
 			case "c":
 				// c to $
-				value = value.multiply(new BigDecimal(100.0));
+				value = value.divide(new BigDecimal(100.0), 6,
+				        RoundingMode.HALF_DOWN);
 		        break;
 		}
 
