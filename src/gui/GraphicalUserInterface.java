@@ -46,10 +46,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   static Timer timer = new Timer(3, historyDisplay);
   static final ResourceBundle COLORS = ResourceBundle.getBundle("gui.Colors");
   // static final ResourceBundle STRINGS = ResourceBundle.getBundle("gui.Strings");
-<<<<<<< HEAD
   static final Locale LOCALE = null; // Locale.getDefault(); 
-=======
->>>>>>> branch 'main' of https://github.com/bernstdh/team22.git
   static JButton intStepsButton = new JButton("<");
   static Timer historyTimer = new Timer(3, historyDisplay);
   static Timer intermediateTimer = new Timer(3, intermediateDisplay);
@@ -1061,7 +1058,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   /**
    * Helper method to set the colors.
    */
-  private void setColor()
+  private void setColor(boolean set)
   {
 
     int r1 = Integer.parseInt(COLORS.getString("R1"));
@@ -1076,5 +1073,11 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     Color second = new Color(r2, g2, b2);
 
     // Set the colors below
+    
+    if (set)
+    {
+      
+      
+    }
   }
 }

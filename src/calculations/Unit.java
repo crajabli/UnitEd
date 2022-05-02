@@ -292,7 +292,6 @@ public class Unit
     }
     
     String r = "";
-    char hat = '^';
     
     for (Map.Entry<String, Integer> e : mapNumerator.entrySet())
     {
@@ -300,7 +299,8 @@ public class Unit
       if (e.getValue() > 1)
       {
         
-        r += e.getKey() + hat + e.getValue();
+        r += unicode(e.getKey(), e.getValue());
+        System.out.println(r);
       
       } else
       {
@@ -322,7 +322,7 @@ public class Unit
         if (e.getValue() > 1)
         {
           
-          r += e.getKey() + hat + e.getValue();
+          r += unicode(e.getKey(), e.getValue());
         
         } else
         {
@@ -336,8 +336,12 @@ public class Unit
     
     if (!r.equals(""))
     {
-     
-      r = r.substring(0, r.length() - 1);
+      
+      if (r.charAt(r.length() - 1) == '/' || r.charAt(r.length() - 1) == '-')
+      {
+        
+        r = r.substring(0, r.length() - 1);
+      }
     }
     
     return r;
@@ -409,5 +413,87 @@ public class Unit
     }
     
     return r;
+  }
+  
+  /**
+   * Private helper method to convert to unicode.
+   * 
+   * @param unit for the unit
+   * @param n for the number
+   * 
+   * @return the exponent
+   */
+  public static String unicode(final String unit, final int n)
+  {
+    
+    String e = String.valueOf(n);
+    String exp = "";
+    
+    char[] c = new char[e.length()];
+    
+    for (int i = 0; i < e.length(); i++)
+    {
+      
+      c[i] = e.charAt(i);
+    }
+    
+    for (char ch : c)
+    {
+      
+      switch (ch)
+      {
+        
+        case '0':
+          
+          exp +=("\u2070");
+          break;
+
+        case '2':
+          
+          exp += ("\u00B2");
+          break;
+
+        case '3':
+          
+          exp += ("\u00B3");
+          break;
+
+        case '4':
+          
+          exp += ("\u2074");
+          break;
+
+        case '5':
+          
+          exp += ("\u2075");
+          break;
+
+        case '6':
+          
+          exp += ("\u2076");
+          break;
+
+        case '7':
+          
+          exp += ("\u2077");
+          break;
+
+        case '8':
+          
+          exp += ("\u2078");
+          break;
+
+        case '9':
+          
+          exp += ("\u2079");
+          break;
+
+        default:
+          
+          break;
+      }
+    }
+    
+    return unit + exp;
   }
 }

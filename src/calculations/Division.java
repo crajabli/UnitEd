@@ -75,6 +75,19 @@ public class Division
       unit = Unit.calculateUnits(tempUnit, "", true);
     }
 
-    return value.toString() + " " + (unit);
+    String result = "";
+    
+    if (unit.equals(""))
+    {
+      
+      result = value.toString();
+    
+    } else
+    {
+      
+      result = value.toString() + " " + Unit.format(unit);
+    }
+
+    return result;
   }
 }

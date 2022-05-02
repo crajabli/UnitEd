@@ -54,7 +54,6 @@ class ExpressionParserTest
     assertEquals(right1.getUnit(), ep1.getRight().getUnit());
     assertEquals(DIVISION, ep1.getOperator());
   }
-
   
 //  @Test
 //  void testNoValue() throws OperationFormatException, IncompleteUnitsException, NoValueEnteredException, IncompleteExpressionException

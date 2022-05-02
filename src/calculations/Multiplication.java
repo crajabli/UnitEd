@@ -56,12 +56,25 @@ public class Multiplication
     } else
     {
     
-      String tempUnit = Unit.calculateUnits(tempLeft.getUnit(), "", false) + "-"
-          + Unit.calculateUnits(tempRight.getUnit(), operator, false);
+      String tempUnit = Unit.calculateUnits(left, "", false) + "-"
+          + Unit.calculateUnits(right, operator, false);
       
       unit = Unit.calculateUnits(tempUnit, "", true);
     }
+    
+    String result = "";
+    
+    if (unit.equals(""))
+    {
+      
+      result = value.toString();
+    
+    } else
+    {
+      
+      result = value.toString() + " " + Unit.format(unit);
+    }
 
-    return value.toString() + " " + Unit.format(unit);
+    return result;
   }
 }

@@ -37,14 +37,14 @@ public class OperationTest
     BigDecimal a = BigDecimal.valueOf(12);
     BigDecimal b = BigDecimal.valueOf(2);
     String add = "+";
-    Operand leftOp = new Operand(a, unit, 1, null);
-    Operand rightOp = new Operand(b, unit, 1, null);
+    Operand leftOp = new Operand(a, unit, 1, unit);
+    Operand rightOp = new Operand(b, unit, 1, unit);
     
-    assertEquals("14 lb", Operation.calculate(leftOp, rightOp, add));
+    assertEquals("14.000000 lb", Operation.calculate(leftOp, rightOp, add));
     
     // Throws the exception
-    Operand leftOp1 = new Operand(a, unit, 1, null);
-    Operand rightOp1 = new Operand(b, "ft", 1, null);
+    Operand leftOp1 = new Operand(a, unit, 1, unit);
+    Operand rightOp1 = new Operand(b, "ft", 1, "ft");
     
     assertThrows(OperationFormatException.class, () ->
     {
@@ -66,14 +66,14 @@ public class OperationTest
     BigDecimal a = BigDecimal.valueOf(9);
     BigDecimal b = BigDecimal.valueOf(4);
     String subtract = "-";
-    Operand leftOp = new Operand(a, unit, 1, null);
-    Operand rightOp = new Operand(b, unit, 1, null);
+    Operand leftOp = new Operand(a, unit, 1, unit);
+    Operand rightOp = new Operand(b, unit, 1, unit);
     
-    assertEquals("5 lb", Operation.calculate(leftOp, rightOp, subtract));
+    assertEquals("5.000000 lb", Operation.calculate(leftOp, rightOp, subtract));
     
     // Throws the exception
-    Operand leftOp1 = new Operand(a, unit, 1, null);
-    Operand rightOp1 = new Operand(b, "km", 1, null);
+    Operand leftOp1 = new Operand(a, unit, 1, unit);
+    Operand rightOp1 = new Operand(b, "km", 1, "km");
     
     assertThrows(OperationFormatException.class, () ->
     {
@@ -94,10 +94,10 @@ public class OperationTest
 
     BigDecimal a = BigDecimal.valueOf(6);
     BigDecimal b = BigDecimal.valueOf(5);
-    Operand leftOp = new Operand(a, unit, 1, null);
-    Operand rightOp = new Operand(b, unit, 1, null);
+    Operand leftOp = new Operand(a, unit, 1, unit);
+    Operand rightOp = new Operand(b, unit, 1, unit);
 
-    assertEquals("30 lb-lb", Operation.calculate(leftOp, rightOp, "x"));
+    assertEquals("30.000000 lb\u00B2", Operation.calculate(leftOp, rightOp, "x"));
   }
 
   /**
@@ -114,28 +114,22 @@ public class OperationTest
     BigDecimal b = BigDecimal.valueOf(4);
     String divide = "/";
     
-    Operand leftOp = new Operand(a, unit, 1, null);
-    Operand rightOp = new Operand(b, unit, 1, null);
+    Operand leftOp = new Operand(a, unit, 1, unit);
+    Operand rightOp = new Operand(b, unit, 1, unit);
     
-    assertEquals("2", Operation.calculate(leftOp, rightOp, divide));
+    assertEquals("2.000000", Operation.calculate(leftOp, rightOp, divide));
     
-    Operand leftOp1 = new Operand(a, "lb-m", 1, null);
-    Operand rightOp1 = new Operand(b, "ft-km", 1, null);
+    Operand leftOp1 = new Operand(a, "lb-m", 1, "lb-m");
+    Operand rightOp1 = new Operand(b, "ft-km", 1, "ft-km");
     
-    assertEquals("2 lb-m/ft-km", Operation.calculate(leftOp1, rightOp1, divide));
+    assertEquals("2.000000 lb-m/ft-km", Operation.calculate(leftOp1, rightOp1, divide));
     
     String units = "lb-lb";
     
-    Operand leftOp2 = new Operand(a, units, 1, null);
-    Operand rightOp2 = new Operand(b, "m", 1, null);
+    Operand leftOp2 = new Operand(a, units, 1, units);
+    Operand rightOp2 = new Operand(b, "m", 1, "m");
     
-    assertEquals("2 lb", Operation.calculate(leftOp2, rightOp, divide));
-    assertEquals("2 lb-lb/m", Operation.calculate(leftOp2, rightOp2, divide));
-    
-    /**
-     * Handle cases.
-     * mi/h / h = mi/hr-hr
-     * mi/h / mi = mi/hr-mi
-     */
+    assertEquals("2.000000 lb", Operation.calculate(leftOp2, rightOp, divide));
+    assertEquals("2.000000 lb-lb/m", Operation.calculate(leftOp2, rightOp2, divide));
   }
 }
