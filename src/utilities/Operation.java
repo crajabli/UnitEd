@@ -1,6 +1,7 @@
 package utilities;
 
 import calculations.*;
+import exceptions.DivideByZeroException;
 
 /**
  * Calculates result given two operands and an operator.
@@ -28,9 +29,10 @@ public class Operation
    *          represents which calculation to do
    * @return String
    * @throws OperationFormatException
+   * @throws DivideByZeroException 
    */
   public static String calculate(final Operand leftOp, final Operand rightOp, final String operator)
-      throws OperationFormatException
+      throws OperationFormatException, DivideByZeroException
   {
 
     String result = "";

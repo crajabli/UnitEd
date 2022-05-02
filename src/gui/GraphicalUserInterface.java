@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
 
 import javax.swing.*;
 
+import exceptions.DivideByZeroException;
 import exceptions.IncompleteExpressionException;
 import exceptions.IncompleteUnitsException;
 import exceptions.NoValueEnteredException;
@@ -42,6 +43,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   static JButton historyButton = new JButton(">");
   static Timer timer = new Timer(3, historyDisplay);
   static final ResourceBundle COLORS = ResourceBundle.getBundle("gui.Colors");
+  static final ResourceBundle STRINGS = ResourceBundle.getBundle("gui.Strings");
   static JButton intStepsButton = new JButton("<");
   static Timer historyTimer = new Timer(3, historyDisplay);
   static Timer intermediateTimer = new Timer(3, intermediateDisplay);
@@ -173,6 +175,8 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           if ((Character.isDigit(c) || Character.isLetter(c)) && !units.equals("")) {
             JOptionPane.showMessageDialog(null, "No units allowed in input field", "Wrong units",
                 JOptionPane.INFORMATION_MESSAGE);
+//            JOptionPane.showMessageDialog(null, STRINGS.getString("NO_UNITS_INPUT"), STRINGS.getString("WRONG_UNITS"),
+//                JOptionPane.INFORMATION_MESSAGE);
             reset();
             break;
           }
@@ -196,6 +200,8 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           {
             JOptionPane.showMessageDialog(null, "The units you entered are incomplete",
                 "Wrong units", JOptionPane.INFORMATION_MESSAGE);
+//            JOptionPane.showMessageDialog(null, STRINGS.getString("NO_UNITS_INPUT"), STRINGS.getString("WRONG_UNITS"),
+//                JOptionPane.INFORMATION_MESSAGE);
             reset();
             break;
           }
@@ -228,8 +234,11 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         }
         else if (lastResult == null && numeric.equals(""))
         {
-          JOptionPane.showMessageDialog(null, "Enter value", "No value",
+          JOptionPane.showMessageDialog(null, "Please enter a value", "No Value",
               JOptionPane.INFORMATION_MESSAGE);
+//          JOptionPane.showMessageDialog(null, STRINGS.getString("ENTER_VALUE"), STRINGS.getString("NO_VALUE"),
+//              JOptionPane.INFORMATION_MESSAGE);
+          
         }
         integerPowerActive = false;
 
@@ -248,6 +257,8 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           if ((Character.isDigit(c) || Character.isLetter(c)) && !units.equals("")) {
             JOptionPane.showMessageDialog(null, "No units allowed in input field", "Wrong units",
                 JOptionPane.INFORMATION_MESSAGE);
+//          JOptionPane.showMessageDialog(null, STRINGS.getString("NO_UNITS_INPUT"), STRINGS.getString("WRONG_UNITS"),
+//          JOptionPane.INFORMATION_MESSAGE);
             reset();
             break;
           }
@@ -259,6 +270,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           {
             JOptionPane.showMessageDialog(null, "The units you entered are incomplete",
                 "Wrong units", JOptionPane.INFORMATION_MESSAGE);
+            
             reset();
             break;
           }
@@ -290,8 +302,10 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         }
         else if (lastResult == null && numeric.equals(""))
         {
-          JOptionPane.showMessageDialog(null, "Enter value", "No value",
+          JOptionPane.showMessageDialog(null, "Please enter a value", "No Value",
               JOptionPane.INFORMATION_MESSAGE);
+//        JOptionPane.showMessageDialog(null, STRINGS.getString("ENTER_VALUE"), STRINGS.getString("NO_VALUE"),
+//        JOptionPane.INFORMATION_MESSAGE);
         }
         integerPowerActive = false;
 
@@ -484,6 +498,8 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           if ((Character.isDigit(c) || Character.isLetter(c)) && !units.equals("")) {
             JOptionPane.showMessageDialog(null, "No units allowed in input field", "Wrong units",
                 JOptionPane.INFORMATION_MESSAGE);
+//          JOptionPane.showMessageDialog(null, STRINGS.getString("NO_UNITS_INPUT"), STRINGS.getString("WRONG_UNITS"),
+//          JOptionPane.INFORMATION_MESSAGE);
             reset();
             break;
           }
@@ -525,8 +541,10 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         }
         else if (lastResult == null && numeric.equals(""))
         {
-          JOptionPane.showMessageDialog(null, "Enter value", "No value",
+          JOptionPane.showMessageDialog(null, "Please enter a value", "No Value",
               JOptionPane.INFORMATION_MESSAGE);
+//        JOptionPane.showMessageDialog(null, STRINGS.getString("ENTER_VALUE"), STRINGS.getString("NO_VALUE"),
+//        JOptionPane.INFORMATION_MESSAGE);
         }
         integerPowerActive = false;
 
@@ -546,6 +564,8 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           if ((Character.isDigit(c) || Character.isLetter(c)) && !units.equals("")) {
             JOptionPane.showMessageDialog(null, "No units allowed in input field", "Wrong units",
                 JOptionPane.INFORMATION_MESSAGE);
+//          JOptionPane.showMessageDialog(null, STRINGS.getString("NO_UNITS_INPUT"), STRINGS.getString("WRONG_UNITS"),
+//          JOptionPane.INFORMATION_MESSAGE);
             reset();
             break;
           }
@@ -587,8 +607,10 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         }
         else if (lastResult == null && numeric.equals(""))
         {
-          JOptionPane.showMessageDialog(null, "Enter value", "No value",
+          JOptionPane.showMessageDialog(null, "Please enter a value", "No Value",
               JOptionPane.INFORMATION_MESSAGE);
+//        JOptionPane.showMessageDialog(null, STRINGS.getString("ENTER_VALUE"), STRINGS.getString("NO_VALUE"),
+//        JOptionPane.INFORMATION_MESSAGE);
         }
         integerPowerActive = false;
 
@@ -598,8 +620,9 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         // calculate;
         integerPowerActive = false;
         expression[2] = input.getText() + unitsDropDown.getSelectedItem();
+        // if (results != null 
         expression[3] = "" + resultsDropDown.getSelectedItem();
-
+        // else do expression[3] = ""; 
         try
         {
           String result;
@@ -613,18 +636,30 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           expression = new String[4];
 
         }
-
+        
+        catch (DivideByZeroException dbz)
+        {
+          reset();
+          JOptionPane.showMessageDialog(null, "You cannot divide by zero",
+              "Incorrect Equation", JOptionPane.INFORMATION_MESSAGE);
+//        JOptionPane.showMessageDialog(null, STRINGS.getString(""), STRINGS.getString("NO_VALUE"),
+//        JOptionPane.INFORMATION_MESSAGE);
+        }
         catch (IncompleteUnitsException iue)
         {
           reset();
           JOptionPane.showMessageDialog(null, "The units you entered are incomplete", "Wrong units",
               JOptionPane.INFORMATION_MESSAGE);
+//        JOptionPane.showMessageDialog(null, STRINGS.getString(""), STRINGS.getString("NO_VALUE"),
+//        JOptionPane.INFORMATION_MESSAGE);
         }
         catch (OperationFormatException ex)
         {
           reset();
           JOptionPane.showMessageDialog(null, "Units are not same ", "Wrong unit ",
               JOptionPane.INFORMATION_MESSAGE);
+//        JOptionPane.showMessageDialog(null, STRINGS.getString(""), STRINGS.getString("NO_VALUE"),
+//        JOptionPane.INFORMATION_MESSAGE);
         }
         // catch (ArithmeticException ax)
         // {
@@ -656,13 +691,18 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           reset();
           JOptionPane.showMessageDialog(null, "Please enter a value", "No Value",
               JOptionPane.INFORMATION_MESSAGE);
+//        JOptionPane.showMessageDialog(null, STRINGS.getString("ENTER_VALUE"), STRINGS.getString("NO_VALUE"),
+//        JOptionPane.INFORMATION_MESSAGE);
         }
         catch (IncompleteExpressionException iee)
         {
           reset();
-          JOptionPane.showMessageDialog(null, "The expression you entered was incomplete.",
+          JOptionPane.showMessageDialog(null, "The expression you entered was incomplete",
               "Incomplete Expression", JOptionPane.INFORMATION_MESSAGE);
+//        JOptionPane.showMessageDialog(null, STRINGS.getString("EXPRESSION_INCOM"), STRINGS.getString("INCOMPLETE"),
+//        JOptionPane.INFORMATION_MESSAGE);
         }
+        
 
         clear();
 

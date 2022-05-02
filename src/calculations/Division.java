@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import enums.Convert;
+import exceptions.DivideByZeroException;
 import utilities.Operand;
 import utilities.OperationFormatException;
 
@@ -27,14 +28,15 @@ public class Division
    * @throws OperationFormatException when trying to divide by zero
    */
   public static String calculate(final Operand leftOp, final Operand rightOp, final String operator)
-      throws OperationFormatException
+      throws DivideByZeroException
   {
     // Check that rightOp value is not zero
-    if (rightOp.getValue().equals(BigDecimal.ZERO))
+    // changed BigDecimal.ZERO to BigDecimal.valueOf(0.0)
+    if (rightOp.getValue().equals(BigDecimal.valueOf(0.0)))
     {
-      throw new OperationFormatException("Cannot divide by zero");
+      throw new DivideByZeroException("Cannot divide by zero");
     }
-    
+     
     // Functionality for unit conversion
     Operand tempRight = Convert.convert(leftOp, rightOp);
     

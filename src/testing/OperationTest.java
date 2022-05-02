@@ -4,6 +4,8 @@ import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
+import exceptions.DivideByZeroException;
+
 import java.math.BigDecimal;
 
 import utilities.Operand;
@@ -26,9 +28,10 @@ public class OperationTest
    * Testing add method.
    * 
    * @throws OperationFormatException 
+   * @throws DivideByZeroException 
    */
   @Test
-  public void add() throws OperationFormatException
+  public void add() throws OperationFormatException, DivideByZeroException
   {
     
     BigDecimal a = BigDecimal.valueOf(12);
@@ -54,9 +57,10 @@ public class OperationTest
    * Testing subtract method.
    * 
    * @throws OperationFormatException 
+   * @throws DivideByZeroException 
    */
   @Test
-  public void subtract() throws OperationFormatException
+  public void subtract() throws OperationFormatException, DivideByZeroException
   {
     
     BigDecimal a = BigDecimal.valueOf(9);
@@ -81,10 +85,11 @@ public class OperationTest
   /**
    * Testing multiply method.
    * 
-   * @throws OperationFormatException
+   * @throws OperationFormatException 
+   * @throws DivideByZeroException 
    */
   @Test
-  public void multiply() throws OperationFormatException
+  public void multiply() throws OperationFormatException, DivideByZeroException
   {
 
     BigDecimal a = BigDecimal.valueOf(6);
@@ -98,10 +103,11 @@ public class OperationTest
   /**
    * Testing divide method.
    * 
-   * @throws OperationFormatException
+   * @throws DivideByZeroException 
+   * @throws OperationFormatException 
    */
   @Test
-  public void divide() throws OperationFormatException
+  public void divide() throws DivideByZeroException, OperationFormatException
   {
 
     BigDecimal a = BigDecimal.valueOf(8);

@@ -49,7 +49,7 @@ public class ExpressionParser
   }
 
   /**
-   * Private helper.
+   * Private helper. 
    * 
    * @param expression
    * @throws OperationFormatException
@@ -61,10 +61,10 @@ public class ExpressionParser
       IncompleteUnitsException, NoValueEnteredException, IncompleteExpressionException
   {
 
-    if (expression == null || expression.length == 0)
-    {
-      throw new IllegalArgumentException("You didn't enter anything.");
-    }
+//    if (expression == null || expression.length == 0)
+//    {
+//      throw new IllegalArgumentException("You didn't enter anything.");
+//    }
 
     // potentially change this to allow null to be passed in so we can throw error message in real
     // time
@@ -75,7 +75,7 @@ public class ExpressionParser
       if (expression[i] == null || expression[i].length() == 0)
 
       {
-        throw new IncompleteExpressionException("You did not enter anything.");
+        throw new IncompleteExpressionException("The expression you entered was incomplete");
       }
 
     // Construct left and right operands
@@ -153,7 +153,7 @@ public class ExpressionParser
     // check if there is a value entered
     if (toBeValue.length() == 0)
     {
-      throw new NoValueEnteredException("You didn't enter a value.");
+      throw new NoValueEnteredException("Please enter a value");
     }
 
     BigDecimal value = BigDecimal.valueOf(Double.parseDouble(toBeValue.toString()));
