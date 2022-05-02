@@ -21,6 +21,7 @@ import exceptions.IncompleteUnitsException;
 import exceptions.NoValueEnteredException;
 
 /**
+ * The Graphical User Interface for the unitED calculator.
  * 
  * @author Makenzie Williams, Chingiz Rajabli
  * @version 1
@@ -43,7 +44,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   static JButton historyButton = new JButton(">");
   static Timer timer = new Timer(3, historyDisplay);
   static final ResourceBundle COLORS = ResourceBundle.getBundle("gui.Colors");
-  static final ResourceBundle STRINGS = ResourceBundle.getBundle("gui.Strings");
+  // static final ResourceBundle STRINGS = ResourceBundle.getBundle("gui.Strings");
   static JButton intStepsButton = new JButton("<");
   static Timer historyTimer = new Timer(3, historyDisplay);
   static Timer intermediateTimer = new Timer(3, intermediateDisplay);
