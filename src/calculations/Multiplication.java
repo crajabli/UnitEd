@@ -3,7 +3,7 @@ package calculations;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import enums.Convert;
+import convertUtils.Convert;
 import utilities.Operand;
 
 /**
@@ -27,12 +27,14 @@ public class Multiplication
   public static String calculate(final Operand leftOp, final Operand rightOp, final String operator)
   {
     // Functionality for unit conversion
-    Operand tempRight = Convert.convert(leftOp, rightOp);
+    Operand[] temp = Convert.convert(leftOp, rightOp);
+    Operand tempLeft = temp[0];
+    Operand tempRight = temp[1];
     
-    BigDecimal value = leftOp.getValue().multiply(tempRight.getValue()).setScale(6,
+    BigDecimal value = tempLeft.getValue().multiply(tempRight.getValue()).setScale(6,
         RoundingMode.HALF_DOWN);
     
-    String left = leftOp.getUnit();
+    String left = tempLeft.getUnit();
     String right = tempRight.getUnit();
     String unit;
     
@@ -54,7 +56,7 @@ public class Multiplication
     } else
     {
     
-      String tempUnit = Unit.calculateUnits(leftOp.getUnit(), "", false) + "-"
+      String tempUnit = Unit.calculateUnits(tempLeft.getUnit(), "", false) + "-"
           + Unit.calculateUnits(tempRight.getUnit(), operator, false);
       
       unit = Unit.calculateUnits(tempUnit, "", true);

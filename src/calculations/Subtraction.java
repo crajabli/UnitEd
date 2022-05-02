@@ -3,7 +3,7 @@ package calculations;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import enums.Convert;
+import convertUtils.Convert;
 import utilities.Operand;
 import utilities.OperationFormatException;
 
@@ -30,13 +30,15 @@ public class Subtraction
       throws OperationFormatException
   {
     // Functionality for unit conversion
-    Operand tempRight = Convert.convert(leftOp, rightOp);
+    Operand[] temp = Convert.convert(leftOp, rightOp);
+    Operand tempLeft = temp[0];
+    Operand tempRight = temp[1];
     
-    Unit.sameUnitException(leftOp, tempRight);
+    Unit.sameUnitException(tempLeft, tempRight);
     
-    BigDecimal value = leftOp.getValue().subtract(tempRight.getValue()).setScale(6,
+    BigDecimal value = tempLeft.getValue().subtract(tempRight.getValue()).setScale(6,
         RoundingMode.HALF_DOWN);
 
-    return value.toString() + " " + leftOp.getUnit();
+    return value.toString() + " " + tempLeft.getUnit();
   }
 }
