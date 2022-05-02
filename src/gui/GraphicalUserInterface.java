@@ -46,10 +46,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   static Timer timer = new Timer(3, historyDisplay);
   static final ResourceBundle COLORS = ResourceBundle.getBundle("gui.Colors");
   // static final ResourceBundle STRINGS = ResourceBundle.getBundle("gui.Strings");
-<<<<<<< HEAD
-  static final Locale LOCALE = null; // Locale.getDefault(); 
-=======
->>>>>>> branch 'main' of https://github.com/bernstdh/team22.git
+  static final Locale LOCALE = null; // Locale.getDefault(); Belgium and French 
   static JButton intStepsButton = new JButton("<");
   static Timer historyTimer = new Timer(3, historyDisplay);
   static Timer intermediateTimer = new Timer(3, intermediateDisplay);
@@ -679,31 +676,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           // STRINGS.getString("NO_VALUE"),
           // JOptionPane.INFORMATION_MESSAGE);
         }
-        // catch (ArithmeticException ax)
-        // {
-        // reset();
-        // JOptionPane.showMessageDialog(null, "You didn't enter a unit ", "No unit ",
-        // JOptionPane.INFORMATION_MESSAGE);
-        // }
-        // catch (ArrayIndexOutOfBoundsException ax)
-        // {
-        // reset();
-        // JOptionPane.showMessageDialog(null, "You didn't enter a value ", "No unit ",
-        // JOptionPane.INFORMATION_MESSAGE);
-        // }
-
-        // catch (ArithmeticException ax)
-        // {
-        // reset();
-        // JOptionPane.showMessageDialog(null, "You didn't enter a unit ", "No unit ",
-        // JOptionPane.INFORMATION_MESSAGE);
-        // }
-        // catch (ArrayIndexOutOfBoundsException ax)
-        // {
-        // reset();
-        // JOptionPane.showMessageDialog(null, "You didn't enter a value ", "No unit ",
-        // JOptionPane.INFORMATION_MESSAGE);
-        // }
+       
         catch (NoValueEnteredException e1)
         {
           reset();

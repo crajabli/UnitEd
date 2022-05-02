@@ -73,4 +73,21 @@ public class Units
   {
     return instanceOf(other.getUnit(), list);
   }
+  
+  /**
+   * Returns true if the units are like units.
+   * 
+   * @param unit
+   *          first unit
+   * @param unit2
+   *          second unit 
+   * @return boolean
+   */
+  public static boolean instanceOf(final String unit, final String unit2)
+  {
+//    if (unit instanceof )
+    
+    return true;
+  }
+  
 }

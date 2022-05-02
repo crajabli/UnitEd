@@ -33,8 +33,7 @@ public class ExpressionParser
    */
   public ExpressionParser(final String[] expression) throws OperationFormatException,
       IncompleteUnitsException, NoValueEnteredException, IncompleteExpressionException
-  {
-    
+  {    
     parseHelper(expression);
   }
 

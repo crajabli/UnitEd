@@ -34,7 +34,10 @@ public class Addition
     Operand tempLeft = temp[0];
     Operand tempRight = temp[1];
     
-    Unit.sameUnitException(tempLeft, tempRight);
+    // if () {
+      // throw new NotLikeUnitsException()
+   //  }
+    // Unit.sameUnitException(tempLeft, tempRight);
     
     BigDecimal value = tempLeft.getValue().add(tempRight.getValue()).setScale(6,
         RoundingMode.HALF_DOWN);
