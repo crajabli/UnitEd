@@ -45,19 +45,19 @@ public class Volume
         break;
 
       case "qt":
-    	value = VolumeUtils.toPint(op);
+    	value = VolumeUtils.toQuart(op);
         break;
         
       case "gal":
-    	value = VolumeUtils.toPint(op);
+    	value = VolumeUtils.toGallon(op);
         break;
 
       case "cc":
-    	value = VolumeUtils.toPint(op);
+    	value = VolumeUtils.toCubicCentimeter(op);
         break;
           
       case "l":
-    	 value = VolumeUtils.toPint(op);
+    	 value = VolumeUtils.toLiter(op);
          break;
 
 
