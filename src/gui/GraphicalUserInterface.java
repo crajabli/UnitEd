@@ -6,6 +6,7 @@ import utilities.OperationFormatException;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
@@ -46,16 +47,19 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   static Timer timer = new Timer(3, historyDisplay);
   static final ResourceBundle COLORS = ResourceBundle.getBundle("gui.Colors");
   // static final ResourceBundle STRINGS = ResourceBundle.getBundle("gui.Strings");
-<<<<<<< HEAD
-  static final Locale LOCALE = null; // Locale.getDefault(); 
-=======
->>>>>>> branch 'main' of https://github.com/bernstdh/team22.git
+  static final Locale LOCALE = null; // Locale.getDefault();
   static JButton intStepsButton = new JButton("<");
   static Timer historyTimer = new Timer(3, historyDisplay);
   static Timer intermediateTimer = new Timer(3, intermediateDisplay);
   private final String EXPONENT = "X\u02B8";
   boolean integerPowerActive = false;
   static JButton exponent = new JButton("X\u02B8");
+  private String aboutStr = "This calculator is by unitEd. This is a four function calculator with some extra features\n"
+      + "including the ability to inverse a function as well as evaluate an integer exponent. This calculator will not\n"
+      + "let you type units into the input bar - you must select one from the drop down menu. Additionally, it will change\n"
+      + "languages based on your locality, but is currently limited to English, French, and Russian speaking localities.\n"
+      + "The calculator shows all previous calculations in the history display to the right and shows the steps of those\n"
+      + "calculations in the intermediate steps display on the left.";
 
   /**
    * Constructor.
@@ -162,7 +166,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
     switch (ac)
     {
-      // do i internationalize this ?? 
+      // do i internationalize this ??
       case "R" -> reset();
       case "C" -> clear();
       case "+" ->
@@ -630,6 +634,11 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         integerPowerActive = false;
 
       }
+      case "About" ->
+      {
+        JFrame aboutFrame = new JFrame("About");
+        JOptionPane.showMessageDialog(aboutFrame, aboutStr);
+      }
       case "=" ->
       {
         // calculate;
@@ -738,7 +747,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   {
 
     // creation of frame and content pane
-    // Do i internationalize logo?? 
+    // Do i internationalize logo??
     JFrame frame = new JFrame("UnitED");
     JPanel contentPane = (JPanel) frame.getContentPane();
     contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
@@ -967,6 +976,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
     exponent.addActionListener(this);
     inverse.addActionListener(this);
+    about.addActionListener(this);
 
     frame.addComponentListener(this);
 
