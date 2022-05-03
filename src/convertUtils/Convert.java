@@ -41,6 +41,28 @@ public class Convert
 
     return result;
   }
+  
+  /**
+   * Returns a String representation of the converted Operand
+   * 
+   * @param left
+   *          represents left Operand
+   * @param right
+   *          represents right Operand
+   * @return Operand array
+   */
+  public static String convertToString(Operand op)
+  {
+    Operand result = op;
+    List<String> compare = Units.instanceOf(op);
+
+    if (compare != null && compare.size() > 0)
+    {
+      result = convertOp(op, compare);
+    }
+
+    return op.getValue() + " " + op.getUnit() + " = " + result.getValue() + " " + result.getUnit();
+  }
 
   /**
    * Helper method to determine the type of conversion to do.
