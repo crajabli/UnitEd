@@ -68,8 +68,6 @@ public class Unit
       clone = unit;
     }
     
-    System.out.println("This is the clone: " + clone);
-    
     char c = '-';
     
     if (operator.equals(SLASH))
@@ -620,8 +618,6 @@ public class Unit
         check = false;
       }
     }
-    
-    System.out.println("This is rs: " + rs);
     
     return rs;
   }
