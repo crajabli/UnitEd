@@ -71,6 +71,8 @@ public class ExpressionParser
     operator = expression[1];
     resultUnit = expression[3];
     
+    resultUnits = new String[2];
+    
     if (operator.equals("x"))
     {
       
@@ -84,6 +86,14 @@ public class ExpressionParser
     }
     
     String right = expression[2];
+    
+    if (resultUnit.isEmpty())
+    {
+      
+      resultUnits[0] = "";
+      resultUnits[1] = "";
+    }
+    
     rightOp = setOperand(right, resultUnits[1]);
     leftOp = setOperand(left, resultUnits[0]);
 
