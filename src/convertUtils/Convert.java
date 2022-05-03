@@ -45,10 +45,7 @@ public class Convert
   /**
    * Returns a String representation of the converted Operand
    * 
-   * @param left
-   *          represents left Operand
-   * @param right
-   *          represents right Operand
+   * @param op represents given Operand
    * @return Operand array
    */
   public static String convertToString(Operand op)
@@ -62,6 +59,20 @@ public class Convert
     }
 
     return op.getValue() + " " + op.getUnit() + " = " + result.getValue() + " " + result.getUnit();
+  }
+  
+  /**
+   * Returns a String representation of the converted Operands
+   * 
+   * @param left
+   *          represents left Operand
+   * @param right
+   *          represents right Operand
+   * @return Operand array
+   */
+  public static String convertToString(Operand left, Operand right)
+  {
+    return convertToString(left) + "\n" + convertToString(right);
   }
 
   /**
