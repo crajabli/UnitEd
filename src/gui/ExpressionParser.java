@@ -88,7 +88,7 @@ public class ExpressionParser
     }
     
     String right = expression[2];
-    
+    System.out.println("resultUnits: " + resultUnits.length); 
     if (resultUnit.isEmpty())
     {
       
