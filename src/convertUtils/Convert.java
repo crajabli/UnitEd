@@ -51,6 +51,25 @@ public class Convert
    * @param op represents given Operand
    * @return String
    */
+  public static String converted(Operand op)
+  {
+    Operand result = op;
+    List<String> compare = Units.instanceOf(op);
+
+    if (compare != null && compare.size() > 0)
+    {
+      result = convertOp(op, compare);
+    }
+
+    return result.getValue() + " " + result.getUnit();
+  }
+  
+  /**
+   * Returns a String representation of the converted Operand
+   * 
+   * @param op represents given Operand
+   * @return String
+   */
   public static String convertToString(Operand op)
   {
     Operand result = op;
@@ -114,7 +133,7 @@ public class Convert
 		  break;
 	  }
 	  
-    return convertToString(left, right) + "\n" + result;
+    return convertToString(left, right) + "\n" + converted(left) + " " + operator + " " + converted(right) + " = " + result;
   }
 
 
