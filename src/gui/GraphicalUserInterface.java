@@ -36,7 +36,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
   JTextField display;
   JTextField input;
-  static String[] expression = new String[5];
+  static String[] expression = new String[4];
   private final String DIVIDE = "\u00F7";
   String lastResult = null;
   private final String SIGN = "\u00B1";
@@ -729,7 +729,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
               + " = " + result);
           historyDisplay.updateText(display.getText());
           lastResult = result;
-          expression = new String[5];
+          expression = new String[4];
           resultsDropDown.setModel(new DefaultComboBoxModel(measurements));
 
         }
