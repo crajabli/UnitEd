@@ -110,14 +110,28 @@ public class Units
    */
   public static boolean instanceOf(final String left, final String right)
   {
-	  for (int i = 0; i < UNITS.size(); i++)
-	    {
-	      if (instanceOf(left, UNITS.get(i)) && instanceOf(right, UNITS.get(i)))
-	      {
-	        return true;
-	      }
-	    }
+    if (LENGTHS.contains(left) && LENGTHS.contains(right))
+    {
+      return true;
+    }
+    else if (WEIGHTS.contains(left) && WEIGHTS.contains(right))
+    {
+      return true;
+    }
+    else if (VOLUMES.contains(left) && VOLUMES.contains(right))
+    {
+      return true;
 
+    }
+    else if (MONEY.contains(left) && MONEY.contains(right))
+    {
+      return true;
+
+    }
+    else if (TIMES.contains(left) && TIMES.contains(right))
+    {
+      return true;
+    }
     return false;
   }
 
