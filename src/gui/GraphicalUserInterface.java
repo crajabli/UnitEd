@@ -182,7 +182,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
   private void updateFinalDropdown(Object[] units)
   {
-      resultsDropDown.setModel(new DefaultComboBoxModel(finalUnits)); 
+      resultsDropDown.setModel(new DefaultComboBoxModel(units));
   }
 
   @Override
