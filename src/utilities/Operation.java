@@ -2,6 +2,7 @@ package utilities;
 
 import calculations.*;
 import exceptions.DivideByZeroException;
+import exceptions.NotLikeUnitsException;
 
 /**
  * Calculates result given two operands and an operator.
@@ -30,9 +31,10 @@ public class Operation
    * @return String
    * @throws OperationFormatException
    * @throws DivideByZeroException 
+   * @throws NotLikeUnitsException 
    */
   public static String calculate(final Operand leftOp, final Operand rightOp, final String operator)
-      throws OperationFormatException, DivideByZeroException
+      throws OperationFormatException, DivideByZeroException, NotLikeUnitsException
   {
 
     String result = "";

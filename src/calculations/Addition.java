@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import convertUtils.Convert;
+import convertUtils.Units;
+import exceptions.NotLikeUnitsException;
 import utilities.Operand;
 import utilities.OperationFormatException;
 
@@ -24,17 +26,21 @@ public class Addition
    * 
    * @return the result
    * 
-   * @throws OperationFormatException when the units are not the same
+   * @throws NotLikeUnitsException for non-compatible units 
    */
   public static String calculate(final Operand leftOp, final Operand rightOp)
-      throws OperationFormatException
+      throws NotLikeUnitsException
   {
+    // checks if units are like units before adding
+    if (!Units.instanceOf(leftOp.getUnit(), rightOp.getUnit())) {
+      throw new NotLikeUnitsException("You cannot add/subtract non-like units"); 
+    }
+    
     // Functionality for unit conversion
     Operand[] temp = Convert.convert(leftOp, rightOp);
     Operand tempLeft = temp[0];
     Operand tempRight = temp[1];
     
-    Unit.sameUnitException(tempLeft, tempRight);
     
     BigDecimal value = tempLeft.getValue().add(tempRight.getValue()).setScale(6,
         RoundingMode.HALF_DOWN);

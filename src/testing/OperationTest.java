@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import exceptions.DivideByZeroException;
+import exceptions.NotLikeUnitsException;
 
 import java.math.BigDecimal;
 
@@ -29,9 +30,10 @@ public class OperationTest
    * 
    * @throws OperationFormatException 
    * @throws DivideByZeroException 
+   * @throws NotLikeUnitsException 
    */
   @Test
-  public void add() throws OperationFormatException, DivideByZeroException
+  public void add() throws OperationFormatException, DivideByZeroException, NotLikeUnitsException
   {
     
     BigDecimal a = BigDecimal.valueOf(12);
@@ -58,9 +60,10 @@ public class OperationTest
    * 
    * @throws OperationFormatException 
    * @throws DivideByZeroException 
+   * @throws NotLikeUnitsException 
    */
   @Test
-  public void subtract() throws OperationFormatException, DivideByZeroException
+  public void subtract() throws OperationFormatException, DivideByZeroException, NotLikeUnitsException
   {
     
     BigDecimal a = BigDecimal.valueOf(9);
@@ -87,9 +90,10 @@ public class OperationTest
    * 
    * @throws OperationFormatException 
    * @throws DivideByZeroException 
+   * @throws NotLikeUnitsException 
    */
   @Test
-  public void multiply() throws OperationFormatException, DivideByZeroException
+  public void multiply() throws OperationFormatException, DivideByZeroException, NotLikeUnitsException
   {
 
     BigDecimal a = BigDecimal.valueOf(6);
@@ -156,9 +160,10 @@ public class OperationTest
    * 
    * @throws DivideByZeroException 
    * @throws OperationFormatException 
+   * @throws NotLikeUnitsException 
    */
   @Test
-  public void divide() throws DivideByZeroException, OperationFormatException
+  public void divide() throws DivideByZeroException, OperationFormatException, NotLikeUnitsException
   {
 
     BigDecimal a = BigDecimal.valueOf(8);

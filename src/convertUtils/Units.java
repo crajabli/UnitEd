@@ -40,7 +40,7 @@ public class Units
 
     return result;
   }
-  
+
   /**
    * Returns type list associated with the given Operand. Returns empty list if unit is unsupported.
    * 
@@ -98,4 +98,46 @@ public class Units
   {
     return instanceOf(other.getUnit(), list);
   }
+
+  /**
+   * Returns true if the units are like units.
+   * 
+   * @param unit
+   *          first unit
+   * @param unit2
+   *          second unit
+   * @return boolean
+   */
+  public static boolean instanceOf(final String unit, final String unit2)
+  {
+    if (LENGTHS.contains(unit) && LENGTHS.contains(unit2))
+    {
+      return true;
+    }
+    else if (WEIGHTS.contains(unit) && WEIGHTS.contains(unit2))
+    {
+      return true;
+    }
+    else if (VOLUMES.contains(unit) && VOLUMES.contains(unit2))
+    {
+      return true;
+
+    }
+    else if (MONEY.contains(unit) && MONEY.contains(unit2))
+    {
+      return true;
+
+    }
+    else if (TIMES.contains(unit) && TIMES.contains(unit2))
+    {
+      return true;
+
+    }
+    else if (unit.equals(unit2))
+    {
+      return true;
+    }
+    return false;
+  }
+
 }
