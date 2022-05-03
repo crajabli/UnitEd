@@ -2,7 +2,6 @@ package gui;
 
 import java.math.BigDecimal;
 
-
 import exceptions.IncompleteExpressionException;
 import exceptions.IncompleteUnitsException;
 import exceptions.NoValueEnteredException;
@@ -20,7 +19,7 @@ public class ExpressionParser
   private Operand leftOp;
   private Operand rightOp;
   private String operator;
-  private String resultUnit; 
+  private String resultUnit;
 
   /**
    * Parses the expression.
@@ -34,23 +33,19 @@ public class ExpressionParser
    */
   public ExpressionParser(final String[] expression) throws OperationFormatException,
       IncompleteUnitsException, NoValueEnteredException, IncompleteExpressionException
-  {    
+  {
     parseHelper(expression);
-    
+
   }
 
-  /**
-   * Getter method.
-   * 
-   * @return operator sign
-   */
+
   public String getOperator()
   {
     return operator;
   }
 
   /**
-   * Private helper. 
+   * Private helper.
    * 
    * @param expression
    * @throws OperationFormatException
@@ -61,39 +56,27 @@ public class ExpressionParser
   private void parseHelper(final String[] expression) throws OperationFormatException,
       IncompleteUnitsException, NoValueEnteredException, IncompleteExpressionException
   {
-
-//    if (expression == null || expression.length == 0)
-//    {
-//      throw new IllegalArgumentException("You didn't enter anything.");
-//    }
-
-    // potentially change this to allow null to be passed in so we can throw error message in real
-    // time
-    // Checks there is a string in each array index
-
     for (int i = 0; i < expression.length - 1; i++)
-
+    {
       if (expression[i] == null || expression[i].length() == 0)
 
       {
         throw new IncompleteExpressionException("The expression you entered was incomplete");
       }
+    }
 
     // Construct left and right operands
     String left = expression[0];
-    resultUnit = expression[3]; 
+    resultUnit = expression[3];
     leftOp = setOperand(left);
     operator = expression[1];
-    // Do a check here first to see if we have something in for the right expression
-    // maybe pass the Expression parser in expression[3] a specific string "No Input yet"?
     String right = expression[2];
     rightOp = setOperand(right);
-    
 
   }
 
   /**
-   * Private Helper method to make sure the operands were inputted correctly before setting them.
+   * Private Helper method to make sure the operands were inputed correctly before setting them.
    * 
    * @param op
    *          given String
@@ -118,7 +101,6 @@ public class ExpressionParser
     for (int i = 0; i < op.length(); i++)
     {
       char c = op.charAt(i);
-      // System.out.println(c); 
       if ((i == 0 && Character.isDigit(c))
           || (i > 0 && Character.isDigit(c) && op.charAt(i - 1) != '^') || c == '.')
       {
@@ -187,9 +169,7 @@ public class ExpressionParser
   {
     return this.rightOp;
   }
-  
- 
-  
+
   /**
    * Helper method for testing purposes.
    * 
