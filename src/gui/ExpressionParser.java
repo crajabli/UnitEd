@@ -59,6 +59,8 @@ public class ExpressionParser
   {
     for (int i = 0; i < expression.length - 1; i++)
     {
+      System.out.println("i: " + i);
+      System.out.println("At i it is: " + expression[i]);
       if (expression[i] == null || expression[i].length() == 0)
 
       {
@@ -68,8 +70,8 @@ public class ExpressionParser
 
     // Construct left and right operands
     String left = expression[0];
-    operator = expression[1];
     resultUnit = expression[3];
+    operator = expression[1];
     
     resultUnits = new String[2];
     
@@ -171,7 +173,7 @@ public class ExpressionParser
     {
       toBeUnit = null;
     }
-
+    System.out.println("opernad unit: " + unit); 
     return new Operand(value, unit, exponent, resultUnit);
   }
 

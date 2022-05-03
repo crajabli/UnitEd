@@ -32,10 +32,10 @@ public class Operand
     this.unit = unitExp(unit, exponent);
     this.exponent = exponent;
 
-    if (resultUnit == null)
-    {
-      this.resultUnit = unit;
-    }
+//    if (resultUnit == null)
+//    {
+//      this.resultUnit = unit;
+//    }
     this.resultUnit = resultUnit;
     this.value = BigDecimal.valueOf(Math.pow(value.doubleValue(), exponent));
   }
