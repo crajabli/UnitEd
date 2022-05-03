@@ -1098,8 +1098,8 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   @Override
   public void componentMoved(ComponentEvent e)
   {
-    historyDisplay.setLocation((int) e.getComponent().getLocation().getX() + 545,
-        (int) e.getComponent().getLocation().getY() + 112);
+    historyDisplay.setLocation((int) e.getComponent().getLocation().getX() + 368,
+        (int) e.getComponent().getLocation().getY() + 89);
 
     intermediateDisplay.setLocation((int) e.getComponent().getLocation().getX() + 6,
         (int) e.getComponent().getLocation().getY() + 112);
