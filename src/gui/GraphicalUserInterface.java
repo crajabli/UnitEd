@@ -56,6 +56,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   static Timer intermediateTimer = new Timer(3, intermediateDisplay);
   private final String EXPONENT = "X\u02B8";
   boolean integerPowerActive = false;
+  String wholeExponent = "";
   static JButton exponent = new JButton("X\u02B8");
   // private String aboutStr = "This calculator is by unitEd. This is a four-function calculator
   // with"
@@ -211,6 +212,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
             JOptionPane.showMessageDialog(null, STRINGS.getString("NO_UNITS_INPUT"),
                 STRINGS.getString("WRONG_UNITS"), JOptionPane.INFORMATION_MESSAGE);
             reset();
+            wholeExponent = "";
             break;
           }
 
@@ -236,6 +238,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
             JOptionPane.showMessageDialog(null, STRINGS.getString("NO_UNITS_INPUT"),
                 STRINGS.getString("WRONG_UNITS"), JOptionPane.INFORMATION_MESSAGE);
             reset();
+            wholeExponent = "";
             break;
           }
         }
@@ -244,11 +247,12 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         {
           display.setText("");
           display.setText(
-              display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + " + ");
-          addOperand(input.getText() + unitsDropDown.getSelectedItem(), "+");
+              display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + wholeExponent + " + ");
+          addOperand(input.getText() + unitsDropDown.getSelectedItem() + wholeExponent, "+");
           // finalUnits = ResultUnits.likeUnits(new Operand(new BigDecimal(12),
           // (String) unitsDropDown.getSelectedItem(), 1, "result"));
           // updateFinalDropdown(finalUnits);
+          wholeExponent = "";
           clear();
 
         }
@@ -261,21 +265,24 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           // (String) unitsDropDown.getSelectedItem(), 1, "result"));
           // updateFinalDropdown(finalUnits);
           clear();
+          wholeExponent = "";
         }
         else if (lastResult != null && !numeric.equals("")) // calculations for the non rolling over
                                                             // operations that arent first
         {
           display.setText("");
           display.setText(
-              display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + " + ");
-          addOperand(input.getText() + unitsDropDown.getSelectedItem(), "+");
+              display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + wholeExponent + " + ");
+          addOperand(input.getText() + unitsDropDown.getSelectedItem() + wholeExponent, "+");
           // finalUnits = ResultUnits.likeUnits(new Operand(new BigDecimal(12),
           // (String) unitsDropDown.getSelectedItem(), 1, "result"));
           // updateFinalDropdown(finalUnits);
           clear();
+          wholeExponent = "";
         }
         else if (lastResult == null && numeric.equals(""))
         {
+          wholeExponent = "";
           // JOptionPane.showMessageDialog(null, "Please enter a value", "No Value",
           // JOptionPane.INFORMATION_MESSAGE);
           JOptionPane.showMessageDialog(null, STRINGS.getString("ENTER_VALUE"),
@@ -303,6 +310,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
             JOptionPane.showMessageDialog(null, STRINGS.getString("NO_UNITS_INPUT"),
                 STRINGS.getString("WRONG_UNITS"), JOptionPane.INFORMATION_MESSAGE);
             reset();
+            wholeExponent = "";
             break;
           }
         }
@@ -317,6 +325,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
             JOptionPane.showMessageDialog(null, STRINGS.getString("INCOMPLETE_UNITS"),
                 STRINGS.getString("WRONG_UNITS"), JOptionPane.INFORMATION_MESSAGE);
             reset();
+            wholeExponent = "";
             break;
           }
         }
@@ -325,11 +334,12 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         {
           display.setText("");
           display.setText(
-              display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + " - ");
-          addOperand(input.getText() + unitsDropDown.getSelectedItem(), "-");
+              display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + wholeExponent + " - ");
+          addOperand(input.getText() + unitsDropDown.getSelectedItem() + wholeExponent, "-");
           // finalUnits = ResultUnits.likeUnits(new Operand(new BigDecimal(12),
           // (String) unitsDropDown.getSelectedItem(), 1, "result"));
           // updateFinalDropdown(finalUnits);
+          wholeExponent = "";
           clear();
 
         }
@@ -340,17 +350,19 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           // finalUnits = ResultUnits.likeUnits(new Operand(new BigDecimal(12),
           // (String) unitsDropDown.getSelectedItem(), 1, "result"));
           // updateFinalDropdown(finalUnits);
+          wholeExponent = "";
           clear();
         }
         if (lastResult != null && !numeric.equals("")) // non rolling calculation but with
         {
           display.setText("");
           display.setText(
-              display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + " - ");
-          addOperand(input.getText() + unitsDropDown.getSelectedItem(), "-");
+              display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + wholeExponent + " - ");
+          addOperand(input.getText() + unitsDropDown.getSelectedItem() + wholeExponent, "-");
           // finalUnits = ResultUnits.likeUnits(new Operand(new BigDecimal(12),
           // (String) unitsDropDown.getSelectedItem(), 1, "result"));
           // updateFinalDropdown(finalUnits);
+          wholeExponent = "";
           clear();
 
         }
@@ -382,6 +394,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         if (integerPowerActive)
         {
           putExponent("\u00B9");
+          wholeExponent += "\u00B9";
         }
         else
         {
@@ -394,6 +407,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         if (integerPowerActive)
         {
           putExponent("\u00B2");
+          wholeExponent += "\u00B2";
         }
         else
         {
@@ -406,6 +420,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         if (integerPowerActive)
         {
           putExponent("\u00B3");
+          wholeExponent += "\u00B3";
         }
         else
         {
@@ -418,6 +433,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         if (integerPowerActive)
         {
           putExponent("\u2074");
+          wholeExponent += "\u2074";
         }
         else
         {
@@ -430,6 +446,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         if (integerPowerActive)
         {
           putExponent("\u2075");
+          wholeExponent += "\u2075";
         }
         else
         {
@@ -442,6 +459,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         if (integerPowerActive)
         {
           putExponent("\u2076");
+          wholeExponent += "\u2076";
         }
         else
         {
@@ -454,6 +472,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         if (integerPowerActive)
         {
           putExponent("\u2077");
+          wholeExponent += "\u2077";
         }
         else
         {
@@ -466,6 +485,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         if (integerPowerActive)
         {
           putExponent("\u2078");
+          wholeExponent += "\u2078";
         }
         else
         {
@@ -478,6 +498,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         if (integerPowerActive)
         {
           putExponent("\u2079");
+          wholeExponent += "\u2079";
         }
         else
         {
@@ -490,6 +511,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         if (integerPowerActive)
         {
           putExponent("\u2070");
+          wholeExponent += "\u2070";
         }
         else
         {
@@ -556,6 +578,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
             JOptionPane.showMessageDialog(null, STRINGS.getString("NO_UNITS_INPUT"),
                 STRINGS.getString("WRONG_UNITS"), JOptionPane.INFORMATION_MESSAGE);
             reset();
+            wholeExponent = "";
             break;
           }
         }
@@ -571,6 +594,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
                 STRINGS.getString("WRONG_UNITS"), JOptionPane.INFORMATION_MESSAGE);
 
             reset();
+            wholeExponent = "";
             break;
           }
         }
@@ -579,13 +603,13 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         {
           display.setText("");
           display.setText(
-              display.getText() + input.getText() + unitsDropDown.getSelectedItem() + " x ");
-          addOperand(input.getText() + unitsDropDown.getSelectedItem(), "x");
+              display.getText() + input.getText() + unitsDropDown.getSelectedItem() + wholeExponent + " x ");
+          addOperand(input.getText() + unitsDropDown.getSelectedItem() + wholeExponent, "x");
           // finalUnits = ResultUnits.multiplicationUnits(new Operand(new BigDecimal(12),
           // (String) unitsDropDown.getSelectedItem(), 1, "result"),
           // new Operand(new BigDecimal(1), (String) secondUnit, 1, ""));
           // updateFinalDropdown(finalUnits);
-
+          wholeExponent = "";
           clear();
         }
         else if (lastResult != null && numeric.equals("")) // rolling calculation
@@ -593,18 +617,21 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           display.setText(lastResult + " x ");
           addOperand(lastResult, "x");
           clear();
+          wholeExponent = "";
         }
         else if (lastResult != null && !numeric.equals("")) // non rolling calculation but not first
                                                             // one
         {
           display.setText("");
           display.setText(
-              display.getText() + input.getText() + unitsDropDown.getSelectedItem() + " x ");
-          addOperand(input.getText() + unitsDropDown.getSelectedItem(), "x");
+              display.getText() + input.getText() + unitsDropDown.getSelectedItem() + wholeExponent + " x ");
+          addOperand(input.getText() + unitsDropDown.getSelectedItem() + wholeExponent, "x");
+          wholeExponent = "";
           clear();
         }
         else if (lastResult == null && numeric.equals(""))
         {
+          wholeExponent = "";
           // JOptionPane.showMessageDialog(null, "Please enter a value", "No Value",
           // JOptionPane.INFORMATION_MESSAGE);
           JOptionPane.showMessageDialog(null, STRINGS.getString("ENTER_VALUE"),
@@ -632,6 +659,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
             JOptionPane.showMessageDialog(null, STRINGS.getString("NO_UNITS_INPUT"),
                 STRINGS.getString("WRONG_UNITS"), JOptionPane.INFORMATION_MESSAGE);
             reset();
+            wholeExponent = "";
             break;
           }
         }
@@ -646,6 +674,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
             JOptionPane.showMessageDialog(null, STRINGS.getString("INCOMPLETE_UNITS"),
                 STRINGS.getString("WRONG_UNITS"), JOptionPane.INFORMATION_MESSAGE);
             reset();
+            wholeExponent = "";
             break;
           }
         }
@@ -654,8 +683,9 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         {
           display.setText("");
           display.setText(
-              display.getText() + input.getText() + unitsDropDown.getSelectedItem() + " / ");
-          addOperand(input.getText() + unitsDropDown.getSelectedItem(), "/");
+              display.getText() + input.getText() + unitsDropDown.getSelectedItem() + wholeExponent + " / ");
+          addOperand(input.getText() + unitsDropDown.getSelectedItem() + wholeExponent, "/");
+          wholeExponent = "";
           clear();
 
         }
@@ -663,18 +693,21 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         {
           display.setText(lastResult + " / ");
           addOperand(lastResult, "/");
+          wholeExponent = "";
           clear();
         }
         if (lastResult != null && !numeric.equals("")) // normal calculation
         {
           display.setText("");
           display.setText(
-              display.getText() + input.getText() + unitsDropDown.getSelectedItem() + " / ");
-          addOperand(input.getText() + unitsDropDown.getSelectedItem(), "/");
+              display.getText() + input.getText() + unitsDropDown.getSelectedItem()  + wholeExponent + " / ");
+          addOperand(input.getText() + unitsDropDown.getSelectedItem() + wholeExponent, "/");
+          wholeExponent = "";
           clear();
         }
         else if (lastResult == null && numeric.equals(""))
         {
+          wholeExponent = "";
           // JOptionPane.showMessageDialog(null, "Please enter a value", "No Value",
           // JOptionPane.INFORMATION_MESSAGE);
           JOptionPane.showMessageDialog(null, STRINGS.getString("ENTER_VALUE"),
@@ -719,11 +752,13 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           lastResult = result;
           expression = new String[4];
           resultsDropDown.setModel(new DefaultComboBoxModel(measurements));
+          wholeExponent = "";
 
         }
 
         catch (NotLikeUnitsException nlu)
         {
+          wholeExponent = "";
           reset();
           // JOptionPane.showMessageDialog(null, "You cannot add/subtract non-compatible units",
           // "Non-compatible Units",
@@ -733,6 +768,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         }
         catch (DivideByZeroException dbz)
         {
+          wholeExponent = "";
           reset();
           // JOptionPane.showMessageDialog(null, "You cannot divide by zero", "Incorrect Equation",
           // JOptionPane.INFORMATION_MESSAGE);
@@ -741,6 +777,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         }
         catch (IncompleteUnitsException iue)
         {
+          wholeExponent = "";
           reset();
           // JOptionPane.showMessageDialog(null, "The units you entered are incomplete", "Wrong
           // units",
@@ -750,6 +787,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         }
         catch (OperationFormatException ex)
         {
+          wholeExponent = "";
           reset();
           // JOptionPane.showMessageDialog(null, "Units are not same ", "Wrong unit ",
           // JOptionPane.INFORMATION_MESSAGE);
@@ -759,6 +797,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
         catch (NoValueEnteredException e1)
         {
+          wholeExponent = "";
           reset();
           // JOptionPane.showMessageDialog(null, "Please enter a value", "No Value",
           // JOptionPane.INFORMATION_MESSAGE);
@@ -767,6 +806,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         }
         catch (IncompleteExpressionException iee)
         {
+          wholeExponent = "";
           reset();
           // JOptionPane.showMessageDialog(null, "The expression you entered was incomplete",
           // "Incomplete Expression", JOptionPane.INFORMATION_MESSAGE);
@@ -1079,6 +1119,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     expression = new String[4];
     lastResult = null;
     updateFinalDropdown(measurements);
+    wholeExponent = "";
   }
 
   /**
@@ -1087,6 +1128,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   private void clear()
   {
     input.setText("");
+    wholeExponent = "";
   }
 
   @Override
