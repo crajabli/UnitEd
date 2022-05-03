@@ -246,9 +246,9 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           display.setText(
               display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + " + ");
           addOperand(input.getText() + unitsDropDown.getSelectedItem(), "+");
-          finalUnits = ResultUnits.likeUnits(new Operand(new BigDecimal(12),
-              (String) unitsDropDown.getSelectedItem(), 1, "result"));
-          updateFinalDropdown(finalUnits);
+//          finalUnits = ResultUnits.likeUnits(new Operand(new BigDecimal(12),
+//              (String) unitsDropDown.getSelectedItem(), 1, "result"));
+//          updateFinalDropdown(finalUnits);
           clear();
 
         }
@@ -257,9 +257,9 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         {
           display.setText(lastResult + " + ");
           addOperand(lastResult, "+");
-          finalUnits = ResultUnits.likeUnits(new Operand(new BigDecimal(12),
-              (String) unitsDropDown.getSelectedItem(), 1, "result"));
-          updateFinalDropdown(finalUnits);
+//          finalUnits = ResultUnits.likeUnits(new Operand(new BigDecimal(12),
+//              (String) unitsDropDown.getSelectedItem(), 1, "result"));
+//          updateFinalDropdown(finalUnits);
           clear();
         }
         else if (lastResult != null && !numeric.equals("")) // calculations for the non rolling over
@@ -269,9 +269,9 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           display.setText(
               display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + " + ");
           addOperand(input.getText() + unitsDropDown.getSelectedItem(), "+");
-          finalUnits = ResultUnits.likeUnits(new Operand(new BigDecimal(12),
-              (String) unitsDropDown.getSelectedItem(), 1, "result"));
-          updateFinalDropdown(finalUnits);
+//          finalUnits = ResultUnits.likeUnits(new Operand(new BigDecimal(12),
+//              (String) unitsDropDown.getSelectedItem(), 1, "result"));
+//          updateFinalDropdown(finalUnits);
           clear();
         }
         else if (lastResult == null && numeric.equals(""))
@@ -330,9 +330,9 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           display.setText(
               display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + " - ");
           addOperand(input.getText() + unitsDropDown.getSelectedItem(), "-");
-          finalUnits = ResultUnits.likeUnits(new Operand(new BigDecimal(12),
-              (String) unitsDropDown.getSelectedItem(), 1, "result"));
-          updateFinalDropdown(finalUnits);
+//          finalUnits = ResultUnits.likeUnits(new Operand(new BigDecimal(12),
+//              (String) unitsDropDown.getSelectedItem(), 1, "result"));
+//          updateFinalDropdown(finalUnits);
           clear();
 
         }
@@ -340,9 +340,9 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         {
           display.setText(lastResult + " - ");
           addOperand(lastResult, "-");
-          finalUnits = ResultUnits.likeUnits(new Operand(new BigDecimal(12),
-              (String) unitsDropDown.getSelectedItem(), 1, "result"));
-          updateFinalDropdown(finalUnits);
+//          finalUnits = ResultUnits.likeUnits(new Operand(new BigDecimal(12),
+//              (String) unitsDropDown.getSelectedItem(), 1, "result"));
+//          updateFinalDropdown(finalUnits);
           clear();
         }
         if (lastResult != null && !numeric.equals("")) // non rolling calculation but with
@@ -351,9 +351,9 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           display.setText(
               display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + " - ");
           addOperand(input.getText() + unitsDropDown.getSelectedItem(), "-");
-          finalUnits = ResultUnits.likeUnits(new Operand(new BigDecimal(12),
-              (String) unitsDropDown.getSelectedItem(), 1, "result"));
-          updateFinalDropdown(finalUnits);
+//          finalUnits = ResultUnits.likeUnits(new Operand(new BigDecimal(12),
+//              (String) unitsDropDown.getSelectedItem(), 1, "result"));
+//          updateFinalDropdown(finalUnits);
           clear();
 
         }
@@ -899,11 +899,17 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     unitsDropDown.addItemListener(new ItemListener() {
       @Override
       public void itemStateChanged(ItemEvent e) {
-        if (!display.getText().equals("")) {
+        if (!display.getText().equals("") && expression[1] != null) {
           secondUnit = e.getItemSelectable().getSelectedObjects()[0];
-          finalUnits = ResultUnits.nonLikeUnits(new Operand(new BigDecimal(1), getFirstUnit(), 1, ""),
-              new Operand(new BigDecimal(1), (String) secondUnit, 1, ""), expression[1]);
-          updateFinalDropdown(finalUnits);
+          if (expression[1].equals("x") || expression[1].equals("/")) {
+            finalUnits = ResultUnits.nonLikeUnits(new Operand(new BigDecimal(1), getFirstUnit(), 1, ""),
+                new Operand(new BigDecimal(1), (String) secondUnit, 1, ""), expression[1]);
+            updateFinalDropdown(finalUnits);
+          } else if (expression[1].equals("+") || expression[1].equals("-")) {
+            finalUnits = ResultUnits.likeUnits(new Operand(new BigDecimal(1), getFirstUnit(), 1, ""),
+                new Operand(new BigDecimal(1), (String) secondUnit, 1, ""));
+            updateFinalDropdown(finalUnits);
+          }
         }
       }
     });
@@ -1079,6 +1085,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     input.setText("");
     expression = new String[3];
     lastResult = null;
+    updateFinalDropdown(finalUnits);
   }
 
   /**

@@ -12,9 +12,10 @@ public class ResultUnits {
   private static String rightUnit;
   private static Object[] result;
 
-  public static Object[] likeUnits(Operand leftOperand) {
+  public static Object[] likeUnits(Operand leftOperand,  Operand rightOperand) {
     leftUnit = leftOperand.getUnit();
-    List<String> units = Units.instanceOf(leftOperand);
+    rightUnit = rightOperand.getUnit();
+    List<String> units = Units.instanceOf(leftOperand, rightOperand);
     result = units.toArray();
     return result;
   }
