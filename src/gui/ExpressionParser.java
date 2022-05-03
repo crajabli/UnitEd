@@ -19,6 +19,7 @@ public class ExpressionParser
   private Operand leftOp;
   private Operand rightOp;
   private String operator;
+  private String[] resultUnits;
   private String resultUnit;
 
   /**
@@ -67,11 +68,25 @@ public class ExpressionParser
 
     // Construct left and right operands
     String left = expression[0];
-    resultUnit = expression[3];
-    leftOp = setOperand(left);
     operator = expression[1];
+    resultUnit = expression[3];
+    
+    if (operator.equals("x"))
+    {
+      
+      resultUnits = Operand.separateDashUnits(expression[3]);
+    }
+    
+    if (operator.equals("/"))
+    {
+      
+      resultUnits = Operand.separateSlashUnits(expression[3]);
+    }
+    
     String right = expression[2];
-    rightOp = setOperand(right);
+    rightOp = setOperand(right, resultUnits[1]);
+    leftOp = setOperand(left, resultUnits[0]);
+
 
   }
 
@@ -86,7 +101,7 @@ public class ExpressionParser
    * @throws IncompleteUnitsException
    * @throws NoValueEnteredException
    */
-  private Operand setOperand(final String op)
+  private Operand setOperand(final String op, String resultUnit)
       throws OperationFormatException, IncompleteUnitsException, NoValueEnteredException
   {
     StringBuilder toBeValue = new StringBuilder();
