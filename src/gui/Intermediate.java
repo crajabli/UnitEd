@@ -1,11 +1,17 @@
 package gui;
 
+import convertUtils.Convert;
+import exceptions.*;
+import utilities.Operand;
+import utilities.OperationFormatException;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.concurrent.TimeUnit;
 
+import static gui.GraphicalUserInterface.expression;
 import static gui.GraphicalUserInterface.startIntermediateTimer;
 
 public class Intermediate extends JWindow implements ActionListener {
@@ -48,8 +54,16 @@ public class Intermediate extends JWindow implements ActionListener {
     contentPane.add(Box.createVerticalGlue());
   }
 
-  public void updateIntermediate() {
-    intermediateDisplay.setText("s");
+
+
+
+  public void updateIntermediate() throws OperationFormatException, IncompleteExpressionException, IncompleteUnitsException, NoValueEnteredException, DivideByZeroException, NotLikeUnitsException {
+    ExpressionParser parser = new ExpressionParser(expression);
+    Operand firstOperand = parser.getLeft();
+    Operand secondOperand = parser.getRight();
+    String result = Convert.convertToString(firstOperand, secondOperand, parser.getOperator());
+    intermediateDisplay.setText(GraphicalUserInterface.display.getText()
+        + "\n" + result);
   }
 
 
