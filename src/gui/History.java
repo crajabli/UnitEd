@@ -81,7 +81,6 @@ public class History extends JWindow implements ActionListener
   {
     historyDisplay.setText(historyDisplay.getText() + "\n" + text);
 
-    // System.out.println(historyDisplay.getText());
   }
 
   public void reset()
@@ -128,7 +127,7 @@ public class History extends JWindow implements ActionListener
       
     }
 
-    System.out.println(getWidth());
+
     historyDisplay.setSize(getWidth() + 1, 280);
     setSize(getWidth() + 7, 280);
 
