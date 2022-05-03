@@ -101,10 +101,15 @@ public class Operand
 
   private String unitExp(String unit, int exponent) {
     
+    if (unit.equals("") || unit == null) {
+      
+      return "";
+    }
+    
     String e = String.valueOf(exponent);
     String exp = "";
     
-    char[] c = new char[e.length()];
+    char[] c = e.toCharArray();
     
     for (int i = 0; i < e.length(); i++)
     {
@@ -121,6 +126,11 @@ public class Operand
         case '0':
           
           exp += ("\u2070");
+          break;
+          
+        case '1':
+          
+          exp += ("\u00B9");
           break;
           
         case '2':
@@ -169,6 +179,29 @@ public class Operand
       }
     }
     
-    return unit + exp;
+    if (exp.equals("\u00B9"))
+    {
+      
+      exp = "";
+    }
+    
+    String r = "";
+    
+    for (int i = 0; i < unit.length(); i++)
+    {
+      
+      if (Character.isLetter(unit.charAt(i)))
+      {
+        
+        r += unit.charAt(i);
+      
+      } else
+      {
+        
+        r += exp + unit.charAt(i);
+      }
+    }
+    
+    return r + exp;
   }
 }

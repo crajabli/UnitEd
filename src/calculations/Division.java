@@ -59,7 +59,7 @@ public class Division
     } else if (left.equals(""))
     {
       
-      unit = Unit.calculateUnits(right, operator, false);
+      unit =  "1/" + Unit.calculateUnits(right, operator, false);
     
     } else if (right.equals(""))
     {

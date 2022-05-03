@@ -1,6 +1,7 @@
 package calculations;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -54,13 +55,27 @@ public class Unit
     numerator = new ArrayList<String>();
     denominator = new ArrayList<String>();
     
-    String clone = unwrap(unit);
+    String clone;
+    
+    if (!check)
+    {
+      
+      clone = unwrap(unit);
+    
+    } else 
+    {
+      
+      clone = unit;
+    }
+    
+    System.out.println("This is the clone: " + clone);
+    
     char c = '-';
     
     if (operator.equals(SLASH))
     {
       
-      clone = reverse(unit);
+      clone = reverse(clone);
       c = '/';
     }
     
@@ -446,6 +461,11 @@ public class Unit
           
           exp +=("\u2070");
           break;
+          
+        case '1':
+          
+          exp += ("\u00B9");
+          break;
 
         case '2':
           
@@ -514,55 +534,95 @@ public class Unit
       r += unit.charAt(i);
     }
     
-    String sub = "";
-    int index = 0;
     
     if (r.contains("\u2070"))
     {
       
-      r = r.replace("\u2070", "^0");
-    
-    } else if (r.contains("\u00B2"))
-    {
-      
-      r = r.replace("\u00B2", "^2");
-    
-    } else if (r.contains("\u00B3"))
-    {
-      
-      r = r.replace("\u00B3", "^3");
-    
-    } else if (r.contains("\u2074"))
-    {
-      
-      r = r.replace("\u2074", "^4");
-    
-    } else if (r.contains("\u2075"))
-    {
-      
-      r = r.replace("\u2075", "^5");
-    
-    } else if (r.contains("\u2076")) 
-    {
-      
-      r = r.replace("\u2076", "^6");
-    
-    } else if (r.contains("\u2077")) 
-    {
-      
-      r = r.replace("\u2077", "^7");
-    
-    } else if (r.contains("\u2078")) 
-    {
-      
-      r = r.replace("\u2078", "^8");
-    
-    } else if (r.contains("\u2079"))
-    {
-      
-      r = r.replace("\u2079", "^9");
+      r = r.replace("\u2070", "0");
     }
     
-    return r;
+    if (r.contains("\u00B9"))
+    {
+      
+      r = r.replace("\u00B9", "1");
+    }
+    
+    if (r.contains("\u00B2"))
+    {
+      
+      r = r.replace("\u00B2", "2");
+    }
+    
+    if (r.contains("\u00B3"))
+    {
+      
+      r = r.replace("\u00B3", "3");
+    }
+    
+    if (r.contains("\u2074"))
+    {
+      
+      r = r.replace("\u2074", "4");
+    }
+    
+    if (r.contains("\u2075"))
+    {
+      
+      r = r.replace("\u2075", "5");
+    }
+    
+    if (r.contains("\u2076")) 
+    {
+
+      r = r.replace("\u2076", "6");
+    }
+    
+    if (r.contains("\u2077")) 
+    {
+      
+      r = r.replace("\u2077", "7");
+    }
+    
+    if (r.contains("\u2078")) 
+    {
+
+      r = r.replace("\u2078", "8");
+    } 
+
+    if (r.contains("\u2079"))
+    {
+
+      r = r.replace("\u2079", "9");
+    }
+    
+    boolean check = false;
+    String rs = "";
+    
+    for (int i = 0; i < r.length(); i++)
+    {
+      
+      if (Character.isDigit(r.charAt(i)))
+      {
+        
+        if (!check)
+        {
+          
+          rs += '^';
+          check = true;
+        }
+        
+        rs += r.charAt(i);
+        
+      } else
+      {
+        
+        rs += r.charAt(i);
+        check = false;
+      }
+    }
+    
+    System.out.println("This is rs: " + rs);
+    
+    return rs;
   }
 }
