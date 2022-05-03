@@ -131,6 +131,8 @@ public class Units
     else if (TIMES.contains(left) && TIMES.contains(right))
     {
       return true;
+    } else if (left.equals(right)) {
+      return true; 
     }
     return false;
   }
