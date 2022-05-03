@@ -78,24 +78,24 @@ public class Operand
   }
 
   /**
-   * Parses out individual units if apart of a conjuction.
+   * Parses out individual units if apart of a conjunction.
    * 
    * @return string array of individual units
    */
-  public String[] separateDashUnits(String unit)
+  public static String[] separateDashUnits(String unit)
   {
     String[] units = unit.split("-");
     return units;
   }
 
   /**
-   * Parses out individual units if apart of a conjuction.
+   * Parses out individual units if apart of a conjunction.
    * 
    * @return string array of individual units
    */
-  public String[] separateSlashUnits(String unit)
+  public static String[] separateSlashUnits(String unit)
   {
-    String[] units = unit.split("-");
+    String[] units = unit.split("/");
     return units;
   }
 
