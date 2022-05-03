@@ -100,9 +100,6 @@ public class History extends JWindow implements ActionListener
     startHistoryTimer();
   }
 
- 
-
-
   @Override
   public void actionPerformed(ActionEvent e)
   {
