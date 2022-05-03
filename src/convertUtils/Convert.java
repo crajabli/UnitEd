@@ -3,6 +3,9 @@ package convertUtils;
 import java.util.HashMap;
 import java.util.List;
 
+import calculations.*;
+import exceptions.DivideByZeroException;
+import exceptions.NotLikeUnitsException;
 import utilities.Operand;
 
 public class Convert
@@ -46,7 +49,7 @@ public class Convert
    * Returns a String representation of the converted Operand
    * 
    * @param op represents given Operand
-   * @return Operand array
+   * @return String
    */
   public static String convertToString(Operand op)
   {
@@ -68,12 +71,52 @@ public class Convert
    *          represents left Operand
    * @param right
    *          represents right Operand
-   * @return Operand array
+   * @return String
    */
   public static String convertToString(Operand left, Operand right)
   {
     return convertToString(left) + "\n" + convertToString(right);
   }
+  
+  /**
+   * Returns a String representation of the converted Operands plus their solution
+   * 
+   * @param left
+   *          represents left Operand
+   * @param right
+   *          represents right Operand
+   *          
+   * @param operator represents operator
+   * @return String
+ * @throws NotLikeUnitsException 
+ * @throws DivideByZeroException 
+   */
+  public static String convertToString(Operand left, Operand right, String operator) throws NotLikeUnitsException, DivideByZeroException
+  {
+	  String result = "";
+	  
+	  switch (operator)
+	  {
+	  case "+":
+		  result = Addition.calculate(left, right);
+		  break;
+		  
+	  case "-":
+		  result = Subtraction.calculate(left, right);
+		  break;
+		  
+	  case "/":
+		  result = Division.calculate(left, right, operator);
+		  break;
+		  
+	  case "x":
+		  result = Multiplication.calculate(left, right, operator);
+		  break;
+	  }
+	  
+    return convertToString(left, right) + "\n" + result;
+  }
+
 
   /**
    * Helper method to determine the type of conversion to do.
