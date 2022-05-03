@@ -1,13 +1,14 @@
 package gui;
 
 import javax.swing.*;
+
 import javax.swing.text.DefaultEditorKit;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
 import java.util.concurrent.TimeUnit;
 
 import static gui.GraphicalUserInterface.startHistoryTimer;
@@ -22,6 +23,10 @@ import static gui.GraphicalUserInterface.startHistoryTimer;
 public class History extends JWindow implements ActionListener
 {
 
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
   JTextArea historyDisplay;
   Clipboard clipboard;
   Action[] textActions = {new DefaultEditorKit.CopyAction(), new DefaultEditorKit.PasteAction(),};
@@ -95,6 +100,9 @@ public class History extends JWindow implements ActionListener
     super.setVisible(b);
     startHistoryTimer();
   }
+
+ 
+
 
   @Override
   public void actionPerformed(ActionEvent e)
