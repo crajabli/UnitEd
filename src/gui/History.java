@@ -23,11 +23,13 @@ import static gui.GraphicalUserInterface.startHistoryTimer;
 public class History extends JWindow implements ActionListener
 {
 
+
   /**
    * 
    */
   private static final long serialVersionUID = 1L;
-  JTextArea historyDisplay;
+  // JTextArea historyDisplay;
+  JTextPane historyDisplay;
   Clipboard clipboard;
   Action[] textActions = {new DefaultEditorKit.CopyAction(), new DefaultEditorKit.PasteAction(),};
   // new DefaultEditorKit.CopyAction()
@@ -55,17 +57,17 @@ public class History extends JWindow implements ActionListener
 
     JPanel historyPanel = new JPanel();
 
-    historyDisplay = new JTextArea();
+    historyDisplay = new JTextPane();
     historyPanel.setLayout(new GridLayout());
     historyDisplay.setEditable(false);
 
     // Action copy = historyDisplay.getActionMap().get("copy");
 
     JButton closeButton = new JButton("<");
-    
+
     // JButton copyButton = new JButton(textActions[0]);
     // copyButton.addActionListener(this);
-    // closeButton.addActionListener(this);
+     closeButton.addActionListener(this);
 
     historyPanel.add(historyDisplay);
     // contentPane.add( copy);
@@ -129,7 +131,7 @@ public class History extends JWindow implements ActionListener
         setSize(getWidth() - 7, 280);
         return;
       }
-      
+
     }
 
 

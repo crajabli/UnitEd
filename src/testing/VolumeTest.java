@@ -5,12 +5,16 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import exceptions.DivideByZeroException;
+import utilities.Operand;
 import utilities.OperationFormatException;
 
 class VolumeTest {
 	
 	@Test
 	void testToPint() throws OperationFormatException, DivideByZeroException {
+		Operand left;
+		Operand right;
+		
 		// Both pt
 		
 		// qt to pt
@@ -25,6 +29,9 @@ class VolumeTest {
 	
 	@Test
 	void testToQuart() throws OperationFormatException, DivideByZeroException {
+		Operand left;
+		Operand right;
+		
 		// Both qt
 		
 		// pt to qt
@@ -39,6 +46,9 @@ class VolumeTest {
 	
 	@Test
 	void testToGallon() throws OperationFormatException, DivideByZeroException {
+		Operand left;
+		Operand right;
+		
 		// Both gal
 		
 		// qt to gal
@@ -53,6 +63,9 @@ class VolumeTest {
 	
 	@Test
 	void testToCubicCentimeter() throws OperationFormatException, DivideByZeroException {
+		Operand left;
+		Operand right;
+		
 		// Both cc
 		
 		// qt to cc
@@ -67,6 +80,9 @@ class VolumeTest {
 	
 	@Test
 	void testToLiter() throws OperationFormatException, DivideByZeroException {
+		Operand left;
+		Operand right;
+		
 		// Both l
 		
 		// qt to l

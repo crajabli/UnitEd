@@ -108,35 +108,16 @@ public class Units
    *          second unit
    * @return boolean
    */
-  public static boolean instanceOf(final String unit, final String unit2)
+  public static boolean instanceOf(final String left, final String right)
   {
-    if (LENGTHS.contains(unit) && LENGTHS.contains(unit2))
-    {
-      return true;
-    }
-    else if (WEIGHTS.contains(unit) && WEIGHTS.contains(unit2))
-    {
-      return true;
-    }
-    else if (VOLUMES.contains(unit) && VOLUMES.contains(unit2))
-    {
-      return true;
+	  for (int i = 0; i < UNITS.size(); i++)
+	    {
+	      if (instanceOf(left, UNITS.get(i)) && instanceOf(right, UNITS.get(i)))
+	      {
+	        return true;
+	      }
+	    }
 
-    }
-    else if (MONEY.contains(unit) && MONEY.contains(unit2))
-    {
-      return true;
-
-    }
-    else if (TIMES.contains(unit) && TIMES.contains(unit2))
-    {
-      return true;
-
-    }
-    else if (unit.equals(unit2))
-    {
-      return true;
-    }
     return false;
   }
 

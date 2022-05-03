@@ -5,11 +5,15 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import exceptions.DivideByZeroException;
+import utilities.Operand;
 import utilities.OperationFormatException;
 
 class WeightTest {
 	@Test
 	void testToOunce() throws OperationFormatException, DivideByZeroException {
+		Operand left;
+		Operand right;
+		
 		// Both oz
 		
 		// lb to oz
@@ -24,6 +28,9 @@ class WeightTest {
 	
 	@Test
 	void testToPound() throws OperationFormatException, DivideByZeroException {
+		Operand left;
+		Operand right;
+		
 		// Both lb
 		
 		// oz to lb
@@ -38,6 +45,9 @@ class WeightTest {
 	
 	@Test
 	void testToTon() throws OperationFormatException, DivideByZeroException {
+		Operand left;
+		Operand right;
+		
 		// Both ton
 		
 		// oz to ton
@@ -52,6 +62,9 @@ class WeightTest {
 	
 	@Test
 	void testToGram() throws OperationFormatException, DivideByZeroException {
+		Operand left;
+		Operand right;
+		
 		// Both g
 		
 		// oz to g
@@ -66,6 +79,9 @@ class WeightTest {
 	
 	@Test
 	void testToKilogram() throws OperationFormatException, DivideByZeroException {
+		Operand left;
+		Operand right;
+		
 		// Both kg
 		
 		// oz to kg

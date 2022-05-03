@@ -34,7 +34,7 @@ import utilities.ResultUnits;
 public class GraphicalUserInterface implements ActionListener, ComponentListener
 {
 
-  JTextField display;
+  static JTextField display;
   JTextField input;
   static String[] expression = new String[4];
   private final String DIVIDE = "\u00F7";
@@ -1098,11 +1098,11 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   @Override
   public void componentMoved(ComponentEvent e)
   {
-    historyDisplay.setLocation((int) e.getComponent().getLocation().getX() + 545,
-        (int) e.getComponent().getLocation().getY() + 112);
+    historyDisplay.setLocation((int) e.getComponent().getLocation().getX() + 368,
+        (int) e.getComponent().getLocation().getY() + 63);
 
     intermediateDisplay.setLocation((int) e.getComponent().getLocation().getX() + 6,
-        (int) e.getComponent().getLocation().getY() + 112);
+        (int) e.getComponent().getLocation().getY() + 63);
 
   }
 
