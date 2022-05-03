@@ -9,10 +9,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
+import java.awt.event.*;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.util.Locale;
@@ -39,7 +36,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
   JTextField display;
   JTextField input;
-  String[] expression = new String[4];
+  static String[] expression = new String[5];
   private final String DIVIDE = "\u00F7";
   String lastResult = null;
   private final String SIGN = "\u00B1";
@@ -68,6 +65,12 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 //      + "calculator shows all previous calculations in the history display to the right and shows the "
 //      + "steps of those calculations in the intermediate steps display on the left.";
   Object[] finalUnits;
+  static Object secondUnit;
+  // string array of units for dropdown menu
+  static String[] measurements = {"", "in", "ft", "yd", "mi", "mm", "cm", "m", "km", "oz", "lb", "ton",
+      "g", "kg", "pt", "qt", "gal", "cc", "l", "c", "$", "sec", "hr", "day", "mon", "yr"};
+
+
 
   /**
    * Constructor.
@@ -77,9 +80,17 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     setLayout();
   }
 
+  public static String getOperator() {
+    return expression[1];
+  }
+
   public void resetTimer()
   {
     historyTimer.restart();
+  }
+
+  public static String getFirstUnit() {
+    return expression[0].replaceAll("\\d", "");
   }
 
   /**
@@ -577,6 +588,11 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           display.setText(
               display.getText() + input.getText() + unitsDropDown.getSelectedItem() + " x ");
           addOperand(input.getText() + unitsDropDown.getSelectedItem(), "x");
+//          finalUnits = ResultUnits.multiplicationUnits(new Operand(new BigDecimal(12),
+//              (String) unitsDropDown.getSelectedItem(), 1, "result"),
+//              new Operand(new BigDecimal(1), (String) secondUnit, 1, ""));
+//          updateFinalDropdown(finalUnits);
+
           clear();
         }
         else if (lastResult != null && numeric.equals("")) // rolling calculation
@@ -713,7 +729,8 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
               + " = " + result);
           historyDisplay.updateText(display.getText());
           lastResult = result;
-          expression = new String[4];
+          expression = new String[5];
+          resultsDropDown.setModel(new DefaultComboBoxModel(measurements));
 
         }
 
@@ -868,19 +885,28 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     // creation of history panel
     JPanel historyPanel = new JPanel();
 
-    // string array of units for dropdown menu
-    String[] measurements = {"", "in", "ft", "yd", "mi", "mm", "cm", "m", "km", "oz", "lb", "ton",
-        "g", "kg", "pt", "qt", "gal", "cc", "l", "c", "$", "sec", "hr", "day", "mon", "yr"};
 
     // result units drop down menu
     resultsDropDown = new JComboBox(measurements);
     resultsDropDown.setEditable(true);
     resultsDropDown.setVisible(true);
 
+
     // units drop down menu
     unitsDropDown = new JComboBox(measurements);
     unitsDropDown.setEditable(true);
     unitsDropDown.setVisible(true);
+    unitsDropDown.addItemListener(new ItemListener() {
+      @Override
+      public void itemStateChanged(ItemEvent e) {
+        if (!display.getText().equals("")) {
+          secondUnit = e.getItemSelectable().getSelectedObjects()[0];
+          finalUnits = ResultUnits.nonLikeUnits(new Operand(new BigDecimal(1), getFirstUnit(), 1, ""),
+              new Operand(new BigDecimal(1), (String) secondUnit, 1, ""), expression[1]);
+          updateFinalDropdown(finalUnits);
+        }
+      }
+    });
 
     // adding interior panels to exterior panels
     topExteriorPanel.add(extLogoPanel);
