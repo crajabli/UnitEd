@@ -48,6 +48,10 @@ public class Intermediate extends JWindow implements ActionListener {
     contentPane.add(Box.createVerticalGlue());
   }
 
+  public void updateIntermediate() {
+    intermediateDisplay.setText("s");
+  }
+
 
   @Override
   public void setVisible(boolean b)

@@ -715,6 +715,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           display.setText(display.getText() + input.getText() + unitsDropDown.getSelectedItem()
               + " = " + result);
           historyDisplay.updateText(display.getText());
+          intermediateDisplay.updateIntermediate();
           lastResult = result;
           expression = new String[4];
           resultsDropDown.setModel(new DefaultComboBoxModel(measurements));
@@ -1077,7 +1078,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     input.setText("");
     expression = new String[4];
     lastResult = null;
-    updateFinalDropdown(finalUnits);
+    updateFinalDropdown(measurements);
   }
 
   /**
