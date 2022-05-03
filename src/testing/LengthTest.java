@@ -8,13 +8,14 @@ import org.junit.jupiter.api.Test;
 
 import calculations.*;
 import exceptions.DivideByZeroException;
+import exceptions.NotLikeUnitsException;
 import utilities.Operand;
 import utilities.OperationFormatException;
 
 class LengthTest {
 
 	@Test
-	void testToInch() throws OperationFormatException, DivideByZeroException {
+	void testToInch() throws OperationFormatException, DivideByZeroException, NotLikeUnitsException {
 		Operand left;
 		Operand right;
 
@@ -84,7 +85,7 @@ class LengthTest {
 	}
 
 	@Test
-	void testToFeet() throws OperationFormatException, DivideByZeroException {
+	void testToFeet() throws OperationFormatException, DivideByZeroException, NotLikeUnitsException {
 		Operand left;
 		Operand right;
 
@@ -112,7 +113,7 @@ class LengthTest {
 	}
 
 	@Test
-	void testToYard() throws OperationFormatException, DivideByZeroException {
+	void testToYard() throws OperationFormatException, DivideByZeroException, NotLikeUnitsException {
 		Operand left;
 		Operand right;
 
@@ -140,7 +141,7 @@ class LengthTest {
 	}
 
 	@Test
-	void testToMile() throws OperationFormatException, DivideByZeroException {
+	void testToMile() throws OperationFormatException, DivideByZeroException, NotLikeUnitsException {
 		Operand left;
 		Operand right;
 
@@ -168,7 +169,7 @@ class LengthTest {
 	}
 
 	@Test
-	void testToMillimeter() throws OperationFormatException, DivideByZeroException {
+	void testToMillimeter() throws OperationFormatException, DivideByZeroException, NotLikeUnitsException {
 		Operand left;
 		Operand right;
 
@@ -196,7 +197,7 @@ class LengthTest {
 	}
 
 	@Test
-	void testToCentimeter() throws OperationFormatException, DivideByZeroException {
+	void testToCentimeter() throws OperationFormatException, DivideByZeroException, NotLikeUnitsException {
 		Operand left;
 		Operand right;
 
@@ -224,7 +225,7 @@ class LengthTest {
 	}
 
 	@Test
-	void testToMeter() throws OperationFormatException, DivideByZeroException {
+	void testToMeter() throws OperationFormatException, DivideByZeroException, NotLikeUnitsException {
 		Operand left;
 		Operand right;
 
@@ -252,7 +253,7 @@ class LengthTest {
 	}
 
 	@Test
-	void testToKilometer() throws OperationFormatException, DivideByZeroException {
+	void testToKilometer() throws OperationFormatException, DivideByZeroException, NotLikeUnitsException {
 		Operand left;
 		Operand right;
 

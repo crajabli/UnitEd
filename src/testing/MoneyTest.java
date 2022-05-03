@@ -11,13 +11,14 @@ import calculations.Division;
 import calculations.Multiplication;
 import calculations.Subtraction;
 import exceptions.DivideByZeroException;
+import exceptions.NotLikeUnitsException;
 import utilities.Operand;
 import utilities.OperationFormatException;
 
 class MoneyTest {
 
 	@Test
-	void testToCent() throws OperationFormatException, DivideByZeroException {
+	void testToCent() throws OperationFormatException, DivideByZeroException, NotLikeUnitsException {
 		Operand left;
 		Operand right;
 		
@@ -46,7 +47,7 @@ class MoneyTest {
 	}
 	
 	@Test
-	void testToDollar() throws OperationFormatException, DivideByZeroException {
+	void testToDollar() throws OperationFormatException, DivideByZeroException, NotLikeUnitsException {
 		Operand left;
 		Operand right;
 		

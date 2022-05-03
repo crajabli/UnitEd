@@ -2,6 +2,7 @@ package gui;
 
 import java.math.BigDecimal;
 
+
 import exceptions.IncompleteExpressionException;
 import exceptions.IncompleteUnitsException;
 import exceptions.NoValueEnteredException;
@@ -35,6 +36,7 @@ public class ExpressionParser
       IncompleteUnitsException, NoValueEnteredException, IncompleteExpressionException
   {    
     parseHelper(expression);
+    
   }
 
   /**
