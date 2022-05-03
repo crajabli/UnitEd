@@ -182,7 +182,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
   private void updateFinalDropdown(Object[] units)
   {
-      resultsDropDown.setModel(new DefaultComboBoxModel(finalUnits)); 
+      resultsDropDown.setModel(new DefaultComboBoxModel(units));
   }
 
   @Override
@@ -715,6 +715,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           display.setText(display.getText() + input.getText() + unitsDropDown.getSelectedItem()
               + " = " + result);
           historyDisplay.updateText(display.getText());
+          intermediateDisplay.updateIntermediate();
           lastResult = result;
           expression = new String[4];
           resultsDropDown.setModel(new DefaultComboBoxModel(measurements));
@@ -1064,6 +1065,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     frame.setSize(550, 400);
     frame.setVisible(true);
     frame.setLocationRelativeTo(null);
+    frame.pack();
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
 
@@ -1076,7 +1078,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     input.setText("");
     expression = new String[4];
     lastResult = null;
-    updateFinalDropdown(finalUnits);
+    updateFinalDropdown(measurements);
   }
 
   /**
