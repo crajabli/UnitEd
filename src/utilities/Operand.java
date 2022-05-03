@@ -84,7 +84,21 @@ public class Operand
    */
   public static String[] separateDashUnits(String unit)
   {
-    String[] units = unit.split("-");
+    
+    String[] units = new String[2];
+    
+    if (unit.contains("-"))
+    {
+      
+      units = unit.split(unit);
+    
+    } else
+    {
+      
+      units[0] = unit;
+      units[1] = unit;
+    }
+    
     return units;
   }
 
@@ -95,7 +109,21 @@ public class Operand
    */
   public static String[] separateSlashUnits(String unit)
   {
-    String[] units = unit.split("/");
+    
+    String[] units = new String[2];
+    
+    if (unit.contains("/"))
+    {
+      
+      units = unit.split(unit);
+    
+    } else
+    {
+      
+      units[0] = unit;
+      units[1] = unit;
+    }
+    
     return units;
   }
 
