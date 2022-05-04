@@ -40,20 +40,36 @@ class ExpressionParserTest
     assertEquals(right.getValue(), ep.getRight().getValue());
     assertEquals(right.getUnit(), ep.getRight().getUnit());
 
-    expression[0] = "0 miles";
+    expression[0] = "0mm";
     expression[1] = DIVISION;
     expression[2] = "100 miles";
     expression[3] = null;
 
     ExpressionParser ep1 = new ExpressionParser(expression);
     BigDecimal val1 = new BigDecimal("0.0");
-    Operand left1 = new Operand(val1, "miles", 1, null);
+    Operand left1 = new Operand(val1, "mm", 1, null);
     Operand right1 = new Operand(new BigDecimal("100.0"), "miles", 1, null);
     assertEquals(left1.getUnit(), ep1.getLeft().getUnit());
     assertEquals(left1.getValue(), ep1.getLeft().getValue());
     assertEquals(right1.getValue(), ep1.getRight().getValue());
     assertEquals(right1.getUnit(), ep1.getRight().getUnit());
     assertEquals(DIVISION, ep1.getOperator());
+    
+    expression = new String[4];
+    expression[0] = "-10pow";
+    expression[1] = MULTIPLICATION;
+    expression[2] = "-2 mm";
+    expression[3] = "stars";
+    
+    ExpressionParser ep2 = new ExpressionParser(expression);
+    Operand l = new Operand(new BigDecimal("-10"), "pow", 1, "stars");
+    Operand r = new Operand(new BigDecimal("-2"), "mm", 1, "stars");
+    
+    System.out.println(l.getUnit()); 
+
+    assertEquals(l.getUnit(), ep2.getLeft().getUnit());
+    
+    
   }
 
   @Test
@@ -90,10 +106,10 @@ class ExpressionParserTest
   {
     expression[0] = "";
     expression[1] = ""; 
-    expression[2] = ""; 
+    expression[2] = "";  
 
     try
-    {
+    { 
       ExpressionParser ep = new ExpressionParser(expression);
     }
     catch (IncompleteExpressionException iee)

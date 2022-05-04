@@ -59,7 +59,7 @@ public class ExpressionParser
   {
     for (int i = 0; i < expression.length - 1; i++)
     {
-      
+       
       if (expression[i] == null || expression[i].length() == 0)
 
       {
@@ -80,7 +80,7 @@ public class ExpressionParser
       resultUnits = Operand.separateDashUnits(expression[3]);
       rightOp = setOperand(right, resultUnits[1]);
       leftOp = setOperand(left, resultUnits[0]);
-    } else if (operator.equals("/"))
+    } else if (operator.equals("/")) 
     {
       resultUnits = Operand.separateSlashUnits(expression[3]);
       rightOp = setOperand(right, resultUnits[1]);
@@ -92,8 +92,9 @@ public class ExpressionParser
       rightOp = setOperand(right, resultUnits[1]);
       leftOp = setOperand(left, resultUnits[0]);
     } else {
-      rightOp = setOperand(right, resultUnit);
       leftOp = setOperand(left, resultUnit);
+
+      rightOp = setOperand(right, resultUnit);
     }
 //    System.out.println(resultUnits[1]); 
 //    System.out.println(resultUnits[0]); 

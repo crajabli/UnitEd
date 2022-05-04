@@ -97,7 +97,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
   public static String getFirstUnit()
   {
-    return expression[0].replaceAll("\\d", "");
+    return expression[0].replaceAll("\\d", ""); 
   }
 
   /**
