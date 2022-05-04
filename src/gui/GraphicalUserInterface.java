@@ -1273,7 +1273,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     // creation of function buttons
 
     JButton inverse = new JButton("1/x");
-    
+
     ArrayList<JButton> buttons = new ArrayList<JButton>();
     buttons.add(sign);
     buttons.add(reset);
@@ -1298,9 +1298,9 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     buttons.add(intStepsButton);
     buttons.add(historyButton);
     buttons.add(exponent);
-    
+
     setColor(buttons, true);
-    
+
     // adding intSteps button to panel
     intStepsPanel.add(intStepsButton);
 
@@ -1487,16 +1487,17 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
     if (set)
     {
-      
+
       display.setBackground(color);
       input.setBackground(color);
     }
   }
-  
+
   /**
    * Helper method to set the color of the buttons.
    * 
-   * @param buttons for the list of buttons
+   * @param buttons
+   *          for the list of buttons
    */
   private void setColor(ArrayList<JButton> buttons, boolean set)
   {
@@ -1504,14 +1505,14 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     int r2 = Integer.parseInt(COLORS.getString("R2"));
     int g2 = Integer.parseInt(COLORS.getString("G2"));
     int b2 = Integer.parseInt(COLORS.getString("B2"));
-    
+
     Color color = new Color(r2, g2, b2);
-    
+
     if (set)
     {
       for (JButton jb : buttons)
       {
-        
+
         jb.setForeground(color);
       }
     }
