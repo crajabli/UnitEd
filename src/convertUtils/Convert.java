@@ -19,6 +19,7 @@ public class Convert
       put(Units.VOLUMES, "Volume");
       put(Units.MONEY, "Money");
       put(Units.TIMES, "Time");
+      put(Units.SPEEDS, "Speed");
     }
   };
 
@@ -170,6 +171,10 @@ public class Convert
       case "Time":
       	result = Time.convertTime(op);
     	break;
+    	
+      case "Speed":
+        result = Speed.convertSpeed(op);
+      	break;
     }
     
     return result;
