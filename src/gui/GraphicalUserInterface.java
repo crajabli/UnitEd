@@ -47,6 +47,8 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   JComboBox resultsDropDown;
   static JButton historyButton = new JButton(">");
   static Timer timer = new Timer(3, historyDisplay);
+  static final ResourceBundle COLORS = ResourceBundle.getBundle("gui.Colors");
+  
   static final Locale LOCALE = Locale.getDefault(); // Belgium and French
   static final ResourceBundle STRINGS = ResourceBundle.getBundle("gui.Strings");
   static JButton intStepsButton = new JButton("<");
@@ -56,7 +58,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   boolean integerPowerActive = false;
   String wholeExponent = "";
   static JButton exponent = new JButton("X\u02B8");
-  static final ResourceBundle COLORS = ResourceBundle.getBundle("gui.Colors");
+//  static final ResourceBundle COLORS = ResourceBundle.getBundle("gui.Colors");
 
   // private final String ABOUT = STRINGS.getString("About");
   // private String aboutStr = "This calculator is by unitEd. This is a four-function calculator
@@ -80,6 +82,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   public GraphicalUserInterface()
   {
     setLayout();
+
   }
 
   public static String getOperator()
