@@ -1,5 +1,10 @@
 package gui;
 
+import exceptions.IncompleteExpressionException;
+import exceptions.IncompleteUnitsException;
+import exceptions.NoValueEnteredException;
+import utilities.OperationFormatException;
+
 import javax.swing.*;
 
 import javax.swing.text.DefaultEditorKit;
@@ -29,7 +34,7 @@ public class History extends JWindow implements ActionListener
    */
   private static final long serialVersionUID = 1L;
   // JTextArea historyDisplay;
-  JTextPane historyDisplay;
+  JTextArea historyDisplay;
   Clipboard clipboard;
   Action[] textActions = {new DefaultEditorKit.CopyAction(), new DefaultEditorKit.PasteAction(),};
   // new DefaultEditorKit.CopyAction()
@@ -39,35 +44,34 @@ public class History extends JWindow implements ActionListener
    * default Constructor.
    *
    */
-  public History()
-  {
+  public History()  {
     super();
 
     setLayout();
   }
 
+
   /**
    * sets up the layout of the History window.
    *
    */
-  private void setLayout()
-  {
+  private void setLayout() {
+
+
     Container contentPane = getContentPane();
     contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.X_AXIS));
+    clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 
     JPanel historyPanel = new JPanel();
 
-    historyDisplay = new JTextPane();
+    historyDisplay = new JTextArea(30,200);
     historyPanel.setLayout(new GridLayout());
-    historyDisplay.setEditable(false);
+    historyDisplay.setEditable(true);
 
 
-    // Action copy = historyDisplay.getActionMap().get("copy");
 
     JButton closeButton = new JButton("<");
 
-    // JButton copyButton = new JButton(textActions[0]);
-    // copyButton.addActionListener(this);
      closeButton.addActionListener(this);
 
     historyPanel.add(historyDisplay);
@@ -76,6 +80,7 @@ public class History extends JWindow implements ActionListener
     contentPane.add(closeButton);
     // contentPane.add(copyButton);
     contentPane.add(Box.createVerticalGlue());
+    setGlassPane(contentPane);
 
   }
 
