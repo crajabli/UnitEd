@@ -12,6 +12,7 @@ import java.awt.LayoutManager;
 import java.awt.event.*;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -1239,6 +1240,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     // creation of input text field
     input = new JTextField();
     input.addKeyListener(this);
+    setColor(true);
 
     // creation of utility buttons
     JButton sign = new JButton(SIGN);
@@ -1268,7 +1270,34 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     // creation of function buttons
 
     JButton inverse = new JButton("1/x");
-
+    
+    ArrayList<JButton> buttons = new ArrayList<JButton>();
+    buttons.add(sign);
+    buttons.add(reset);
+    buttons.add(clear);
+    buttons.add(backspace);
+    buttons.add(plus);
+    buttons.add(minus);
+    buttons.add(multiply);
+    buttons.add(divide);
+    buttons.add(equals);
+    buttons.add(zero);
+    buttons.add(one);
+    buttons.add(two);
+    buttons.add(three);
+    buttons.add(four);
+    buttons.add(five);
+    buttons.add(six);
+    buttons.add(seven);
+    buttons.add(eight);
+    buttons.add(nine);
+    buttons.add(inverse);
+    buttons.add(intStepsButton);
+    buttons.add(historyButton);
+    buttons.add(exponent);
+    
+    setColor(buttons, true);
+    
     // adding intSteps button to panel
     intStepsPanel.add(intStepsButton);
 
@@ -1449,18 +1478,39 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     int g1 = Integer.parseInt(COLORS.getString("G1"));
     int b1 = Integer.parseInt(COLORS.getString("B1"));
 
-    int r2 = Integer.parseInt(COLORS.getString("R2"));
-    int g2 = Integer.parseInt(COLORS.getString("G2"));
-    int b2 = Integer.parseInt(COLORS.getString("B2"));
-
-    Color first = new Color(r1, g1, b1);
-    Color second = new Color(r2, g2, b2);
+    Color color = new Color(r1, g1, b1);
 
     // Set the colors below
 
     if (set)
     {
+      
+      display.setBackground(color);
+      input.setBackground(color);
+    }
+  }
+  
+  /**
+   * Helper method to set the color of the buttons.
+   * 
+   * @param buttons for the list of buttons
+   */
+  private void setColor(ArrayList<JButton> buttons, boolean set)
+  {
 
+    int r2 = Integer.parseInt(COLORS.getString("R2"));
+    int g2 = Integer.parseInt(COLORS.getString("G2"));
+    int b2 = Integer.parseInt(COLORS.getString("B2"));
+    
+    Color color = new Color(r2, g2, b2);
+    
+    if (set)
+    {
+      for (JButton jb : buttons)
+      {
+        
+        jb.setForeground(color);
+      }
     }
   }
 
