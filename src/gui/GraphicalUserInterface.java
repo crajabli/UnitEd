@@ -98,10 +98,6 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   public static String getFirstUnit(String op)
   {
 
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'main' of https://github.com/bernstdh/team22.git
     op = op.replaceAll("\\d", "");
     StringBuilder toBeUnit = new StringBuilder();
     int exponent = 0;
@@ -129,11 +125,6 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     }
 
     return toBeUnit.toString();
-
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'main' of https://github.com/bernstdh/team22.git
   }
 
 
