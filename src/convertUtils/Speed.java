@@ -52,7 +52,7 @@ public class Speed {
 	        break;
 
 	      case "km/hr":
-	        value = SpeedUtils.toKmPerSec(op);
+	        value = SpeedUtils.toKmPerHr(op);
 	        break;
 	    }
 	    return new Operand(value, unit, op.getExp(), unit);
