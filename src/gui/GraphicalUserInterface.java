@@ -77,7 +77,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       "ton", "g", "kg", "pt", "qt", "gal", "cc", "l", "c", "$", "sec", "hr", "day", "mon", "yr"};
 
   /**
-   * Constructor.
+   * Constructor. 
    */
   public GraphicalUserInterface()
   {
@@ -97,9 +97,8 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
   public static String getFirstUnit(String op)
   {
-<<<<<<< HEAD
-    return expression[0].replaceAll("\\d", ""); 
-=======
+
+
     op = op.replaceAll("\\d", "");
     StringBuilder toBeUnit = new StringBuilder();
     int exponent = 0;
@@ -128,7 +127,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
     return toBeUnit.toString();
 
->>>>>>> branch 'main' of https://github.com/bernstdh/team22.git
+
   }
 
 

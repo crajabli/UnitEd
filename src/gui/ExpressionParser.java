@@ -39,7 +39,6 @@ public class ExpressionParser
 
   }
 
-
   public String getOperator()
   {
     return operator;
@@ -59,7 +58,7 @@ public class ExpressionParser
   {
     for (int i = 0; i < expression.length - 1; i++)
     {
-       
+
       if (expression[i] == null || expression[i].length() == 0)
 
       {
@@ -73,34 +72,39 @@ public class ExpressionParser
     operator = expression[1];
     String right = expression[2];
     resultUnits = new String[2];
-    
+
     if (operator.equals("x"))
     {
-      
+
       resultUnits = Operand.separateDashUnits(expression[3]);
-      rightOp = setOperand(right, resultUnits[1]);
       leftOp = setOperand(left, resultUnits[0]);
-    } else if (operator.equals("/")) 
+      rightOp = setOperand(right, resultUnits[1]);
+    }
+    else if (operator.equals("/"))
     {
       resultUnits = Operand.separateSlashUnits(expression[3]);
-      rightOp = setOperand(right, resultUnits[1]);
       leftOp = setOperand(left, resultUnits[0]);
-    } else if (resultUnit == null || resultUnit.isEmpty())
+      rightOp = setOperand(right, resultUnits[1]);
+
+    }
+    else if (resultUnit == null || resultUnit.isEmpty())
     {
       resultUnits[0] = "";
       resultUnits[1] = "";
-      rightOp = setOperand(right, resultUnits[1]);
       leftOp = setOperand(left, resultUnits[0]);
-    } else {
+      rightOp = setOperand(right, resultUnits[1]);
+
+    }
+    else
+    {
       leftOp = setOperand(left, resultUnit);
 
       rightOp = setOperand(right, resultUnit);
     }
-//    System.out.println(resultUnits[1]); 
-//    System.out.println(resultUnits[0]); 
-//    rightOp = setOperand(right, resultUnits[1]);
-//    leftOp = setOperand(left, resultUnits[0]);
-
+    // System.out.println(resultUnits[1]);
+    // System.out.println(resultUnits[0]);
+    // rightOp = setOperand(right, resultUnits[1]);
+    // leftOp = setOperand(left, resultUnits[0]);
 
   }
 
@@ -122,30 +126,37 @@ public class ExpressionParser
     StringBuilder toBeUnit = new StringBuilder();
     int exponent = 1;
 
+    System.out.println(op.charAt(0) == '-'); 
+
     if (op.charAt(0) == '-')
     {
+      System.out.println("add to value: " + op.charAt(0)); 
       toBeValue = toBeValue.append(op.charAt(0));
     }
 
     for (int i = 0; i < op.length(); i++)
     {
       char c = op.charAt(i);
+      System.out.println("C is: " + c + " i: " + i); 
       if ((i == 0 && Character.isDigit(c))
           || (i > 0 && Character.isDigit(c) && op.charAt(i - 1) != '^') || c == '.')
       {
+        System.out.println("add to value: " + c); 
         toBeValue = toBeValue.append(c);
       }
-      else if ((op.charAt(0) != '-') && (Character.isLetter(c) || c == '/' || c == '-' || (c == '^')
+      else if (c != '-' && (Character.isLetter(c) || c == '/' || c == '-' || (c == '^')
           || (i != 0 && Character.isDigit(c) && op.charAt(i - 1) == '^')))
       {
+        System.out.println("add to unit: " + c); 
 
         toBeUnit = toBeUnit.append(c);
 
       }
-      else if (!Character.isDigit(c) && !Character.isLetter(c) &&  c != ' ')
+      else if (!Character.isDigit(c) && !Character.isLetter(c) && c != ' ' && c != '-')
       {
         try
         {
+          System.out.println("add to expoent: " + c); 
           exponent = Character.getNumericValue(c);
         }
         catch (NumberFormatException nfe)
@@ -176,7 +187,7 @@ public class ExpressionParser
       toBeUnit = null;
     }
     return new Operand(value, unit, exponent, resultUnit);
-  } 
+  }
 
   /**
    * Helper method for testing purposes.

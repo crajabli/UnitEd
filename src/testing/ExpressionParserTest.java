@@ -26,13 +26,13 @@ class ExpressionParserTest
   void testGoodArray() throws OperationFormatException, IncompleteUnitsException,
       NoValueEnteredException, IncompleteExpressionException
   {
-    expression[0] = "5ft";
+    expression[0] = "-5ft";
     expression[1] = ADDITION;
     expression[2] = "9miles";
     expression[3] = null;
 
     ExpressionParser ep = new ExpressionParser(expression);
-    BigDecimal val = new BigDecimal("5.0");
+    BigDecimal val = new BigDecimal("-5.0");
     Operand left = new Operand(val, "ft", 1, null);
     Operand right = new Operand(new BigDecimal("9.0"), "miles", 1, null);
     assertEquals(left.getUnit(), ep.getLeft().getUnit());
@@ -42,13 +42,13 @@ class ExpressionParserTest
 
     expression[0] = "0mm";
     expression[1] = DIVISION;
-    expression[2] = "100 miles";
+    expression[2] = "-100 miles";
     expression[3] = null;
 
     ExpressionParser ep1 = new ExpressionParser(expression);
     BigDecimal val1 = new BigDecimal("0.0");
     Operand left1 = new Operand(val1, "mm", 1, null);
-    Operand right1 = new Operand(new BigDecimal("100.0"), "miles", 1, null);
+    Operand right1 = new Operand(new BigDecimal("-100.0"), "miles", 1, null);
     assertEquals(left1.getUnit(), ep1.getLeft().getUnit());
     assertEquals(left1.getValue(), ep1.getLeft().getValue());
     assertEquals(right1.getValue(), ep1.getRight().getValue());
