@@ -6,135 +6,104 @@ import java.util.List;
 
 import utilities.Operand;
 
-public class Units
-{
-  final static List<String> LENGTHS = Arrays.asList("in", "ft", "yd", "mi", "mm", "cm", "m", "km");
-  final static List<String> WEIGHTS = Arrays.asList("oz", "lb", "ton", "g", "kg");
-  final static List<String> VOLUMES = Arrays.asList("pt", "qt", "gal", "cc", "l");
-  final static List<String> MONEY = Arrays.asList("c", "$");
-  final static List<String> TIMES = Arrays.asList("sec", "hr", "day", "mon", "yr");
-  private static final List<List<String>> UNITS = Arrays.asList(LENGTHS, WEIGHTS, VOLUMES, MONEY,
-      TIMES);
+public class Units {
+	final static List<String> LENGTHS = Arrays.asList("in", "ft", "yd", "mi", "mm", "cm", "m", "km");
+	final static List<String> WEIGHTS = Arrays.asList("oz", "lb", "ton", "g", "kg");
+	final static List<String> VOLUMES = Arrays.asList("pt", "qt", "gal", "cc", "l");
+	final static List<String> MONEY = Arrays.asList("c", "$");
+	final static List<String> TIMES = Arrays.asList("sec", "hr", "day", "mon", "yr");
+	final static List<String> SPEEDS = Arrays.asList("mi/sec", "mi/hr", "km/sec", "km/hr");
+	private static final List<List<String>> UNITS = Arrays.asList(LENGTHS, WEIGHTS, VOLUMES, MONEY, TIMES, SPEEDS);
 
-  /**
-   * Returns type list associated with the given Operands. Returns empty list if types don't match.
-   * 
-   * @param left
-   *          represents left Operand
-   * @param right
-   *          represents right Operand
-   * @return List of Strings
-   */
-  public static List<String> instanceOf(final Operand left, final Operand right)
-  {
-    List<String> result = new ArrayList<>();
+	/**
+	 * Returns type list associated with the given Operands. Returns empty list if
+	 * types don't match.
+	 * 
+	 * @param left  represents left Operand
+	 * @param right represents right Operand
+	 * @return List of Strings
+	 */
+	public static List<String> instanceOf(final Operand left, final Operand right) {
+		List<String> result = new ArrayList<>();
 
-    for (int i = 0; i < UNITS.size(); i++)
-    {
-      if (instanceOf(left, UNITS.get(i)) && instanceOf(right, UNITS.get(i)))
-      {
-        result.addAll(UNITS.get(i));
-        break;
-      }
-    }
+		for (int i = 0; i < UNITS.size(); i++) {
+			if (instanceOf(left, UNITS.get(i)) && instanceOf(right, UNITS.get(i))) {
+				result.addAll(UNITS.get(i));
+				break;
+			}
+		}
 
-    return result;
-  }
+		return result;
+	}
 
-  /**
-   * Returns type list associated with the given Operand. Returns empty list if unit is unsupported.
-   * 
-   * @param left
-   *          represents left Operand
-   * @param right
-   *          represents right Operand
-   * @return List of Strings
-   */
-  public static List<String> instanceOf(final Operand op)
-  {
-    List<String> result = new ArrayList<>();
+	/**
+	 * Returns type list associated with the given Operand. Returns empty list if
+	 * unit is unsupported.
+	 * 
+	 * @param left  represents left Operand
+	 * @param right represents right Operand
+	 * @return List of Strings
+	 */
+	public static List<String> instanceOf(final Operand op) {
+		List<String> result = new ArrayList<>();
 
-    for (int i = 0; i < UNITS.size(); i++)
-    {
-      if (instanceOf(op, UNITS.get(i)))
-      {
-        result.addAll(UNITS.get(i));
-        break;
-      }
-    }
+		for (int i = 0; i < UNITS.size(); i++) {
+			if (instanceOf(op, UNITS.get(i))) {
+				result.addAll(UNITS.get(i));
+				break;
+			}
+		}
 
-    return result;
-  }
+		return result;
+	}
 
-  /**
-   * Returns true if given String is in the given list.
-   * 
-   * @param other
-   *          represents comparison object
-   * @param list
-   *          represents String list
-   * @return boolean
-   */
-  public static boolean instanceOf(final String other, final List<String> list)
-  {
-    if (list.contains(other))
-    {
-      return true;
-    }
+	/**
+	 * Returns true if given String is in the given list.
+	 * 
+	 * @param other represents comparison object
+	 * @param list  represents String list
+	 * @return boolean
+	 */
+	public static boolean instanceOf(final String other, final List<String> list) {
+		if (list.contains(other)) {
+			return true;
+		}
 
-    return false;
-  }
+		return false;
+	}
 
-  /**
-   * Returns true if given Operand is in the given list.
-   * 
-   * @param other
-   *          represents comparison object
-   * @param list
-   *          represents String list
-   * @return boolean
-   */
-  public static boolean instanceOf(final Operand other, final List<String> list)
-  {
-    return instanceOf(other.getUnit(), list);
-  }
+	/**
+	 * Returns true if given Operand is in the given list.
+	 * 
+	 * @param other represents comparison object
+	 * @param list  represents String list
+	 * @return boolean
+	 */
+	public static boolean instanceOf(final Operand other, final List<String> list) {
+		return instanceOf(other.getUnit(), list);
+	}
 
-  /**
-   * Returns true if the units are like units.
-   * 
-   * @param unit
-   *          first unit
-   * @param unit2
-   *          second unit
-   * @return boolean
-   */
-  public static boolean instanceOf(final String left, final String right)
-  {
-    if (LENGTHS.contains(left) && LENGTHS.contains(right))
-    {
-      return true;
-    }
-    else if (WEIGHTS.contains(left) && WEIGHTS.contains(right))
-    {
-      return true;
-    }
-    else if (VOLUMES.contains(left) && VOLUMES.contains(right))
-    {
-      return true;
+	/**
+	 * Returns true if the units are like units.
+	 * 
+	 * @param unit  first unit
+	 * @param unit2 second unit
+	 * @return boolean
+	 */
+	public static boolean instanceOf(final String left, final String right) {
+		boolean result = false;
+		if (left.contentEquals(right))
+		{
+			return true;
+		}
 
-    }
-    else if (MONEY.contains(left) && MONEY.contains(right))
-    {
-      return true;
+		for (int i = 0; i < UNITS.size(); i++) {
+			if (instanceOf(left, UNITS.get(i)) && instanceOf(right, UNITS.get(i))) {
+				return true;
+			}
+		}
 
-    }
-    else if (TIMES.contains(left) && TIMES.contains(right))
-    {
-      return true;
-    } else if (left.equals(right)) {
-      return true; 
-    }
-    return false;
-  }
+		return result;
+	}
 
 }
