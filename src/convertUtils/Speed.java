@@ -4,6 +4,12 @@ import java.math.BigDecimal;
 
 import utilities.Operand;
 
+/**
+ * Speed class.
+ * 
+ * @author Victor Aten
+ * @version 05/04/2022
+ */
 public class Speed {
 	/**
 	   * Returns converted operand.

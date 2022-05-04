@@ -5,6 +5,12 @@ import java.math.RoundingMode;
 
 import utilities.Operand;
 
+/**
+ * VolumeUtils class.
+ * 
+ * @author Victor Aten
+ * @version 05/04/2022
+ */
 public class VolumeUtils {
 	/**
 	 * Converts given Operand to pints

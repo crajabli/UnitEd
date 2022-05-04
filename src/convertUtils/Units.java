@@ -6,6 +6,12 @@ import java.util.List;
 
 import utilities.Operand;
 
+/**
+ * Units class.
+ * 
+ * @author Victor Aten
+ * @version 05/04/2022
+ */
 public class Units {
 	final static List<String> LENGTHS = Arrays.asList("in", "ft", "yd", "mi", "mm", "cm", "m", "km");
 	final static List<String> WEIGHTS = Arrays.asList("oz", "lb", "ton", "g", "kg");

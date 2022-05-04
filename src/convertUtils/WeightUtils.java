@@ -5,6 +5,12 @@ import java.math.RoundingMode;
 
 import utilities.Operand;
 
+/**
+ * WeightUtils class.
+ * 
+ * @author Victor Aten
+ * @version 05/04/2022
+ */
 public class WeightUtils
 {
 
