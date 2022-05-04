@@ -161,7 +161,7 @@ public class ExpressionParser
       }
     }
         
-    if (!toBeEx.isEmpty())
+    if (!(toBeEx.length() == 0))
     {
       String x = toBeEx.toString();
       String xx = "";
