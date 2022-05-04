@@ -31,7 +31,7 @@ import utilities.ResultUnits;
  * @version 1
  *
  */
-public class GraphicalUserInterface implements ActionListener, ComponentListener
+public class GraphicalUserInterface implements ActionListener, ComponentListener, KeyListener
 {
 
   static JTextField display;
@@ -58,6 +58,8 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   boolean integerPowerActive = false;
   static String wholeExponent = "";
   static JButton exponent = new JButton("X\u02B8");
+
+  JButton plus, minus, multiply, divide, equals;
 //  static final ResourceBundle COLORS = ResourceBundle.getBundle("gui.Colors");
 
   // private final String ABOUT = STRINGS.getString("About");
@@ -1199,6 +1201,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
     // creation of input text field
     input = new JTextField();
+    input.addKeyListener(this);
 
     // creation of utility buttons
     JButton sign = new JButton(SIGN);
@@ -1207,11 +1210,11 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     JButton backspace = new JButton(BACK);
 
     // operator buttons
-    JButton plus = new JButton("+");
-    JButton minus = new JButton("-");
-    JButton multiply = new JButton("x");
-    JButton divide = new JButton(DIVIDE);
-    JButton equals = new JButton("=");
+    plus = new JButton("+");
+    minus = new JButton("-");
+    multiply = new JButton("x");
+    divide = new JButton(DIVIDE);
+    equals = new JButton("=");
 
     // creation of number buttons
     JButton zero = new JButton("0");
@@ -1279,6 +1282,12 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     multiply.addActionListener(this);
     divide.addActionListener(this);
     equals.addActionListener(this);
+
+    plus.addKeyListener(this);
+    minus.addKeyListener(this);
+    multiply.addKeyListener(this);
+    divide.addKeyListener(this);
+    equals.addKeyListener(this);
 
     backspace.addActionListener(this);
 
@@ -1415,6 +1424,84 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     if (set)
     {
 
+    }
+  }
+
+  @Override
+  public void keyTyped(KeyEvent e) {
+    //  not supported
+  }
+
+  @Override
+  public void keyPressed(KeyEvent e) {
+    // not supported
+  }
+
+  @Override
+  public void keyReleased(KeyEvent e) {
+    Character kr = e.getKeyChar();
+
+    switch (kr)
+    {
+      // do i internationalize this ??
+      case '+':
+        fixedInput();
+        plus.doClick();
+        break;
+      case '-':
+        fixedInput();
+        minus.doClick();
+        break;
+      case 'x':
+        fixedInput();
+        multiply.doClick();
+        break;
+      case '/':
+        fixedInput();
+        divide.doClick();
+        break;
+      case '=':
+        fixedInput();
+        equals.doClick();
+        break;
+      case '^':
+        exponent.doClick();
+        integerPowerActive = true;
+        fixedInput();
+        break;
+      case KeyEvent.VK_ENTER:
+        equals.doClick();
+        break;
+    }
+  }
+
+  private void fixedInput()
+  {
+    String text = input.getText();
+
+    if (text.endsWith("+"))
+    {
+      input.setText(text.replace("+", ""));
+    }
+    else if (text.endsWith("-"))
+    {
+      input.setText(text.replace("-", ""));
+    }
+    else if (text.endsWith("x"))
+    {
+      input.setText(text.replace("x", ""));
+    }
+    else if (text.endsWith("/"))
+    {
+      input.setText(text.replace("/", ""));
+    }
+    else if (text.endsWith("="))
+    {
+      input.setText(text.replace("=", ""));
+    }
+    else if (text.contains("^"))
+    {
+      input.setText(text.replace("^", ""));
     }
   }
 }
