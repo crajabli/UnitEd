@@ -58,13 +58,10 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   boolean integerPowerActive = false;
   static String wholeExponent = "";
   static JButton exponent = new JButton("X\u02B8");
-<<<<<<< HEAD
   // static final ResourceBundle COLORS = ResourceBundle.getBundle("gui.Colors");
-=======
 
   JButton plus, minus, multiply, divide, equals;
-//  static final ResourceBundle COLORS = ResourceBundle.getBundle("gui.Colors");
->>>>>>> branch 'main' of https://github.com/bernstdh/team22.git
+  // static final ResourceBundle COLORS = ResourceBundle.getBundle("gui.Colors");
 
   // private final String ABOUT = STRINGS.getString("About");
   // private String aboutStr = "This calculator is by unitEd. This is a four-function calculator
@@ -103,10 +100,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
   public static String getFirstUnit(String op)
   {
-<<<<<<< HEAD
-=======
 
->>>>>>> branch 'main' of https://github.com/bernstdh/team22.git
     op = op.replaceAll("\\d", "");
     StringBuilder toBeUnit = new StringBuilder();
     int exponent = 0;
@@ -1471,17 +1465,20 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   }
 
   @Override
-  public void keyTyped(KeyEvent e) {
-    //  not supported
-  }
-
-  @Override
-  public void keyPressed(KeyEvent e) {
+  public void keyTyped(KeyEvent e)
+  {
     // not supported
   }
 
   @Override
-  public void keyReleased(KeyEvent e) {
+  public void keyPressed(KeyEvent e)
+  {
+    // not supported
+  }
+
+  @Override
+  public void keyReleased(KeyEvent e)
+  {
     Character kr = e.getKeyChar();
 
     switch (kr)
