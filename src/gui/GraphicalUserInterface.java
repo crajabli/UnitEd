@@ -98,7 +98,10 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   public static String getFirstUnit(String op)
   {
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'main' of https://github.com/bernstdh/team22.git
     op = op.replaceAll("\\d", "");
     StringBuilder toBeUnit = new StringBuilder();
     int exponent = 0;
@@ -127,7 +130,10 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
     return toBeUnit.toString();
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'main' of https://github.com/bernstdh/team22.git
   }
 
 
@@ -253,9 +259,8 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
    */
   private void putInput(int n)
   {
-    String numeric = input.getText().replaceAll("[^0-9]", "");
-    String units = input.getText().replaceAll("\\d", "");
-    input.setText(numeric + n + units);
+    String numeric = input.getText().replaceAll("[^0-9, -]", "");
+    input.setText(numeric + n);
   }
 
   /**
