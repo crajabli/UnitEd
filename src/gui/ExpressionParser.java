@@ -71,31 +71,34 @@ public class ExpressionParser
     String left = expression[0];
     resultUnit = expression[3];
     operator = expression[1];
-    
+    String right = expression[2];
     resultUnits = new String[2];
     
     if (operator.equals("x"))
     {
       
       resultUnits = Operand.separateDashUnits(expression[3]);
-    }
-    
-    if (operator.equals("/"))
+      rightOp = setOperand(right, resultUnits[1]);
+      leftOp = setOperand(left, resultUnits[0]);
+    } else if (operator.equals("/"))
     {
-      
       resultUnits = Operand.separateSlashUnits(expression[3]);
-    }
-    
-    String right = expression[2];
-    if (resultUnit.isEmpty())
+      rightOp = setOperand(right, resultUnits[1]);
+      leftOp = setOperand(left, resultUnits[0]);
+    } else if (resultUnit == null || resultUnit.isEmpty())
     {
-      
       resultUnits[0] = "";
       resultUnits[1] = "";
+      rightOp = setOperand(right, resultUnits[1]);
+      leftOp = setOperand(left, resultUnits[0]);
+    } else {
+      rightOp = setOperand(right, resultUnit);
+      leftOp = setOperand(left, resultUnit);
     }
-   //  System.out.println("rU: " + )
-    rightOp = setOperand(right, resultUnits[1]);
-    leftOp = setOperand(left, resultUnits[0]);
+//    System.out.println(resultUnits[1]); 
+//    System.out.println(resultUnits[0]); 
+//    rightOp = setOperand(right, resultUnits[1]);
+//    leftOp = setOperand(left, resultUnits[0]);
 
 
   }
@@ -138,7 +141,7 @@ public class ExpressionParser
         toBeUnit = toBeUnit.append(c);
 
       }
-      else if (!Character.isDigit(c) && !Character.isLetter(c))
+      else if (!Character.isDigit(c) && !Character.isLetter(c) &&  c != ' ')
       {
         try
         {
@@ -172,7 +175,7 @@ public class ExpressionParser
       toBeUnit = null;
     }
     return new Operand(value, unit, exponent, resultUnit);
-  }
+  } 
 
   /**
    * Helper method for testing purposes.

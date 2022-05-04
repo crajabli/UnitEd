@@ -530,6 +530,12 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       }
       case "1/x" ->
       {
+        if (input.getText() == null || input.getText().isEmpty()) {
+          JOptionPane.showMessageDialog(null, STRINGS.getString("ENTER_VALUE"),
+              STRINGS.getString("NO_VALUE"), JOptionPane.INFORMATION_MESSAGE);
+          reset();
+          break; 
+        }
         double result = Double.parseDouble(input.getText());
         input.setText("");
         result = 1 / result;

@@ -112,8 +112,11 @@ public class Operand
    */
   public static String[] separateSlashUnits(String unit)
   {
-
-    String[] units = new String[2];
+    if (unit == null) {
+      return new String[2]; 
+    }
+    
+    String[] units = new String[2]; 
 
     if (unit.contains("/"))
     {
@@ -134,7 +137,7 @@ public class Operand
   private String unitExp(String unit, int exponent)
   {
 
-    if (unit.equals("") || unit == null)
+    if (unit == null || unit.equals(""))
     {
 
       return "";
