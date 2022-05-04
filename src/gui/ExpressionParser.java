@@ -36,7 +36,6 @@ public class ExpressionParser
       IncompleteUnitsException, NoValueEnteredException, IncompleteExpressionException
   {
     parseHelper(expression);
-
   }
 
   public String getOperator()
