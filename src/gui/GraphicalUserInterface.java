@@ -952,7 +952,6 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         textArea.setEditable(false);
 
         aboutPanel.add(textArea);
-        aboutDialog.setVisible(true);
         aboutDialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         aboutDialog.setSize(400, 200);
         aboutDialog.setLocationRelativeTo(null);

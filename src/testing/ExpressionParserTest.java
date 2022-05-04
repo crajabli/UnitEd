@@ -154,7 +154,7 @@ class ExpressionParserTest
     ExpressionParser e = new ExpressionParser(expression);
     
     String[] st = Operand.separateSlashUnits("ft/in"); 
-    String[] sR = new String[2]; 
+    String[] sR = new String[2];  
     sR[0] = "ft"; 
     sR[1] = "in"; 
     assertEquals(sR[0].toString(), st[0].toString());
