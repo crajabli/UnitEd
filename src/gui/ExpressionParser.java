@@ -126,28 +126,23 @@ public class ExpressionParser
     StringBuilder toBeUnit = new StringBuilder();
     int exponent = 1;
 
-    System.out.println(op.charAt(0) == '-'); 
 
     if (op.charAt(0) == '-')
     {
-      System.out.println("add to value: " + op.charAt(0)); 
       toBeValue = toBeValue.append(op.charAt(0));
     }
 
     for (int i = 0; i < op.length(); i++)
     {
       char c = op.charAt(i);
-      System.out.println("C is: " + c + " i: " + i); 
       if ((i == 0 && Character.isDigit(c))
           || (i > 0 && Character.isDigit(c) && op.charAt(i - 1) != '^') || c == '.')
       {
-        System.out.println("add to value: " + c); 
         toBeValue = toBeValue.append(c);
       }
       else if (c != '-' && (Character.isLetter(c) || c == '/' || c == '-' || (c == '^')
           || (i != 0 && Character.isDigit(c) && op.charAt(i - 1) == '^')))
       {
-        System.out.println("add to unit: " + c); 
 
         toBeUnit = toBeUnit.append(c);
 
@@ -156,7 +151,6 @@ public class ExpressionParser
       {
         try
         {
-          System.out.println("add to expoent: " + c); 
           exponent = Character.getNumericValue(c);
         }
         catch (NumberFormatException nfe)
