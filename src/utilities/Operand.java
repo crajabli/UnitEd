@@ -112,23 +112,22 @@ public class Operand
    */
   public static String[] separateSlashUnits(String unit)
   {
-    if (unit == null) {
-      return new String[2]; 
-    }
-    
-    String[] units = new String[2];  
+    String[] units = new String[2];
 
-    if (unit.contains("/"))
+    if (unit != null && !unit.isEmpty())
     {
+      if (unit.contains("/"))
+      {
 
-      units = unit.split("/");
+        units = unit.split("/"); 
 
-    }
-    else
-    {
+      }
+      else
+      {
 
-      units[0] = unit;
-      units[1] = unit;
+        units[0] = unit;
+        units[1] = unit;
+      }
     }
 
     return units;

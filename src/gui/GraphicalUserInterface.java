@@ -48,7 +48,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   static JButton historyButton = new JButton(">");
   static Timer timer = new Timer(3, historyDisplay);
   static final ResourceBundle COLORS = ResourceBundle.getBundle("gui.Colors");
-  
+
   static final Locale LOCALE = Locale.getDefault(); // Belgium and French
   static final ResourceBundle STRINGS = ResourceBundle.getBundle("gui.Strings");
   static JButton intStepsButton = new JButton("<");
@@ -58,7 +58,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   boolean integerPowerActive = false;
   static String wholeExponent = "";
   static JButton exponent = new JButton("X\u02B8");
-//  static final ResourceBundle COLORS = ResourceBundle.getBundle("gui.Colors");
+  // static final ResourceBundle COLORS = ResourceBundle.getBundle("gui.Colors");
 
   // private final String ABOUT = STRINGS.getString("About");
   // private String aboutStr = "This calculator is by unitEd. This is a four-function calculator
@@ -77,7 +77,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       "ton", "g", "kg", "pt", "qt", "gal", "cc", "l", "c", "$", "sec", "hr", "day", "mon", "yr"};
 
   /**
-   * Constructor. 
+   * Constructor.
    */
   public GraphicalUserInterface()
   {
@@ -97,7 +97,6 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
   public static String getFirstUnit(String op)
   {
-
     op = op.replaceAll("\\d", "");
     StringBuilder toBeUnit = new StringBuilder();
     int exponent = 0;
@@ -127,8 +126,8 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     return toBeUnit.toString();
   }
 
-
-  public static int getFirstExponent() {
+  public static int getFirstExponent()
+  {
     String op = expression[0].replaceAll("\\d", "");
     String exponent = "";
     for (int i = 0; i < op.length(); i++)
@@ -144,23 +143,26 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         {
           exponent += 1;
         }
-      } else {
+      }
+      else
+      {
         break;
       }
     }
-    if (exponent.equals("")) {
+    if (exponent.equals(""))
+    {
       return 1;
     }
     return Integer.parseInt(exponent);
   }
-
 
   public static String getWholeExponent()
   {
     return wholeExponent;
   }
 
-  public static int getWholeExponentAsInt() {
+  public static int getWholeExponentAsInt()
+  {
     String op = wholeExponent;
     String exponent = "";
     for (int i = 0; i < op.length(); i++)
@@ -176,14 +178,17 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         {
           exponent += 1;
         }
-      } else {
+      }
+      else
+      {
         break;
       }
     }
     return Integer.parseInt(exponent);
   }
 
-  public static String getFirstExponentAsString() {
+  public static String getFirstExponentAsString()
+  {
     String op = expression[0].replaceAll("\\d", "");
     String exponent = "";
     for (int i = 0; i < op.length(); i++)
@@ -199,13 +204,14 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         {
           exponent += 1;
         }
-      } else {
+      }
+      else
+      {
         break;
       }
     }
     return exponent;
   }
-
 
   /**
    * adds operand to the expression array.
@@ -355,17 +361,20 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
         if (lastResult == null && !numeric.equals("")) // initial calculation
         {
-          if (unitsDropDown.getSelectedItem().equals("")) { // checking if units are selected
+          if (unitsDropDown.getSelectedItem().equals(""))
+          { // checking if units are selected
             display.setText("");
-            display.setText(
-                display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + " + ");
+            display.setText(display.getText() + input.getText() + " "
+                + unitsDropDown.getSelectedItem() + " + ");
             addOperand(input.getText() + unitsDropDown.getSelectedItem(), "+");
             wholeExponent = "";
             clear();
-          } else {
+          }
+          else
+          {
             display.setText("");
-            display.setText(
-                display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + wholeExponent + " + ");
+            display.setText(display.getText() + input.getText() + " "
+                + unitsDropDown.getSelectedItem() + wholeExponent + " + ");
             addOperand(input.getText() + unitsDropDown.getSelectedItem() + wholeExponent, "+");
             // finalUnits = ResultUnits.likeUnits(new Operand(new BigDecimal(12),
             // (String) unitsDropDown.getSelectedItem(), 1, "result"));
@@ -389,20 +398,23 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         else if (lastResult != null && !numeric.equals("")) // calculations for the non rolling over
                                                             // operations that arent first
         {
-          if (unitsDropDown.getSelectedItem().equals("")) {   //checking if units are selected
+          if (unitsDropDown.getSelectedItem().equals(""))
+          { // checking if units are selected
             display.setText("");
-            display.setText(
-                display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + " + ");
+            display.setText(display.getText() + input.getText() + " "
+                + unitsDropDown.getSelectedItem() + " + ");
             addOperand(input.getText() + unitsDropDown.getSelectedItem(), "+");
             // finalUnits = ResultUnits.likeUnits(new Operand(new BigDecimal(12),
             // (String) unitsDropDown.getSelectedItem(), 1, "result"));
             // updateFinalDropdown(finalUnits);
             clear();
             wholeExponent = "";
-          } else {
+          }
+          else
+          {
             display.setText("");
-            display.setText(
-                display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + wholeExponent + " + ");
+            display.setText(display.getText() + input.getText() + " "
+                + unitsDropDown.getSelectedItem() + wholeExponent + " + ");
             addOperand(input.getText() + unitsDropDown.getSelectedItem() + wholeExponent, "+");
             // finalUnits = ResultUnits.likeUnits(new Operand(new BigDecimal(12),
             // (String) unitsDropDown.getSelectedItem(), 1, "result"));
@@ -463,17 +475,20 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
         if (lastResult == null && !numeric.equals("")) // the first calculation
         {
-          if (unitsDropDown.getSelectedItem().equals("")) {
+          if (unitsDropDown.getSelectedItem().equals(""))
+          {
             display.setText("");
-            display.setText(
-                display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + " - ");
+            display.setText(display.getText() + input.getText() + " "
+                + unitsDropDown.getSelectedItem() + " - ");
             addOperand(input.getText() + unitsDropDown.getSelectedItem(), "-");
             wholeExponent = "";
             clear();
-          } else {
+          }
+          else
+          {
             display.setText("");
-            display.setText(
-                display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + wholeExponent + " - ");
+            display.setText(display.getText() + input.getText() + " "
+                + unitsDropDown.getSelectedItem() + wholeExponent + " - ");
             addOperand(input.getText() + unitsDropDown.getSelectedItem() + wholeExponent, "-");
             // finalUnits = ResultUnits.likeUnits(new Operand(new BigDecimal(12),
             // (String) unitsDropDown.getSelectedItem(), 1, "result"));
@@ -494,17 +509,20 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         }
         if (lastResult != null && !numeric.equals("")) // non rolling calculation but with
         {
-          if (unitsDropDown.getSelectedItem().equals("")) {
+          if (unitsDropDown.getSelectedItem().equals(""))
+          {
             display.setText("");
-            display.setText(
-                display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + " - ");
+            display.setText(display.getText() + input.getText() + " "
+                + unitsDropDown.getSelectedItem() + " - ");
             addOperand(input.getText() + unitsDropDown.getSelectedItem(), "-");
             wholeExponent = "";
             clear();
-          } else {
+          }
+          else
+          {
             display.setText("");
-            display.setText(
-                display.getText() + input.getText() + " " + unitsDropDown.getSelectedItem() + wholeExponent + " - ");
+            display.setText(display.getText() + input.getText() + " "
+                + unitsDropDown.getSelectedItem() + wholeExponent + " - ");
             addOperand(input.getText() + unitsDropDown.getSelectedItem() + wholeExponent, "-");
             // finalUnits = ResultUnits.likeUnits(new Operand(new BigDecimal(12),
             // (String) unitsDropDown.getSelectedItem(), 1, "result"));
@@ -673,11 +691,12 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       }
       case "1/x" ->
       {
-        if (input.getText() == null || input.getText().isEmpty()) {
+        if (input.getText() == null || input.getText().isEmpty())
+        {
           JOptionPane.showMessageDialog(null, STRINGS.getString("ENTER_VALUE"),
               STRINGS.getString("NO_VALUE"), JOptionPane.INFORMATION_MESSAGE);
           reset();
-          break; 
+          break;
         }
         double result = Double.parseDouble(input.getText());
         input.setText("");
@@ -754,17 +773,20 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
         if (lastResult == null && !numeric.equals("")) // first operation
         {
-          if (unitsDropDown.getSelectedItem().equals("")) {
+          if (unitsDropDown.getSelectedItem().equals(""))
+          {
             display.setText("");
             display.setText(
                 display.getText() + input.getText() + unitsDropDown.getSelectedItem() + " x ");
             addOperand(input.getText() + unitsDropDown.getSelectedItem(), "x");
             wholeExponent = "";
             clear();
-          } else {
+          }
+          else
+          {
             display.setText("");
-            display.setText(
-                display.getText() + input.getText() + unitsDropDown.getSelectedItem() + wholeExponent + " x ");
+            display.setText(display.getText() + input.getText() + unitsDropDown.getSelectedItem()
+                + wholeExponent + " x ");
             addOperand(input.getText() + unitsDropDown.getSelectedItem() + wholeExponent, "x");
             // finalUnits = ResultUnits.multiplicationUnits(new Operand(new BigDecimal(12),
             // (String) unitsDropDown.getSelectedItem(), 1, "result"),
@@ -784,17 +806,20 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         else if (lastResult != null && !numeric.equals("")) // non rolling calculation but not first
                                                             // one
         {
-          if (unitsDropDown.getSelectedItem().equals("")) {
+          if (unitsDropDown.getSelectedItem().equals(""))
+          {
             display.setText("");
             display.setText(
                 display.getText() + input.getText() + unitsDropDown.getSelectedItem() + " x ");
             addOperand(input.getText() + unitsDropDown.getSelectedItem(), "x");
             wholeExponent = "";
             clear();
-          } else {
+          }
+          else
+          {
             display.setText("");
-            display.setText(
-                display.getText() + input.getText() + unitsDropDown.getSelectedItem() + wholeExponent + " x ");
+            display.setText(display.getText() + input.getText() + unitsDropDown.getSelectedItem()
+                + wholeExponent + " x ");
             addOperand(input.getText() + unitsDropDown.getSelectedItem() + wholeExponent, "x");
             wholeExponent = "";
             clear();
@@ -852,17 +877,20 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
         if (lastResult == null && !numeric.equals("")) // first operation
         {
-          if (unitsDropDown.getSelectedItem().equals("")) {
+          if (unitsDropDown.getSelectedItem().equals(""))
+          {
             display.setText("");
             display.setText(
                 display.getText() + input.getText() + unitsDropDown.getSelectedItem() + " / ");
             addOperand(input.getText() + unitsDropDown.getSelectedItem(), "/");
             wholeExponent = "";
             clear();
-          } else {
+          }
+          else
+          {
             display.setText("");
-            display.setText(
-                display.getText() + input.getText() + unitsDropDown.getSelectedItem() + wholeExponent + " / ");
+            display.setText(display.getText() + input.getText() + unitsDropDown.getSelectedItem()
+                + wholeExponent + " / ");
             addOperand(input.getText() + unitsDropDown.getSelectedItem() + wholeExponent, "/");
             wholeExponent = "";
             clear();
@@ -877,17 +905,20 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         }
         if (lastResult != null && !numeric.equals("")) // normal calculation
         {
-          if (unitsDropDown.getSelectedItem().equals("")) {
+          if (unitsDropDown.getSelectedItem().equals(""))
+          {
             display.setText("");
             display.setText(
-                display.getText() + input.getText() + unitsDropDown.getSelectedItem()+ " / ");
+                display.getText() + input.getText() + unitsDropDown.getSelectedItem() + " / ");
             addOperand(input.getText() + unitsDropDown.getSelectedItem(), "/");
             wholeExponent = "";
             clear();
-          } else {
+          }
+          else
+          {
             display.setText("");
-            display.setText(
-                display.getText() + input.getText() + unitsDropDown.getSelectedItem() + wholeExponent + " / ");
+            display.setText(display.getText() + input.getText() + unitsDropDown.getSelectedItem()
+                + wholeExponent + " / ");
             addOperand(input.getText() + unitsDropDown.getSelectedItem() + wholeExponent, "/");
             wholeExponent = "";
             clear();
@@ -1009,7 +1040,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
       }
 
     }
-    
+
     if (ac.equals(STRINGS.getObject("ABOUT")))
     {
       JDialog aboutDialog = new JDialog();
@@ -1137,17 +1168,21 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           secondUnit = e.getItemSelectable().getSelectedObjects()[0];
           if (expression[1].equals("x") || expression[1].equals("/"))
           {
-            if (wholeExponent.equals("")) {
+            if (wholeExponent.equals(""))
+            {
               finalUnits = ResultUnits.nonLikeUnits(
-                  new Operand(new BigDecimal(1), getFirstUnit(expression[0]), getFirstExponent(), ""),
-                  new Operand(new BigDecimal(1), (String) secondUnit,
-                      1, ""), expression[1]);
+                  new Operand(new BigDecimal(1), getFirstUnit(expression[0]), getFirstExponent(),
+                      ""),
+                  new Operand(new BigDecimal(1), (String) secondUnit, 1, ""), expression[1]);
               updateFinalDropdown(finalUnits);
-            } else {
+            }
+            else
+            {
               finalUnits = ResultUnits.nonLikeUnits(
-                  new Operand(new BigDecimal(1), getFirstUnit(expression[0]), getFirstExponent(), ""),
-                  new Operand(new BigDecimal(1), (String) secondUnit,
-                      getWholeExponentAsInt(), ""), expression[1]);
+                  new Operand(new BigDecimal(1), getFirstUnit(expression[0]), getFirstExponent(),
+                      ""),
+                  new Operand(new BigDecimal(1), (String) secondUnit, getWholeExponentAsInt(), ""),
+                  expression[1]);
               updateFinalDropdown(finalUnits);
             }
           }
