@@ -32,10 +32,10 @@ public class Operand
     this.unit = unitExp(unit, exponent);
     this.exponent = exponent;
 
-//    if (resultUnit == null)
-//    {
-//      this.resultUnit = unit;
-//    }
+    // if (resultUnit == null)
+    // {
+    // this.resultUnit = unit;
+    // }
     this.resultUnit = resultUnit;
     this.value = BigDecimal.valueOf(Math.pow(value.doubleValue(), exponent));
   }
@@ -57,16 +57,16 @@ public class Operand
   {
     return unit;
   }
-  
+
   /**
    * 
-   * @return the unit to be converted to 
+   * @return the unit to be converted to
    */
   public String getResultUnit()
   {
     return resultUnit;
   }
-  
+
   /**
    * Helper method for testing purposes.
    * 
@@ -84,21 +84,24 @@ public class Operand
    */
   public static String[] separateDashUnits(String unit)
   {
-    
     String[] units = new String[2];
-    
-    if (unit.contains("-"))
+
+    if (unit != null && !unit.isEmpty())
     {
-      
-      units = unit.split(unit);
-    
-    } else
-    {
-      
-      units[0] = unit;
-      units[1] = unit;
+      if (unit.contains("-"))
+      {
+
+        units = unit.split(unit);
+
+      }
+      else
+      {
+
+        units[0] = unit;
+        units[1] = unit;
+      }
     }
-    
+
     return units;
   }
 
@@ -109,127 +112,131 @@ public class Operand
    */
   public static String[] separateSlashUnits(String unit)
   {
-    
+
     String[] units = new String[2];
-    
+
     if (unit.contains("/"))
     {
-      
+
       units = unit.split(unit);
-    
-    } else
+
+    }
+    else
     {
-      
+
       units[0] = unit;
       units[1] = unit;
     }
-    
+
     return units;
   }
 
-  private String unitExp(String unit, int exponent) {
-    
-    if (unit.equals("") || unit == null) {
-      
+  private String unitExp(String unit, int exponent)
+  {
+
+    if (unit.equals("") || unit == null)
+    {
+
       return "";
     }
-    
+
     String e = String.valueOf(exponent);
     String exp = "";
-    
+
     char[] c = e.toCharArray();
-    
+
     for (int i = 0; i < e.length(); i++)
     {
-      
+
       c[i] = e.charAt(i);
     }
-    
+
     for (char ch : c)
     {
-      
+
       switch (ch)
       {
-        
+
         case '0':
-          
+
           exp += ("\u2070");
           break;
-          
+
         case '1':
-          
+
           exp += ("\u00B9");
           break;
-          
+
         case '2':
-          
+
           exp += ("\u00B2");
           break;
 
         case '3':
-          
+
           exp += ("\u00B3");
           break;
 
         case '4':
-          
+
           exp += ("\u2074");
           break;
 
         case '5':
-          
+
           exp += ("\u2075");
           break;
 
         case '6':
-          
+
           exp += ("\u2076");
           break;
 
         case '7':
-          
+
           exp += ("\u2077");
           break;
 
         case '8':
-          
+
           exp += ("\u2078");
           break;
 
         case '9':
-          
+
           exp += ("\u2079");
           break;
 
         default:
-          
+
           break;
       }
     }
-    
+
     if (exp.equals("\u00B9"))
     {
-      
+
       exp = "";
     }
-    
+
     String r = "";
-    
+
     for (int i = 0; i < unit.length(); i++)
     {
-      
+
       if (Character.isLetter(unit.charAt(i)))
       {
-        
+
         r += unit.charAt(i);
-      
-      } else
+
+      }
+      else
       {
-        
+
         r += exp + unit.charAt(i);
       }
     }
-    
+
     return r + exp;
   }
 }

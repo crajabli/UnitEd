@@ -88,14 +88,13 @@ public class ExpressionParser
     }
     
     String right = expression[2];
-    System.out.println("resultUnits: " + resultUnits.length); 
     if (resultUnit.isEmpty())
     {
       
       resultUnits[0] = "";
       resultUnits[1] = "";
     }
-    
+   //  System.out.println("rU: " + )
     rightOp = setOperand(right, resultUnits[1]);
     leftOp = setOperand(left, resultUnits[0]);
 
@@ -173,7 +172,6 @@ public class ExpressionParser
     {
       toBeUnit = null;
     }
-    System.out.println("opernad unit: " + unit); 
     return new Operand(value, unit, exponent, resultUnit);
   }
 
