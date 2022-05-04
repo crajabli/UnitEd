@@ -61,6 +61,7 @@ public class History extends JWindow implements ActionListener
     historyPanel.setLayout(new GridLayout());
     historyDisplay.setEditable(false);
 
+
     // Action copy = historyDisplay.getActionMap().get("copy");
 
     JButton closeButton = new JButton("<");
