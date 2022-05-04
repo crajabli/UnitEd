@@ -4,6 +4,12 @@ import java.math.BigDecimal;
 
 import utilities.Operand;
 
+/**
+ * Speed class.
+ * 
+ * @author Victor Aten
+ * @version 05/04/2022
+ */
 public class Speed {
 	/**
 	   * Returns converted operand.
@@ -52,7 +58,7 @@ public class Speed {
 	        break;
 
 	      case "km/hr":
-	        value = SpeedUtils.toKmPerSec(op);
+	        value = SpeedUtils.toKmPerHr(op);
 	        break;
 	    }
 	    return new Operand(value, unit, op.getExp(), unit);

@@ -8,6 +8,12 @@ import exceptions.DivideByZeroException;
 import exceptions.NotLikeUnitsException;
 import utilities.Operand;
 
+/**
+ * Convert class.
+ * 
+ * @author Victor Aten
+ * @version 05/04/2022
+ */
 public class Convert
 {
   private static final HashMap<List<String>, String> HashUnits = new HashMap<List<String>, String>()

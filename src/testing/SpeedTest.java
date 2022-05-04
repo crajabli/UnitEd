@@ -105,17 +105,17 @@ class SpeedTest {
 		// mi/hr to km/hr
 		left = new Operand(new BigDecimal(1.0), "km/hr", 1, "km/hr");
 		right = new Operand(new BigDecimal(1.0), "mi/hr", 1, "km/hr");
-		assertEquals("1.000447 km/hr", Addition.calculate(left, right));
+		assertEquals("2.609000 km/hr", Addition.calculate(left, right));
 
 		// km/sec to km/hr
 		left = new Operand(new BigDecimal(1.0), "km/hr", 1, "km/hr");
 		right = new Operand(new BigDecimal(1.0), "km/sec", 1, "km/hr");
-		assertEquals("2.000000 km/hr", Addition.calculate(left, right));
+		assertEquals("3601.000000 km/hr", Addition.calculate(left, right));
 
 		// mi/sec to km/hr
 		left = new Operand(new BigDecimal(1.0), "km/hr", 1, "km/hr");
 		right = new Operand(new BigDecimal(1.0), "mi/sec", 1, "km/hr");
-		assertEquals("2.609000 km/hr", Addition.calculate(left, right));
+		assertEquals("5794.648006 km/hr", Addition.calculate(left, right));
 	}
 
 }

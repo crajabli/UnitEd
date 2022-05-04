@@ -5,6 +5,12 @@ import java.math.RoundingMode;
 
 import utilities.Operand;
 
+/**
+ * LengthUtils class.
+ * 
+ * @author Victor Aten
+ * @version 05/04/2022
+ */
 public class LengthUtils {
 	/**
 	 * Converts given Operand to inches
