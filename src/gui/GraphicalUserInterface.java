@@ -47,16 +47,17 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
   JComboBox resultsDropDown;
   static JButton historyButton = new JButton(">");
   static Timer timer = new Timer(3, historyDisplay);
-  static final ResourceBundle COLORS = ResourceBundle.getBundle("gui.Colors");
+  static final Locale LOCALE = Locale.getDefault(); // Belgium and French
   static final ResourceBundle STRINGS = ResourceBundle.getBundle("gui.Strings");
-  static final Locale LOCALE = null; // Locale.getDefault(); // Belgium and French
-
   static JButton intStepsButton = new JButton("<");
   static Timer historyTimer = new Timer(3, historyDisplay);
   static Timer intermediateTimer = new Timer(3, intermediateDisplay);
   private final String EXPONENT = "X\u02B8";
   boolean integerPowerActive = false;
   static JButton exponent = new JButton("X\u02B8");
+  static final ResourceBundle COLORS = ResourceBundle.getBundle("gui.Colors");
+
+  // private final String ABOUT = STRINGS.getString("About");
   // private String aboutStr = "This calculator is by unitEd. This is a four-function calculator
   // with"
   // + " some extra features including the ability to inverse a function as well as evaluate an "
@@ -182,7 +183,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
   private void updateFinalDropdown(Object[] units)
   {
-      resultsDropDown.setModel(new DefaultComboBoxModel(units));
+    resultsDropDown.setModel(new DefaultComboBoxModel(units));
   }
 
   @Override
@@ -705,7 +706,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         // calculate;
         integerPowerActive = false;
         expression[2] = input.getText() + unitsDropDown.getSelectedItem();
-        expression[3] = "" + resultsDropDown.getSelectedItem();   
+        expression[3] = "" + resultsDropDown.getSelectedItem();
         try
         {
           String result;
@@ -736,7 +737,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
           reset();
           // JOptionPane.showMessageDialog(null, "You cannot divide by zero", "Incorrect Equation",
           // JOptionPane.INFORMATION_MESSAGE);
-          JOptionPane.showMessageDialog(null, STRINGS.getString("ZERO_DIVIDE "),
+          JOptionPane.showMessageDialog(null, STRINGS.getString("ZERO_DIVIDE"),
               STRINGS.getString("INCORRECT_EXPRESSION"), JOptionPane.INFORMATION_MESSAGE);
         }
         catch (IncompleteUnitsException iue)
@@ -779,6 +780,25 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
         clear();
 
       }
+
+    }
+    
+    if (ac.equals(STRINGS.getObject("ABOUT")))
+    {
+      JDialog aboutDialog = new JDialog();
+      JPanel aboutPanel = (JPanel) aboutDialog.getContentPane();
+      JTextArea textArea = new JTextArea(5, 40);
+
+      textArea.setText(STRINGS.getString("ABOUT_MESSAGE")); // aboutStr
+      textArea.setLineWrap(true);
+      textArea.setWrapStyleWord(true);
+      textArea.setEditable(false);
+
+      aboutPanel.add(textArea);
+      aboutDialog.setVisible(true);
+      aboutDialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+      aboutDialog.setSize(400, 200);
+      aboutDialog.setLocationRelativeTo(null);
     }
 
   }
