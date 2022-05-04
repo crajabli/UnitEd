@@ -1075,7 +1075,7 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
     // creation of frame and content pane
     // Do i internationalize logo??
-    JFrame frame = new JFrame("UnitED");
+    JFrame frame = new JFrame(); // UnitED"
     JPanel contentPane = (JPanel) frame.getContentPane();
     contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 
@@ -1569,6 +1569,9 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     }
   }
 
+  /**
+   * A helper method which corrects the format of the operand when a hard key is pressed.
+   */
   private void fixedInput()
   {
     String text = input.getText();

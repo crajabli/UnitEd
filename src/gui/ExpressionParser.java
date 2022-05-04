@@ -11,7 +11,7 @@ import utilities.OperationFormatException;
 /**
  * Parses value, unit, and operator from the users expression.
  * 
- * @author Team 22
+ * @author Maxine Payton
  * @version 4/6/22
  */
 public class ExpressionParser
@@ -100,10 +100,6 @@ public class ExpressionParser
 
       rightOp = setOperand(right, resultUnit);
     }
-    // System.out.println(resultUnits[1]);
-    // System.out.println(resultUnits[0]);
-    // rightOp = setOperand(right, resultUnits[1]);
-    // leftOp = setOperand(left, resultUnits[0]);
 
   }
 
@@ -125,7 +121,7 @@ public class ExpressionParser
     StringBuilder toBeUnit = new StringBuilder();
     int exponent = 1;
 
-
+    // if the first char is a dash use it as a negative sign
     if (op.charAt(0) == '-')
     {
       toBeValue = toBeValue.append(op.charAt(0));
@@ -134,11 +130,13 @@ public class ExpressionParser
     for (int i = 0; i < op.length(); i++)
     {
       char c = op.charAt(i);
+      // add all numbers and related chars to the value 
       if ((i == 0 && Character.isDigit(c))
           || (i > 0 && Character.isDigit(c) && op.charAt(i - 1) != '^') || c == '.')
       {
         toBeValue = toBeValue.append(c);
       }
+      // add all letters and related chars to the unit 
       else if (c != '-' && (Character.isLetter(c) || c == '/' || c == '-' || (c == '^')
           || (i != 0 && Character.isDigit(c) && op.charAt(i - 1) == '^')))
       {
@@ -150,6 +148,7 @@ public class ExpressionParser
       {
         try
         {
+          // parse exponent
           exponent = Character.getNumericValue(c);
         }
         catch (NumberFormatException nfe)

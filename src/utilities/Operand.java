@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 /**
  * Creates Operand objects.
  * 
- * @author Team 22
+ * @author Maxine Payton
  * @version 4/6/22
  *
  */
@@ -31,17 +31,12 @@ public class Operand
     }
     this.unit = unitExp(unit, exponent);
     this.exponent = exponent;
-
-    // if (resultUnit == null)
-    // {
-    // this.resultUnit = unit;
-    // }
     this.resultUnit = resultUnit;
     this.value = BigDecimal.valueOf(Math.pow(value.doubleValue(), exponent));
   }
 
   /**
-   * 
+   *   
    * @return value of operand
    */
   public BigDecimal getValue()
@@ -119,7 +114,7 @@ public class Operand
       if (unit.contains("/"))
       {
 
-        units = unit.split("/"); 
+        units = unit.split("/");
 
       }
       else
