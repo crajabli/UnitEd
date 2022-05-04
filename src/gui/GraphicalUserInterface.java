@@ -8,6 +8,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.LayoutManager;
 import java.awt.event.*;
 import java.math.BigDecimal;
@@ -1107,7 +1108,10 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     intLogoPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
     // creation of image label
-    ImageIcon image = loadImageIcon("unitED_Logo.png");
+    ImageIcon image = loadImageIcon("JMU_icon.png");
+    Image image1 = image.getImage();
+    Image newImage = image1.getScaledInstance(150, 70, image1.SCALE_AREA_AVERAGING);
+    image = new ImageIcon(newImage);
     JLabel label = new JLabel(image);
     intLogoPanel.add(label);
 
