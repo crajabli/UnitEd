@@ -23,20 +23,66 @@ public class ResultUnits {
 
   public static Object[] nonLikeUnits(Operand leftOperand, Operand rightOperand, String op) {
 //    String operator = GraphicalUserInterface.getOperator();
-    Object[] leftUnitInstance = Units.instanceOf(leftOperand).toArray();
-    Object[] rightUnitInstance = Units.instanceOf(rightOperand).toArray();
+    int leftExponent = leftOperand.getExp();
+    String leftExponentString = GraphicalUserInterface.getFirstExponentAsString();
+    String rightExponentString = GraphicalUserInterface.getWholeExponent();
+    int rightExponent = rightOperand.getExp();
+    Object[] leftUnitInstance = Units.instanceOf(new Operand(leftOperand.getValue(),
+        GraphicalUserInterface.getFirstUnit(leftOperand.getUnit()), 1, "")).toArray();
+    Object[] rightUnitInstance = Units.instanceOf(new Operand(rightOperand.getValue(),
+        GraphicalUserInterface.getFirstUnit(rightOperand.getUnit()), 1, "")).toArray();
     List<String> result = new ArrayList<>();
 
     if (op.equals("x")) {
-      for (Object unit : leftUnitInstance) {
-        for (Object secondUnit :  rightUnitInstance) {
-          result.add(unit + "-" + secondUnit);
+      if (leftExponent == 1 && rightExponent == 1) {
+        for (Object unit : leftUnitInstance) {
+          for (Object secondUnit : rightUnitInstance) {
+            result.add(unit + "-" + secondUnit);
+          }
+        }
+      } else if (leftExponent > 1 && rightExponent == 1) {
+        for (Object unit : leftUnitInstance) {
+          for (Object secondUnit : rightUnitInstance) {
+            result.add(unit + leftExponentString + "-" + secondUnit);
+          }
+        }
+      } else if (leftExponent == 1 && rightExponent > 1) {
+        for (Object unit : leftUnitInstance) {
+          for (Object secondUnit : rightUnitInstance) {
+            result.add(unit + "-" + secondUnit + rightExponentString);
+          }
+        }
+      } else if (leftExponent > 1 && rightExponent > 1) {
+        for (Object unit : leftUnitInstance) {
+          for (Object secondUnit : rightUnitInstance) {
+            result.add(unit + leftExponentString + "-" + secondUnit + rightExponentString);
+          }
         }
       }
     } else if (op.equals("/")) {
-      for (Object unit : leftUnitInstance) {
-        for (Object secondUnit :  rightUnitInstance) {
-          result.add(unit + "/" + secondUnit);
+      if (leftExponent == 1 && rightExponent == 1) {
+        for (Object unit : leftUnitInstance) {
+          for (Object secondUnit : rightUnitInstance) {
+            result.add(unit + "/" + secondUnit);
+          }
+        }
+      } else if (leftExponent > 1 && rightExponent == 1) {
+        for (Object unit : leftUnitInstance) {
+          for (Object secondUnit : rightUnitInstance) {
+            result.add(unit + leftExponentString + "/" + secondUnit);
+          }
+        }
+      } else if (leftExponent == 1 && rightExponent > 1) {
+        for (Object unit : leftUnitInstance) {
+          for (Object secondUnit : rightUnitInstance) {
+            result.add(unit + "/" + secondUnit + rightExponentString);
+          }
+        }
+      } else if (leftExponent > 1 && rightExponent > 1) {
+        for (Object unit : leftUnitInstance) {
+          for (Object secondUnit : rightUnitInstance) {
+            result.add(unit + leftExponentString + "/" + secondUnit + rightExponentString);
+          }
         }
       }
     }

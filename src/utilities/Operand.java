@@ -91,7 +91,7 @@ public class Operand
       if (unit.contains("-"))
       {
 
-        units = unit.split(unit);
+        units = unit.split("-");
 
       }
       else
@@ -121,7 +121,7 @@ public class Operand
     if (unit.contains("/"))
     {
 
-      units = unit.split(unit);
+      units = unit.split("/");
 
     }
     else
