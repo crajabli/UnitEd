@@ -128,6 +128,14 @@ public class Operand
     return units;
   }
 
+  /**
+   * Helper method to add the exponent to the unit.
+   * 
+   * @param unit for the unit
+   * @param exponent for the exponent
+   * 
+   * @return the unit with exponent
+   */
   private String unitExp(String unit, int exponent)
   {
 

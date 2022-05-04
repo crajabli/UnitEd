@@ -138,7 +138,7 @@ public class ExpressionParser
       }
       // add all letters and related chars to the unit 
       else if (c != '-' && (Character.isLetter(c) || c == '/' || c == '-' || (c == '^')
-          || (i != 0 && Character.isDigit(c) && op.charAt(i - 1) == '^')))
+          || (i != 0 && Character.isDigit(c) && op.charAt(i - 1) == '^') || c == '$'))
       {
 
         toBeUnit = toBeUnit.append(c);
