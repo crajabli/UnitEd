@@ -90,16 +90,13 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
   }
 
-  public static String getOperator()
-  {
-    return expression[1];
-  }
 
-  public void resetTimer()
-  {
-    historyTimer.restart();
-  }
-
+  /**
+   * get the unit of the first operator .
+   *
+   * @param op operator
+   * @return unit of the op operator
+   */
   public static String getFirstUnit(String op)
   {
 
@@ -132,6 +129,11 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     return toBeUnit.toString();
   }
 
+  /**
+   * get exponent of the first Operand.
+   *
+   * @return first operand as integer
+   */
   public static int getFirstExponent()
   {
     String op = expression[0].replaceAll("\\d", "");
@@ -162,11 +164,21 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     return Integer.parseInt(exponent);
   }
 
+  /**
+   * get the exponent as a String because it exponent is made up of special ASCI chars.
+   *
+   * @return ASCI characters
+   */
   public static String getWholeExponent()
   {
     return wholeExponent;
   }
 
+  /**
+   * parse the string to get the integer.
+   *
+   * @return the integer of exponent
+   */
   public static int getWholeExponentAsInt()
   {
     String op = wholeExponent;
@@ -193,6 +205,11 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     return Integer.parseInt(exponent);
   }
 
+  /**
+   * get the first exponent as a String.
+   *
+   * @return string version of the string
+   */
   public static String getFirstExponentAsString()
   {
     String op = expression[0].replaceAll("\\d", "");
@@ -234,25 +251,43 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
   }
 
+  /**
+   * start history timer.
+   *
+   */
   public static void startHistoryTimer()
   {
     historyTimer.start();
   }
 
+  /**
+   * start Intermediate Timer.
+   *
+   */
   public static void startIntermediateTimer()
   {
     intermediateTimer.start();
   }
 
+  /**
+   * stop history timer.
+   *
+   */
   public static void stopHistoryTimer()
   {
     historyTimer.stop();
   }
 
+  /**
+   * stop intermediate timer.
+   *
+   */
   public static void stopIntermediateTimer()
   {
     intermediateTimer.stop();
   }
+
+
 
   /**
    * uses buttons to input to the input field.
@@ -281,13 +316,10 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
 
   }
 
-  private String getNumberOfInput()
-  {
-    return input.getText().replaceAll("[^0-9]", "");
-  }
+
 
   /**
-   * make history btton visible.
+   * make history button visible.
    *
    */
   public static void setHistoryButtonVisible()
@@ -303,6 +335,11 @@ public class GraphicalUserInterface implements ActionListener, ComponentListener
     intStepsButton.setVisible(true);
   }
 
+  /**
+   * update final dropdown with the units provided.
+   *
+   * @param units to be changed in the final dropdown
+   */
   private void updateFinalDropdown(Object[] units)
   {
     resultsDropDown.setModel(new DefaultComboBoxModel(units));
