@@ -132,7 +132,7 @@ public class ExpressionParser
     for (int i = 0; i < op.length(); i++)
     {
       char c = op.charAt(i);
-      // add all numbers and related chars to the value
+      // add all numbers and related chars to the value   
       if ((i == 0 && Character.isDigit(c))
           || (i > 0 && Character.isDigit(c) && op.charAt(i - 1) != '^') || c == '.')
       {
@@ -146,10 +146,10 @@ public class ExpressionParser
         toBeUnit = toBeUnit.append(c);
 
       }
-      else if (!Character.isDigit(c) && !Character.isLetter(c) && c != ' ' && c != '-')
+      else if (!Character.isDigit(c) && !Character.isLetter(c) && c != ' ' && c != '-' && !Character.isLetter(op.charAt(i - 1)))
       {
         try
-        {
+        {   
           // parse exponent
           exponent = Character.getNumericValue(c);
           toBeEx.append(c);
@@ -160,6 +160,7 @@ public class ExpressionParser
         }
       }
     }
+        
     if (!toBeEx.isEmpty())
     {
       String x = toBeEx.toString();
