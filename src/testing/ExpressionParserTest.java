@@ -65,7 +65,6 @@ class ExpressionParserTest
     Operand l = new Operand(new BigDecimal("-10"), "pow", 1, "stars");
     Operand r = new Operand(new BigDecimal("-2"), "mm", 1, "stars");
 
-    System.out.println(l.getUnit());
 
     assertEquals(l.getUnit(), ep2.getLeft().getUnit());
 
@@ -173,7 +172,7 @@ class ExpressionParserTest
     
     a = Operand.separateSlashUnits("ft");
     assertEquals("ft", a[0]);
-    assertEquals("ft", a[1]);
+    assertEquals("ft", a[1]); 
 
     BigDecimal n1 = BigDecimal.valueOf(2);
     

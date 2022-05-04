@@ -119,6 +119,8 @@ public class ExpressionParser
   {
     StringBuilder toBeValue = new StringBuilder();
     StringBuilder toBeUnit = new StringBuilder();
+    StringBuilder toBeEx = new StringBuilder();
+
     int exponent = 1;
 
     // if the first char is a dash use it as a negative sign
@@ -130,16 +132,16 @@ public class ExpressionParser
     for (int i = 0; i < op.length(); i++)
     {
       char c = op.charAt(i);
-      // add all numbers and related chars to the value 
+      // add all numbers and related chars to the value
       if ((i == 0 && Character.isDigit(c))
           || (i > 0 && Character.isDigit(c) && op.charAt(i - 1) != '^') || c == '.')
       {
         toBeValue = toBeValue.append(c);
       }
-      // add all letters and related chars to the unit 
+      // add all letters and related chars to the unit
       else if (c != '-' && (Character.isLetter(c) || c == '/' || c == '-' || (c == '^')
           || (i != 0 && Character.isDigit(c) && op.charAt(i - 1) == '^') || c == '$'))
-      {
+      {   
 
         toBeUnit = toBeUnit.append(c);
 
@@ -150,6 +152,7 @@ public class ExpressionParser
         {
           // parse exponent
           exponent = Character.getNumericValue(c);
+          toBeEx.append(c);
         }
         catch (NumberFormatException nfe)
         {
@@ -157,6 +160,19 @@ public class ExpressionParser
         }
       }
     }
+    if (!toBeEx.isEmpty())
+    {
+      String x = toBeEx.toString();
+      String xx = "";
+      for (int i = 0; i < x.length(); i++)
+      {
+        char c = x.charAt(i);
+        int cc = Character.getNumericValue(c);
+        xx = xx + cc;
+      }
+      
+      exponent = Integer.parseInt(xx);
+    }   
 
     // check for incomplete units
     if (toBeUnit.length() != 0 && (toBeUnit.charAt(toBeUnit.length() - 1) == '/'
@@ -178,6 +194,7 @@ public class ExpressionParser
     {
       toBeUnit = null;
     }
+
     return new Operand(value, unit, exponent, resultUnit);
   }
 
