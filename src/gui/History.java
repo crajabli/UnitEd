@@ -1,19 +1,10 @@
 package gui;
 
-import exceptions.IncompleteExpressionException;
-import exceptions.IncompleteUnitsException;
-import exceptions.NoValueEnteredException;
-import utilities.OperationFormatException;
-
 import javax.swing.*;
-
-import javax.swing.text.DefaultEditorKit;
-
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
 import java.util.concurrent.TimeUnit;
 
 import static gui.GraphicalUserInterface.startHistoryTimer;
@@ -36,7 +27,6 @@ public class History extends JWindow implements ActionListener
   // JTextArea historyDisplay;
   JTextArea historyDisplay;
   Clipboard clipboard;
-  Action[] textActions = {new DefaultEditorKit.CopyAction(), new DefaultEditorKit.PasteAction(),};
   // new DefaultEditorKit.CopyAction()
   // new DefaultEditorKit.PasteAction()
 
@@ -80,7 +70,6 @@ public class History extends JWindow implements ActionListener
     contentPane.add(closeButton);
     // contentPane.add(copyButton);
     contentPane.add(Box.createVerticalGlue());
-    setGlassPane(contentPane);
 
   }
 
